@@ -182,11 +182,11 @@
  [% END %]
  [% END %]
  <li id="patron-privacyguarantor">
- <span class="label">Show checkouts to guarantor:</span>
+ <span class="label">Tổng số ghi mượn cho người bảo lãnh:</span>
  [% IF patron.privacy_guarantor_checkouts %] Có [% ELSE %] Không [% END %]</li>
 
  <li id="patron-privacy_guarantor_fines">
- <span class="label">Show charges to guarantor:</span>
+ <span class="label">Hiển thị các khoản phí cho người bảo lãnh:</span>
  [% IF patron.privacy_guarantor_fines %] Có [% ELSE %] Không [% END %]</li>
 
  [% IF guarantees %]
@@ -371,7 +371,7 @@
 
  [% IF ( patron.date_renewed ) %]
  <li id="patron-daterenewed">
- <span class="label">Renewal date: </span>
+ <span class="label">Ngày gia hạn: </span>
  [% patron.date_renewed | $KohaDates %]
  </li>
  [% END %]
@@ -440,7 +440,7 @@
  </li>
  [% IF CAN_user_superlibrarian %]
  <li id="patron-password_expiration_date">
- <span class="label">Password expires:</span>
+ <span class="label">Ngày hết hạn mật khẩu:</span>
  [% IF ( patron.password_expiration_date ) %]
  [% patron.password_expiration_date | $KohaDates %]
  [% ELSE %]

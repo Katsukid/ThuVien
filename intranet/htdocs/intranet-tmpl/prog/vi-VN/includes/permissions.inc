@@ -151,7 +151,7 @@
  <span class="permissioncode">([% name | html %])</span>
  [%- CASE 'manage_libraries' -%]
  <span class="sub_permission manage_libraries_subpermission">
- Manage libraries and library groups
+ Manage libraries and Nhóm thư viện
  </span>
  <span class="permissioncode">([% name | html %])</span>
  [%- CASE 'manage_itemtypes' -%]

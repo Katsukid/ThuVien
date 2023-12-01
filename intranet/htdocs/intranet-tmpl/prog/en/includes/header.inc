@@ -194,10 +194,10 @@
 
                     [% IF loggedinusernumber %]
                         <li class ="toplinks-myaccount">
-                            <a class="toplinks" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% loggedinusernumber | html %]">My account</a>
+                            <a class="toplinks" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% loggedinusernumber | html %]">Tài khoản cá nhân</a>
                         </li>
                         <li class="toplinks-mycheckouts">
-                            <a class="toplinks" href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% loggedinusernumber | html %]">My checkouts</a>
+                            <a class="toplinks" href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% loggedinusernumber | html %]">Tài liệu mượn</a>
                         </li>
                     [% END %]
                     <li>

@@ -47,7 +47,7 @@
     <table id="holdst">
       <thead>
         <tr>
-          <th>Sách đang giữ/th>
+          <th>Sách đang giữ</th>
           <th>Items</th>
           <th>Hold ratio</th>
           <th class="anti-the">Title</th>

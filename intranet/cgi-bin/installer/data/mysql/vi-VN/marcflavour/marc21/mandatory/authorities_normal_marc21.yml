@@ -193,8 +193,8 @@ tables:
       tagfield: '000'
     - authorised_value: ~
       authtypecode: ''
-      liblibrarian: CONTROL NUMBER
-      libopac: CONTROL NUMBER
+      liblibrarian: Mã điều khiển
+      libopac: Mã điều khiển
       mandatory: 1
       repeatable: 0
       tagfield: '001'

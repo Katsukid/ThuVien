@@ -342,7 +342,7 @@
                                     </p>
                                 [% END %]
                                 [% IF ai_holds %]
-                                    <h4>Sách đang giữ/h4>
+                                    <h4>Sách đang giữ</h4>
                                     <p>The following IDs exist in both tables [% "reserves" | $HtmlTags tag="strong" %] and [% "old_reserves" | $HtmlTags tag="strong" %]:</p>
                                     <p>
                                         [% FOR h IN ai_holds %]

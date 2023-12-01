@@ -3,7 +3,7 @@
 [% USE KohaSpan %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Library groups &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Nhóm thư viện &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.css("lib/jquery/plugins/treetable/stylesheets/jquery.treetable.css") | $raw %]
 </head>
@@ -19,7 +19,7 @@
             <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
         [% END %]
         [% WRAPPER breadcrumb_item bc_active= 1 %]
-            <span>Library groups</span>
+            <span>Nhóm thư viện</span>
         [% END %]
     [% END #/ WRAPPER breadcrumbs %]
 [% END #/ WRAPPER sub-header.inc %]
@@ -70,7 +70,7 @@
                         </div>
                     </div>
 
-                <h1>Library groups</h1>
+                <h1>Nhóm thư viện</h1>
 
                 [% FOREACH root_group IN root_groups %]
                 <div class="page-section">

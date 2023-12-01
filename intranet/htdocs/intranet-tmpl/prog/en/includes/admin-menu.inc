@@ -15,7 +15,7 @@
         <ul>
             [% IF ( CAN_user_parameters_manage_libraries ) %]
                 <li><a href="/cgi-bin/koha/admin/branches.pl">Libraries</a></li>
-                <li><a href="/cgi-bin/koha/admin/library_groups.pl">Library groups</a></li>
+                <li><a href="/cgi-bin/koha/admin/library_groups.pl">Nhóm thư viện</a></li>
             [% END %]
             [% IF ( CAN_user_parameters_manage_itemtypes ) %]
                 <li><a href="/cgi-bin/koha/admin/itemtypes.pl">Item types</a></li>

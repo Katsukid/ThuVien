@@ -43,7 +43,7 @@
             [% END %]
         </ul>
 
-        <h5>Sách đang giữ/h5>
+        <h5>Sách đang giữ</h5>
         <ul>
             <li>
                 <a href="/cgi-bin/koha/circ/view_holdsqueue.pl">Holds queue</a>

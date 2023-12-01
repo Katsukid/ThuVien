@@ -257,7 +257,7 @@
  <th></th>
  [% END %]
  <th class="anti-the">Nhan đề</th>
- <th class="holds_count" title="Item holds / Total holds">Sách đang giữ/th>
+ <th class="holds_count" title="Item holds / Total holds">Sách đang giữ</th>
  [% FOREACH item_header IN headers %]
  [% IF item_header.column_name %]
  <th data-colname="[% item_header.column_name | html %]">

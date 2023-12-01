@@ -891,7 +891,7 @@ msgstr ""
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_tag_structure:2:row:2
 msgid "CONTROL NUMBER"
-msgstr ""
+msgstr "Mã điều khiển"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_tag_structure:2:row:3
 msgid "CONTROL NUMBER IDENTIFIER"
@@ -7684,7 +7684,7 @@ msgid "f (OCLC)"
 msgstr ""
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_subfield_structure:3:row:1
-msgid "fixed length control field"
+msgid "Trường xác định độ dài cố định"
 msgstr ""
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:3866

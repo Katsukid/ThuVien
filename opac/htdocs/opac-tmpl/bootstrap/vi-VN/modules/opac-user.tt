@@ -39,7 +39,7 @@
  <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
  </li>
  <li class="breadcrumb-item active">
- <a href="#" aria-current="page">Thông tin cá nhân</a>
+ <a href="#" aria-current="page">Thông tin tổng quan</a>
  </li>
  </ol>
  </nav> <!-- /#breadcrumbs -->
@@ -54,7 +54,7 @@
  <div class="col-md-12 col-lg-10 order-1 order-lg-2">
  <div id="userdetails" class="maincontent">
 
- <h1>Thông tin cá nhân</h1>
+ <h1>Thông tin tổng quan</h1>
 
  [% INCLUDE 'opac-note.inc' %]
 

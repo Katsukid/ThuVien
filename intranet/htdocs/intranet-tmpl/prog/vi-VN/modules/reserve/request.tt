@@ -138,7 +138,7 @@
  [% END %]
 
  <main>
- <h1>Sách đang giữ/h1>
+ <h1>Sách đang giữ</h1>
 
  [% IF ( nobiblio ) %]
  <div class="dialog alert">

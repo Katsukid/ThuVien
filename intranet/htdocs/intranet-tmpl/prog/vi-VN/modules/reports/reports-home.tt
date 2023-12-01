@@ -59,7 +59,7 @@
  <li><a href="/cgi-bin/koha/reports/issues_stats.pl">Phân hệ lưu thông</a></li>
  <li><a href="/cgi-bin/koha/reports/serials_stats.pl">Ấn phẩm định kỳ</a></li>
  <li><a href="/cgi-bin/koha/reports/cash_register_stats.pl">Cash register</a></li>
- <li><a href="/cgi-bin/koha/reports/reserves_stats.pl">Sách đang giữ/a></li>
+ <li><a href="/cgi-bin/koha/reports/reserves_stats.pl">Sách đang giữ</a></li>
  </ul>
 
  [% IF plugins_enabled %]

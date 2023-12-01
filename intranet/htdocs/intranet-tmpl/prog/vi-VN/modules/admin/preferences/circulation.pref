@@ -144,7 +144,7 @@ lưu thông:
       pref: HoldsToPullStartDate
     - day(s) ago. Note that the default end date is controlled by the system preference
       <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ConfirmFutureHolds">ConfirmFutureSách
-      đang giữ/a>.
+      đang giữ</a>.
   - - choices:
         '0': ' Không cho phép'
         '1': ' Cho phép'

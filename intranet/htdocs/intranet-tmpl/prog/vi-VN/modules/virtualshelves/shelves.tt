@@ -339,7 +339,7 @@
  <span class="noholdstext">Không có đặt mượn</span>
  [% ELSE %]
  [% IF ( itemsloo.ITEM_RESULTS.count ) %]
- <a id="reserve_[% itemsloo.biblionumber | html %]" href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% itemsloo.biblionumber | html %]">Sách đang giữ/a>
+ <a id="reserve_[% itemsloo.biblionumber | html %]" href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% itemsloo.biblionumber | html %]">Sách đang giữ</a>
  [% IF ( holdfor ) %]
  <span class="holdforlink">| <a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% itemsloo.biblionumber | uri %]&amp;findborrower=[% holdfor_patron.cardnumber | uri %]">Place hold for [% INCLUDE 'patron-title.inc' patron => holdfor_patron no_title => 1 %]</a></span>
  [% END %]

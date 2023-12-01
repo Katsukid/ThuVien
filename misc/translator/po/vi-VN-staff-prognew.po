@@ -46168,7 +46168,7 @@ msgstr "Tạo thẻ bạn đọc"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/admin-menu.inc:33
 #, c-format
 msgid "Patron categories"
-msgstr "để kiểm tra lại."
+msgstr "Phân loại bạn đọc"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/smart-rules.tt:108
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/smart-rules.tt:547
@@ -47176,7 +47176,7 @@ msgstr "Koha &rsaquo; Bạn đọc %s&rsaquo; Kết quả tìm kiếm%s"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batch_extend_due_dates.tt:65
 #, c-format
 msgid "Patrons' categories: "
-msgstr "để kiểm tra lại."
+msgstr "Phân loại bạn đọc:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-add.tt:433
 #, c-format
@@ -74674,9 +74674,9 @@ msgstr "phiên bản"
 #~ msgid "Patron card creator "
 #~ msgstr "Tạo thẻ bạn đọc"
 
-#, fuzzy
+#, c-format
 #~ msgid "Patron categories "
-#~ msgstr "để kiểm tra lại."
+#~ msgstr "Phân loại bạn đọc "
 
 #, fuzzy
 #~ msgid "Patron clubs "

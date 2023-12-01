@@ -243,7 +243,7 @@
  <h2>Quên mật khẩu đăng nhập?</h2>
  <p>Quên mật khẩu đăng nhập? Nếu bạn quên mật khẩu đăng nhập, hãy mang theo thẻ thư viện và liên hệ với cán bộ thư viện để lấy lại mật khẩu.</p>
  <h2>Bạn chưa có thẻ thư viện?</h2>
- <p>Nếu bạn không có thẻ thư viện, hãy ghé qua thư viện địa phương để đăng ký.</p>
+ <p>Nếu bạn không có thẻ thư viện, hãy lên thư viện để đăng ký.</p>
  [% END # / IF OpacLoginInstructions %]
  </div>
  [% IF Koha.Preference('OpacPasswordChange') && Categories.can_any_reset_password %]

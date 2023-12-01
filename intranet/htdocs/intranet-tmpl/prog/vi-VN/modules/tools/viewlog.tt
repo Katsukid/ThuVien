@@ -77,7 +77,7 @@
 
 [%        CASE 'SERIAL'       %]<span>Ấn phẩm định kỳ</span>[% UNLESS Koha.Preference('SubscriptionLog') %] <i class="fa fa-warning" title="Log not enabled"></i>[% END %]
 
-[%        CASE 'HOLDS'        %]<span>Sách đang giữ/span>[% UNLESS Koha.Preference('HoldsLog') %] <i class="fa fa-warning" title="Log not enabled"></i>[% END %]
+[%        CASE 'HOLDS'        %]<span>Sách đang giữ</span>[% UNLESS Koha.Preference('HoldsLog') %] <i class="fa fa-warning" title="Log not enabled"></i>[% END %]
 
 [%        CASE 'ILL'          %]<span>Interlibrary loans</span>[% UNLESS Koha.Preference('IllLog') %] <i class="fa fa-warning" title="Log not enabled"></i>[% END %]
 
