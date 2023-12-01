@@ -1,0 +1,133 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% USE AuthorisedValues %]
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>Các trường tìm kiếm tài liệu &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+ [% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_itemssearchfields" class="admin">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+ [% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/mainpage.pl">Trang chủ</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Quản trị hệ thống</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Các trường tìm kiếm tài liệu</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="new_search_field" href="/cgi-bin/koha/admin/items_search_fields.pl"><i class="fa fa-plus"></i> New search field</a>
+ </div>
+
+ [% IF field_added %]
+ <div class="dialog message">
+ Field successfully added: [% field_added.label | html %]
+ </div>
+ [% ELSIF field_not_added %]
+ <div class="dialog alert">
+ <p>Failed to add field. Please make sure the field name doesn't already exist.</p>
+ <p>Check logs for more details.</p>
+ </div>
+ [% ELSIF field_deleted %]
+ <div class="dialog message">
+ Field successfully deleted.
+ </div>
+ [% ELSIF field_not_deleted %]
+ <div class="dialog alert">
+ <p>Failed to delete field.</p>
+ <p>Check logs for more details.</p>
+ </div>
+ [% ELSIF field_updated %]
+ <div class="dialog message">
+ Field successfully updated: [% field_updated.label | html %]
+ </div>
+ [% ELSIF field_not_updated %]
+ <div class="dialog alert">
+ <p>Failed to update field.</p>
+ <p>Check logs for more details.</p>
+ </div>
+ [% END %]
+ [% IF fields.size %]
+ <div id="search_fields_list">
+ <h1>Các trường tìm kiếm tài liệu</h1>
+ <div class="page-section">
+ <table id="search_fields_table">
+ <thead>
+ <tr>
+ <th>Tên</th>
+ <th>Nhãn</th>
+ <th>Trường MARC</th>
+ <th>Trường con MARC</th>
+ <th>Authorised values category</th>
+ <th class="noExport">Thao tác</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH field IN fields %]
+ <tr>
+ <td>[% field.name | html %]</td>
+ <td>[% field.label | html %]</td>
+ <td>[% field.tagfield | html %]</td>
+ <td>[% field.tagsubfield | html %]</td>
+ <td>[% field.authorised_values_category | html %]</td>
+ <td>
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/items_search_field.pl?name=[% field.name | html %]"><i class="fa fa-pencil"></i> Chỉnh sửa</a>
+ <a class="field-delete btn btn-default btn-xs" href="/cgi-bin/koha/admin/items_search_fields.pl?op=del&name=[% field.name | html %]"><i class="fa fa-trash"></i> Xóa</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.page-section -->
+ </div> <!-- /#search_fields_list -->
+ [% ELSE %]
+ <h1>Các trường tìm kiếm tài liệu</h1>
+ <div class="dialog message">
+ There are no item search fields defined.
+ </div>
+ [% END %]
+
+ <form id="add_field_form" action="/cgi-bin/koha/admin/items_search_fields.pl" method="POST">
+ <fieldset class="rows">
+ <legend><h1>Add a new field</h1></legend>
+ [% INCLUDE 'admin-items-search-field-form.inc' field=undef %]
+ <input type="hidden" name="op" value="add" />
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <a href="#" class="cancel hide_form">Hủy bỏ</a>
+ </fieldset>
+ </form>
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% Asset.js("js/item_search_fields.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

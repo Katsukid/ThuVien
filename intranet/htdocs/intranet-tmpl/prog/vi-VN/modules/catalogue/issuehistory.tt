@@ -1,0 +1,140 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE TablesSettings %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Checkout history for [% INCLUDE 'biblio-title-head.inc' %] &rsaquo; Catalog &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="catalog_issuehistory" class="catalog">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/catalogue/search.pl">Tìm kiếm</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ [% INCLUDE 'biblio-title.inc' link = 1 %]
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lịch sử ghi mượn</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+<h1>Lịch sử ghi mượn của [% INCLUDE 'biblio-title.inc' %]</h1>
+[% IF biblio.author %]<h3>, Tác giả: [% biblio.author | html %]</h3>[% END %]
+
+[% SET show_patron_column = Koha.Preference('intranetreadinghistory') AND CAN_user_circulate_circulate_remaining_permissions %]
+
+<div class="searchresults page-section">
+ [% IF checkouts %]
+ <h2>Hiện tại tài liệu được ghi mượn [% checkouts.size | html %] lần</h2>
+ <table id="table_issues">
+ <thead><tr>
+ [% IF show_patron_column %]
+ <th>Bạn đọc</th>
+ [% END %]
+ <th>Đăng ký cá biệt</th>
+ <th>Nơi ghi mượn</th>
+ [% IF Koha.Preference('RecordStaffUserOnCheckout') %]
+ <th>Checked out by</th>
+ [% ELSE %]
+ <th class="NoVisible">Checked out by</th>
+ [% END %]
+ <th>Gia hạn</th>
+ <th>Ngày ghi mượn</th>
+ <th>Ngày hết hạn</th>
+ <th>Ngày ghi trả</th>
+ </tr></thead>
+ <tbody>
+ [% FOREACH checkout IN checkouts %]
+ <tr>
+ [% IF show_patron_column %]
+ <td>
+ [% IF checkout.patron %][%# Not set for deleted patron records %]
+ [% INCLUDE 'patron-title.inc' patron => checkout.patron hide_patron_infos_if_needed=1 %]
+ [% END %]
+ </td>
+ [% END %]
+ <td>
+ [% IF checkout.item.barcode %] [%# FIXME This test is not mandatory I think %]
+ <a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% checkout.item.biblionumber | uri %]&amp;itemnumber=[% checkout.item.itemnumber | uri %]">[% checkout.item.barcode | html %]</a>
+ [% ELSE %]
+ &nbsp;
+ [% END %]</td>
+ <td>[% IF checkout.branchcode %]
+ [% Branches.GetName( checkout.branchcode ) | html %]
+ [% ELSE %]
+ &nbsp;
+ [% END %]</td>
+ <td>[% IF checkout.issuer_id %]
+ <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% checkout.issuer_id | uri %]">
+ [% INCLUDE 'patron-title.inc' patron=checkout.issuer %]
+ </a>
+ [% END %]</td>
+ <td>[% IF checkout.renewals_count %] Có[% IF checkout.lastreneweddate %], <small>lần cuối vào ngày: [% checkout.lastreneweddate |$KohaDates  with_hours => 1 %]</small>
+ [% END %] [% ELSE %] Không [% END %]</td>
+ <td data-order="[% checkout.issuedate | html %]">
+ [% checkout.issuedate |$KohaDates  with_hours => 1 %]
+ </td>
+ <td data-order="[% checkout.date_due | html %]">
+ [% checkout.date_due | $KohaDates as_due_date => 1 %]
+ </td>
+ <td data-order="[% checkout.returndate | html %]">
+ [% checkout.returndate |$KohaDates  with_hours => 1 %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% ELSE %]
+ <div class="dialog message"><p>
+ <strong>[% biblio.title | html %][% IF biblio.author %], Tác giả: [% biblio.author | html %][% END %]</strong> chưa được ghi mượn.</p></div>
+
+ [% END %]
+</div>
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'biblio-view-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+[% INCLUDE 'datatables.inc' %]
+[% INCLUDE 'columns_settings.inc' %]
+ <script id="js">
+        $(document).ready(function() {
+            var table_settings = [% TablesSettings.GetTableSettings('catalogue', 'detail', 'checkoutshistory-table', 'json') | $raw %];
+            [% UNLESS show_patron_column %]
+                // Remove the patron column definition
+                table_settings['columns'].splice(0,1);
+            [% END %]
+            var table = KohaTable("table_issues", {
+                "sDom": 'C<"top pager"ilpfB><"#filter_c">tr<"bottom pager"ip>',
+                "aaSorting": [[ 5, "desc" ]],
+                "sPaginationType": "full_numbers"
+            }, table_settings);
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

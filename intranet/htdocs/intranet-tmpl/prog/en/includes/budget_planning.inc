@@ -1,0 +1,8 @@
+[% PROCESS 'i18n.inc' %]
+[%- BLOCK planning -%]
+  [%- SWITCH plan -%]
+    [%- CASE 'MONTHS'    -%][% t('by months') | html %]
+    [%- CASE 'BRANCHES'  -%][% t('by libraries') | html %]
+    [%- CASE 'ITEMTYPES' -%][% t('by item types') | html %]
+  [%- END -%]
+[%- END -%]

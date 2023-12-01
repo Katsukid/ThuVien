@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>[% CHANNELTITLE | html %]</title>
+        <link>[% CHANNELLINK | html %]</link>
+        <description>[% CHANNELDESC | html %]</description>
+        <language>[% CHANNELLANG | html %]</language>
+        <lastBuildDate>[% CHANNELLASTBUILD | html %]</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>Koha</generator>
+        <image>
+            <title>[% IMAGETITLE | html %]</title>
+            <url>[% IMAGEURL | html %]</url>
+            <link>[% IMAGELINK | html %]</link>
+            <width>[% IMAGEWIDTH | html %]</width>
+            <height>[% IMAGEHEIGHT | html %]</height>
+            <description>[% IMAGEDESCRIPTION | html %]</description>
+        </image>
+
+[% FOREACH i IN ITEMS %]
+ <item>
+  <title>[% i.TITLE | html %][% IF i.AUTHOR %] by [% i.AUTHOR | html %][% END %]</title>
+  <link>[% OPACBaseURL | html %]/cgi-bin/koha/opac-detail.pl?biblionumber=[% i.biblionumber | html %]</link>
+<description><![CDATA[[% i.TITLE | html %][% IF i.AUTHOR %] by [% i.AUTHOR | html %][% END %]
+<br>[% IF i.publishercode %][% i.place | html %] [% i.publishercode | html %] [% publicationyear | html %]<br>[% END %]
+[% IF i.pages %][% i.pages | html %][% i.illus | html %][% i.size | html %][% END %]
+[% IF i.notes %]<p>[% i.notes | html %]</p>[% END %]<br>
+<a href="[% OPACBaseURL | url %]/cgi-bin/koha/opac-detail.pl?biblionumber=[% i.biblionumber | uri %]">View Details</a> | <a href="[% OPACBaseURL | url %]/cgi-bin/koha/opac-reserve.pl?biblionumber=[% i.biblionumber | uri %]">Reserve this Item</a>[% IF i.author %] | <a href="[% OPACBaseURL | url %]/cgi-bin/koha/opac-search.pl?marclist=biblio.author&amp;and_or=and&amp;excluding=&amp;operator=contains&amp;value=[% i.author | uri %]&amp;resultsperpage=20&amp;orderby=biblio.title&amp;op=do_search">More by this Author</a>[% END %]
+]]></description>
+ </item>
+[% END %]
+
+</channel>
+</rss>

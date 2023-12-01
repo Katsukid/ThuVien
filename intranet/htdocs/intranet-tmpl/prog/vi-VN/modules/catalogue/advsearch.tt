@@ -1,0 +1,518 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE Branches %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Tìm kiếm nâng cao &rsaquo; Catalog &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+[%- BLOCK language_limit_select -%]
+ <select name="limit" id="[% ln_id | html %]">
+ <option value="">Tất cả</option>
+ [% FOREACH ln_loo IN ln_loop %]
+ [% IF ( ln_loo.selected or selected == ln_loo.iso639_2_code ) %]
+ <option value="[% ln_index | html %],rtrn:[% ln_loo.iso639_2_code | html %]" selected="selected">
+ [% ln_loo.language_description | html %]
+ </option>
+ [% ELSE %]
+ <option value="[% ln_index | html %],rtrn:[% ln_loo.iso639_2_code | html %]">
+ [% ln_loo.language_description | html %]
+ </option>
+ [% END %]
+ [% END %]
+ </select>
+[%- END -%]
+
+<body id="catalog_advsearch" class="catalog">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'adv-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tìm kiếm nâng cao</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+ <form action="search.pl" method="get">
+ <div id="advanced-search">
+ [% IF edit_filter %]
+ <div id="toolbar" class="btn-toolbar">
+ <legend>Editing filter: [% edit_filter.name | html %]</legend>
+ <div class="btn-group">
+ <label for="filter_edit_opac">Show in OPAC?</label>
+ [% IF edit_filter.opac %]
+ <input type="checkbox" id="show_filter_opac" name="show_filter_opac" checked="checked">
+ [% ELSE %]
+ <input type="checkbox" id="show_filter_opac" name="show_filter_opac">
+ [% END %]
+ <label for="filter_edit_staff_client">Show in staff interface?</label>
+ [% IF edit_filter.staff_client %]
+ <input type="checkbox" id="filter_edit_staff_client" name="filter_edit_staff_client" checked="checked">
+ [% ELSE %]
+ <input type="checkbox" id="filter_edit_staff_client" name="filter_edit_staff_client">
+ [% END %]
+ </div>
+ <hr>
+ <div class="btn-group">
+ <button id="save_filter" class="btn btn-default"><i class="fa fa-save"></i> Save filter</button>
+ <button class="btn btn-default" type="submit" accesskey="s"><i class="fa fa-search"></i> Search using filter</button>
+ </div>
+ <div class="btn-group">
+ <a href="/cgi-bin/koha/catalogue/search.pl?do=Clear&expanded_options=[% expanded_options | uri %]" class="btn btn-link"><i class="fa fa-trash"></i> Hủy bỏ</a>
+ </div>
+ </div>
+ [% ELSE %]
+ <input type="hidden" name="advsearch" value="1"/>
+ <h1>Tìm kiếm nâng cao</h1>
+
+ <!-- SEARCH BUTTONS -->
+ <div id="toolbar" class="btn-toolbar">
+ <div class="btn-group">
+ <button class="btn btn-primary" type="submit" accesskey="s"><i class="fa fa-search"></i> Tìm kiếm</button>
+ </div>
+ <div class="btn-group">
+ [% IF ( expanded_options ) %]
+ <a href="/cgi-bin/koha/catalogue/search.pl?expanded_options=0" class="btn btn-link"><i class="fa fa-search-minus"></i> Ẩn bớt tùy chọn</a>
+ </div>
+ [% ELSE %]
+ <a href="/cgi-bin/koha/catalogue/search.pl?expanded_options=1" class="btn btn-link"><i class="fa fa-search-plus"></i> Thêm tùy chọn</a>
+ </div>
+ [% END %]
+ <div class="btn-group">
+ <a href="/cgi-bin/koha/catalogue/search.pl?do=Clear&expanded_options=[% expanded_options | uri %]" class="btn btn-link"><i class="fa fa-trash"></i> Làm mới tìm kiếm</a>
+ </div>
+ <div class="btn-group">
+ <a href="/cgi-bin/koha/catalogue/itemsearch.pl" class="btn btn-link"><i class="fa fa-search"></i> Đi tới tìm kiếm danh mục</a>
+ </div>
+
+ [% IF Koha.Preference('EnableSearchHistory') %]
+ <div class="btn-group">
+ <a href="/cgi-bin/koha/catalogue/search-history.pl" class="btn btn-link"><i class="fa fa-history"></i> Lịch sử tìm kiếm</a>
+ </div>
+ [% END %]
+ </div> <!-- /#toolbar -->
+ <!-- /SEARCH BUTTONS -->
+ [% END %]
+
+ [% IF ( outer_servers_loop ) %]
+ <!-- DATABASES -->
+ <fieldset>
+ <legend>Chọn sơ sở dữ liệu nội bộ</legend>
+ [% FOREACH local_servers_loo IN local_servers_loop %]
+ [% IF ( local_servers_loo.checked ) %]
+ <input type="checkbox" id="[% local_servers_loo.id | html %]" name="[% local_servers_loo.name | html %]" checked="checked" value="[% local_servers_loo.value | html %]" />
+ [% ELSE %]
+ <input type="checkbox" id="[% local_servers_loo.id | html %]" name="[% local_servers_loo.name | html %]" value="[% local_servers_loo.value | html %]" />
+ [% END %]
+ <label for="[% local_servers_loo.id | html %]">
+ <img width="16" height="16" alt="[% local_servers_loo.id | html %]" src="[% themelang | html %]/img/[% local_servers_loo.icon | html %]" /> [% local_servers_loo.label | html %]
+ </label>
+ [% END # /FOREACH local_servers_loo %]
+ </fieldset>
+ <!-- /DATABASES -->
+ [% END # /IF ( outer_servers_loop ) %]
+
+ [% IF ( outer_servers_loop ) %]
+ <!-- REMOTE DATABASES -->
+ <fieldset id="databases">
+ <legend>Chọn cơ sở dữ liệu ngoài</legend>
+ [% FOREACH outer_servers_loo IN outer_servers_loop %]
+ [% IF ( outer_servers_loo.checked ) %]
+ <input type="checkbox" id="[% outer_servers_loo.id | html %]" name="[% outer_servers_loo.name | html %]" checked="checked" value="[% outer_servers_loo.value | html %]" />
+ [% ELSE %]
+ <input type="checkbox" id="[% outer_servers_loo.id | html %]" name="[% outer_servers_loo.name | html %]" value="[% outer_servers_loo.value | html %]" />
+ [% END %]
+ <label for="[% outer_servers_loo.id | html %]">
+ <img alt="[% outer_servers_loo.id | html %]" src="[% themelang | html %]/images/[% outer_servers_loo.icon | html %]" />[% outer_servers_loo.label | html %]
+ </label>
+ [% END # /FOREACH outer_servers_loo %]
+ </fieldset> <!-- /#databases -->
+ <!-- /REMOTE DATABASES -->
+ [% END %]
+
+ <!-- BOOLEAN SEARCH OPTIONS -->
+ <fieldset id="searchterms">
+ <legend>Thông tin tìm kiếm </legend>
+ [% FOREACH query IN operands %]
+ [% IF ( expanded_options ) %]
+ [% IF loop.first %]
+ <div class="search-term-row" style="text-indent: 4.25em;">
+ [% ELSE %]
+ <div class="search-term-row">
+ [% SET opindex = loop.index - 1 %]
+ <select name="op">
+ [% IF operators.$opindex == 'OR' %]
+ <option value="AND">và</option>
+ <option value="OR" selected="selected">Hoặc</option>
+ <option value="NOT">không</option>
+ [% ELSIF operators.$opindex == 'NOT' %]
+ <option value="AND">và</option>
+ <option value="OR">Hoặc</option>
+ <option value="NOT" selected="selected">không</option>
+ [% ELSE %]
+ <option value="AND" selected="selected">và</option>
+ <option value="OR">Hoặc</option>
+ <option value="NOT">không</option>
+ [% END %]
+ </select>
+ [% END %]
+ [% ELSE %]
+ <div>
+ [% END %]
+ [% SET preselect = 'ms_' _ indexes.${loop.index}.replace(',','comma') %]
+ [% INCLUDE 'search_indexes.inc' ${preselect} = 1 %]
+ <input name="q" size="30" title="Nhập từ khóa tìm kiếm" type="text" value="[% query | html %]" />
+ [% IF ( expanded_options ) %]
+ [% IF ( loop.last ) %]
+ <a href="JavaScript:add_field();" id="ButtonPlus" title="Thêm trường tìm kiếm">[+]</a>
+ [% END %]
+ [% IF ( loop.first ) %]
+ <label for="scan">Scan indexes:</label> <input type="checkbox" name="scan" id="scan" value="1" />
+ [% END %]
+ [% END %]
+ </div>
+ [% END %]
+ [% IF Koha.Preference('SearchEngine') == 'Elasticsearch' %]
+ [% IF ( expanded_options ) %]
+ <p>
+ [% IF Koha.Preference('ElasticsearchMARCFormat') == 'ARRAY' %]
+ <label><input type="checkbox" name="whole_record" /> Search entire MARC record</label>
+ [% END %]
+ <span id="weight_search">
+ <label><input type="checkbox" name="weight_search" checked="checked" /> Apply field weights to search</label>
+ </span>
+ <p>
+ [% ELSE %]
+ <input type="hidden" name="weight_search" value="1" />
+ [% END %]
+ [% END %]
+ [% IF Koha.Preference('IncludeSeeFromInSearches') %]
+ <div class="hint included-see-from-headings-info">
+ <i class="fa fa-info-circle" aria-hidden="true"></i>
+ See from (non-preferred form) headings are included
+ </div>
+ [% END %]
+ </fieldset>
+ <!-- /BOOLEAN SEARCH OPTIONS -->
+ </div> <!-- /#advanced-search -->
+
+ <!-- MC-TYPE LIMITS -->
+ [% WRAPPER tabs id= "advsearches" %]
+ [% WRAPPER tabs_nav %]
+ [% FOREACH advsearchloo IN advancedsearchesloop %]
+ [% WRAPPER tab_item tabname= "advsearch-tab-${advsearchloo.advanced_search_type}" %]
+ [% IF ( advsearchloo.advanced_search_type == 'itemtypes' ) %]
+ <span>Kiểu tài liệu</span>
+ [% ELSIF ( advsearchloo.advanced_search_type == 'ccode' ) %]
+ <span>Bộ sưu tập</span>
+ [% ELSIF ( advsearchloo.advanced_search_type == 'loc' ) %]
+ <span>Kho tài liệu</span>
+ [% ELSE %]
+ <span>Something else</span>
+ [% END %]
+ [% END # /tab_item#advsearch-tab-... %]
+ [% END # /FOREACH advsearchloo %]
+ [% END # /WRAPPER tabs_nav %]
+
+ [% WRAPPER tab_panels %]
+ [% FOREACH advsearchloo IN advancedsearchesloop %]
+ [% WRAPPER tab_panel tabname="advsearch-tab-${advsearchloo.advanced_search_type}" %]
+ <h4>Giới hạn kết quả tìm kiếm trong các kiểu tài liệu sau đây:</h4>
+ <table>
+ <tr>
+ [% FOREACH itemtypeloo IN advsearchloo.code_loop %]
+ <td>
+ [% SET limit_key = 'mc-' _ itemtypeloo.ccl _ "_" _ itemtypeloo.code %]
+ [% IF limits.$limit_key.defined %]
+ [% limits.delete( limit_key ) %]
+ <input type="checkbox" checked="checked" id="[% itemtypeloo.ccl FILTER remove(',') | html %]-[% itemtypeloo.number | html %]" name="limit" value="mc-[% itemtypeloo.ccl | html %]:[% itemtypeloo.code | html %]"/>
+ [% ELSE %]
+ <input type="checkbox" id="[% itemtypeloo.ccl FILTER remove(',') | html %]-[% itemtypeloo.number | html %]" name="limit" value="mc-[% itemtypeloo.ccl | html %]:[% itemtypeloo.code | html %]"/>
+ [% END # /IF limits.$limit_key.defined %]
+ <label for="[% itemtypeloo.ccl FILTER remove(',') | html %]-[% itemtypeloo.number | html %]">
+ [% UNLESS ( Koha.Preference('OpacNoItemTypeImages') ) %]
+ [% IF ( itemtypeloo.imageurl ) %]
+ <img src="[% itemtypeloo.imageurl | html %]" alt="[% itemtypeloo.description | html %]" />
+ [% END %]
+ &nbsp;
+ [% END %]
+ <span class="itypetext">[% itemtypeloo.description | html %]</span>
+ </label>
+ </td>
+ [% IF ( loop.last ) %]
+ </tr>
+ [% ELSE %]
+ [% UNLESS ( loop.count % 5 ) %]
+ </tr>
+ <tr>
+ [% END %]
+ [% END # /IF ( loop.last ) %]
+ [% END # /FOREACH itemtypeloo %]
+ </table>
+ [% END # tab_panel/#advsearch-... %]
+ [% END # /FOREACH advsearchloo %]
+ [% END # /WRAPPER tab_panels %]
+ [% END # /WRAPPER tabs %]
+ <!-- /MC-TYPE LIMIT -->
+
+ [% IF ( expanded_options ) %]
+ <!-- BASIC LIMITS -->
+ <fieldset id="basiclimits">
+ <legend>Giới hạn</legend>
+ <fieldset id="pubrange">
+ <!-- PUB / COPY YEAR LIMIT --><!-- FIXME: add publication,copyright,acquisition options -->
+ <p>
+ <label for="limit-yr">Năm xuất bản: </label>
+ [% SET year_limit_key = 'yr,st-numeric' %]
+ <input type="text" size="15" name="limit-yr" id="limit-yr" value="[% limits.$year_limit_key.0 | html %]"/>&nbsp;&nbsp;(format: yyyy-yyyy)
+ [% IF limits.$year_limit_key.defined %]
+ [% limits.delete(year_limit_key) %]
+ [% END %]
+ </p>
+ <!-- /PUB / COPY YEAR LIMIT -->
+ </fieldset> <!-- /#pubrange -->
+
+ <fieldset id="language">
+ <!-- LANGUAGE LIMIT -->
+ <p>
+ <label for="language-limit">Ngôn ngữ: </label>
+ [% PROCESS language_limit_select ln_loop=search_languages_loop ln_id='language-limit' ln_index='ln' selected = limits.${'ln,rtrn'}.0 %]
+ [% limits.delete( 'ln,rtrn' ) %]
+ <label for="language-original-limit">Language of original: </label>
+ [% PROCESS language_limit_select ln_loop=search_languages_loop ln_id='language-original-limit' ln_index='language-original' selected = limits.${'language-original,rtrn'}.0 %]
+ [% limits.delete( 'language-original,rtrn' ) %]
+ </p>
+ <!-- /LANGUAGE LIMIT -->
+ </fieldset> <!-- /#language -->
+ </fieldset> <!-- /#basiclimits -->
+ <!-- /BASIC LIMITS -->
+ [% END # /IF ( expanded_options ) %]
+
+ [% IF ( UNIMARC ) %]
+ [% INCLUDE 'subtypes_unimarc.inc' %]
+ [% ELSE %]
+ [% PROCESS 'subtype_limits.inc' %]
+ <!-- SUBTYPE LIMITS -->
+ <fieldset id="subtype">
+ <legend>Giới hạn chi tiết</legend><p>
+ [% PROCESS subtype_dropdowns %]
+ <fieldset id="current_subtype_limits">
+ <legend>Current subtype limits</legend>
+ [% FOREACH subtype IN ['aud','fic','bio','ctype','l-format'] %]
+ [% FOREACH limit IN limits.$subtype %]
+ <span>
+ <input name="limit" value="[% subtype | html %]:[% limit | html %]" type="hidden">
+ <label for="subtype_limit_[% loop.index() | html %]">[%# PROCESS subtype_limits_description subtype_limit = subtype _':' _ limit #%]</label>
+ <input type="checkbox" class="toggle_limit" name="subtype_limit_[% loop.index() | html %]" checked="checked">
+ </span>
+ [% END %]
+ [% limits.delete( subtype ) %]
+ [% END # /FOREACH subtype %]
+ </fieldset> <!-- #current_subtype_limits -->
+ </fieldset> <!-- /#subtype -->
+ [% END # /IF ( UNIMARC ) %]
+
+ <!-- AVAILABILITY LIMITS -->
+ <fieldset id="availability">
+ <legend>Giới hạn theo thư viện và trạng thái tài liệu</legend>
+ <fieldset id="currently-avail">
+ [% IF limit_available %]
+ <p><label for="available-items">Hiện tại chỉ có các danh mục sau khả dụng::</label> <input type="checkbox" id="available-items" name="limit" value="available"  checked="checked" /></p>
+ [% ELSE %]
+ <p><label for="available-items">Hiện tại chỉ có các danh mục sau khả dụng::</label> <input type="checkbox" id="available-items" name="limit" value="available" /></p>
+ [% END %]
+ </fieldset> <!-- /#currently-avail -->
+
+ <fieldset id="select-libs">
+ <p>
+ <label for="branchloop">Thư viện:</label>
+ <select name="limit" id="branchloop">
+ <option value="">Tất cả thư viện</option>
+ [%# FIXME Should not we filter the libraries displayed? %]
+ [% PROCESS options_for_libraries prefix => "branch:" libraries => Branches.all( unfiltered => 1, do_not_select_my_library => 1, selected => limits.branch.0 ) %]
+ [% limits.delete('branch') %]
+ </select> <!-- /#branchloop -->
+ </p>
+ [% IF search_groups %]
+ <p>Hoặc</p>
+ <p>
+ <label for="categoryloop">Nhóm thư viện: </label>
+ <select name="limit" id="categoryloop">
+ <option value=""> -- Không -- </option>
+ [% FOREACH sg IN search_groups %]
+ [% UNLESS sg.branchcode %]
+ [% IF limits.multibranchlimit.0 == sg.id %]
+ <option selected="selected" value="multibranchlimit:[% sg.id | html %]">[% sg.title | html %]</option>
+ [% ELSE %]
+ <option value="multibranchlimit:[% sg.id | html %]">[% sg.title | html %]</option>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% limits.delete('multibranchlimit') %]
+ </select> <!-- /#categoryloop -->
+ </p>
+ [% END # /search_groups %]
+ </fieldset> <!-- /#select-libs -->
+ </fieldset> <!-- /#availability -->
+ <!-- /AVAILABILITY LIMITS -->
+
+ <!-- OTHER LIMITS (facets, etc.) -->
+ [% IF limits.size %]
+ <fieldset id="">
+ <legend>Other limits</legend>
+ <p>
+ [% FOREACH key IN limits.keys %]
+ [% FOREACH limit IN limits.$key %]
+ <span>
+ <input type="hidden" name="limit" value="[% key | html %]:[% limit | html %]">
+ <label for="other_[% key _ loop.index() | html %]">[% key | html %]:[% limit | html %]</label>
+ <input type="checkbox" class="toggle_limit" name="other_[% key _ loop.index() | html %]" checked="checked">
+ </span>
+ [% END %]
+ [% END %]
+ </p>
+ </fieldset>
+ [% END # /IF limits.size %]
+ <!-- /OTHER LIMITS (facets, etc.) -->
+
+ <!-- RANK LIMITS -->
+ <fieldset id="sortby">
+ <legend>Sắp xếp kết quả tìm kiếm</legend>
+ <p>
+ <label for="sort_by">Sắp xếp theo: </label>
+ <select id="sort_by" name="sort_by">
+ [% INCLUDE 'resort_form.inc' sort_by = sort || sort_by %]
+ </select>
+ </p>
+ </fieldset> <!-- /#sortby -->
+ <!-- /RANK LIMITS -->
+ </form>
+ </div>
+ </div>
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("lib/hc-sticky.js") | $raw %]
+ [% Asset.js("js/browser.js") | $raw %]
+ [% Asset.css("css/humanmsg.css") | $raw %]
+ [% Asset.js("lib/jquery/plugins/humanmsg.js") | $raw %]
+ <script>
+        /**
+         *  Function add_field();
+         *  This function allows to display a new field to search.
+         */
+        function add_field() {
+            var ButtonPlus = document.getElementById("ButtonPlus");
+            var line = ButtonPlus.parentNode;
+            var dad  = line.parentNode;
+            dad.appendChild(line.cloneNode(true));
+            line.removeChild(ButtonPlus);
+        }
+
+        var Sticky;
+        $(document).ready(function() {
+            $("input[name=q]:eq(0)").focus();
+            if( $("#advsearches .tab-pane.active").length < 1 ){
+                $("#advsearches a:first").tab("show");
+            }
+            Sticky = $("#toolbar");
+            Sticky.hcSticky({
+                stickTo: ".main",
+                stickyClass: "floating"
+            });
+            [% IF search_groups %]
+                function branch_limit() {
+                    if( $("#branchloop").val() != "" ){
+                        $("#categoryloop").val("").prop('disabled',true);
+                    } else {
+                        $("#categoryloop").prop('disabled',false);
+                    }
+                    if ( $("#categoryloop").val() != "" ){
+                        $("#branchloop").val("").prop('disabled',true);
+                    } else {
+                        $("#branchloop").prop('disabled',false);
+                    }
+                }
+                branch_limit();
+                $("#branchloop,#categoryloop").on("change",function(){
+                    branch_limit();
+                });
+            [% END %]
+
+            if( $("#current_subtype_limits input").length == 0 ){
+                $("#current_subtype_limits").hide();
+            }
+            $(".toggle_limit").on('click',function(){
+                $(this).siblings("[type='hidden']").prop('disabled', !this.checked);
+            });
+
+            [% IF searchid %]
+                browser = KOHA.browser('[% searchid | html %]');
+                browser.show_back_link();
+            [% END %]
+
+            [% IF edit_filter %]
+            $("#save_filter").click(function(e){
+                e.preventDefault();
+                let operators = [];
+                let indexes = [];
+                let operands = [];
+                let limits =[];
+                let opac = $("#show_filter_opac").prop('checked');
+                let staff_client = $("#show_filter_staff_client").prop('checked');
+                $("select[name='op']").each(function(){
+                    operators.push( $(this).val() );
+                });
+                $("select[name='idx']").each(function(){
+                    indexes.push( $(this).val() );
+                });
+                $("input[name='q']").each(function(){
+                    operands.push( $(this).val() );
+                });
+                $("select[name='limit'],input[name='limit']:checked").each(function(){
+                    if( $(this).val() != ""){
+                        limits.push( $(this).val() );
+                    }
+                });
+                let year_limit = $("#limit-yr").val();
+                if( year_limit ){
+                    limits.push( "yr,st-numeric:"+year_limit );
+                }
+                let options = {
+                    url: '/api/v1/search_filters/'+ [% edit_filter.id | html %],
+                    method: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        name: "[% edit_filter.name | html %]",
+                        query: JSON.stringify({ operands: operands, indexes: indexes, operators:operators }),
+                        limits: JSON.stringify({ limits: limits }),
+                        opac: opac,
+                        staff_client: staff_client,
+                    })
+                };
+                $.ajax(options)
+                    .then(function(result) {
+                        humanMsg.displayAlert( _("Saved filter: ") + result.name  , { className: 'human Success' } );
+                    })
+                    .fail( function(err){
+                        humanMsg.displayAlert( _("There was an error during saving:") + err.responseText, { className: 'humanError' } );
+                    });
+
+
+            });
+            [% END %]
+
+
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

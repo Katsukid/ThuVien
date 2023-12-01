@@ -1,0 +1,53 @@
+---
+description:
+- Credit types used in Koha
+tables:
+- account_credit_types:
+    multiline: []
+    rows:
+    - can_be_added_manually: '0'
+      code: OVERPAYMENT
+      description: Overpayment refund
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PAYMENT
+      description: Payment
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: WRITEOFF
+      description: Writeoff
+      is_system: '1'
+    - can_be_added_manually: '1'
+      code: FORGIVEN
+      description: Forgiven
+      is_system: '1'
+    - can_be_added_manually: '1'
+      code: CREDIT
+      description: Credit
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: DISCOUNT
+      description: A discount applied to a patrons fine
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: REFUND
+      description: Refund
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: LOST_FOUND
+      description: Lost item fee refund
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PURCHASE
+      description: Purchase
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: CANCELLATION
+      description: Cancellation
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PROCESSING_FOUND
+      description: Lost item processing fee refund
+      is_system: '1'
+    translatable:
+    - description

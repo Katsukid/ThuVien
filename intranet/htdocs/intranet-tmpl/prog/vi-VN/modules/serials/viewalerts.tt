@@ -1,0 +1,65 @@
+[% USE raw %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Alert subscribers for [% bibliotitle | html %] &rsaquo; Serials &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="ser_viewalerts" class="ser">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'serials-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/serials-home.pl">Ấn phẩm định kỳ</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscriptionid | uri %]"><em>[% bibliotitle | html %]</em></a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Alert subscribers</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ <h1>Cảnh báo tới bạn đọc liên quan đến ÂPĐK: <em>[% bibliotitle | html %]</em></h1>
+ <p>
+ <span class="label">Ấn phẩm định kỳ:</span> <a href="subscription-detail.pl?subscriptionid=[% subscriptionid | uri %]">[% bibliotitle | html %] #[% subscriptionid | html %]</a>
+ </p>
+
+ <div class="page-section">
+
+ [% IF subscribers.count %]
+ <table>
+ <tr>
+ <th>Tên bạn đọc</th>
+ </tr>
+ [% FOREACH subscriber IN subscribers %]
+ <tr>
+ <td>
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% subscriber.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' patron=subscriber %]</a>
+ </td>
+ </tr>
+ [% END %]
+ </table>
+ [% ELSE %]
+ <p>Không có bạn đọc trong danh sách cần gửi cảnh báo liên quan đến ấn phẩm định kỳ này.</p>
+ [% END %]
+ </div> <!-- /.page-section -->
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'serials-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

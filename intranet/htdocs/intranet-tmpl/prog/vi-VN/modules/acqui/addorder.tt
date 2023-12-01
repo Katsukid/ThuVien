@@ -1,0 +1,35 @@
+[% INCLUDE "doc-head-open.inc" %]
+<title>Add order &rsaquo; Acquisition &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE "doc-head-close.inc" %]
+</head>
+
+<body id="acq_addorder" class="acq">
+[% INCLUDE "header.inc" %]
+
+ <div class="container-fluid">
+ [% IF (not_enough_budget) %]
+ <form action="/cgi-bin/koha/acqui/addorder.pl" method="post">
+ [% FOREACH var IN vars_loop %]
+ [% FOREACH val IN var.values %]
+ <input type="hidden" name="[% var.name | html %]" value="[% val | html %]" />
+ [% END %]
+ [% END %]
+ <input type="hidden" name="confirm_budget_exceeding" value="1" />
+ <div class="dialog alert">
+ [% IF (budget_exceeded) %]
+ <p>Cảnh báo! Tổng số tiền thanh toán đơn hàng vượt quá ngân sách thanh toán.</p>
+ [% END %]
+ [% IF (encumbrance_exceeded) %]
+ <p>Cảnh báo! Bạn còn thiếu [% encumbrance | html %]% để thanh toán đơn hàng này.</p>
+ [% END %]
+ [% IF (expenditure_exceeded) %]
+ <p>Cảnh báo! Bạn vượt quá giới hạn thanh toán ([% expenditure | html %][% IF (currency) %] [% currency | html %][% END %]) của nguồn quỹ thanh toán.</p>
+ [% END %]
+ <p>Bạn xác nhận muốn tạo đơn hàng này?</p>
+ <button type="submit" class="approve"><i class="fa fa-fw fa-check"></i> Xác nhận</button>
+ <button type="button" class="deny" onclick="window.location.href = '[% referer | html %]'"><i class="fa fa-fw fa-remove"></i> Không tạo đơn hàng</button>
+ </div>
+ </form>
+ [% END %]
+
+[% INCLUDE "intranet-bottom.inc" %]

@@ -1,0 +1,90 @@
+---
+#
+#  Copyright 2020 Koha Development Team
+#
+#  This file is part of Koha.
+#
+# Koha is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Koha is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Koha; if not, see <http://www.gnu.org/licenses>.
+
+description:
+  - "Sample news items"
+
+tables:
+  - additional_contents:
+      translatable: [ title, content ]
+      multiline: [ content ]
+      rows:
+        - title: "Welcome to Koha"
+          category: "news"
+          code: "News_1"
+          location: "staff_only"
+          content:
+            - "Welcome to Koha. Koha is a full-featured open-source ILS. Developed initially in New Zealand by Katipo Communications Ltd and first deployed in January of 2000 for Horowhenua Library Trust, Koha is currently maintained by a team of software providers and library technology staff from around the globe."
+          lang: "default"
+          published_on: "2007-10-29 05:25:58"
+          expirationdate: "2099-01-10"
+          number: 1
+
+        - title: "What's Next?"
+          category: "news"
+          location: "staff_only"
+          code: "News_2"
+          content:
+            - "Now that you've installed Koha, what's next? Here are some suggestions:"
+            - "<ul>"
+            - "<li><a href=\"http://koha-community.org/documentation/\">Read Koha Documentation</a></li>"
+            - "<li><a href=\"http://wiki.koha-community.org\">Read/Write to the Koha Wiki</a></li>"
+            - "<li><a href=\"http://koha-community.org/support/\">Read and Contribute to Discussions</a></li>"
+            - "<li><a href=\"http://bugs.koha-community.org\">Report Koha Bugs</a></li>"
+            - "<li><a href=\"http://wiki.koha-community.org/wiki/Version_Control_Using_Git\">Submit Patches to Koha using Git (Version Control System)</a></li>"
+            - "<li><a href=\"http://koha-community.org/support/\">Chat with Koha users and developers</a></li>"
+            - "</ul>"
+            - ""
+          lang: "default"
+          published_on: "2007-10-29 05:34:45"
+          expirationdate: "2099-01-10"
+          number: 2
+
+        - title: "Catalog concern help text"
+          category: "html_customizations"
+          location: "CatalogConcernHelp"
+          code: "CatalogConcernHelp_1"
+          content:
+              - "Please describe your concern clearly and the library will try to deal with it as quickly as possible"
+          lang: "default"
+          published_on: "2007-10-29 05:25:58"
+          expirationdate: "2099-01-10"
+          number: 1
+
+        - title: "Catalog concern template text"
+          category: "html_customizations"
+          location: "CatalogConcernTemplate"
+          code: "CatalogConcernTemplate_1"
+          content:
+            - "**Describe the concern**"
+            - "A clear and concise description of what the concern is."
+            - ""
+            - "**To reproduce**"
+            - "Steps to reproduce the behavior:"
+            - "1. Go to '...'"
+            - "2. Click on '....'"
+            - "3. Scroll down to '....'"
+            - "4. See error"
+            - ""
+            - "**Expected behavior**"
+            - "A clear and concise description of what you expected to happen."
+          lang: "default"
+          published_on: "2007-10-29 05:25:58"
+          expirationdate: "2099-01-10"
+          number: 1

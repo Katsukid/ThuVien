@@ -1,0 +1,31 @@
+---
+type: object
+properties:
+  city_id:
+    type: integer
+    description: internally assigned city identifier
+    readOnly: true
+  name:
+    description: city name
+    type: string
+  state:
+    description: city state
+    type:
+      - string
+      - "null"
+  postal_code:
+    description: city postal code
+    type:
+      - string
+      - "null"
+  country:
+    description: city country
+    type:
+      - string
+      - "null"
+additionalProperties: false
+required:
+  - name
+  - state
+  - postal_code
+  - country

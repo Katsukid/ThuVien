@@ -1,0 +1,52 @@
+Tools:
+    Barcodes:
+        -
+            - Split barcodes on the following separator chars
+            - pref: BarcodeSeparators
+              default: '\s\r\n'
+            - "in batch item modification and inventory.<br/>Note: Type \\r for carriage return, \\n for newline and \\s for whitespace. Possible candidates to include also are pipe char |, hyphen (precede with backslash), comma, semicolon, dot, etc."
+    Batch item:
+        -
+            - Process up to
+            - pref: MaxItemsToProcessForBatchMod
+              class: integer
+            - items in a single item modification batch.
+        -
+            - Display up to
+            - pref: MaxItemsToDisplayForBatchDel
+              class: integer
+            - items in a single item deletion batch.
+        -
+            - Display up to
+            - pref: MaxItemsToDisplayForBatchMod
+              class: integer
+            - items in a single item modification batch.
+    Patron cards:
+        -
+            - Limit the number of creator images stored in the database to
+            - pref: ImageLimit
+              class: Integer
+            - images.
+    News:
+        -
+            - "Show the author for news items:"
+            - pref: NewsAuthorDisplay
+              choices:
+                  none: "not at all"
+                  opac: "OPAC only"
+                  staff: "staff interface only"
+                  both: "both OPAC and staff interface"
+            - "."
+        -
+            - By default edit additional contents and news items with
+            - pref: AdditionalContentsEditor
+              choices:
+                  tinymce: "a WYSIWYG editor (TinyMCE)"
+                  codemirror: "a text editor (CodeMirror)"
+            - .
+    Upload:
+        -
+            - Automatically delete temporary uploads older than
+            - pref: UploadPurgeTemporaryFilesDays
+              class: integer
+            - "days in cleanup_database cron job. NOTE: If you leave this field empty, the cron job will not delete any files. On the other hand a value of 0 means: delete all temporary files."

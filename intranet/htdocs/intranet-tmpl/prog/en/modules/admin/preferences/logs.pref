@@ -1,0 +1,141 @@
+Logging:
+    Logging:
+        -
+            - pref: ClaimsLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when an acquisitions claim or a serials claim notice is sent.
+        -
+            - pref: BorrowersLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - changes to patron records.
+        -
+            - pref: CataloguingLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - any changes to bibliographic or item records.
+        -
+            - pref: AuthoritiesLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - changes to authority records.
+        -
+            - pref: FinesLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when fines are charged, paid, or forgiven.
+        -
+            - pref: HoldsLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - any actions on holds (create, cancel, suspend, resume, etc).
+        -
+            - pref: IllLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when changes to ILL requests take place.
+        -
+            - pref: AcquisitionLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when acquisition actions take place.
+        -
+            - pref: IssueLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when items are checked out.
+        -
+            - pref: ReturnLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when items are checked in.
+        -
+            - pref: RenewalLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when items are renewed.
+        -
+            - pref: SubscriptionLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when serials are added, deleted or changed.
+        -
+            - pref: CronjobLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - information from cron jobs.
+        -
+            - pref: ReportsLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - when reports are added, deleted or changed.
+        -
+            - pref: AuthFailureLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - " authentication failures."
+        -
+            - pref: AuthSuccessLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - " successful authentications."
+        -
+            - pref: NoticesLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - " changes to notice templates."
+        -
+            - pref: NewsLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - " changes to news entries and other contents managed in the news tool."
+        -
+            - pref: RecallsLog
+              choices:
+                  1: Log
+                  0: "Don't log"
+            - any actions on recalls (create, cancel, expire, fulfill).
+
+    Debugging:
+        -
+            - "When logging actions, store a stack trace that goes at most"
+            - pref: "ActionLogsTraceDepth"
+              class: integer
+            - "levels deep."
+        -
+            - pref: DumpTemplateVarsIntranet
+              choices:
+                  1: Do
+                  0: "Don't"
+            - dump all Template Toolkit variables to a comment in the HTML source for the staff interface.
+        -
+            - pref: DumpTemplateVarsOpac
+              choices:
+                  1: Do
+                  0: "Don't"
+            - dump all Template Toolkit variables to a comment in the HTML source for the OPAC.
+        -
+            - pref: DumpSearchQueryTemplate
+              choices:
+                  1: Do
+                  0: "Don't"
+            - dump search query to a comment in the HTML source for the OPAC and staff interface.

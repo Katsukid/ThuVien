@@ -1,0 +1,40 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Sending your list &rsaquo; Lists &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="lists_sendshelfform" class="lists" style="padding: 1em;">
+[% INCLUDE 'blocking_errors.inc' %]
+<div class="container">[% IF ( email ) %]
+
+ [% IF ( SENT ) %]
+ <h3>Gửi tin nhắn cho bạn đọc</h3>
+ <p>Thông tin tài liệu trong giá sách ảo đã được gửi tới hòm thư: [% email | html %]</p>
+ <p><a class="close focus" href="#">Đóng</a></p>
+ [% END %]
+ [% IF ( error ) %]
+ <p>Gặp lỗi khi gửi giá sách ảo...</p>
+ [% END %]
+ 
+[% ELSE %]
+
+<form action="/cgi-bin/koha/virtualshelves/sendshelf.pl" method="post">
+
+<fieldset class="rows"> 
+ <legend><h1>Gửi giá sách ảo của bạn</h1></legend>
+<ol> <li>
+ <label for="email">Địa chỉ Email:</label>
+ <input type="text" id="email" name="email" size="43" class="focus" />
+ </li>
+ <li>
+ <label for="comment">Bình luận:</label>
+ <textarea id="comment" name="comment" rows="4" cols="40"></textarea>
+ </li>
+ <li>
+ <input type="hidden" name="shelfid" value="[% shelfid | html %]" />
+ </li></ol></fieldset>
+ <fieldset class="action"> <input class="btn btn-primary" type="submit" value="Gửi thư" /> <a class="cancel close" href="#">Hủy bỏ</a> </fieldset>
+</form>
+
+[% END %]</div>
+</body>
+</html>

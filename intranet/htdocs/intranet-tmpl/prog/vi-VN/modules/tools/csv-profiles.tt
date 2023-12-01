@@ -1,0 +1,361 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>
+ [% IF op == 'add_form' %]
+ [% IF csv_profile %]
+ Modify a CSV profile &rsaquo;
+ [% ELSE %]
+ New CSV profile &rsaquo;
+ [% END %]
+ [% END %]
+ CSV export profiles &rsaquo; Tools &rsaquo; Trường CĐKTQS1
+</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="tools_csv-profiles" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Công cụ bổ trợ</a>
+ [% END %]
+ [% IF op == 'add_form' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/csv-profiles.pl">Mẫu CSV</a>
+ [% END %]
+ [% IF csv_profile %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Modify a CSV profile</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>New CSV profile</span>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Mẫu CSV</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+[% FOR m IN messages %]
+ <div class="dialog [% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>An error occurred when updating this CSV profile. Perhaps it already exists</span>
+ [% CASE 'error_on_insert' %]
+ <span>An error occurred when adding this CSV profile</span>
+ [% CASE 'error_on_delete' %]
+ <span>An error occurred when deleting this CSV profile. Check the logs</span>
+ [% CASE 'success_on_update' %]
+ <span>CSV profile updated successfully</span>
+ [% CASE 'success_on_insert' %]
+ <span>CSV profile added successfully</span>
+ [% CASE 'success_on_delete' %]
+ <span>CSV profile deleted successfully</span>
+ [% CASE 'already_exists' %]
+ <span>This CSV profile already exists</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+[% BLOCK list_separator_options %]
+ [% IF selected_separator == ',' %]
+ <option value="," selected="selected">Dấu phẩy (,)</option>
+ [% ELSE %]
+ <option value=",">Dấu phẩy (,)</option>
+ [% END %]
+ [% IF selected_separator == '|' %]
+ <option value="|" selected="selected">Gạch thẳng (|)</option>
+ [% ELSE %]
+ <option value="|">Gạch thẳng (|)</option>
+ [% END %]
+ [% IF selected_separator == ';' %]
+ <option value=";" selected="selected">Chấm phẩy (;)</option>
+ [% ELSE %]
+ <option value=";">Chấm phẩy (;)</option>
+ [% END %]
+ [% IF selected_separator == '#' %]
+ <option value="#" selected="selected">Dấu thăng (#)</option>
+ [% ELSE %]
+ <option value="#">Dấu thăng (#)</option>
+ [% END %]
+ [% IF selected_separator == ' ' %]
+ <option value=" " selected="selected">Dấu cách ( )</option>
+ [% ELSE %]
+ <option value=" ">Dấu cách ( )</option>
+ [% END %]
+ [% IF selected_separator == '\t' %]
+ <option value="\t" selected="selected">Tabulation (\t)</option>
+ [% ELSE %]
+ <option value="\t">Tabulation (\t)</option>
+ [% END %]
+ [% IF selected_separator == '\n' %]
+ <option value="\n" selected="selected">New line (\n)</option>
+ [% ELSE %]
+ <option value="\n">New line (\n)</option>
+ [% END %]
+[% END %]
+
+[% BLOCK type_description %]
+ [% IF type_code == 'marc' %] <span>Hiển thị MARC</span>
+ [% ELSIF type_code == 'sql' %] <span>SQL</span>
+ [% ELSE %] <span>Unknown type</span>
+ [% END %]
+[% END %]
+
+[% BLOCK used_for_description %]
+ [% IF used_for_code == 'export_records' %] <span>Export records</span>
+ [% ELSIF used_for_code == 'late_issues' %] <span>Late serial issues claims</span>
+ [% ELSIF used_for_code == 'late_orders' %] <span>Export late orders</span>
+ [% ELSIF used_for_code == 'export_basket' %] <span>Basket export in acquisition</span>
+ [% ELSIF used_for_code == 'export_lost_items' %] <span>Export lost items in report</span>
+ [% ELSE %] <span>Unknown usage</span>
+ [% END %]
+[% END %]
+
+[% IF op == 'add_form' %]
+ [% IF csv_profile %]
+ <h1>Modify a CSV profile</h1>
+ [% ELSE %]
+ <h1>New CSV profile</h1>
+ [% END %]
+
+ <form action="/cgi-bin/koha/tools/csv-profiles.pl" class="validated" method="post">
+ <input type="hidden" name="op" value="add_validate" />
+ <input type="hidden" name="export_format_id" value="[% csv_profile.export_format_id | html %]" />
+ <fieldset class="rows">
+ <ol>
+ [% IF csv_profile %]
+ <li><span class="label">Profile ID: </span>[% csv_profile.export_format_id | html %]</li>
+ [% END %]
+ <li>
+ <label for="profile" class="required">Tên mẫu: </label>
+ <input type="text" name="profile" id="profile" value="[% csv_profile.profile | html %]" class="required">
+ <span class="required">Bắt buộc</span>
+ </li>
+ <li>
+ <label for="type" class="required">Kiểu mẫu CSV: </label>
+ <select id="type" name="type">
+ [% FOREACH type IN [ 'marc' 'sql'] %]
+ [% IF csv_profile.type == type %]
+ <option value="[% type | html %]" selected="selected">[% PROCESS type_description type_code = type %]</option>
+ [% ELSE %]
+ <option value="[% type | html %]">[% PROCESS type_description type_code = type %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <span class="required">Bắt buộc</span>
+ </li>
+ <li class="sql_specific">
+ <label for="used_for_sql">Usage: </label>
+ <select id="used_for_sql" name="used_for_sql">
+ [% FOREACH used_for IN [ 'late_issues' 'late_orders', 'export_basket' 'export_lost_items' ] %]
+ [% IF csv_profile.used_for == used_for %]
+ <option value="[% used_for | html %]" selected="selected">[% PROCESS used_for_description used_for_code = used_for %]</option>
+ [% ELSE %]
+ <option value="[% used_for | html %]">[% PROCESS used_for_description used_for_code = used_for %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ <li class="marc_specific">
+ <label for="used_for_marc">Usage: </label>
+ <select id="used_for_marc" name="used_for_marc">
+ [% FOREACH used_for IN [ 'export_records' ] %]
+ [% IF csv_profile.used_for == used_for %]
+ <option value="[% used_for | html %]" selected="selected">[% PROCESS used_for_description used_for_code = used_for %]</option>
+ [% ELSE %]
+ <option value="[% used_for | html %]">[% PROCESS used_for_description used_for_code = used_for %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="description">Thông tin mô tả: </label>
+ <textarea cols="50" rows="2" name="description" id="description">[% csv_profile.description | html %]</textarea>
+ </li>
+ <li>
+ <label for="csv_separator">Dấu phân cách CSV: </label>
+ <select name="csv_separator" id="csv_separator">
+ [% PROCESS list_separator_options selected_separator=csv_profile.csv_separator || ',' %]
+ </select>
+ </li>
+
+ <li class="marc_specific">
+ <label for="field_separator">Dấu phân cách trường dữ liệu: </label>
+ <select name="field_separator" id="field_separator">
+ [% PROCESS list_separator_options selected_separator=csv_profile.field_separator || '#' %]
+ </select>
+ </li>
+
+ <li class="marc_specific"><label for="subfield_separator">Dấu phân cách trường con: </label>
+ <select name="subfield_separator" id="subfield_separator">
+ [% PROCESS list_separator_options selected_separator=csv_profile.subfield_separator || '|'%]
+ </select>
+ </li>
+
+ <li class="marc_specific"><label for="encoding">Chuẩn ký tự: </label>
+ <select name="encoding" id="encoding">
+ [% FOREACH encoding IN encodings %]
+ [% IF csv_profile.encoding == encoding OR NOT csv_profile AND encoding == 'utf8' %]
+ <option selected="selected">[% encoding | html %]</option>
+ [% ELSE %]
+ <option>[% encoding | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li class="marc_specific">
+ <label for="staff_only">Only available on the staff interface: </label>
+ [% IF csv_profile.staff_only %]
+ <input type="checkbox" name="staff_only" id="staff_only" value="1" checked="checked">
+ [% ELSE %]
+ <input type="checkbox" name="staff_only" id="staff_only" value="1">
+ [% END %]
+ </li>
+
+ <li class="marc_specific">
+ <label for="marc_content" class="required">Trường MARC trong mẫu: </label>
+ <textarea cols="50" rows="2" name="marc_content" id="marc_content">[% csv_profile.content | html %]</textarea>
+ <span class="required">Bắt buộc</span>
+ <p>Bạn cần khai báo các trường và trường con của dữ liệu cần xuất ra trong mẫu CSV, các trường phân cách bằng dấu gạch thẳng.</p>
+ <p>Bạn cũng có thể đặt tên cho các trường dữ liệu bằng cách đặt tên trước số trường và cách nhau bằng dấu</p>
+ <p>Ví dụ như: Tên cá nhân=200|Thành tố=210$a|300|009</p>
+ <p>You can use Template Toolkit tags too. See the help page for more information.</p>
+ </li>
+
+ <li class="sql_specific">
+ <label for="sql_content" class="required">Trường mẫu SQL: </label>
+ <textarea cols="50" rows="2" name="sql_content" id="sql_content">[% csv_profile.content | html %]</textarea>
+ <p>Bạn phải xác định các trường bạn muốn xuất dữ liệu, các trường được phân cách bằng ký tự "|".</p>
+ <p>Bạn cũng có thể sử dụng từ ngữ quy định thông tin của riêng bạn (thay thế cho các từ ngữ được quy định bởi Koha), bằng cách bạn thêm từ ngữ mô tả của bạn vào trước mỗi trường thông tin của Koha và phân cách với trường thông tin bằng dấu "=".</p>
+ <p>Ví dụ: Tên=subscription.name|Nhan đề=subscription.title|Kỳ phát hành=serial.serialseq</p>
+ <p>For late issues claims you can use data from following tables: serial, subscription, biblio, biblioitems and aqbookseller.</p>
+ <p>For basket exports you can use data from following tables: biblio, biblioitems, aqorders, aqbudgets and aqbasket.</p>
+ <p>For exporting late orders you must provide a profile in Template Toolkit syntax to generate the CSV file.</p>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <a class="cancel" href="/cgi-bin/koha/tools/csv-profiles.pl">Hủy bỏ</a>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'delete_confirm' %]
+ <div class="dialog alert">
+ [% IF csv_profile %]
+ <h1>Delete CSV Profile "[% csv_profile.profile | html %]?"</h1>
+ <form action="/cgi-bin/koha/tools/csv-profiles.pl" method="post">
+ <input type="hidden" name="op" value="delete_confirmed" />
+ <input type="hidden" name="export_format_id" value="[% csv_profile.export_format_id | html %]" />
+ <input class="approve" type="submit" value="Xóa" />
+ </form>
+ <form action="/cgi-bin/koha/tools/csv-profiles.pl" method="get">
+ <input type="submit" class="deny" value="No, do not Delete" />
+ </form>
+ [% ELSE %]
+ This CSV Profile does not exist.
+ [% END %]
+ </div>
+[% END %]
+
+[% IF op == 'list' %]
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="newcsvprofile" href="/cgi-bin/koha/tools/csv-profiles.pl?op=add_form"><i class="fa fa-plus"></i> New CSV profile</a>
+ </div>
+
+ <h1>Mẫu CSV</h1>
+
+ [% IF csv_profiles %]
+ <div class="page-section">
+ <table id="table_csv_profiles">
+ <thead>
+ <th>CSV profile ID</th>
+ <th>Tên</th>
+ <th>Thông tin mô tả</th>
+ <th>Nội dung</th>
+ <th>CSV separator</th>
+ <th>CSV type</th>
+ <th>Usage</th>
+ <th class="noExport">Thao tác</th>
+ </thead>
+ <tbody>
+ [% FOREACH csv_profile IN csv_profiles %]
+ <tr>
+ <td>[% csv_profile.export_format_id | html %]</td>
+ <td>[% csv_profile.profile | html %]</td>
+ <td>[% csv_profile.description | html %]</td>
+ <td>[% csv_profile.content | html | html_line_break %]</td>
+ <td>[% csv_profile.csv_separator | html %]</td>
+ <td>[% PROCESS type_description type_code = csv_profile.type %]</td>
+ <td>[% PROCESS used_for_description used_for_code = csv_profile.used_for %]</td>
+ <td class="actions">
+ <a href="/cgi-bin/koha/tools/csv-profiles.pl?op=add_form&amp;export_format_id=[% csv_profile.export_format_id | uri %]" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Chỉnh sửa</a>
+ <a href="/cgi-bin/koha/tools/csv-profiles.pl?op=delete_confirm&amp;export_format_id=[% csv_profile.export_format_id | uri %]" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> Xóa</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+ [% ELSE %] Không có mẫu CSV.<a href="/cgi-bin/koha/tools/csv-profiles.pl?op=add_form">Create a new CSV profile</a>.
+ [% END %]
+[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ <script>
+        function reloadPage(p) {
+            var id = p.value;
+            if (id != 0) { document.location = "/cgi-bin/koha/tools/csv-profiles.pl?op=add_form&amp;export_format_id=" + id; }
+        }
+        $(document).ready(function() {
+            $("#type").change(function(){
+                if ( $(this).find("option:selected").val() == "marc" ) {
+                    $("li.marc_specific").show();
+                    $("#marc_content").attr("required", "required");
+                    $("li.sql_specific").hide();
+                    $("#sql_content").removeAttr("required");
+                } else {
+                    $("li.marc_specific").hide();
+                    $("#marc_content").removeAttr("required");
+                    $("li.sql_specific").show();
+                    $("#sql_content").attr("required", "required");
+                }
+            });
+            $("#type").change();
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

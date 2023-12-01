@@ -1,0 +1,65 @@
+[% USE Koha %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>
+ [% IF ( nopermission ) %]Access denied[% END %]
+ [% IF ( timed_out ) %]Session timed out[% END %]
+ [% IF ( different_ip ) %]IP address change[% END %]
+ [% IF ( invalid_username_or_password ) %]Invalid username or password[% END %]
+ [% IF ( loginprompt ) %]Log in to the Koha web installer[% END %] &rsaquo; Trường CĐKTQS1
+</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="installer-login" class="installer-main col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+
+ <div id="logo"><a href="#">Koha</a></div>
+
+ [% IF ( nopermission ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Lỗi: </strong>Unauthorized user <a href="/cgi-bin/koha/mainpage.pl?logout.x=1">Đăng xuất</a></div>
+ [% END %]
+
+ [% IF ( timed_out ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Lỗi: </strong>Phiên đăng nhập quá hạn, hãy đăng nhập lại</div>
+ [% END %]
+
+ [% IF ( different_ip ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Lỗi: </strong>Địa chỉ IP thay đổi, đăng nhập lại </div>
+ [% END %]
+
+ [% IF ( invalid_username_or_password ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Lỗi: </strong>Tên đăng nhập hoặc mật khẩu không hợp lệ</div>
+ [% END %]
+
+ [% IF ( loginprompt ) %]
+ <h1>Welcome to the Koha [%- Koha.Version.release | html -%] web installer</h1>
+
+ <p>Trước khi bắt đầu, hãy kiểm tra lại các thông tin. Đăng nhập bằng tài khoản hệ thống cung cấp trong file cấu hình<code>koha-conf.xml</code> configuration file.</p>
+
+ <form action="[% url | html %]" method="post" id="mainform">
+ [% FOREACH INPUT IN INPUTS %]
+ <input type="hidden" name="[% INPUT.name | html %]" value="[% INPUT.value | html %]" />
+ [% END %]
+
+ <fieldset>
+ <legend>Please enter your username and password</legend>
+
+ <div class="form-group">
+ <label>Tên đăng nhập:</label>
+ <input type="text" class="form-control" name="userid" id="userid" value="[% userid | html %]" size="20" tabindex="1" />
+ </div>
+ <div class="form-group">
+ <label>Mật khẩu:</label>
+ <input type="password" class="form-control" name="password" id="password" value="" size="20" tabindex="2" />
+ </div>
+ <input class="btn btn-primary" id="submit" tabindex="3" type="submit" value="Đăng nhập" />
+ </fieldset>
+ </form>
+ [% END %]
+ </div> <!-- / #installer-login -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

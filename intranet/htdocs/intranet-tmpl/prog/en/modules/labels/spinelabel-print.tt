@@ -1,0 +1,60 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Branches %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Spine labels &rsaquo; Tools &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' popup => 1 %]
+[% Asset.css("css/spinelabel.css") | $raw %]
+<style>
+    @media print {
+        .noprint { display: none; }
+    }
+</style>
+[% IF ( IntranetUserCSS ) %]<style>[% IntranetUserCSS | $raw %]</style>[% END %]
+</head>
+
+	[% IF ( BarcodeNotFound ) %]
+		<body id="labels_spinelabel-print" class="tools labels">
+            <div class="dialog message">The barcode [% Barcode | html %] was not found.</div>
+            <div id="print_button" class="noprint">
+                <button class="btn btn-default close-window">Close</button>
+            </div>
+	[% ELSE %]
+            <body id="labels_spinelabel-print" class="tools labels">
+            <div id="spinelabel" class="[% Branches.GetLoggedInBranchcode | html %]" data-loggedinbranch="[% Branches.GetLoggedInBranchcode | html %]" data-homebranch="[% itemhomebranch | html %]" data-holdingbranch="[% itemholdingbranch | html %]">
+                [% content | $raw %]
+            </div>
+            <div id="print_button" class="noprint">
+                <button class="btn btn-default print-label"><i class="fa fa-print"></i> Print this label</button>
+                <button class="btn btn-default edit-label"><i class="fa fa-lock"></i> Edit this label</button>
+            </div>
+	[% END %]
+
+[% Asset.js( "lib/jquery/jquery-3.6.0.min.js" ) | $raw %]
+[% Asset.js( "lib/jquery/jquery-migrate-3.3.2.min.js" ) | $raw %]
+[% IF ( autoprint ) %]
+    [% INCLUDE 'slip-print.inc' #printThenClose %]
+[% END %]
+<script>
+    $(document).ready(function(){
+        $(".print-label").on("click", function(e){
+            e.preventDefault();
+            window.print();
+            window.close();
+        });
+
+        $(".close-window").on("click", function(e){
+            e.preventDefault();
+            window.close();
+        });
+        $('.edit-label').click( function() {
+                $('#spinelabel').attr('contenteditable', function(index, attr){
+                    return attr == 'true' ? null : 'true';
+                });
+                $('.edit-label .fa').toggleClass('fa-lock').toggleClass('fa-unlock');
+        });
+    });
+</script>
+
+[% INCLUDE 'popup-bottom.inc' %]

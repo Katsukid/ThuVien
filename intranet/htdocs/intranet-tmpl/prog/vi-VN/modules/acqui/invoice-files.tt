@@ -1,0 +1,125 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Files &rsaquo; Invoice &rsaquo; Acquisitions &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="acq_invoice_files" class="acq">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'acquisitions-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/acqui-home.pl">Phân hệ bổ sung</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/invoices.pl">Hóa đơn</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/invoice.pl?invoiceid=[% invoiceid | uri %]">[% invoicenumber | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tệp tin</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ <h1>Files for invoice: [% invoicenumber | html %]</h1>
+ <p><strong>Nhà cung cấp: </strong><a href="/cgi-bin/koha/acqui/supplier.pl?booksellerid=[% booksellerid | uri %]">[% suppliername | html %]</a></p>
+ <br />
+ [% IF errors %]
+ <div class="dialog alert">
+ [% IF errors.empty_upload %]Tệp tin bạn lựa chọn để tải lên không chứa nội dung.[% END %] [% IF errors.no_file %]Bạn phải chọn tệp tin để tải lên.[% END %] [% IF errors.invalid_parameter %]Thông số script đang thiếu hoặc không hợp lệ. [% END %] </div>
+ [% END %]
+ [% IF files %]
+ <table id="invoice_files_details_table">
+ <thead>
+ <tr>
+ <th>Tên</th>
+ <th>Type</th>
+ <th>Thông tin mô tả</th>
+ <th>Thời gian tải lên</th>
+ <th>Bytes</th>
+ <th>&nbsp;</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH f IN files %]
+ <tr>
+ <td><a href="?invoiceid=[% invoiceid | uri %]&amp;op=download&amp;view=1&amp;file_id=[% f.file_id | uri %]">[% f.file_name | html %]</a></td>
+ <td>[% f.file_type | html %]</td>
+ <td>[% f.file_description | html %]</td>
+ <td data-order="[% f.date_uploaded | html %]">
+ [% f.date_uploaded | $KohaDates %]
+ </td>
+ <td>[% f.file_size | html %]</td>
+ <td><a class="delete_file" href="?invoiceid=[% invoiceid | html %]&amp;op=delete&amp;file_id=[% f.file_id | html %]">Xóa</a></td>
+ <td><a href="?invoiceid=[% invoiceid | uri %]&amp;op=download&amp;file_id=[% f.file_id | uri %]">Tải báo cáo</a></td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% ELSE %]
+ <div class="dialog message">
+ <p>This invoice has no files attached.</p>
+ </div>
+ [% END %]
+ [% IF invoiceid %]
+ <br />
+ <form method="post" action="/cgi-bin/koha/acqui/invoice-files.pl" enctype="multipart/form-data">
+ <fieldset class="rows">
+ <legend>Upload new file</legend>
+ <ol>
+ <li><input type="hidden" name="op" value="upload" />
+ <input type="hidden" name="invoiceid" value="[% invoiceid | html %]" />
+ <label for="description">Thông tin mô tả:</label>
+ <input name="description" id="description" type="text" /></li>
+ <li><label for="uploadfile">Tệp tin:</label><input name="uploadfile" type="file" id="uploadfile" /></li>
+ </ol>
+ </fieldset>
+ <fieldset class="action"><input class="btn btn-primary" id="upload" name="upload" type="submit" value="Tải lên" /></fieldset>
+ </form>
+ [% END %]
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+<div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'acquisitions-menu.inc' %]
+ </aside>
+</div> <!-- /.col-sm-2.col-sm-pull-10 -->
+</div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/acquisitions-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            $("#invoice_files_details_table").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "aoColumnDefs": [
+                    { "aTargets": [ -1, -2 ], "bSortable": false, "bSearchable": false }
+                ],
+                bInfo: false,
+                bPaginate: false,
+                bFilter: false,
+                sDom: "t"
+            }));
+            $("a.delete_file").click(function(){
+                return ( confirm( _("Are you sure you want to delete this file ?") ) );
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

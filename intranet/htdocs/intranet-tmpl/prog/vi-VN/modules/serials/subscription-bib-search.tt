@@ -1,0 +1,53 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Catalog search &rsaquo; Serials &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="ser_subscription-bib-search" class="ser">
+
+<div class="main container-fluid">
+
+<h1>Tìm kiếm biểu ghi thư mục</h1>
+[% IF ( no_query ) %]
+ <div class="warning">Bạn phải nhập từ khóa tìm kiếm </div>
+[% END %]
+<form name="f" action="/cgi-bin/koha/serials/subscription-bib-search.pl" method="get">
+ <input type="hidden" name="op" value="do_search" />
+ <input type="hidden" name="type" value="intranet" />
+ <fieldset class="brief">
+ <ol>
+ <li>
+ <label for="q">Từ khóa: </label>
+ <input type="text" id="q" name="q" autofocus="autofocus" />
+ </li>
+ <li>
+ <label for="itemtypelimit">Hạn chế kiểu tài liệu tới: </label>
+ <select name="itemtypelimit" id="itemtypelimit">
+ <option value="">Tất cả</option>
+ [%- FOREACH itemtypeloo IN itemtypeloop %]
+ <option value="[% itemtypeloo.code | html %]">
+ [% itemtypeloo.description | html %]
+ </option>
+ [%- END %]
+ </select>
+ </li>
+ [%- IF ccodeloop %]
+ <li>
+ <label for="ccodelimit">Hạn chế mã bộ sưu tập tới: </label>
+ <select name="ccodelimit" id="ccodelimit">
+ <option value="">Tất cả</option>
+ [%- FOREACH ccodeloo IN ccodeloop %]
+ <option value="[% ccodeloo.code | html %]">
+ [% ccodeloo.description | html %]
+ </option>
+ [%- END %]
+ </select>
+ </li>
+ [%- END %]
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ </fieldset>
+</form>
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

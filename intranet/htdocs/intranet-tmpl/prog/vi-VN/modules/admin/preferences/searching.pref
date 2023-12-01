@@ -1,0 +1,316 @@
+---
+tìm kiếm:
+  ' Chức năng':
+  - - ' Thực hiện tìm kiếm các ký tự đại diện (Ví dụ từ khóa là <cite>"Har"</cite>
+      sẽ tìm kiếm các từ khóa <cite>"Harry"</cite> và <cite>"harp"</cite>)'
+    - choices:
+        '0': ' chỉ tìm kiếm nếu thêm ký tự "*".'
+        '1': ' tự động tìm kiếm.'
+      pref: QueryAutoTruncate
+      type: boolean
+    - ' <br />Ký tự ''*'' được sử dụng như <cite>''Har*''</cite> hoặc <cite>''*logging''</cite>.)'
+  - - choices:
+        '0': ' Không tìm kiếm'
+        '1': ' Tìm kiếm'
+      pref: QueryFuzzy
+      type: boolean
+    - to match similarly spelled words in a search (for example, a search for <cite>flang</cite>
+      would also match <cite>flange</cite> and <cite>fang</cite>; Currently only affects
+      Zebra searches. Any Elasticsearch term can be made fuzzy by adding a ~ directly
+      after the term.).
+  - - choices:
+        '0': ' Không tìm kiếm'
+        '1': ' Tìm kiếm'
+      pref: QueryStemming
+      type: boolean
+    - '  tìm kiếm các tài liệu có cùng cơ sở với từ khóa tìm kiếm (ví dụ khi tìm kiếm
+      <cite>"enabling"</cite> hệ thống cũng tìm các tài liệu <cite>"enable"</cite>
+      và <cite>"enabled"</cite>; YÊU CẦU ZEBRA).'
+  - - choices:
+        '0': ' Không kích hoạt'
+        '1': ' Kích hoạt'
+      pref: QueryWeightFields
+      type: boolean
+    - ' việc xếp hạng kết quả tìm kiếm theo mức độ liên quan (YÊU CẦU ZEBRA).'
+  - - choices:
+        dont_escape: Don't escape
+        escape: Escape
+        unescape_escaped: Unescape escaped
+      default: escape
+      pref: QueryRegexEscapeOptions
+    - regular expressions within query strings. If "Escape" is selected occurences
+      of "/" in search terms will be automatically escaped, and regular expressions
+      interpreted as regular strings. If "Unescape escaped" is selected this will
+      allow writing regular expressions "\/like this\/" while "/this/", "or/this"
+      will be escaped and interpreted as regular strings. (Elasticsearch only.)
+  - - choices:
+        '0': ' Không bắt buộc'
+        '1': ' Bắt buộc'
+      default: 0
+      pref: TraceCompleteSubfields
+    - subject tracings in the OPAC and staff interface to search only for complete-subfield
+      matches.
+  - - choices:
+        '0': ' Không thực hiện'
+        '1': ' Thực hiện'
+      default: 0
+      pref: TraceSubjectSubdivisions
+    - ' một tìm kiếm mới khi kích vào các chủ đề hiện có.'
+  - - choices:
+        '0': Don't use
+        '1': Use
+      default: 0
+      pref: UseICUStyleQuotes
+    - ICU style quotes ({}) when tracing subjects. The default is to use standard
+      quotes ("").
+  - - choices:
+        '0': ' Không bao gồm'
+        '1': ' Bao gồm'
+      default: 0
+      pref: IncludeSeeFromInSearches
+    - '<em>see from</em> (non-preferred form) headings in bibliographic searches.
+      Please note: you will need to reindex your bibliographic database when changing
+      this preference.'
+  - - choices:
+        '0': ' Không lưu giữ'
+        '1': ' Lưu giữ'
+      default: 0
+      pref: EnableSearchHistory
+    - patron search history in the staff interface.
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: 0
+      pref: BrowseResultSelection
+    - browsing search results from the bibliographic record detail page in staff interface.
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: 0
+      pref: ElasticsearchCrossFields
+    - the cross_fields option for Elasticsearch searches, supported in Elasticsearch
+      6.X and above.
+    - See documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html#type-cross-fields
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: 0
+      pref: SavedSearchFilters
+    - the option for staff with permission to create/edit custom saved search filters.
+  Did you mean/spell checking:
+  - - Swedish service for spellchecking.<br/>
+    - LIBRIS Spellchecking API key
+    - pref: LibrisKey
+    - Can be obtained at http://api.libris.kb.se/bibspell.
+  - - LIBRIS base URL
+    - class: url
+      pref: LibrisURL
+    - Please only change this if you are sure it needs changing.
+  Results display:
+  - - choices:
+        '0': Don't show
+        '1': Show
+      default: no
+      pref: numSearchResultsDropdown
+      type: boolean
+    - results per page dropdown on staff interface search results.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      default: no
+      pref: OPACnumSearchResultsDropdown
+      type: boolean
+    - results per page dropdown on OPAC search results.
+  - - By default, sort search results in the staff interface by
+    - choices:
+        acqdate: ' ngày bổ sung'
+        author: ' tác giả'
+        call_number: ' ký hiệu phân loại'
+        popularity: ' tổng số lần ghi mượn'
+        pubdate: ' ngày xuất bản'
+        relevance: ' mức độ liên quan'
+        title: ' nhan đề'
+      default: relevance
+      pref: defaultSortField
+    - ' ,'
+    - choices:
+        asc: ' Thứ tự tăng dần.'
+        az: ' Từ A đến Z.'
+        dsc: ' Thứ tự giảm dần.'
+        za: ' Từ Z đến A.'
+      pref: defaultSortOrder
+  - - When limiting search results with a library or library group, limit by the item's
+    - choices:
+        both: home library and holding library.
+        holdingbranch: holding library.
+        homebranch: home library.
+      pref: SearchLimitLibrary
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      default: no
+      pref: displayFacetCount
+      type: boolean
+    - facet counts. The relevance of these numbers highly depends on the value of
+      the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=maxRecordsForFacets">maxRecordsForFacets</a>
+      preference. Applies to OPAC and staff interface.
+  - - ' Theo mặc định, hiển thị'
+    - class: integer
+      pref: numSearchResults
+    - results per page in the staff interface.
+  - - For records with many items, only check the availability status for the first
+    - class: integer
+      pref: MaxSearchResultsItemsPerRecordStatusCheck
+    - items.
+    - <br/>Availability statuses may show incorrectly in search results if a record
+      has more items than the limit set. Statuses will display correctly in the record
+      details.
+    - <br/>Leave empty for no limit.
+  - - ' Theo mặc định, sắp xếp kết quả tìm kiếm trong giao diện OPAC theo'
+    - choices:
+        acqdate: ' ngày bổ sung'
+        author: ' tác giả'
+        call_number: ' ký hiệu phân loại'
+        popularity: ' tổng số lần ghi mượn'
+        pubdate: ' ngày xuất bản'
+        relevance: ' mức độ liên quan'
+        title: ' nhan đề'
+      default: relevance
+      pref: OPACdefaultSortField
+    - ' ,'
+    - choices:
+        asc: ' Thứ tự tăng dần.'
+        az: ' Từ A đến Z.'
+        dsc: ' Thứ tự giảm dần.'
+        za: ' Từ Z đến A.'
+      pref: OPACdefaultSortOrder
+    - ''
+  - - ' Hiển thị'
+    - class: integer
+      pref: maxItemsInSearchResults
+    - items per bibliographic record in the search results
+  - - ' Xây dựng các thông số lọc kết quả tìm kiếm dựa trên'
+    - class: integer
+      default: 20
+      pref: maxRecordsForFacets
+    - ' biểu ghi thư mục đầu tiên trong kết quả tìm kiếm.'
+  - - Show up to
+    - class: integer
+      default: 20
+      pref: FacetMaxCount
+    - facets for each category.
+  - - Sort facets
+    - choices:
+        Alphabetical: alphabetically
+        Usage: by usage count
+      default: Alphabetical
+      pref: FacetOrder
+      type: choice
+    - for each category.
+  - - ' Theo mặc định, hiển thị'
+    - class: integer
+      pref: OPACnumSearchResults
+    - ' kết quả tìm kiếm trên mỗi trang Hiển thị trong giao diện OPAC.'
+  - - ' Hiển thị các tiêu chí giới hạn thư viện sau đây trong tính năng giới hạn kết
+      quả tìm kiếm trên giao diện Opac và nhân viên'
+    - choices:
+        both: ' Thư viện quản lý và thư viện sở hữu'
+        holding: ' Thư viện sở hữu'
+        home: ' Thư viện quản lý'
+      pref: DisplayLibraryFacets
+      type: choice
+  - - ' Loại bỏ'
+    - class: integer
+      pref: FacetLabelTruncationLength
+    - characters, in OPAC/staff interface (REQUIRES ZEBRA).
+  - - ' Sử dụng đoạn văn bản sau đây thay thế cho các thông số tác giả UNIMARC'
+    - class: short
+      pref: UNIMARCAuthorsFacetsSeparator
+  - - ' lịch sử ghi mượn của bạn đọc trên giao diện nhân viên.'
+    - choices:
+        '0': ' không hiển thị'
+        '1': ' hiển thị'
+      pref: SearchWithISBNVariations
+    - on all variations of the ISBN.
+  - - When searching on the ISSN index,
+    - choices:
+        '0': don't search
+        '1': search
+      pref: SearchWithISSNVariations
+    - on all variations of the ISSN.
+  - - choices:
+        '0': Don't retain
+        '1': Retain
+      pref: RetainCatalogSearchTerms
+    - search terms between searches when searching from the 'search the catalog' tab
+      in the staff interface header.
+  - - choices:
+        '0': Don't retain
+        '1': Retain
+      pref: RetainPatronsSearchTerms
+    - search terms between searches when searching from the 'checkout' and 'search
+      patrons' tab in the staff interface header.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      pref: BiblioItemtypeInfo
+    - ' Koha record level itemtype info on detail and result pages in the OPAC and
+      staff interface. This info also displays if the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=item-level_itypes">item-level_itypes</a>
+      system preference is set to bibliographic record.'
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: PassItemMarcToXSLT
+      type: boolean
+    - make item MARC fields (MARC21 952, UNIMARC 995) available to XSLT stylesheets
+      for OPAC and staff interface results pages.
+    - <br/>Default is "Don't", items are displayed using other methods.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      pref: ShowHeadingUse
+    - whether an authority record contains an established heading that conforms to
+      descriptive cataloguing rules, and can therefore be used as a main/added entry,
+      or subject, or series title.
+  Search form:
+  - - choices:
+        '0': Don't add
+        '1': Add
+      default: 0
+      pref: LoadSearchHistoryToTheFirstLoggedUser
+    - search history of the unlogged user to the next patron logging in.
+  - - Show tabs in the staff interface advanced search for limiting searches on the
+    - class: long
+      pref: AdvancedSearchTypes
+    - ' (các giá trị phân cách bằng ký tự |). Các thẻ được xuất hiện theo thứ tự liệt
+      kê.<br/>'
+    - '<em>Currently supported values</em>: Item types (<strong>itemtypes</strong>),
+      Collection, (<strong>ccode</strong>) and Shelving location (<strong>loc</strong>).'
+  - - ' Các ngôn ngữ sau đây không được hiển thị trong tính năng tìm kiếm nâng cao
+      của Koha '
+    - class: long
+      pref: AdvancedSearchLanguages
+    - ' . (Giá trị nhập vào theo mã ngôn ngữ ISO 639-2  và được phân cách bằng ký
+      tự | hoặc ,).'
+    - ' Ví dụ, để hạn chế tiếng Pháp và tiếng Ý, bạn có thể nhập <em>ita|fre</em>.'
+  - - ' Theo mặc định,'
+    - choices:
+        '0': ' không hiển thị'
+        '1': ' hiển thị'
+      pref: expandedSearchOption
+      type: boolean
+    - '"More options" on the OPAC and staff interface advanced search pages.'
+  - - ' Theo mặc định,'
+    - choices:
+        '0': ' không sử dụng'
+        '1': ' sử dụng'
+      pref: OPACNumbersPreferPhrase
+      type: boolean
+    - the operator "phr" in the callnumber and standard number OPAC searches.
+  - - ' Theo mặc định,'
+    - choices:
+        '0': ' không sử dụng'
+        '1': ' sử dụng'
+      pref: IntranetNumbersPreferPhrase
+      type: boolean
+    - the operator "phr" in the callnumber and standard number staff interface searches.

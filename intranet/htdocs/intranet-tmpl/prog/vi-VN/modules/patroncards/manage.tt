@@ -1,0 +1,295 @@
+[% USE CGI %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% BLOCK translate_card_element %]
+[%-  SWITCH element -%]
+[%-  CASE 'layout'    -%][% t('layout') | html %]
+[%-  CASE 'Layouts'   -%][% t('Layouts') | html %]
+[%-  CASE 'template'  -%][% t('template') | html %]
+[%-  CASE 'Templates' -%][% t('Templates') | html %]
+[%-  CASE 'profile'   -%][% t('profile') | html %]
+[%-  CASE 'Profiles'  -%][% t('Profiles') | html %]
+[%-  CASE 'batch'     -%][% t('batch') | html %]
+[%-  CASE 'Batches'   -%][% t('Batches') | html %]
+[%-  CASE 'Actions'   -%][% t('Actions') | html %]
+[%-  END -%]
+[% END %]
+[% BLOCK translate_card_elements %]
+[%-  SWITCH element -%]
+[%-  CASE 'layout'    -%]<span>layouts</span>
+[%-  CASE 'template'  -%]<span>templates</span>
+[%-  CASE 'profile'   -%]<span>profiles</span>
+[%-  CASE 'batch'     -%]<span>batches</span>
+[%-  END -%]
+[% END %]
+
+ [% INCLUDE 'doc-head-open.inc' %]
+ <title>[% PROCESS translate_card_element element=card_element_title %] &rsaquo; Patron card creator &rsaquo; Tools &rsaquo; Trường CĐKTQS1</title>
+ [% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="pcard_manage" class="tools pcard">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Công cụ bổ trợ</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/patroncards/home.pl">Tạo thẻ bạn đọc</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% PROCESS translate_card_element element=card_element_title %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ [% INCLUDE 'patroncards-toolbar.inc' %]
+
+ <h1>Patron card templates</h1>
+
+ [% INCLUDE 'patroncards-errors.inc' %]
+ <div id="manage-patroncards-layouts">
+ [% IF ( table_loop ) %]
+ <form name="layouts" action="/cgi-bin/koha/manage.pl?card_element=[% card_element | html %]">
+ <div class="page-section">
+ <h2>Currently available [% PROCESS translate_card_element element=card_element_title FILTER lower %]</h2>
+ <table>
+ [% FOREACH table_loo IN table_loop %]
+ [% IF ( table_loo.header_fields ) %]
+ <tr>
+ [% FOREACH header_field IN table_loo.header_fields %]
+ [% SWITCH header_field.field_label -%]
+ [%-  CASE 'Layout ID'     -%]<th>Layout ID</th>
+ [%-  CASE 'Layout'        -%]<th>Layout</th>
+ [%-  CASE 'Action'        -%]<th>Thao tác</th>
+ [%-  CASE 'Actions'       -%]<th class="noExport">Thao tác</th>
+ [%-  CASE 'Select'        -%][% IF ( print ) %]<th>Chọn</th>[% END %]
+ [%-  CASE 'Template ID'   -%]<th>Template ID</th>
+ [%-  CASE 'Template Name' -%]<th>Template name</th>
+ [%-  CASE 'Description'   -%]<th>Thông tin mô tả</th>
+ [%-  CASE 'Profile ID'    -%]<th>Profile ID</th>
+ [%-  CASE 'Printer Name'  -%]<th>Printer name</th>
+ [%-  CASE 'Paper Bin'     -%]<th>Paper bin</th>
+ [%-  CASE 'Batch ID'      -%]<th>Batch ID</th>
+ [%-  CASE 'Patron Count'  -%]<th>Patron count</th>
+ [%-  CASE                 -%]<th>[% header_field.field_label | html %]</th>
+ [% END -%]
+ [% END %]
+ </tr>
+ [% ELSE %]
+ <tr>
+ [% FOREACH text_field IN table_loo.text_fields %]
+ [% IF ( text_field.select_field ) %]
+ <td>
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/patroncards/edit-[% card_element | html %].pl?op=edit&element_id=[% text_field.field_value | html %]"><i class="fa fa-edit"></i> Chỉnh sửa</a>
+ [% IF ( print ) %]<a class="btn btn-default btn-xs export" data-batch-id="[% text_field.field_value |url %]" href="/cgi-bin/koha/patroncards/print.pl?batch_id=[% text_field.field_value |url %]"><i class="fa fa-share-square-o"></i> Xuất dữ liệu</a>[% END %]
+ <a class="btn btn-default btn-xs delete" href="/cgi-bin/koha/patroncards/manage.pl?op=delete&card_element=[% card_element | html %]&element_id=[% text_field.field_value | html %]"><i class="fa fa-trash"></i> Xóa</a>
+ </td>
+ [% IF ( print ) %]<td><input type="checkbox" name="action" value="[% text_field.field_value | html %]" /></td>[% END %]
+ [% ELSIF ( text_field.field_value ) %]
+ <td>[% text_field.field_value | html %]</td>
+ [% ELSE %]
+ <td>&nbsp;</td>
+ [% END %]
+ [% END %]
+ </tr>
+ [% END %]
+ [% END %]
+ </table>
+ <fieldset class="action">
+ [% IF ( print ) %]<input type="button" id="print" value="Export selected batches" />[% END %]
+ </fieldset>
+ </div> <!-- /.page-section -->
+ [% IF patron_lists %]
+ <fieldset class="rows">
+ <legend>Hoặc sử dụng một danh sách bạn đọc</legend>
+ <ol>
+ <li>
+ <label for="patron_list_id">Danh sách bạn đọc: </label>
+ <select id="patron_list_id" name="patron_list_id">
+ <option value=""></option>
+ [% FOREACH pl IN patron_lists %]
+ <option value="[% pl.patron_list_id | html %]">[% pl.name | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="button" id="printlist" value="Export from patron list" />
+ </fieldset>
+ [% END %]
+ </form>
+
+ [% ELSE %]
+ <div class="dialog message">
+ <h4>Hiện tại không có [% PROCESS translate_card_element element=card_element_title %] thẻ bạn đọc sẵn sàng.</h4>
+ <p>Sử dụng thanh công cụ bên trên để tạo [% PROCESS translate_card_element element=card_element %] thẻ bạn đọc mới.</p></div>
+ [% END %]
+ </div>
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'greybox.inc' %]
+ <script>
+        function DeleteConfirm() {
+            var element_ids = selected_layouts("delete");
+
+            var msg;
+            if (element_ids.length > 1) {
+                msg = _("Bạn chắc chắn muốn xóa %s %s?").format(element_ids.length, "[% PROCESS translate_card_elements element=card_element %]");
+            } else if (element_ids.length == 1) {
+                msg = _("Bạn chắc chắn muốn xóa %s %s?").format("[% PROCESS translate_card_element element=card_element %]", element_ids[0]);
+            }
+
+            if (msg && confirm(msg)) {
+                var elements = "";
+                for (var i = 0; i < element_ids.length; i++) {
+                    if (element_ids[i] > -1) {
+                        elements += element_ids[i] + ","
+                    }
+                    else {
+                        return;     // no layout selected
+                    }
+                }
+
+                window.location = "/cgi-bin/koha/patroncards/manage.pl?op=delete&card_element=[% card_element | html %]&element_id=" + elements;
+            }
+            else {
+                return; // abort delete
+            }
+
+        };
+
+        function Edit() {
+            var element_id = selected_layouts("edit");
+            if (element_id>-1) {
+                window.location = "/cgi-bin/koha/patroncards/edit-[% card_element | html %].pl?op=edit&element_id=" + element_id;
+            }
+            else {
+                return;     // no layout selected
+            };
+        };
+        function Xport() {
+            batches= new Array;
+            if(document.layouts.action.length > 0) {
+                for (var i=0; i < document.layouts.action.length; i++) {
+                    if (document.layouts.action[i].checked) {
+                        batches.push("batch_id=" +  document.layouts.action[i].value);
+                    }
+                }
+                if (batches.length < 1) {
+                    alert(_("Vui lòng chọn lô nhãn gáy bạn muốn in."));
+                    return;     // no batch selected
+                }
+                getstr = batches.join("&");
+            }
+            else if (document.layouts.action.checked) {
+                getstr = "batch_id="+document.layouts.action.value;
+            }
+            else {
+                alert(_("Vui lòng chọn lô nhãn gáy bạn muốn in."));
+                return;     // no batch selected
+            }
+            return GB_showCenter(_("Xuất thẻ bạn đọc"), "/cgi-bin/koha/patroncards/print.pl?" + getstr, 400, 800);
+        };
+
+        function XportPatronlist() {
+            if ( patron_list_id.value.length < 1 ) {
+                alert(_("Please select a patron list."));
+                return;     // no patron list selected
+            }
+            getstr = 'patronlist_id='+patron_list_id.value;
+            return GB_showCenter(_("Export patron cards from list"), "/cgi-bin/koha/patroncards/print.pl?" + getstr, 700, 800);
+        };
+
+        function selected_layout(op) {
+            if (document.layouts.action.length) {
+                var selected = new Array();
+                for (i=0;i<document.layouts.action.length;i++){
+                    if (document.layouts.action[i].checked){
+                        selected.push(i);
+                    }
+                };
+                if (selected.length == 1 || (op == "delete" && selected.length >= 1)) {
+                    if (op == "delete") {
+                        var selectedDelete = new Array;
+                        for (i = 0; i < selected.length; i++) {
+                            selectedDelete.push(document.layouts.action[selected[i]].value);
+                        }
+                        return(selectedDelete);
+                    } else {
+                        // op == 'edit' returns only the object and not list
+                        return(document.layouts.action[selected[0]].value);
+                    }
+                }
+                else if (selected.length < 1) {
+                    if (op == "edit") {
+                        alert(_("Please select one %s to %s.").format("[% PROCESS translate_card_element element=card_element %]", op));
+                    } else {
+                        alert(_("Please select at least one %s to %s.").format("[% PROCESS translate_card_element element=card_element %]", op));
+                    }
+                    return (-1);
+                }
+                else {
+                    alert(_("Vui lòng chỉ lựa chọn một %s để %s.").format("[% PROCESS translate_card_element element=card_element %]", op));
+                    return (-1);
+                }
+            }
+            else {
+                if (document.layouts.action.checked){
+                    return([document.layouts.action.value]);
+                }
+            };
+            alert(_("Vui lòng lựa chọn %s.").format("[% PROCESS translate_card_element element=card_element %]"));
+            return (-1);
+        };
+
+        $(document).ready(function() {
+            $("#edit").click(function(){
+                Edit();
+                return false;
+            });
+            $("#delete").click(function(){
+                DeleteConfirm();
+                return false;
+            });
+            $("#print").click(function(){
+                Xport();
+                return false;
+            });
+            $("#printlist").click(function(){
+                XportPatronlist();
+                return false;
+            });
+            $(".delete").on("click", function(){
+                return confirmDelete( _("Are you sure you want to delete this?") );
+            });
+            $(".export").on("click", function(e){
+                e.preventDefault();
+                var batch_id = $(this).data("batch-id");
+                GB_showCenter( _("Export single batch"),'/cgi-bin/koha/patroncards/print.pl?batch_id='+batch_id, 400, 800);
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

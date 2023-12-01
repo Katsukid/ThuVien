@@ -1,0 +1,195 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% USE TablesSettings %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Catalog concerns &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_concerns" class="cat">
+ [% INCLUDE 'header.inc' %]
+ [% INCLUDE 'cataloging-search.inc' %]
+
+ <nav id="breadcrumbs" aria-label="Breadcrumb" class="breadcrumb">
+ <ol>
+ <li>
+ <a href="/cgi-bin/koha/mainpage.pl">Trang chủ</a>
+ </li>
+ <li>
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Phân hệ biên mục</a>
+ </li>
+ <li>
+ <a href="#" aria-current="page">
+ Catalog concerns
+ </a>
+ </li>
+ </ol>
+ </nav>
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+ <h1>Concerns</h1>
+
+ <div class="page-section">
+ <fieldset class="action" style="cursor:pointer;">
+ <a id="hideResolved"><i class="fa fa-minus-square"></i> Hide resolved</a>
+ | <a id="showAll"><i class="fa fa-bars"></i> Hiển thị tất cả</a>
+ </fieldset>
+
+ <table id="table_concerns">
+ <thead>
+ <tr>
+ <th>Reported</th>
+ <th>Thông tin cá nhân</th>
+ <th>Nhan đề</th>
+ <th>Trạng thái</th>
+ <th data-class-name="actions noExport">Thao tác</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+ [% INCLUDE 'modals/display_ticket.inc' %]
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'js-date-format.inc' %]
+ [% INCLUDE 'js-patron-format.inc' %]
+ [% INCLUDE 'js-biblio-format.inc' %]
+ <script>
+        $(document).ready(function() {
+
+            logged_in_user_borrowernumber = [% logged_in_user.borrowernumber | html %];
+
+            var table_settings = [% TablesSettings.GetTableSettings('cataloguing', 'concerns', 'table_concerns', 'json') | $raw %];
+
+            var filtered = false;
+            let additional_filters = {
+                resolved_date: function(){
+                    if ( filtered ) {
+                        return { "=": null };
+                    } else {
+                        return;
+                    }
+                }
+            };
+
+            var tickets_url = '/api/v1/tickets';
+            var tickets = $("#table_concerns").kohaTable({
+                "ajax": {
+                    "url": tickets_url
+                },
+                "embed": [
+                    "reporter",
+                    "resolver",
+                    "biblio",
+                    "updates+count",
+                ],
+                'emptyTable': '<div class="dialog message">' + _("Congratulations, there are no catalog concerns.") + '</div>',
+                "columnDefs": [{
+                    "targets": [0, 1, 2, 3],
+                    "render": function(data, type, row, meta) {
+                        if (type == 'display') {
+                            if (data != null) {
+                                return data.escapeHtml();
+                            } else {
+                                return "";
+                            }
+                        }
+                        return data;
+                    }
+                }],
+                "columns": [{
+                        "data": "reported_date:reporter.firstname",
+                        "render": function(data, type, row, meta) {
+                            let reported = '<span class="date clearfix">' + $datetime(row.reported_date) + '</span>';
+                            reported += '<span class="reporter clearfix">' + $patron_to_html(row.reporter, {
+                                display_cardnumber: false,
+                                url: true
+                            }) + '</span>';
+                            return reported;
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "title:body",
+                        "render": function(data, type, row, meta) {
+                            let resolved = ( row.resolved_date ) ? true : false;
+                            let result = '<a role="button" href="#" data-toggle="modal" data-target="#ticketDetailsModal" data-concern="' + encodeURIComponent(row.ticket_id) + '" data-resolved="'+resolved+'">' + row.title + '</a>';
+                            if (row.updates_count) {
+                                result += '<span class="pull-right"><a role="button" href="#" data-toggle="modal" data-target="#ticketDetailsModal" data-concern="' + encodeURIComponent(row.ticket_id) + '" data-resolved="'+resolved+'"><i class="fa fa-comment" aria-hidden="true"></i> ' + row.updates_count + '</a></span>';
+                            }
+                            result += '<div id="detail_' + row.ticket_id + '" class="hidden">' + row.body + '</div>';
+                            return result;
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "biblio.title",
+                        "render": function(data, type, row, meta) {
+                            return $biblio_to_html(row.biblio, {
+                                link: 1
+                            });
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "resolver.firstname:resolver.surname:resolved_date",
+                        "render": function(data, type, row, meta) {
+                            let result = '';
+                            if (row.resolved_date) {
+                                result += _("Resolved by:") + ' <span>' + $patron_to_html(row.resolver, {
+                                    display_cardnumber: false,
+                                    url: true
+                                }) + '</span>';
+                                result += '<span class="clearfix">' + $datetime(row.resolved_date) + '</span>';
+                            } else {
+                                result += _("Mở");
+                            }
+                            return result;
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function(row, type, val, meta) {
+                            let resolved = ( row.resolved_date ) ? true : false;
+                            let result = '<a class="btn btn-default btn-xs" role="button" href="#" data-toggle="modal" data-target="#ticketDetailsModal" data-concern="' + encodeURIComponent(row.ticket_id) + '" data-resolved="'+resolved+'"><i class="fa fa-eye" aria-hidden="true"></i> ' + _("Thông tin cá nhân") + '</a>';
+                            return result;
+                        },
+                        "searchable": false,
+                        "orderable": false
+                    },
+                ]
+            }, table_settings, 1, additional_filters);
+
+            $('#hideResolved').on("click", function() {
+                filtered = true;
+                tickets.DataTable().draw();
+            });
+
+            $('#showAll').on("click", function() {
+                filtered = false;
+                tickets.DataTable().draw();
+            });
+        });
+    </script>
+ [% Asset.js("js/modals/display_ticket.js") | $raw %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

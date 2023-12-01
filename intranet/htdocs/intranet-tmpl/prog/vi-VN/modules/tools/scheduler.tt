@@ -1,0 +1,114 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Task scheduler &rsaquo; Tools &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="tools_scheduler" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Công cụ bổ trợ</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lập lịch báo cáo</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ <h1>Lập lịch báo cáo</h1>
+
+[% IF ( job_add_failed ) %]
+<div class="dialog message">Bị lỗi khi tạo lịch báo cáo</div>
+[% END %]
+
+<form name="form1" action="scheduler.pl" method="post">
+<input type="hidden" name="mode" value="job_add" />
+
+<fieldset class="rows">
+<legend>Lập lịch báo cáo</legend><ol>
+<li><span class="label">Thời gian hiện tại:</span>
+[% time | html %]</li>
+<li><label for="starttime">Thời gian chạy báo cáo:</label>
+<input type="text" name="starttime" id="starttime" value="" maxlength="5" size="5" /></li>
+ <li>
+ <label for="startdate">Ngày chạy báo cáo: </label>
+ <input type="text" size="10" id="startdate" name="startdate" class="flatpickr" data-flatpickr-futuredate="true" value="" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+<li><label for="report">Loại báo cáo:</label>
+<select name="report" id="report">
+[% FOREACH savedreport IN savedreports %]
+ [% IF ( savedreport.selected ) %]
+ <option value="[% savedreport.id | html %]" selected="selected">[% savedreport.report_name | html %]</option>
+ [% ELSE %]
+ <option value="[% savedreport.id | html %]">[% savedreport.report_name | html %]</option>
+ [% END %]
+[% END %]
+</select>
+</li>
+<li>
+ <label for="format">Đinh dạng báo cáo:</label>
+ <select name="format" id="format">
+ <option value="text">Text (TSV)</option>
+ <option value="csv">CSV</option>
+ <option value="html">HTML</option>
+ </select>
+</li>
+<li><label for="email">Thư điện tử:</label>
+
+<input type="text" name="email" id="email" size="50" />
+</li>
+</ol></fieldset>
+<fieldset class="action"><input class="btn btn-primary" type="submit" value="Lưu" /></fieldset>
+</form>
+
+[% IF ( JOBS ) %]<h2>Lịch báo cáo</h2>
+<table>
+<tr>
+<th>Ngày/Giờ</th>
+<th>Thao tác</th>
+<th>&nbsp;</th>
+</tr>
+[% FOREACH JOB IN JOBS %]
+<form action="scheduler.pl" method="post">
+<input type="hidden" name="mode" value="job_change" />
+
+<tr>
+<td>[% JOB.TIME | html %]</td>
+<td>[% JOB.TAG | html %]</td>
+<td><input class="btn btn-primary" name="delete" type="submit" value="Xóa" /></td>
+</tr>
+<input type="hidden" name="jobid" value="[% JOB.JOBID | html %]" />
+</form>
+[% END %]
+</table>[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ [% INCLUDE 'guided-reports-view.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ [% INCLUDE 'calendar.inc' %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

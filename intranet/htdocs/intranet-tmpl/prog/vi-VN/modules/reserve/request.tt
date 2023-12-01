@@ -1,0 +1,1731 @@
+[% USE raw %]
+[% USE To %]
+[% USE Asset %]
+[% USE JSON.Escape %]
+[% USE Koha %]
+[% USE Biblio %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE Categories %]
+[% USE ItemTypes %]
+[% USE AuthorisedValues %]
+[% USE Price %]
+[% USE TablesSettings %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% SET libraries = Branches.all %]
+[% SET categories = Categories.all.unblessed %]
+[% SET columns = ['name', 'cardnumber', 'dateofbirth', 'category', 'branch', 'address', 'phone'] %]
+[% PROCESS "patron-search.inc" %]
+[% UNLESS ( multi_hold ) %]
+ <title>Place a hold on [% INCLUDE 'biblio-title-head.inc' %] &rsaquo; Holds &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+[% ELSE %]
+ <title>Confirm holds &rsaquo; Holds &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+[% END %]
+[% INCLUDE 'doc-head-close.inc' %]
+[% FILTER collapse %]
+ <style>
+        a.hold-arrow {
+            display:inline-block;
+            padding:3px;
+        }
+        a.hold-arrow:link,
+        a.hold-arrow:visited {
+            color: #538200;
+        }
+
+        a.hold-arrow:hover,
+        a.hold-arrow:active{
+            color: #75b700;
+        }
+
+        .hold-arrow:hover i,
+        .hold-arrow:active i {
+            border-color: #75b700;
+        }
+
+        a.cancel-hold {
+            display:inline-block;
+            padding:3px;
+        }
+
+        a.cancel-hold:link,
+        a.cancel-hold:visited{
+            color:#c00;
+            font-size:130%
+        }
+
+        .icon-move-hold-up::before {
+            content: "\f062";
+        }
+
+        .icon-move-hold-top {
+            border-top: 3px solid #538200;
+        }
+
+        .icon-move-hold-top::before {
+            content: "\f062";
+        }
+
+        .icon-move-hold-bottom {
+            border-bottom: 3px solid #538200;
+        }
+
+        .icon-move-hold-bottom::before {
+            content: "\f063";
+        }
+
+        .icon-move-hold-down::before {
+            content: "\f063";
+        }
+
+        .icon-unset-lowest::before {
+            content: "\f050";
+        }
+
+        .icon-set-lowest::before {
+            content: "\f04e";
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="circ_request" class="catalog">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/catalogue/search.pl">Tìm kiếm</a>
+ [% END %]
+ [% UNLESS ( multi_hold ) %]
+ [% WRAPPER breadcrumb_item %]
+ [% INCLUDE 'biblio-title.inc' link =1 %]
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Place a hold</span>
+ [% END %]
+ [% ELSE %]
+ [% IF ( patron ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Place holds</span>
+ [% END %]
+ [% ELSE %]
+ [% IF clubcount %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Search patrons or clubs</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tìm bạn đọc</span>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% END # UNLESS multi_hold %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ [% IF ( multi_hold || nobiblio ) # No sidebar menu when placing multiple holds or biblio not found %]
+ <div class="col-md-10 col-md-offset-1">
+ [% ELSE %]
+ <div class="col-sm-10 col-sm-push-2">
+ [% END %]
+
+ <main>
+ <h1>Sách đang giữ/h1>
+
+ [% IF ( nobiblio ) %]
+ <div class="dialog alert">
+ [%IF (multi_hold) %]
+ <strong>Không thể đặt mượn:</strong> one or more records don't exist.
+ [% ELSE %]
+ <strong>Không thể đặt mượn:</strong> this record doesn't exist.
+ [% END %]
+ </div>
+ [% END %]
+ [% IF ( noitems ) %]
+ <div class="dialog alert">
+ [%IF (multi_hold) %]
+ <strong>Không thể đặt mượn:</strong> one or more records without items attached.
+ [% ELSE %]
+ <strong>Không thể đặt mượn:</strong> this record has no items attached.
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF ( messagetransfert ) %]
+ <div class="dialog message">
+ <h2>Đặt mượn được tìm thấy cho tài liệu ([% nextreservtitle | html %]), bạn hãy chuyển tài liệu này tới bạn đọc</h2>
+ <p>Bạn đọc đặt mượn : <strong> [% nextreservsurname | html %] [% nextreservfirstname | html %]</strong> tại thư viện: <strong> [% branchname | html %] </strong>, bạn hãy chuyển tài liệu này tới bạn đọc. </p>
+ <form name="cancelReservewithtransfert" action="branchreserves.pl" method="post">
+ <input type="submit" class="button" />
+ </form>
+ </div>
+ [% END %]
+
+ [% UNLESS ( multi_hold ) %]
+ <h2>Place a hold on [% INCLUDE 'biblio-title.inc' link = 1 %] [% IF biblio.author %] by [% biblio.author | html %][% END %]</h2>
+ [% ELSE %]
+ <h2>
+ [% IF ( patron ) %]
+ <span>Place holds</span>
+ [% ELSE %]
+ [% IF clubcount %]
+ <span>Search patrons or clubs</span>
+ [% ELSE %]
+ <span>Tìm bạn đọc</span>
+ [% END %]
+ [% END %]
+ </h2>
+ [% END %]
+
+ [% UNLESS club OR patron OR patron.borrowernumber OR noitems OR nobiblio %]
+ [% IF ( messageborrower ) %]
+ <div class="dialog alert">
+ <h3>Không tìm thấy bạn đọc</h3>
+ <p>Không tìm thấy bạn đọc có tên theo yêu cầu, bạn hãy kiểm tra và tìm kiếm bạn đọc khác</p>
+ </div>
+ [% END %]
+
+ [% IF ( messageclub ) %]
+ <div class="dialog alert">
+ <h3>Club not found</h3>
+ <p>No club with this name, please, try another</p>
+ </div>
+ [% END %]
+ <fieldset>
+ [% UNLESS multi_hold %]
+ [% IF clubcount %]
+ <h2>Search patrons or clubs</h2>
+ [% ELSE %]
+ <h2>Tìm bạn đọc</h2>
+ [% END %]
+ [% END %]
+
+ [% WRAPPER tabs id= "circ_holds_select" %]
+ [% WRAPPER tabs_nav %]
+ [% WRAPPER tab_item tabname= "holds_patronsearch_pane" bt_active= 1 %] <span>Bạn đọc</span> [% END %]
+ [% IF clubcount %]
+ [% WRAPPER tab_item tabname= "holds_clubsearch_pane" %] <span>Clubs</span> [% END %]
+ [% END %]
+ [% END # /WRAPPER tabs_nav %]
+
+ [% WRAPPER tab_panels %]
+ [% WRAPPER tab_panel tabname="holds_patronsearch_pane" bt_active= 1 %]
+ [% PROCESS patron_search_filters_simple %]
+
+ [% PROCESS patron_search_table table_id => 'table_borrowers', open_on_row_click => 1 %]
+ [% END # /tab_panel# %]
+ [% IF clubcount %]
+ [% WRAPPER tab_panel tabname="holds_clubsearch_pane" %]
+ <form id="holds_clubsearch" action="request.pl" method="post">
+ <div class="hint">Enter club ID or partial name:</div>
+ <input type="text" size="40" id="club" class="focus" name="findclub" autocomplete="off" />
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ [% FOREACH biblionumber IN biblionumbers %]
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]"/>
+ [% END %]
+
+ </form> <!-- /#holds_patronsearch -->
+ [% IF clubs %]
+ [% INCLUDE 'clubs-table.inc' destination = "holds" %]
+ [% END %]
+ [% END # /tab_panel# %]
+ [% END # /IF clubcount %]
+ [% END # /WRAPPER tab_panels %]
+ [% END # /WRAPPER tabs %]
+ </fieldset>
+ [% ELSIF club %]
+ <div class="dialog alert hide clubalert">
+ </div>
+ <fieldset class="rows">
+ <legend>Thông tin chi tiết đặt mượn</legend>
+ <form action="/api/v1/clubs/[% club.id | html %]/holds" method="post" name="form" id="club-request-form">
+
+ [% IF ( multi_hold ) %]
+ <input type="hidden" name="request" value="any"/>
+ [% FOREACH biblioloo IN biblioloop %]
+ [% UNLESS biblioloo.none_avail %]
+ <input type="hidden" name="holdable_bibs" id="holdable_bibs" value="[% biblioloo.biblionumber | html %]"/>
+ <input type="hidden" name="title_[% biblioloo.biblionumber | html %]" value="[% biblioloo.title | html %]"/>
+ <input type="hidden" name="rank_[% biblioloo.biblionumber | html %]" value="[% biblioloo.rank | html %]"/>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ <input type="hidden" name="holdable_bibs" id="holdable_bibs" value="[% biblio.biblionumber | html %]"/>
+ <input type="hidden" name="title" value="[% biblio.title | html %]" />
+ <input type="hidden" name="rank-request" value="[% fixedRank | html %]" />
+ [% END # /IF multi_hold %]
+ <ol>
+ <li>
+ <span class="label">Club: </span> [% club.name | html %]
+ </li>
+ <li>
+ <span class="label">Thông tin mô tả: </span> [% club.description | html %]
+ </li>
+ <li>
+ <label for="pickup">Nơi nhận tài liệu:</label>
+ <select name="pickup" id="pickup_club">
+ [% PROCESS options_for_libraries libraries => Branches.all({ selected => club.branchcode, search_params => { pickup_location => 1 } }) %]
+ </select>
+ </li>
+ <li>
+ <label for="default_patron_home">Pickup at patron's home library when possible:</label>
+ <input type="checkbox" id="default_patron_home" name="default_patron_home"/>
+ </li>
+ </ol>
+ <h2 style="padding: 0 1em;">Bạn đọc</h2>
+ <ol>
+ [% FOREACH member IN members %]
+ [% SET patron = member.patron %]
+ <li style="padding: 0.5em 1em;">
+ <div>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %]</div>
+ [% IF member.exceeded_maxreserves %]
+ <div>
+ <i class="fa fa-error"></i>
+ <strong>Quá nhiều đặt mượn: </strong> Patron can only place a maximum of [% maxreserves | html %] total holds.
+ </div>
+ [% END %]
+ [% IF ( patron.is_expired ) %]
+ <div>
+ <i class="fa fa-warning"></i>
+ <strong>Account has expired</strong>
+ </div>
+ [% END %]
+ [% IF patron.is_debarred %]
+ <div>
+ <i class="fa fa-warning"></i>
+ <strong>Patron has restrictions</strong>
+ </div>
+ [% END %]
+ [% IF member.amount_outstanding && Koha.Preference('maxoutstanding') && member.amount_outstanding > Koha.Preference('maxoutstanding') %]
+ <div>
+ <i class="fa fa-warning"></i>
+ <strong>Patron has outstanding fines: [% member.amount_outstanding | $Price %]</strong>
+ </div>
+ [% END %]
+
+ [% IF ( member.diffbranch ) %]
+ <div>
+ <i class="fa fa-warning"></i>
+ <strong>Pickup library is different.</strong> Patron's home library: ([% Branches.GetName(patron.branchcode) | html %] / [% patron.branchcode | html %] )
+ </div>
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( multi_hold ) %]
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Đặt mượn" />
+ </fieldset>
+ [% ELSE %]
+ <table id="requesttitles">
+ <tr>
+ <th>&nbsp;</th>
+ <th>Nhan đề</th>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <th>Kiểu tài liệu</th>
+ [% END %]
+ <th>Thứ tự đặt mượn</th>
+ <th>Thông tin tài liệu</th>
+ </tr>
+ [% FOREACH biblioloo IN biblioloop %]
+ [% IF ( biblioloo.warn ) %]
+ <tr class="onissue">
+ [% ELSE %]
+ <tr>
+ [% END %]
+ <td>
+ [% UNLESS ( biblioloo.warn ) %]
+ <input class="multi_hold_item_checkbox" type="checkbox" checked="checked" title="[% biblioloo.biblionumber | html %]"/>
+ </td>
+ [% END %]
+ <td>
+ <ul>
+ <li>
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblioloo.biblionumber | uri %]">[% biblioloo.title | html %]</a>
+ [% IF biblioloo.author %]_Tác giả: [% biblioloo.author | html %][% END %] </li>
+ [% IF ( biblioloo.publicationyear ) %]
+ <li>
+ <span class="label">Năm xuất bản:</span> [% biblioloo.publicationyear | html %]
+ </li>
+ [% END %]
+ </ul>
+ [% IF ( biblioloo.warn ) %]
+ <span class="not_holdable" title="[% biblioloo.biblionumber | html %]"></span>
+ [% END %]
+ </td>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <td>
+ <img src="[% biblioloo.itemtype.image_location| html %]" alt="[% biblioloo.itemtype.translated_description | html %]" title="[% biblioloo.itemtype.translated_description | html %]" />
+ </td>
+ [% END %]
+ <td>[% biblioloo.rank | html %]</td>
+ <td>
+ [% IF ( biblioloo.checked_previously ) %]
+ <span>Patron has previously checked out this title</span><br/>
+ [% END %]
+ [% IF ( biblioloo.alreadyres ) %]
+ <ul>
+ [% ELSE %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <ul>
+ [% END %]
+ [% END %]
+
+ [% IF ( biblioloo.alreadyres ) %]
+ <li>
+ [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] <strong>đã có một đặt mượn</strong> trên tài liệu này </li>
+ [% END %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <li> <strong>No items are available</strong> cho bạn đọc đặt mượn.</li>
+ [% END %]
+
+ [% IF ( biblioloo.alreadyres ) %]
+ </ul>
+ [% ELSE %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ </ul>
+ [% END %]
+ [% END %]
+ </td>
+ </tr>
+ [% END # /FOREACH biblioloo %]
+ </table> <!-- /#requesttitles -->
+ [% END %]
+ </form>
+ </fieldset>
+ [% ELSIF NOT ( noitems || nobiblio ) # /UNLESS patron %]
+
+ [% IF ( checked_previously && !multi_hold ) %]
+ <div class="dialog alert">
+ <ul>
+ <li>Patron has previously checked out this title</li>
+ </ul>
+ </div>
+ [% END %]
+
+ [% IF ( no_reserves_allowed || exceeded_maxreserves || exceeded_holds_per_record || alreadyreserved || none_available || alreadypossession || ageRestricted || recall ) %]
+ <div class="dialog alert">
+
+ [% UNLESS ( multi_hold ) %]
+ <h3>Không thể đặt mượn tài liệu</h3>
+ <ul>
+ [% IF ( no_reserves_allowed ) %]
+ <li><strong>Không cho phép đặt mượn:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] cannot place a hold on any of these items.</li>
+ [% ELSIF ( exceeded_maxreserves ) %]
+ <li><strong>Too many holds:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] can only place a maximum of [% maxreserves | html %] total holds.</li>
+ [% ELSIF ( exceeded_holds_per_record ) %]
+ <li><strong>Too many holds for this record:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] can only place a maximum of [% max_holds_for_record | html %] hold(s) on this record.</li>
+ [% ELSIF ( alreadypossession ) %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 hide_patron_infos_if_needed => 1 %] <strong>đã có chủ sở hữu</strong> of one item.</li>
+ [% ELSIF ( alreadyreserved ) %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] <strong>đã có một đặt mượn</strong> on this item.</li>
+ [% ELSIF ( ageRestricted ) %]
+ <li><strong>Age restricted</strong></li>
+ [% ELSIF ( none_available ) %]
+ <li> <strong>No items are available</strong> to be placed on hold.</li>
+ [% ELSIF ( maxreserves ) %]
+ <li><strong>Too many holds:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] has too many holds.</li>
+ [% ELSIF ( recall ) %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] has <strong>already placed a recall</strong> on this item.</li>
+ [% END # /IF exceeded_maxreserves %]
+ </ul>
+ [% ELSE # UNLESS multi_hold %]
+ <h3>Bạn không thể đặt mượn trên nhiều tài liệu</h3>
+ [% IF (no_reserves_allowed ) %]
+ <li><strong>Không cho phép đặt mượn:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] cannot place holds on some of these title's items.</li>
+ [% ELSIF ( exceeded_maxreserves ) %]
+ <li><strong>Too many holds:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] can place [% new_reserves_allowed | html %] of the requested [% new_reserves_count | html %] holds for a maximum of [% maxreserves | html %] total holds.</li>
+ [% ELSIF ( exceeded_holds_per_record ) %]
+ [% FOREACH biblioloo IN biblioloop %]
+ [% IF (biblioloo.tooManyHoldsForThisRecord) %]
+ <li><strong>Too many holds for <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblioloo.biblionumber | uri %]"> [% biblioloo.title | html %]</a>:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] can only place a maximum of [% max_holds_for_record | html %] hold(s) on this record.</li>
+ [% END %]
+ [% END %]
+ [% ELSIF ( none_available ) %]
+ <li><strong>No items available: </strong>One or more records have no items that can be held</li>
+ [% END # /IF exceeded_maxreserves %]
+ [% END # /UNLESS multi_hold %]
+ </div>
+ [% END # /IF ( exceeded_maxreserves || ... %]
+
+ [% IF ( patron.is_expired || diffbranch || patron.is_debarred || ( amount_outstanding && Koha.Preference('maxoutstanding') && amount_outstanding > Koha.Preference('maxoutstanding') ) ) %]
+ <div class="dialog message">
+ <ul>
+ [% IF ( patron.is_expired ) %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %]: <strong>Account has expired</strong></li>
+ [% END %]
+
+ [% IF patron.is_debarred %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %]: <strong>Patron has restrictions</strong></li>
+ [% END %]
+
+ [% IF amount_outstanding && Koha.Preference('maxoutstanding') && amount_outstanding > Koha.Preference('maxoutstanding') %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 link_to => 'members_pay' %]: <strong>Patron has outstanding fines: [% amount_outstanding | $Price %]</strong></li>
+ [% END %]
+
+ [% IF ( diffbranch ) %]
+ <li><strong>Pickup library is different. </strong>Patron: [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] Patron's home library: ([% Branches.GetName(patron.branchcode) | html %] / [% patron.branchcode | html %] )</li>
+ [% END %]
+ </ul> <!-- /.dialog.message -->
+ </div>
+ [% END # /IF patron.is_expired || diffbranch ... %]
+
+ [% IF ( messageborrower ) %]
+ <div class="dialog alert">
+ <h3>Bạn đọc không tồn tại:</h3>
+ <p>Tên hoặc số thẻ của bạn đọc không chính xác. Bạn vui lòng kiểm tra và tìm kiếm lại </p>
+ </div>
+ [% END %]
+
+ <div class="dialog alert hide holdalert">
+ </div>
+
+ <fieldset class="rows">
+ <legend>Thông tin chi tiết đặt mượn</legend>
+ <form action="placerequest.pl" method="post" name="form" id="hold-request-form">
+
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ [% FOREACH biblionumber IN biblionumbers %]
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]"/>
+ [% END %]
+ [% IF ( multi_hold ) %]
+ <input type="hidden" name="multi_holds" id="multi_holds" value="1" />
+ <input type="hidden" name="request" value="any"/>
+ [% FOREACH biblioloo IN biblioloop %]
+ [% UNLESS biblioloo.none_avail %]
+ <input type="hidden" name="holdable_bibs" id="holdable_bibs" value="[% biblioloo.biblionumber | html %]"/>
+ <input type="hidden" name="title_[% biblioloo.biblionumber | html %]" value="[% biblioloo.title | html %]"/>
+ <input type="hidden" name="rank_[% biblioloo.biblionumber | html %]" value="[% biblioloo.rank | html %]"/>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ <input type="hidden" name="holdable_bibs" id="holdable_bibs" value="[% biblio.biblionumber | html %]"/>
+ <input type="hidden" name="title" value="[% biblio.title | html %]" />
+ <input type="hidden" name="rank-request" value="[% fixedRank | html %]" />
+ [% END # /IF multi_hold %]
+
+ <ol>
+ <li>
+ <span class="label">Bạn đọc đặt mượn:</span>
+ [% IF ( patron.borrowernumber ) %]
+ [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %]
+ [% ELSE %]
+ Not defined yet
+ [% END %]
+ </li>
+
+ [% UNLESS ( multi_hold ) %]
+ <li>
+ <span class="label">Estimated priority:</span>
+ <strong>[% fixedRank | html %]</strong>
+ </li>
+ [% END %]
+
+ <li>
+ <label for="holdnotes">Ghi chú:</label>
+ <textarea id="holdnotes" name="notes" cols="30" rows="1"></textarea>
+ </li>
+ <li>
+ <label for="pickup">Nơi nhận tài liệu:</label>
+ [% UNLESS ( multi_hold ) %]
+ <select name="pickup" id="pickup"
+                                        data-biblio-id="[% biblio.biblionumber | html %]"
+                                        data-patron-id="[% patron.borrowernumber | html %]"
+                                        data-pickup-location-source="biblio">
+ [% PROCESS options_for_libraries libraries => Branches.pickup_locations({ search_params => { biblio => biblionumber, patron => patron }, selected => pickup }) %]
+ [% ELSE %]
+ <select name="pickup" id="pickup_multi" data-patron-id="[% patron.borrowernumber | html %]">
+ <option value="" selected="selected"></option>
+ [% FOREACH pickup_location IN multi_pickup_locations %]
+ <option value="[% pickup_location.branchcode | html %]">[% pickup_location.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+
+ [% UNLESS ( multi_hold ) %]
+ [% IF Koha.Preference('AllowHoldItemTypeSelection') %]
+ <li>
+ <label for="itemtype">Request specific item type:</label>
+ <select name="itemtype" id="itemtype">
+ <option value="">Tất cả</option>
+ [%- FOREACH itemtype IN available_itemtypes %]
+ <option value="[% itemtype | html %]">[% ItemTypes.GetDescription( itemtype ) | html %]</option>
+ [%- END %]
+ </select>
+ </li>
+ [% END %]
+ [% END # /UNLESS multi_hold %]
+
+ [% IF ( Koha.Preference('AllowHoldDateInFuture') ) %]
+ <li>
+ <label for="from">Ngày bắt đầu đặt mượn:</label>
+ <input id="reserve_date" name="reserve_date" id="from" size="10" type="text" data-date_to="expiration_date" class="flatpickr" data-flatpickr-futuredate="true" />
+ </li>
+ [% END %]
+
+ <li>
+ <label for="to">Ngày kết thúc đặt mượn:</label>
+ <input id="expiration_date" name="expiration_date" id="to" size="10" type="text" class="flatpickr" data-flatpickr-futuredate="true" />
+ </li>
+
+ [% UNLESS ( multi_hold ) %]
+ <li>
+ <label for="requestany">Hold next available item </label>
+ [% IF force_hold_level == 'item' || force_hold_level == 'item_group'  %]
+ <input type="checkbox" id="requestany" name="request" disabled="true" />
+ [% ELSIF force_hold_level == 'record' %]
+ <input type="checkbox" id="requestany" checked="checked" value="Any" disabled="true"/>
+ <input type="hidden" name="request" value="Any"/>
+ [% ELSE %]
+ <input type="checkbox" id="requestany" name="request" checked="checked" value="Any" />
+ [% END %]
+ <input type="hidden" name="alreadyreserved" value="[% alreadyreserved | html %]" />
+ </li>
+
+ [% IF remaining_holds_for_record > 1 %]
+ <li>
+ <label for="holds_to_place_count">Holds to place (count)</label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" id="holds_to_place_count" name="holds_to_place_count" maxlength="[% remaining_holds_for_record | html %]" value="1" />
+ </li>
+ [% ELSE %]
+ <input type="hidden" name="holds_to_place_count" value="1" />
+ [% END %]
+ [% END # /UNLESS multi_hold %]
+
+ <li id="non_priority_list_item">
+ <label for="non_priority">Non priority hold:</label>
+ <input name="non_priority" id="non_priority" type="checkbox" />
+ <span class="hint">A non priority hold doesn't prevent a current checkout from renewing</span>
+ </li>
+ </ol>
+
+ [% UNLESS ( multi_hold ) %]
+ <fieldset class="action">
+ [% IF ( patron.borrowernumber ) %]
+ [% IF ( override_required ) %]
+ <button type="submit" class="btn btn-primary warning"><i class="fa fa-exclamation-triangle "></i> Đặt mượn</button>
+ [% ELSIF ( none_available ) %]
+ <button type="submit" disabled="disabled" class="btn btn-primary btn-disabled">Đặt mượn</button>
+ [% ELSE %]
+ <button type="submit" class="btn btn-primary">Đặt mượn</button>
+ [% END %]
+ [% END %]
+ </fieldset>
+
+ [% biblio = biblioloop.0 %]
+
+ <ol>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <li>
+ <span class="label">Kiểu tài liệu:</span>
+ [% biblio.itemtype.translated_description | html %]
+ </li>
+ [% END %]
+
+ [% IF ( biblio.biblioitem.publicationyear ) %]
+ <li>
+ <span class="label">Năm xuất bản:</span>
+ [% biblio.biblioitem.publicationyear | html %]
+ </li>
+ [% END %]
+ </ol>
+
+ <!-- ItemGroup level holds -->
+ [% IF Koha.Preference('EnableItemGroupHolds') && biblio.object.item_groups.count %]
+ <h2 style="padding: 0 1em;">
+ Hold next available item from an item group
+ [% IF force_hold_level == 'item_group' %]
+ <span class="error"><i>(Required)</i></span>
+ [% END %]
+ </h2>
+
+ [% IF force_hold_level == 'record' # Patron has placed a record level hold previously for this record %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Không thể đặt mượn"></i>
+ Hold must be record level
+ </span>
+ [% ELSIF force_hold_level == 'item' # Patron has placed an item level hold previously for this record %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Không thể đặt mượn"></i>
+ Hold must be item level
+ </span>
+ [% ELSE %]
+ <table>
+ <thead>
+ <tr>
+ <th>Đặt mượn</th>
+ <th>Item group</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH g IN biblio.object.item_groups.search({}, { order_by => ['display_order'] }) %]
+ [% IF g.items %]
+ <tr>
+ <td>
+ <input id="item_group_id_[% g.id | html %]" type="radio" name="item_group_id" value="[% g.id | html %]" />
+ </td>
+ <td>
+ <label for="item_group_id_[% g.id | html %]">[% g.description | html %]</label>
+ </td>
+ </tr>
+ [% END %]
+ [% END %]
+ </tbody>
+ </table>
+ [% END %]
+ [% END %]
+ <!-- /ItemGroup level holds -->
+
+ <h2 style="padding: 0 1em;">
+ Place a hold on a specific item
+ [% IF force_hold_level == 'item' %]
+ <span class="error"><em>(Required)</em></span>
+ [% END %]
+ </h2>
+
+ <table id="requestspecific">
+ <thead>
+ <tr>
+ <th>Đặt mượn</th>
+ <th>Allowed pickup locations</th>
+ [% IF Koha.Preference('item-level_itypes') %]
+ <th>Kiểu tài liệu</th>
+ [% END %]
+ <th>Đăng ký cá biệt</th>
+ [% IF Koha.Preference('EnableItemGroupHolds') && biblio.object.item_groups.count %]
+ <th>Item group</th>
+ [% END %]
+ <th>Thư viện chính</th>
+ <th>Thư viện hiện tại</th>
+ [% IF itemdata_ccode %]
+ <th>Bộ sưu tập</th>
+ [% END %]
+ <th>Ký hiệu phân loại</th>
+ <th>Số bản sao</th>
+ [% IF itemdata_enumchron %]
+ <th>Số tập</th>
+ [% END %]
+ <th>Thông tin tài liệu</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% SET selected = 0 %]
+ [% FOREACH itemloo IN biblio.itemloop %]
+ [% UNLESS ( itemloo.hide ) %]
+ <tr class="[% itemloo.backgroundcolor | html %]">
+ <td>
+ [% IF force_hold_level == 'record' # Patron has placed a record level hold previously for this record %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Không thể đặt mượn"></i>
+ Hold must be record level
+ </span>
+ [% ELSIF force_hold_level == 'item_group' %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Không thể đặt mượn"></i>
+ Hold must be item group level
+ </span>
+ [% ELSIF ( itemloo.available ) %]
+ <input type="radio" name="checkitem" value="[% itemloo.itemnumber | html %]" />
+ [% ELSIF ( itemloo.override ) %]
+ <input type="radio" name="checkitem" class="needsoverride" value="[% itemloo.itemnumber | html %]" />
+ <i class="fa fa-exclamation-triangle fa-lg" style="color:gold" title="Yêu cầu ghi đè lên chính sách đặt mượn" /></i>
+ [% ELSE %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Không thể đặt mượn"></i>
+ [% IF itemloo.not_holdable %]
+ [% IF itemloo.not_holdable == 'damaged' %]
+ <span>Item damaged</span>
+ [% ELSIF itemloo.not_holdable == 'ageRestricted' %]
+ <span>Age restricted</span>
+ [% ELSIF itemloo.not_holdable == 'tooManyHoldsForThisRecord' %]
+ <span>Exceeded max holds per record</span>
+ [% ELSIF itemloo.not_holdable == 'tooManyReservesToday' %]
+ <span>Daily hold limit reached for patron</span>
+ [% ELSIF itemloo.not_holdable == 'tooManyReserves' %]
+ <span>Too many holds</span>
+ [% ELSIF itemloo.not_holdable == 'notReservable' %]
+ <span>Not holdable</span>
+ [% ELSIF itemloo.not_holdable == 'cannotReserveFromOtherBranches' %]
+ <span>Patron is from different library</span>
+ [% ELSIF itemloo.not_holdable == 'branchNotInHoldGroup' %]
+ <span>Cannot place hold from patron's library</span>
+ [% ELSIF itemloo.not_holdable == 'itemAlreadyOnHold' %]
+ <span>Patron already has hold for this item</span>
+ [% ELSIF itemloo.not_holdable == 'cannotBeTransferred' %]
+ <span>Cannot be transferred to pickup library</span>
+ [% ELSIF itemloo.not_holdable == 'pickupNotInHoldGroup' %]
+ <span>Only pickup locations within the same hold group are allowed</span>
+ [% ELSIF itemloo.not_holdable == 'noReservesAllowed' %]
+ <span>No holds are allowed on this item</span>
+ [% ELSIF itemloo.not_holdable == 'libraryNotPickupLocation' %]
+ <span>Library is not a pickup location</span>
+ [% ELSIF itemloo.not_holdable == 'no_valid_pickup_location' %]
+ <span>No valid pickup location</span>
+ [% ELSIF itemloo.not_holdable == 'notforloan' %]
+ <span>Không cho mượn</span>
+ [% ELSE %]
+ <span>[% itemloo.not_holdable | html %]</span>
+ [% END %]
+ [% END %]
+ </span>
+ [% END # /IF force_hold_level %]
+ </td>
+ <td>
+ [% IF (itemloo.pickup_locations_count > 0) || itemloo.override %]
+ <select name="item_pickup_[% itemloo.itemnumber | html %]" class="pickup_locations" style="width:100%;"
+                                                            data-item-id="[% itemloo.itemnumber | html %]"
+                                                            data-patron-id="[% patron.borrowernumber | html %]"
+                                                            data-pickup-location-source="item">
+ [% IF (itemloo.default_pickup_location) %]
+ <option value="[% itemloo.default_pickup_location.branchcode | html %]" selected="selected">[% itemloo.default_pickup_location.branchname | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </td>
+ [% IF Koha.Preference('item-level_itypes') %]
+ <td>
+ [% UNLESS ( noItemTypeImages ) %]
+ [% IF ( itemloo.itemtype.image_location) %]<img src="[% itemloo.itemtype.image_location | html %]" alt="" /> <br /> [% END %]
+ [% END %]
+ <span class="itypetext">[% itemloo.itemtype.translated_description | html %]</span>
+ </td>
+ [% END %]
+ <td>
+ [% itemloo.barcode | html %]
+ </td>
+ [% IF Koha.Preference('EnableItemGroupHolds') && biblio.object.item_groups.count %]
+ <td>
+ [% itemloo.object.item_group.description | html %]
+ </td>
+ [% END %]
+ <td>
+ [% Branches.GetName( itemloo.homebranch ) | html %]
+ </td>
+ <td>
+ [% Branches.GetName( itemloo.holdingbranch ) | html %]
+ </td>
+ [% IF itemdata_ccode %]
+ <td>
+ [% IF ( itemloo.ccode ) %][% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.ccode', authorised_value => itemloo.ccode ) | html %][% END %]
+ </td>
+ [% END %]
+ <td>
+ [% itemloo.itemcallnumber | html %]
+ </td>
+ <td>
+ [% IF ( itemloo.copynumber ) %][% itemloo.copynumber | html %][% ELSE %]&nbsp;[% END %]
+ </td>
+ [% IF itemdata_enumchron %]
+ <td>
+ [% itemloo.enumchron | html %]
+ </td>
+ [% END %]
+ [% IF ( itemloo.onloan ) %]
+ <td data-order="[% itemloo.date_due | html %]">
+ <span class="checkedout">Ngày hết hạn: [% itemloo.date_due | $KohaDates as_due_date => 1 %]</span>
+ [% ELSE %]
+ <td>
+ [% IF ( itemloo.transfertwhen ) %]
+ <span>In transit from [% Branches.GetName( itemloo.transfertfrom ) | html %],
+ to [% Branches.GetName( itemloo.transfertto ) | html %], since [% itemloo.transfertwhen | $KohaDates %]</span>
+ [% END %]
+ [% END %]
+
+ [% IF ( itemloo.reservedate ) %]
+ [% IF ( itemloo.nocancel ) %]
+ <span>Can't be cancelled when item is in transit</span>
+ [% ELSE %]
+ [% IF ( itemloo.waitingdate ) %]
+ [% IF ( itemloo.canreservefromotherbranches ) %]
+ <span>Waiting for [% INCLUDE 'patron-title.inc' patron=itemloo.ReservedFor %] at [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %] since [% itemloo.waitingdate | $KohaDates %]</span>
+ [% ELSE %]
+ <span>Waiting at [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %] since [% itemloo.waitingdate | $KohaDates %]</span>
+ [% END %]
+ [% ELSE %]
+ [% IF ( itemloo.canreservefromotherbranches ) %]
+ [% IF itemloo.reservedate %]
+ <span>On hold for [% INCLUDE 'patron-title.inc' patron=itemloo.ReservedFor %] expected at [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %] since</span>
+ [% ELSE %]
+ <span>On hold expected at [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %]</span>
+ [% END %]
+ [% ELSIF itemloo.reservedate %]
+ <span>On hold expected at [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %] since [% itemloo.reservedate | $KohaDates %]</span>
+ [% ELSE %]
+ <span>On hold expected at [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %]</span>
+ [% END %]
+ [% END %]
+ <a class="info cancel-hold" href="modrequest.pl?CancelBiblioNumber=[% itemloo.biblionumber | html %]&amp;CancelBorrowerNumber=[% itemloo.ReservedFor.borrowernumber | html %]&amp;CancelItemnumber=[% itemloo.itemnumber | html %]">Hủy đặt mượn</a>
+ [% END # /IF itemloo.nocancel %] [% ELSE %] Không có đặt mượn [% END # /IF itemloo.reservedate %] [% IF itemloo.item_level_holds == "N" %] <br/>Item level hold not allowed from OPAC
+ [% ELSIF itemloo.item_level_holds == "F" %]
+ <br/>Item level hold forced from OPAC
+ [% END %]
+
+ [% IF ( itemloo.itemlost ) %]
+ <span class="lost">[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.itemlost', authorised_value => itemloo.itemlost ) | html %]</span>
+ [% END %]
+
+ [% IF ( itemloo.damaged ) %]
+ <span class="dmg">[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.damaged', authorised_value => itemloo.damaged ) | html %]</span>
+ [% END %]
+
+ [% IF ( itemloo.withdrawn ) %]
+ <span class="wdn">[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.withdrawn', authorised_value => itemloo.withdrawn ) | html %]</span>
+ [% END %]
+
+ [% IF ( itemloo.notforloan ) %]
+ <span class="nfl">Không cho mượn ([% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => itemloo.notforloan ) | html %])</span>
+ [% ELSIF ( itemloo.notforloanitype ) %]
+ <span class="nfl">Not for loan (Itemtype not for loan)</span>
+ [% END %]
+ </td>
+ </tr>
+ [% END # / UNLESS itemloo.hide %]
+ [% END # /FOREACH itemloo %]
+ </tbody>
+ </table> <!-- /#requestspecific -->
+
+ [% IF hiddencount %]
+ <form>
+ <p class="hiddencount">
+ <a href="request.pl?biblionumber=[% biblio.biblionumber | uri %]&amp;borrowernumber=[% borrowernumber | uri %]&amp;showallitems=1">Hiển thị tất cả tài liệu ([% hiddencount | html %] tài liệu ẩn)</a>
+ </p>
+ </form>
+ [% END # /IF hiddencount %]
+
+ [% ELSE # /UNLESS multi_hold %]
+
+ <table id="requesttitles">
+ <tr>
+ <th>&nbsp;</th>
+ <th>Pickup location</th>
+ <th>Nhan đề</th>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <th>Kiểu tài liệu</th>
+ [% END %]
+ <th>Thứ tự đặt mượn</th>
+ <th>Thông tin tài liệu</th>
+ </tr>
+ [% FOREACH biblioloo IN biblioloop %]
+ [% IF ( biblioloo.warn ) %]
+ <tr class="onissue">
+ [% ELSE %]
+ <tr>
+ [% END %]
+ <td>
+ [% UNLESS ( biblioloo.warn ) %]
+ <input class="multi_hold_item_checkbox" type="checkbox" checked="checked" title="[% biblioloo.biblionumber | html %]"/>
+ [% END %]
+ </td>
+ <td>
+ [% UNLESS ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <select name="pickup_[% biblioloo.biblionumber | html %]"
+                                                        class="multi_pickup_select"
+                                                        data-biblio-id="[% biblioloo.biblionumber | html %]"
+                                                        data-patron-id="[% patron.borrowernumber | html %]"
+                                                        data-pickup-locations='[% biblioloo.pickup_locations_codes.json | $raw %]'>
+ <option value=""></option>
+ [% FOREACH pickup_location IN biblioloo.pickup_locations %]
+ <option value="[% pickup_location.branchcode | html %]">[% pickup_location.branchname | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </td>
+ <td>
+ <ul>
+ <li>
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblioloo.biblionumber | uri %]">[% biblioloo.title | html %]</a>
+ [% IF biblioloo.author %]_Tác giả: [% biblioloo.author | html %][% END %] </li>
+ [% IF ( biblioloo.publicationyear ) %]
+ <li>
+ <span class="label">Năm xuất bản:</span> [% biblioloo.publicationyear | html %]
+ </li>
+ [% END %]
+ </ul>
+ [% IF ( biblioloo.warn ) %]
+ <span class="not_holdable" title="[% biblioloo.biblionumber | html %]"></span>
+ [% END %]
+ </td>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <td>
+ <img src="[% biblioloo.itemtype.image_location | html %]" alt="[% biblioloo.itemtype.translated_description | html %]" title="[% biblioloo.itemtype.translated_description | html %]" />
+ </td>
+ [% END %]
+ <td>[% biblioloo.rank | html %]</td>
+ <td>
+ [% IF ( biblioloo.checked_previously ) %]
+ <span>Patron has previously checked out this title</span><br/>
+ [% END %]
+ [% IF ( biblioloo.alreadyres ) %]
+ <ul>
+ [% ELSE %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <ul>
+ [% END %]
+ [% END %]
+
+ [% IF ( biblioloo.alreadyres ) %]
+ <li>
+ [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] <strong>đã có một đặt mượn</strong> trên tài liệu này </li>
+ [% END %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <li> <strong>No items are available</strong> cho bạn đọc đặt mượn.</li>
+ [% END %]
+
+ [% IF ( biblioloo.alreadyres ) %]
+ </ul>
+ [% ELSE %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ </ul>
+ [% END %]
+ [% END %]
+ </td>
+ </tr>
+ [% END # /FOREACH biblioloo %]
+ </table> <!-- /#requesttitles -->
+
+ [% END # /UNLESS multi_hold %]
+
+ <fieldset class="action">
+ [% IF ( patron AND patron.borrowernumber ) %]
+ [% IF ( multi_hold ) %]
+ [% IF ( override_required ) %]
+ <button type="submit" class="btn btn-primary warning"><i class="fa fa-exclamation-triangle "></i> Place holds</button>
+ [% ELSIF ( no_bibs_available ) %]
+ <button type="submit" class="btn btn-primary btn-disabled" disabled="disabled">Place holds</button>
+ [% ELSIF ( none_available ) %]
+ <button type="submit" class="btn btn-primary">Place holds</button>
+ [% ELSE %]
+ <button type="submit" class="btn btn-primary" id="multi_hold_submit">Place holds</button>
+ [% END %]
+ [% ELSE %]
+ [% IF ( override_required ) %]
+ <button type="submit" class="btn btn-primary warning"><i class="fa fa-exclamation-triangle "></i> Đặt mượn</button>
+ [% ELSIF ( none_available ) %]
+ <button type="submit" class="btn btn-primary btn-disabled" disabled="disabled">Đặt mượn</button>
+ [% ELSE %]
+ <button type="submit" class="btn btn-primary">Đặt mượn</button>
+ [% END %]
+ [% END %]
+ [% END # /IF patron %]
+ </fieldset> <!-- /.action -->
+ </form> <!-- /#hold-request-form -->
+ </fieldset> <!-- /.rows -->
+ [% END %]
+
+ [% UNLESS ( patron ) %]
+ [% UNLESS borrowers %]
+ [% SET hold_count = Biblio.HoldsCount( biblio.biblionumber ) | html %]
+ [% IF hold_count %]
+ <label for ="always_show_holds">Always show holds</label>
+ [% IF always_show_holds == 'DONT' %]
+ <input type="checkbox" name="always_show_holds" id="always_show_holds" value="DO">
+ [% UNLESS reserveloop %]
+ <a class="btn btn-default" value="Show holds" id="show_holds_now" href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% biblio.biblionumber | uri %]&show_holds_now=1">Hiển thị sách đang mượn ([% hold_count | html %])</a>
+ [% END %]
+ [% ELSE %]
+ <input type="checkbox" name="always_show_holds" value="DO" id="always_show_holds" checked="checked">
+ [% END %]
+ [% END %]
+ [% END %]
+ [% IF ( reserveloop ) %]
+ <form id="existing_holds" name="T[% time | html %]" action="modrequest.pl" method="post" style="display:block">
+ [% IF ( multi_hold ) %]
+ [% FOREACH biblionumber IN biblionumbers %]
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]"/>
+ [% END %]
+ [% END %]
+
+ [% IF enqueued %]
+ <div class="dialog message">
+ <p>The job has been enqueued! It will be processed as soon as possible.</p>
+ <p><a href="/cgi-bin/koha/admin/background_jobs.pl?op=view&id=[% job_id | uri %]" title="View detail of the enqueued job">View detail of the enqueued job</a></p>
+ </div>
+ [% END %]
+
+ <h2>Danh sách đặt mượn hiện tại</h2>
+ <div id="toolbar" class="btn-toolbar">
+ <div class="btn-group">
+ <input class="btn btn-primary" name="submit" type="submit" value="Cập nhật đặt mượn" />
+ </div>
+ <div class="btn-group">
+ <button class="btn cancel_selected_holds" data-bulk="true"></button>
+ </div>
+ <fieldset id="cancellation-reason-fieldset" class="action" style="display:none">
+ [% SET hold_cancellation = AuthorisedValues.GetAuthValueDropbox('HOLD_CANCELLATION') %]
+ [% IF hold_cancellation.count %]
+ <label for="cancellation-reason">Cancellation reason: </label>
+ <select class="cancellation-reason" name="cancellation-reason" id="cancellation-reason">
+ <option value="">No reason given</option>
+ [% FOREACH reason IN hold_cancellation %]
+ <option value="[% reason.authorised_value | html %]">[% reason.lib | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </fieldset>
+ </div>
+ <div class="page-section">
+
+ [% FOREACH biblioloo IN biblioloop %]
+ [% IF ( biblioloo.reserveloop ) %]
+ <div class="hold_title" id="hold_title_[% biblioloo.biblionumber | html %]">
+ [% IF ( multi_hold ) %]
+ <h3>
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblioloo.biblionumber | uri %]">
+ [% biblioloo.title | html %]
+ </a> <span class="number_box"><span>[% biblioloo.reserveloop.size | html %] [% tn('Hold', 'Holds', biblioloo.reserveloop.size) | $raw %]</span></span>
+ </h3>
+ [% END %]
+
+ [% IF Koha.Preference('HoldsSplitQueue') == 'branch' %]
+
+ [% SET branchcodes = [] %]
+
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% branchcodes.push( h.branchcode ) %]
+ [% END %]
+ [% branchcodes = branchcodes.unique %]
+ [% IF ( branchcodes.empty ) %]
+ <div class="note">
+ There are no holds on this title.
+ </div>
+ [% ELSE %]
+
+ [% FOREACH b IN branchcodes.sort %]
+ [% SET holds_by_branch = [] %]
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% IF h.branchcode == b %]
+ [% holds_by_branch.push( h ) %]
+ [% END %]
+ [% END %]
+ <div class="holds_by_library">
+ <h4>[% Branches.GetName( b ) | html %]</h4>
+
+ [% INCLUDE holds_table.inc holds=holds_by_branch %]
+ </div>
+ [% END # /FOREACh b %]
+ [% END # /IF ( branchcodes.empty ) %]
+
+ [% ELSIF Koha.Preference('HoldsSplitQueue') == 'itemtype' %]
+
+ [% SET itemtypes = [] %]
+
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% SET hold_itemtype = h.object.item.effective_itemtype || h.itemtype %]
+ [% itemtypes.push( hold_itemtype ) %]
+ [% END %]
+ [% itemtypes = itemtypes.unique %]
+ [% IF ( itemtypes.empty ) %]
+ <div class="note">
+ There are no holds on this title.
+ </div>
+ [% ELSE %]
+
+ [% FOREACH i IN itemtypes.sort %]
+ [% SET holds_by_itemtype = [] %]
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% SET hold_itemtype = h.object.item.effective_itemtype || h.itemtype %]
+ [% IF hold_itemtype == i %]
+ [% holds_by_itemtype.push( h ) %]
+ [% END %]
+ [% END %]
+
+ <div class="holds_by_itemtype">
+ [% IF i %]
+ <h4>[% ItemTypes.GetDescription( i ) | html %]</h4>
+ [% ELSE %]
+ <h4>Tất cả</h4>
+ [% END %]
+ [% INCLUDE holds_table.inc holds=holds_by_itemtype %]
+ </div>
+ [% END # /FOREACH i %]
+ [% END # /IF ( itemtypes.empty ) %]
+
+ [% ELSIF Koha.Preference('HoldsSplitQueue') == 'branch_itemtype' %]
+ [% SET branchcodes = [] %]
+
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% branchcodes.push( h.branchcode ) %]
+ [% END %]
+ [% branchcodes = branchcodes.unique %]
+ [% IF ( branchcodes.empty ) %]
+ <div class="note">
+ There are no holds on this title.
+ </div>
+ [% ELSE %]
+
+ [% FOREACH b IN branchcodes.sort %]
+ <div class="holds_by_library">
+ <h4 class="library_holds">[% Branches.GetName( b ) | html %]</h4>
+ [% SET holds_by_branch = [] %]
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% IF h.branchcode == b %]
+ [% holds_by_branch.push( h ) %]
+ [% END %]
+ [% END %]
+
+ [% SET itemtypes = [] %]
+ [% FOREACH h IN holds_by_branch %]
+ [% SET hold_itemtype = h.object.item.effective_itemtype || h.itemtype %]
+ [% itemtypes.push( hold_itemtype ) %]
+ [% END %]
+ [% itemtypes = itemtypes.unique %]
+
+ [% FOREACH i IN itemtypes.sort %]
+ <div class="holds_by_itemtype">
+ <h5 class="itemtype_holds">
+ [% IF i %]
+ [% ItemTypes.GetDescription( i ) | html %]
+ [% ELSE %]
+ <span>Tất cả</span>
+ [% END %]
+ </h5>
+
+ [% SET holds_by_itemtype = [] %]
+ [% FOREACH h IN holds_by_branch %]
+ [% SET hold_itemtype = h.object.item.effective_itemtype || h.itemtype %]
+ [% IF hold_itemtype == i %]
+ [% holds_by_itemtype.push( h ) %]
+ [% END %]
+ [% END %]
+ [% INCLUDE holds_table.inc holds=holds_by_itemtype %]
+ </div> <!-- /.holds_by_itemtype -->
+ [% END %]
+ </div> <!-- /.holds_by_library -->
+ [% END # /FOREACH b %]
+ [% END # /IF ( branchcodes.empty ) %]
+
+ [% ELSE %]
+
+ [% IF ( biblioloo.reserveloop.size ) %]
+ [% INCLUDE holds_table.inc holds=biblioloo.reserveloop %]
+ [% ELSE %]
+ <div class="note">
+ There are no holds on this title.
+ </div>
+ [% END %]
+
+ [% END # /IF HoldsSplitQueue %]
+ </div> <!-- /hold_title -->
+ [% END # /IF biblioloo.reserveloop %]
+ [% END # FOREACH biblioloo %]
+ </div>
+ </form> <!-- /#existing_holds -->
+ [% END # IF reserveloop %]
+ [% END # UNLESS patron %]
+
+ </main>
+
+ [% IF ( multi_hold || nobiblio ) # No sidebar menu when placing multiple holds or biblio not found %]
+ </div> <!-- /.col-md-10.col-md-offset-1 -->
+ [% ELSE %]
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'biblio-view-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ [% END %]
+ </div> <!-- /.row -->
+
+ <div id="cancelModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+ <div class="modal-content">
+ <div class="modal-header">
+ <button type="button" class="closebtn" data-dismiss="modal" aria-hidden="true">×</button>
+ <h3>Xác nhận xóa</h3>
+ </div>
+
+ <div class="modal-body">
+ <p>Bạn chắc chắn muốn hủy bỏ đặt mượn này?</p>
+
+ <fieldset class="action">
+ [% SET hold_cancellation = AuthorisedValues.GetAuthValueDropbox('HOLD_CANCELLATION') %]
+ [% IF hold_cancellation.count %]
+ <label for="cancellation-reason">Cancellation reason: </label>
+ <select class="cancellation-reason" name="modal-cancellation-reason" id="modal-cancellation-reason">
+ <option value="">No reason given</option>
+ [% FOREACH reason IN hold_cancellation %]
+ <option value="[% reason.authorised_value | html %]">[% reason.lib | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </fieldset>
+ </div>
+
+ <div class="modal-footer">
+ <button id="cancelModalConfirmBtn" type="button" class="btn btn-danger">Confirm cancellation</button>
+ <a href="#" data-dismiss="modal">Hủy bỏ</a>
+ </div>
+ </div>
+ </div>
+ </div>
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% Asset.js("lib/hc-sticky.js") | $raw %]
+ [% INCLUDE 'select2.inc' %]
+ [% Asset.js("js/holds.js") | $raw%]
+
+ [% SET url_biblio_params = "biblionumber=" _ biblionumbers.join("&amp;biblionumber=") %]
+ [% IF multi_hold %]
+ [% SET url_biblio_params = url_biblio_params _ "&amp;multi_hold=1" %]
+ [% END %]
+
+ <script>
+        var Sticky;
+        var biblionumbers = [[% biblionumbers.join(', ') | $raw %]];
+        var borrowernumber = "[% patron.borrowernumber | $raw %]";
+        var patron_homebranch = "[% To.json( Branches.GetName( patron.branchcode ) ) | $raw %]";
+        var override_items = {[% FOREACH biblio IN biblioloop %][% FOREACH itemloo IN biblio.itemloop %][% IF ( itemloo.override ) %]
+        [% itemloo.itemnumber | html %]: {
+            homebranch: "[% To.json( Branches.GetName( itemloo.homebranch ) ) | $raw %]",
+            holdallowed: "[% itemloo.holdallowed | html %]"
+            },
+            [% END %][% END %][% END %]
+        };
+        var ERROR_MAP = {
+            damaged: _("Item damaged"),
+            ageRestricted: _("Age restricted"),
+            tooManyHoldsForThisRecord: _("Exceeded max holds per record"),
+            tooManyReservesToday: _("Daily hold limit reached for patron"),
+            tooManyReserves: _("Too many holds"),
+            notReservable: _("Not holdable"),
+            noReservesAllowed: _("No reserves allowed"),
+            cannotReserveFromOtherBranches: _("Patron is from different library"),
+            itemAlreadyOnHold: _("Patron already has hold for this item"),
+            cannotBeTransferred: _("Cannot be transferred to pickup library"),
+            pickupNotInHoldGroup: _("Only pickup locations within the same hold group are allowed")
+        }
+
+        var MSG_CANCEL_SELECTED = _("Cancel selected (%s)");
+        $.fn.select2.defaults.set("width", "100%" );
+        $.fn.select2.defaults.set("dropdownAutoWidth", true );
+
+        $(document).ready(function() {
+            $('#cancellation-reason-fieldset').hide();
+            $('.rank-request').on('change', function() {
+                if ( $(".rank-request option:selected[value='del']").length ) {
+                    $('#cancellation-reason-fieldset').show();
+                } else {
+                    $('#cancellation-reason-fieldset').hide();
+                }
+            });
+
+            if( $("#circ_holds_select").length > 0 ){
+                [% SET active = clubs ? 1 : 0 %]
+                /* Set active tab based on whether a club search was submitted */
+                var tabs = $("#circ_holds_select li:eq(" + [% active | $raw %] + ") a").tab("show");
+                $( tabs[0].hash ).find("input.focus").focus();
+
+                /* Change active focus when tabs change */
+                $("#circ_holds_select a[data-toggle='tab']").on("shown.bs.tab", function (e) {
+                    active_tab = e.target.hash;
+                    $( active_tab ).find("input.focus").focus();
+                });
+            }
+
+
+            function ToggleHoldsToPlace() {
+                if ( $("#requestany").prop('checked') ) {
+                    $("#holds_to_place_count").prop('disabled', false);
+                } else {
+                    $("#holds_to_place_count").prop('disabled', true);
+                }
+            }
+            ToggleHoldsToPlace();
+            $("#requestany").on('change', function(){
+                ToggleHoldsToPlace();
+            });
+
+            [% IF Koha.Preference('UseBranchTransferLimits') %]
+                $("#pickup").on('change', function(){
+                    var pickup = $("#pickup").val();
+                    var url = "?pickup=" + pickup;
+                    url += "&borrowernumber=" + borrowernumber;
+                    url += "&biblionumber=" + biblionumbers[0];
+                    window.location.replace(url);
+                });
+            [% END %]
+
+            var my_table = $("#requestspecific").dataTable($.extend(true, {}, dataTablesDefaults, {
+                'bPaginate': false,
+                "sDom": '<"top pager"ilf>t',
+            }));
+
+            //Override fieldset styling for dataTables search box
+            $("div.top.pager").css("margin-left","1em");
+            $(".dataTables_filter label").css({
+                "width":"auto",
+                "margin-right":"0em"
+            });
+
+            $("#club-request-form").on("submit", function() {
+                let $t = $(this);
+                $('.clubalert, .holdalert').addClass('hide');
+                const data = {
+                    pickup_library_id: $('select[name="pickup"]').val()
+                };
+                if($('input[name="checkitem"]:checked').length)
+                    data.item_id = $('input[name="checkitem"]:checked').val();
+                if($('input[name="item_group_id"]:checked').length)
+                    data.item_group_id = $('input[name="item_group_id"]:checked').val();
+                if($('input[name="borrowernumber"]').length)
+                    data.patron_id = $('input[name="borrowernumber"]').val();
+                if($('textarea[name="notes"]').length)
+                    data.notes = $('textarea[name="notes"]').val()||null;
+                if($('input[name="itemtype"]').length) {
+                    data.item_type = $('input[name="itemtype"]').val()||null;
+                }
+                if($('input[name="default_patron_home"]:checked').length) {
+                    data.default_patron_home = 1;
+                }
+
+                const count = $('input[name="holds_to_place_count"]').length?$('input[name="holds_to_place_count"]').val():1;
+                var newloc = 'request.pl?';
+                biblionumbers.forEach(function (biblionumber) {
+                    newloc += '&biblionumber=' + biblionumber;
+                });
+
+                biblionumbers.forEach(function(biblionumber) {
+                    data.biblio_id = biblionumber;
+                    let options = {
+                        url: $t.attr('action'),
+                        method: $t.attr('method').toUpperCase(),
+                        contentType: 'application/json',
+                        data: JSON.stringify(data)
+                    };
+                    for(let i = 0; i < count; i++) {
+                        $.ajax(options)
+                        .then(function(result) {
+                            document.location = newloc;
+                        })
+                        .fail(function(err) {
+                            var message = err.responseJSON.error;
+                            var match = err.responseJSON.error.match(/Reason: (\w+)\s*$/);
+                            if(match && ERROR_MAP[match[1]]) {
+                                message = '<div><strong>'+_("Không thể đặt mượn tài liệu")+'</strong></div><div>'+ERROR_MAP[match[1]]+'</div>'
+                            }
+                            $('.clubalert, .holdalert').removeClass('hide').html(message);
+                        });
+                    }
+                });
+
+                return false;
+            });
+
+            [% UNLESS ( multi_hold ) %]
+                $("#hold-request-form").on("submit", function(e){
+                    return check(e, $(this));
+                });
+            [% ELSE %]
+                $("#hold-request-form").on("submit", function(){
+                    return checkMultiHold();
+                });
+            [% END %]
+
+            $(".pickup_location_dropdown").each( function () {
+                $(this).pickup_locations_dropdown();
+            });
+
+            $("#pickup_multi").select2({
+                width: '30%',
+                allowClear: true
+            });
+
+            $('.multi_pickup_select').select2({
+                width: '100%',
+                allowClear: true
+            });
+
+            $("#pickup_multi").on("change", function() {
+                var selection = $(this).val();
+                if ( selection != '' ) {
+                    $(".multi_pickup_select").each(function() {
+                        var valid_pickup_locations = $(this).data('pickup-locations');
+                        if ( valid_pickup_locations.includes(selection) ) {
+                            $(this).val(selection);
+                            $(this).trigger("change");
+                        }
+                    });
+                }
+            });
+
+            $("#pickup").each( function () {
+                $(this).pickup_locations_dropdown();
+            });
+
+            $(".pickup_locations").each(function () {
+                $(this).pickup_locations_dropdown();
+            });
+        });
+
+        function check( e, table ) {
+
+            var msg = "";
+
+            if ( ! $("#requestany").is(":checked") ) {
+                // requestany not selected, go through the item-specific cases
+                if ( $('input[type="radio"]:checked').length > 0 ) {
+                    // got item-specific hold requests in the form!
+                    // verify they have a pickup location selected
+
+                    if (table.find('input[type="radio"]:checked')
+                                .closest('tr')
+                                .find(".pickup_locations").val() === null) {
+
+                        msg = _("- Please select a pickup location for the item" + "\n")
+                    }
+                }
+                else {
+                    msg = (_("- Vui lòng lựa chọn tài liệu để đặt mượn") + "\n");
+                }
+            } else {
+                if( $("#pickup").length < 1 || $("#pickup").val() == "" || $('#pickup').val() === null ){
+                    msg = _("- Please select a pickup location for this hold" + "\n");
+                }
+            }
+
+
+            if (msg == "") {
+                $('#hold-request-form').preventDoubleFormSubmit();
+                return(true);
+            } else {
+                e.preventDefault();
+                alert(msg);
+                return(false);
+            }
+        }
+
+        function checkMultiHold() {
+
+            var selected_bibs = $(".multi_hold_item_checkbox:checked");
+            if ( selected_bibs.length > 0 ) {
+                // there are biblios selected in the form!
+                // verify they have a pickup location selected
+
+                var pickup_not_set = 0;
+                selected_bibs.each(function() {
+                    if ( $(this).closest('tr').find(".multi_pickup_select").val() === "" ) {
+                        pickup_not_set++;
+                    }
+                    else {
+                        var bibnum = $(this).attr("title");
+                    }
+                });
+                if ( pickup_not_set > 0 ) {
+                    alert( _("Please make sure all selected titles have a pickup location set" + "\n") );
+                    return false;
+                }
+            }
+            else {
+                alert( _("Please select at least one title" + "\n") );
+                return false;
+            }
+
+            $('#hold-request-form').preventDoubleFormSubmit();
+
+            return true;
+        }
+
+         $(document).ready(function() {
+
+            $("#always_show_holds").change(function(){
+                if( $(this).prop('checked') ){
+                    document.cookie = 'always_show_holds=DO';
+                } else {
+                    document.cookie = 'always_show_holds=DONT';
+                }
+            });
+            $("input.needsoverride").click(function() { // This must be before the radio button/checkbox switch logic
+                var itemnumber = this.value;
+                var msg = '';
+
+                switch (override_items[itemnumber].holdallowed) {
+                    case "not_allowed": msg = _("Thông thường tài liệu này không thể đặt mượn."); break;
+                    case "from_home_library": msg = _("Thông thường tài liệu này không thể đặt mượn cho bạn đọc từ %s.").format(override_items[itemnumber].homebranch); break;
+                }
+
+                msg += "\n\n" + _("Bạn muốn đặt mượn tài liệu này?");
+
+                return confirm(msg);
+            });
+            $("button.warning").click(function() {
+                return confirm( _("Bạn đọc này không được phép đặt mượn các tài liệu này.") + "\n\n" + _("Bạn vẫn muốn đặt mượn cho bạn đọc?") );
+            });
+            $("#requestany").click(function() {
+                if(this.checked){
+                    $("input[name=checkitem]").each(function() {
+                        $(this).prop("checked", false);
+                    });
+                }
+            });
+            $("input[name=checkitem]").click(function() {
+                onechecked = 0;
+                $("input[name=checkitem]").each(function() {
+                    if(this.checked){
+                        onechecked = 1;
+                    }
+                });
+                if(onechecked == 1){
+                    $("#requestany").prop("checked", false);
+                    $("#holds_to_place_count").prop('disabled', true);
+                } else {
+                    $("#requestany").prop("checked",true);
+                    $("#holds_to_place_count").prop('disabled', false);
+                }
+            });
+            var prev_rank_request;
+            $("select[name=rank-request]").on("focus", function() {
+                prev_rank_request = $(this).val();
+                var row = $(this).parents("tr:first");
+            }).change(function() {
+                var row = $(this).parents("tr:first");
+                var value = parseInt($(this).val());
+                var found_holds = $("select[name='rank-request'][disabled='disabled']").length ; //Count how many are found
+                if( !isNaN(value) ) {  //If moved to 'del'
+                    var after = row.parent().find(`tr:nth-child(${value+found_holds})`); //Go to the row 1 after the new value (and skip found holds)
+                    if (prev_rank_request > value) {
+                        row.insertBefore(after);
+                    } else {
+                        row.insertAfter(after);
+                    }
+                }
+
+                var next_priority = 1;
+                $("select[name=rank-request]").each(function () {
+                    if( isNaN( $(this).val() ) ){ return true; } //Don't reset found or del holds
+                    $(this).val(next_priority);
+                    next_priority++;
+                });
+            });
+
+            $(".clear-date").on("click",function(e){
+                e.preventDefault();
+                var fieldID = this.id.replace("clear-date-","");
+                $("#" + fieldID).val("");
+            });
+
+            // Confirm cancellation of hold
+            let cancel_link;
+            $(".cancel-hold").on("click",function(e) {
+                e.preventDefault;
+                cancel_link = $(this);
+                $('#cancelModal').modal();
+                return false;
+            });
+            $("#cancelModalConfirmBtn").on("click",function(e) {
+                let link;
+                if(cancel_link.data('bulk')) {
+                    [% SET data_url = 'biblionumber=' _ biblionumbers.join('&biblionumber=') %]
+                    link = `request.pl?[% data_url | url %]&amp;action=cancelBulk&amp;ids=${$('.holds_table .select_hold:checked').toArray().map(el => $(el).data('id')).join(',')}`;
+                } else {
+                    let borrowernumber = cancel_link.data('borrowernumber');
+                    let biblionumber = cancel_link.data('biblionumber');
+                    let reserve_id = cancel_link.data('id');
+                    link = `request.pl?action=cancel&amp;borrowernumber=${ borrowernumber }&amp;biblionumber=${ biblionumber }&amp;reserve_id=${ reserve_id }`;
+                }
+                let reason = $("#modal-cancellation-reason").val();
+                if ( reason ) {
+                    link += "&amp;cancellation-reason=" + reason
+                }
+                window.location.href = link;
+                return false;
+            });
+
+            [% UNLESS ( patron || patron.borrowernumber || borrowers || noitems || nobiblio ) %]
+                [% IF ( PatronAutoComplete ) %]
+                    patron_autocomplete($("#search_patron_filter"), { 'link-to': 'reserve', 'url-params': '[% url_biblio_params | url %]' });
+                [% END %]
+            [% END %]
+
+            Sticky = $("#toolbar");
+            Sticky.hcSticky({
+                stickTo: "#existing_holds",
+                stickyClass: "floating"
+            });
+
+            [% IF Koha.Preference('EnableItemGroupHolds') %]
+                $(':radio[name="item_group_id"]').change(function(){
+                    $(':radio[name="checkitem"]').prop('checked', false);
+                });
+
+                $(':radio[name="checkitem"]').change(function(){
+                    $(':radio[name="item_group_id"]').prop('checked', false);
+                });
+            [% END %]
+
+            if(!localStorage.selectedHolds  || document.referrer.replace(/\?.*/, '') !== document.location.origin+document.location.pathname) {
+                localStorage.selectedHolds = [];
+            }
+
+            $('.holds_table .select_hold').each(function() {
+                if(localStorage.selectedHolds.includes($(this).data('id'))) {
+                    $(this).prop('checked', true);
+                }
+            });
+
+            $('.holds_table .select_hold_all').each(function() {
+                var table = $(this).parents('.holds_table');
+                var count = $('.select_hold:not(:checked)', table).length;
+                $('.select_hold_all', table).prop('checked', !count);
+            });
+
+            $('.cancel_selected_holds').html(MSG_CANCEL_SELECTED.format($('.holds_table .select_hold:checked').length));
+
+            $('.holds_table .select_hold_all').click(function() {
+                var table = $(this).parents('.holds_table');
+                var count = $('.select_hold:checked', table).length;
+                $('.select_hold', table).prop('checked', !count);
+                $(this).prop('checked', !count);
+                $('.cancel_selected_holds').html(MSG_CANCEL_SELECTED.format($('.holds_table .select_hold:checked').length));
+                localStorage.selectedHolds = $('.holds_table .select_hold:checked').toArray().map(el => $(el).data('id'));
+            });
+
+            $('.holds_table .select_hold').click(function() {
+                var table = $(this).parents('.holds_table');
+                var count = $('.select_hold:not(:checked)', table).length;
+                $('.select_hold_all', table).prop('checked', !count);
+                $('.cancel_selected_holds').html(MSG_CANCEL_SELECTED.format($('.holds_table .select_hold:checked').length));
+                localStorage.selectedHolds = $('.holds_table .select_hold:checked').toArray().map(el => $(el).data('id'));
+            });
+
+            $('.cancel_selected_holds').click(function(e) {
+                e.preventDefault();
+                if($('.holds_table .select_hold:checked').length) {
+                    cancel_link = $(this);
+                    delete localStorage.selectedHolds;
+                    $('#cancelModal').modal();
+                }
+                return false;
+            });
+        });
+    </script>
+
+ <script>
+        table_settings = [% TablesSettings.GetColumns( 'circ', 'circulation', 'table_borrowers', 'json' ) | $raw %];
+    </script>
+
+ [% PROCESS patron_search_js table_id => 'table_borrowers', categories => categories, libraries => libraries, extended_attribute_types => attribute_type_codes, columns => columns, open_on_row_click => 1, on_click_url => '/cgi-bin/koha/reserve/request.pl?' _ url_biblio_params, redirect_if_one_result => 1, redirect_url => '/cgi-bin/koha/reserve/request.pl?' _ url_biblio_params, redirect_if_attribute_equal => 'cardnumber' %]
+ <script>
+        $(document).ready(function() {
+            $("#holds_patronsearch").on("submit", filter);
+        });
+        $('.printholdslip').click(function(){
+                var reserve_id = $(this).attr('data-reserve_id');
+                window.open("/cgi-bin/koha/circ/hold-transfer-slip.pl?reserve_id=" + reserve_id);
+                return false;
+        })
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

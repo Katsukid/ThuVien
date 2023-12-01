@@ -1,0 +1,239 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>
+[% IF ( add_form ) %]
+ [% IF ( contractnumber ) %]Modify contract '[% contractname | html %]'
+[% ELSE %]New contract[% END %]
+[% END %]
+[% IF ( else ) %]Contracts of [% booksellername | html %][% END %]
+[% IF ( add_validate ) %]Data recorded[% END %]
+[% IF ( delete_confirm ) %]Confirm deletion of contract '[% contractnumber | html %]'[% END %]
+[% IF ( delete_confirmed ) %]Contract deleted[% END %]
+ &rsaquo; Contracts &rsaquo; Acquisitions &rsaquo; Trường CĐKTQS1
+</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="acq_aqcontract" class="acq">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'contracts-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/acqui-home.pl">Phân hệ bổ sung</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/supplier.pl?booksellerid=[% booksellerid | uri %]">[% booksellername | html %]</a>
+ [% END %]
+
+ [% IF ( else ) %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Hợp đồng</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/aqcontract.pl?booksellerid=[% booksellerid | uri %]">Hợp đồng</a>
+ [% END %]
+ [% END %]
+
+ [% IF ( add_form ) %]
+ [% IF ( contractnumber ) %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Modify contract '[% contractname | html %]'</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>New contract</span>
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% IF ( add_validate ) %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Dữ liệu đã được lưu lại.</span>
+ [% END %]
+ [% END %]
+
+ [% IF ( delete_confirm ) %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Confirm deletion of contract [% contractnumber | html %]</span>
+ [% END %]
+ [% END %]
+
+ [% IF ( delete_confirmed ) %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Hợp đồng đã bị xóa</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+[% INCLUDE 'acquisitions-toolbar.inc' %]
+
+[% IF error == 'not_deleted' %]
+ <div class="dialog alert">Contract has not been deleted. Maybe a basket linked to this contract exists.</div>
+[% END %]
+
+ [% IF ( add_form ) %]
+ <div class="page-section">
+ <form name="Aform" action="/cgi-bin/koha/admin/aqcontract.pl" id="add_modify_contract" method="post">
+ <input type="hidden" name="op" value="add_validate" />
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <input type="hidden" name="checked" value="0" />
+ [% IF ( contractnumber ) %]
+ <h1>Chỉnh sửa hợp đồng [% contractname | html %] của [% booksellername | html %]</h1>
+ [% ELSE %]
+ <h1>Tạo hợp đồng của [% booksellername | html %]</h1>
+ [% END %]
+ <fieldset class="rows">
+ <ol>
+ [% IF ( contractnumber ) %]
+ <li><span class="label">Contract ID </span>[% contractnumber | html %]
+ <input type="hidden" name="contractnumber" value="[% contractnumber | html %]" />
+ <input type="hidden" name="is_a_modif" value="1" />
+ </li>
+ [% END %]
+ <li><label for="contractname" class="required">Tên:</label> &nbsp;
+ <input type="text" name="contractname" id="contractname" size="40" maxlength="80" value="[% contractname | html %]" />
+ <span class="required">Bắt buộc</span>
+ </li>
+ <li><label for="contractdescription">Thông tin mô tả: </label> &nbsp;
+ <input type="text" name="contractdescription" id="contractdescription" size="40" maxlength="80" value="[% contractdescription | html %]" />
+ </li>
+ <li><label for="from" class="required">Ngày bắt đầu:</label> &nbsp;
+ <input type="text" name="contractstartdate" id="from" value="[% contractstartdate | html %]" maxlength="10" size="10" class="flatpickr" data-date_to="to" />
+ <span class="required">Bắt buộc</span>
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ <li><label for="to" class="required">Ngày kết thúc:</label> &nbsp;
+ <input type="text" name="contractenddate" id="to" value="[% contractenddate | html %]" maxlength="10"  size="10" class="flatpickr" />
+ <span class="required">Bắt buộc</span>
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Lưu" /> <a class="cancel" href="/cgi-bin/koha/admin/aqcontract.pl?booksellerid=[% booksellerid | html %]&amp;contractnumber=[% contractnumber | html %]">Hủy bỏ</a>
+ </fieldset>
+ </form>
+ </div> <!-- /.page-section -->
+ [% END %]
+ [% IF ( add_validate ) %]
+ <h1>Dữ liệu đã được lưu lại.</h1>
+ <form action="[% script_name | html %]" method="post">
+ <input type="submit" class="btn btn-primary" value="OK" />
+ </form>
+ [% END %]
+ [% IF ( delete_confirm ) %]
+ <div class="dialog alert">
+ <h1>Confirm deletion of contract <em>[% contractname | html %]</em></h1>
+ <table>
+ <tr><th scope="row">Số hợp đồng:</th><td>[% contractnumber | html %]</td></tr>
+ <tr><th scope="row">Tên hợp đồng:</th><td>[% contractname | html %]</td></tr>
+ <tr><th scope="row">Mô tả:</th><td>[% contractdescription | html %]</td></tr>
+ <tr><th scope="row">Ngày bắt đầu:</th><td>[% contractstartdate | $KohaDates %]</td></tr>
+ <tr><th scope="row">Ngày kết thúc:</th><td>[% contractenddate | $KohaDates %]</td></tr>
+ <tr><th scope="row">Nhà cung cấp:</th><td>[% booksellername | html %]</td></tr>
+ </table>
+ <form action="[% script_name | html %]" method="post">
+ <input type="hidden" name="op" value="delete_confirmed" />
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <input type="hidden" name="contractnumber" value="[% contractnumber | html %]" />
+ <button type="submit" class="approve"><i class="fa fa-fw fa-check"></i> Yes, delete contract</button>
+ </form>
+ <form action="/cgi-bin/koha/admin/aqcontract.pl" method="get">
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <input type="hidden" name="contractnumber" value="[% contractnumber | html %]" />
+ <button type="submit" class="deny"><i class="fa fa-fw fa-remove"></i> Không xóa</button>
+ </form>
+ </div>
+ [% END %]
+ [% IF ( delete_confirmed ) %]
+ <h1>Hợp đồng đã bị xóa</h1>
+ <form action="[% script_name | html %]" method="post">
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <input type="submit" class="btn btn-primary" value="OK" />
+ </form>
+ [% END %]
+ [% IF ( else ) %]
+ <h1>Hợp đồng của [% booksellername | html %]</h1>
+ [% IF ( loop ) %]
+ <div class="page-section">
+ <table>
+ <tr>
+ <th scope="col">Tên</th>
+ <th scope="col">Thông tin mô tả</th>
+ <th scope="col">Ngày bắt đầu</th>
+ <th scope="col">Ngày kết thúc</th>
+ <th scope="col">Thao tác</th>
+ </tr>
+ [% FOREACH loo IN loop %]
+ <tr>
+ <td>
+ <a href="[% loo.script_name | url %]?op=add_form&amp;booksellerid=[% loo.booksellerid | uri %]&amp;contractnumber=[% loo.contractnumber | uri %]">[% loo.contractname | html %]</a>
+ </td>
+ <td>[% loo.contractdescription | html %]</td>
+ <td>[% loo.contractstartdate | html %]</td>
+ <td>[% loo.contractenddate | html %]</td>
+ <td class="actions">
+ <a href="[% loo.script_name | url %]?op=add_form&amp;contractnumber=[% loo.contractnumber | uri %]&amp;booksellerid=[% loo.booksellerid | uri %]" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Chỉnh sửa</a>
+ <a href="[% loo.script_name | url %]?op=delete_confirm&amp;contractnumber=[% loo.contractnumber | uri %]&amp;booksellerid=[% loo.booksellerid | uri %]" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> Xóa</a>
+ </td>
+ </tr>
+ [% END %]
+ </table>
+ </div> <!-- /.page-section -->
+ [% ELSE %]
+ <div class="dialog message">
+ There are no contracts with this vendor.
+ [% IF active %]
+ <a href="/cgi-bin/koha/admin/aqcontract.pl?op=add_form&amp;booksellerid=[% booksellerid | uri %]">Tạo hợp đồng</a>.
+ [% END %]
+ </div>
+ [% END %]
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'acquisitions-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% Asset.js("js/acq.js") | $raw %]
+ <script>
+        $(document).ready(function(){
+            $("#add_modify_contract").validate({
+                rules: {
+                    contractstartdate: "required",
+                    contractname: "required",
+                    contractenddate: {
+                        required: true,
+                        date_on_or_after: "#from"
+                    }
+                },
+                messages: {
+                    contractenddate: {
+                        date_on_or_after: _("Contract end date must be on or after contract start date")
+                    }
+                }
+            });
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

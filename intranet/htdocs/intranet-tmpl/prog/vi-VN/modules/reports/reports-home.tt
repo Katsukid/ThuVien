@@ -1,0 +1,116 @@
+[% USE Koha %]
+[% USE raw %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Reports &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="rep_reports-home" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Báo cáo</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+ <h1>Báo cáo</h1>
+ <div class="row">
+ <div class="col-xs-6">
+
+ [% IF ( CAN_user_reports_execute_reports || CAN_user_reports_create_reports ) %]
+ <form action="/cgi-bin/koha/reports/guided_reports.pl" method="get">
+ <fieldset class="brief">
+ <h2>Hướng dẫn tạo báo cáo</h2>
+ <input name="phase" value="Use saved" type="hidden">
+ <input name="filter_set" value="1" type="hidden">
+ [% IF ( CAN_user_reports_create_reports ) %]
+ <p>
+ <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new"><i class="fa fa-code-fork"></i> Create guided report</a>
+ </p>
+ <p>
+ <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Create%20report%20from%20SQL"><i class="fa fa-plus"></i> Tạo báo cáo từ SQL</a>
+ </p>
+ [% END %]
+ <p>
+ <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Use%20saved"><i class="fa fa-list"></i> Báo cáo được lưu</a>
+ </p>
+ <label for="filter_keyword">Search by keyword:</label> <input id="filter_keyword" name="filter_keyword" value="" size="16" type="text" /> <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ </fieldset>
+ </form>
+ [% END %]
+
+ <h5>Từ điển báo cáo</h5>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/dictionary.pl?phase=View%20Dictionary">Xem từ điển</a></li>
+ </ul>
+
+ <h2>Báo cáo phân hệ</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/acquisitions_stats.pl">Phân hệ bổ sung</a></li>
+ <li><a href="/cgi-bin/koha/reports/borrowers_stats.pl">Bạn đọc</a></li>
+ <li><a href="/cgi-bin/koha/reports/catalogue_stats.pl">Tìm kiếm</a></li>
+ <li><a href="/cgi-bin/koha/reports/issues_stats.pl">Phân hệ lưu thông</a></li>
+ <li><a href="/cgi-bin/koha/reports/serials_stats.pl">Ấn phẩm định kỳ</a></li>
+ <li><a href="/cgi-bin/koha/reports/cash_register_stats.pl">Cash register</a></li>
+ <li><a href="/cgi-bin/koha/reports/reserves_stats.pl">Sách đang giữ/a></li>
+ </ul>
+
+ [% IF plugins_enabled %]
+ <h2>Report plugins</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/plugins/plugins-home.pl?method=report">Report plugins</a></li>
+ </ul>
+ [% END %]
+
+ </div>
+
+ <div class="col-xs-6"><h2>Lưu thông nhiều nhất</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/bor_issues_top.pl">Bạn đọc ghi mượn nhiều nhất</a></li>
+ <li><a href="/cgi-bin/koha/reports/cat_issues_top.pl">Tài liệu lưu thông nhiều nhất</a></li>
+ </ul>
+
+ <h2>Dừng hoạt động</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/borrowers_out.pl">Bạn đọc không ghi mượn</a></li>
+ <li><a href="/cgi-bin/koha/reports/catalogue_out.pl">Tài liệu không lưu thông</a></li>
+ </ul>
+
+ <h2>Báo cáo khác</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/itemslost.pl">Tài liệu bị mất</a></li>
+ <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Orders by fund</a></li>
+ <li><a href="/cgi-bin/koha/reports/manager.pl?report_name=itemtypes">Số bản tài liệu</a></li>
+ <li><a href="/cgi-bin/koha/reports/issues_avg_stats.pl">Thời gian ghi mượn trung bình</a></li>
+ [% SET koha_version = Koha.Version %]
+ [% IF koha_version.development %]
+ <li><a href="http://schema.koha-community.org/master" target="blank">Sơ đồ dữ liệu Koha</a></li>
+ [% ELSE %]
+ <li><a href="http://schema.koha-community.org/[% koha_version.major | uri %]_[% koha_version.minor | uri %]" target="blank">Sơ đồ dữ liệu Koha</a></li>
+ [% END %]
+
+ <li><a href="http://wiki.koha-community.org/wiki/SQL_Reports_Library" target="blank">Báo cáo mẫu Koha</a></li>
+ </ul>
+ [% IF ( Koha.Preference('Mana') == 2 ) %]
+ <div class="dialog message" style="margin:15px 0 0 0";>
+ <strong>Knowledgebase</strong>
+ <p> You haven't decided if you want to activate Mana Knowledge Base. <a href=/cgi-bin/koha/admin/share_content.pl>Change your Mana KB settings</a>.</p>
+ </div>
+ [% END %]
+ </div>
+</div>
+
+
+</div>
+ <div class="col-md-12" id="intranet-reports-home-html">
+ [% Koha.Preference('IntranetReportsHomeHTML') | $raw %]
+ </div>
+</div>
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,192 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE Price %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% IF ( booksellername ) %]Orders with uncertain prices for vendor [% booksellername | html %][% ELSE %]Orders with uncertain prices[% END %] &rsaquo; Acquisitions &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="acq_uncertainprice" class="acq">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'acquisitions-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/acqui-home.pl">Phân hệ bổ sung</a>
+ [% END %]
+ [% IF ( booksellername ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/supplier.pl?booksellerid=[% booksellerid | uri %]">[% booksellername | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uncertain prices for vendor [% booksellername | html %]</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Giá tạm tính</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+[% INCLUDE 'acquisitions-toolbar.inc' %]
+ [% IF ( validate ) %]
+ [% SET metacontent = '0; url=' _  scriptname  _ '?booksellerid=' _  booksellerid %]
+ <META HTTP-EQUIV=Refresh CONTENT="[% metacontent | html %]">
+ [% ELSE %]
+ [% IF ( booksellername ) %]
+ <h1>Đơn hàng (với giá tham khảo) của nhà cung cấp <a href="/cgi-bin/koha/acqui/supplier.pl?booksellerid=[% booksellerid | uri %]">[% booksellername | html %]</a></h1>
+
+ <div class="page-section">
+ <h2>Thông tin liên hệ</h2>
+ <p><strong>Địa chỉ: </strong>
+ [% booksellerpostal | html %]
+ [% bookselleraddress1 | html %]
+ [% bookselleraddress2 | html %]
+ [% bookselleraddress3 | html %]
+ [% bookselleraddress4 | html %]
+ </p>
+ <p><strong>Điện thoại: </strong>
+ [% booksellerphone | html %]
+ <dl>
+ [% FOREACH contact IN contacts %]
+ <dt><strong>Liên hệ: </strong></dt>
+ <dd>[% contact.name | html %]
+ [% contact.position | html %]
+ [% contact.phone | html %]
+ [% contact.altphone | html %]
+ [% contact.email | html %]
+ [% contact.notes | html %]
+ </dd>
+ [% END %]
+ </dl>
+ [% IF ( booksellernotes ) %]
+ <p><strong>Ghi chú: </strong>
+ [% booksellernotes | html %]</p>
+ [% END %]
+ </div> <!-- /.page-section -->
+ [% END %]
+
+ <div class="page-section">
+ <h2>Order lines with uncertain prices</h2>
+ <form action="[% scriptname | html %]" method="post">
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <label for="owner">Orders from:</label>
+ <select id="owner" name="owner">
+ [% IF ( owner ) %]
+ <option value="0">Tất cả</option>
+ <option value="1" selected="selected">Tôi</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Tất cả</option>
+ <option value="1">Tôi</option>
+ [% END %]
+ </select>
+ <input class="btn btn-primary" type="submit" value="Bộ lọc dữ liệu" />
+ </form>
+ </div> <!-- /.page-section -->
+ <form action="[% scriptname | html %]" method="post" id="uncertainprices">
+ <fieldset class="rows">
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <input type="hidden" name="op" value="validate" />
+ <table id="uncertainpricet">
+ <thead>
+ <tr>
+ <th>Giỏ đặt hàng</th>
+ <th>[% tp('noun', 'Order') | html %]</th>
+ <th>Người liên quan</th>
+ <th class="NoSort">Giá tham khảo</th>
+ <th class="NoSort">Giá tiền</th>
+ <th class="NoSort">Số lượng</th>
+ <th class="NoSort">Chỉnh sửa</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH uncertainpriceorder IN uncertainpriceorders %]
+ <tr>
+ <td>
+ <a href="/cgi-bin/koha/acqui/basket.pl?basketno=[% uncertainpriceorder.basketno | uri %]">[% uncertainpriceorder.basketname | html %]</a>
+ </td>
+ <td>
+ [% INCLUDE 'biblio-title.inc' biblio=uncertainpriceorder link = 1 %]
+ [% IF ( uncertainpriceorder.author ) %] <em>Người liên quan</em> [% uncertainpriceorder.author | html %][% END %]
+ [% IF ( uncertainpriceorder.publishercode ) %]
+ <br /><em>Nhà xuất bản:</em> [% uncertainpriceorder.publishercode | html %]
+ [%- IF    ( uncertainpriceorder.publicationyear ) -%], [% uncertainpriceorder.publicationyear | html %]
+ [%- ELSIF ( uncertainpriceorder.copyrightdate ) -%] [% uncertainpriceorder.copyrightdate | html %]
+ [% END %]
+ [% END %]
+ [% IF ( uncertainpriceorder.isbn ) %]<br />[% uncertainpriceorder.isbn | html %][% END %]
+ <br />
+ </td>
+ <td>
+ [% uncertainpriceorder.firstname | html %] [% uncertainpriceorder.surname | html %]
+ </td>
+ <td>
+ <input type="checkbox" name="uncertainprice[% uncertainpriceorder.ordernumber | html %]" value="1" checked="checked" />
+ </td>
+ <td>
+ <input class="check_uncertain decimal" data-ordernumber="[% uncertainpriceorder.ordernumber | html %]" type="text" size="10" name="price[% uncertainpriceorder.ordernumber | html %]" value="[% uncertainpriceorder.listprice | $Price on_editing => 1 %]" />
+ </td>
+ <td>
+ [% IF basket.effective_create_items == 'ordering' %]
+ [% uncertainpriceorder.quantity | html %]
+ <input type="hidden" name="qty[% uncertainpriceorder.ordernumber | html %]" value="[% uncertainpriceorder.quantity | html %]" />
+ [% ELSE %]
+ <input class="check_uncertain" data-ordernumber="[% uncertainpriceorder.ordernumber | html %]" type="text" size="10" name="qty[% uncertainpriceorder.ordernumber | html %]" value="[% uncertainpriceorder.quantity | html %]" />
+ [% END %]
+ </td>
+ <td class="actions">
+ <a href="/cgi-bin/koha/acqui/neworderempty.pl?ordernumber=[% uncertainpriceorder.ordernumber | uri %]&amp;booksellerid=[% booksellerid | uri %]&amp;basketno=[% uncertainpriceorder.basketno | uri %]" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Chỉnh sửa</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </fieldset>
+ <fieldset class="action"><input class="btn btn-primary" type="submit" value="Lưu" /></fieldset>
+ </form>
+ [% END %]
+
+</main>
+</div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+<div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'vendor-menu.inc' %]
+ </aside>
+</div> <!-- /.col-sm-2.col-sm-pull-10 -->
+</div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/acquisitions-menu.js") | $raw %]
+ [% Asset.js("js/acq.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            var uncertainpricet = $("#uncertainpricet").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "aoColumnDefs": [
+                    { 'bSortable': false, "bSearchable": false, 'aTargets': [ 'NoSort' ] },
+                ],
+                "sPaginationType": "full"
+            }));
+            $(".check_uncertain").on("change",function(){
+                var form = document.getElementById("uncertainprices");
+                var ordernumber = $(this).data("ordernumber");
+                uncheckbox( form, ordernumber );
+            });
+        });
+    </script>
+ [% Asset.js("js/acq.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

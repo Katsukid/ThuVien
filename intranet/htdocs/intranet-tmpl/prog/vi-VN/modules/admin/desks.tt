@@ -1,0 +1,228 @@
+[% USE raw %]
+[% USE Branches %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>
+ [% IF op =='add_form' %]
+ [% IF desk.desk_id %]
+ Modify desk
+ [% ELSE %]
+ New desk
+ [% END %] &rsaquo; [% ELSE %]
+ [% IF op == 'delete_confirm' %]
+ Confirm deletion of desk &rsaquo; [% END %]
+ [% END %]
+ Desks &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_desks" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'desks-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Quản trị hệ thống</a>
+ [% END %]
+
+ [% IF op == 'add_form' || op == 'delete_confirm' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/desks.pl">Desks</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ <span>Desks</span>
+ [% END %]
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ [% IF desk.desk_id %]
+ <span>Modify desk</span>
+ [% ELSE %]
+ <span>New desk</span>
+ [% END %]
+ [% END %]
+
+ [% ELSIF op == 'delete_confirm' %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ <span>Confirm deletion of desk</span>
+ [% END %]
+
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+[% FOR m IN messages %]
+ <div class="dialog [% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>An error occurred when updating this desk. Perhaps it already exists</span>
+ [% CASE 'error_on_insert' %]
+ <span>An error occurred when adding this desk. The desk ID might already exist</span>
+ [% CASE 'error_on_delete' %]
+ <span>An error occurred when deleting this desk. Check the logs</span>
+ [% CASE 'success_on_update' %]
+ <span>Desk updated successfully</span>
+ [% CASE 'success_on_insert' %]
+ <span>Desk added successfully</span>
+ [% CASE 'success_on_delete' %]
+ <span>Desk deleted successfully</span>
+ [% CASE 'already_exists' %]
+ <span>This desk already exists</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+[% IF op == 'add_form' %]
+ [% IF desk %]
+ <h1>Modify a desk</h1>
+ [% ELSE %]
+ <h1>New desk</h1>
+ [% END %]
+
+ <form action="/cgi-bin/koha/admin/desks.pl" name="Aform" method="post" class="validated">
+ <input type="hidden" name="op" value="add_validate" />
+ <input type="hidden" name="desk_id" value="[% desk.desk_id | html %]" />
+
+ <fieldset class="rows">
+ <ol>
+ [% IF desk %]
+ <li><span class="label">Desk ID: </span>[% desk.desk_id | html %]</li>
+ [% END %]
+ <li>
+ <label for="desk_name" class="required">Desk: </label>
+ <input type="text" name="desk_name" id="desk_name" size="80" maxlength="100" value="[% desk.desk_name | html %]" required="required" class="required" /> <span class="required">Bắt buộc</span>
+ </li>
+ <li>
+ <label for="branchcode" class="required">Thư viện: </label>
+ <select id="branchcode" name="branchcode" required="required">
+ <option value=""></option>
+ [% FOREACH branch IN branches %]
+ [% IF desk %]
+ [% IF (desk.branchcode == branch.branchcode) %]
+ <option value="[% branch.branchcode|html %]" selected="selected">[% branch.branchname|html %]</option>
+ [% END%]
+ [% ELSE %]
+ [% IF (Branches.GetLoggedInBranchcode == branch.branchcode) %]
+ <option value="[% branch.branchcode|html %]" selected="selected">[% branch.branchname|html %]</option>
+ [% END%]
+ <option value="[% branch.branchcode|html %]">[% branch.branchname|html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <a class="cancel" href="/cgi-bin/koha/admin/desks.pl">Hủy bỏ</a>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'delete_confirm' %]
+ <div class="dialog alert">
+ <h1>Delete desk "[% desk.desk_name | html %]"?</h1>
+ <table>
+ <tr><th>Desk ID</th>
+ <td>[% desk.desk_id | html %]</td>
+ </tr>
+ <tr><th>Desk</th>
+ <td>[% desk.desk_name | html %]</td>
+ </tr>
+ <tr><th>Thư viện</th>
+ <td>[% Branches.GetName( desk.branchcode ) | html %]</td>
+ </tr>
+ </table>
+ <form action="/cgi-bin/koha/admin/desks.pl" method="post">
+ <input type="hidden" name="op" value="delete_confirmed" />
+ <input type="hidden" name="desk_id" value="[% desk.desk_id | html %]" />
+ <button type="submit" class="approve"><i class="fa fa-fw fa-check"></i> Xóa</button>
+ </form>
+ <form action="/cgi-bin/koha/admin/desks.pl" method="get">
+ <button type="submit" class="deny"><i class="fa fa-fw fa-remove"></i> Không xóa</button>
+ </form>
+ </div>
+[% END %]
+
+[% IF op == 'list' %]
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="newdesk" href="/cgi-bin/koha/admin/desks.pl?op=add_form"><i class="fa fa-plus"></i> New desk</a>
+ </div>
+
+ <h1>Desks</h1>
+ [% IF searchfield %]
+ <span>Searching: [% searchfield | html %]</span>
+ [% END %]
+
+ [% IF desks.count %]
+ <div class="page-section">
+ <table id="table_desks">
+ <thead>
+ <tr>
+ <th>Desk ID</th>
+ <th>Desk</th>
+ <th>Thư viện</th>
+ <th class="NoSort noExport">Thao tác</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH desk IN desks %]
+ <tr>
+ <td>[% desk.desk_id | html %]</td>
+ <td>[% desk.desk_name | html %]</td>
+ <td>[% Branches.GetName( desk.branchcode ) | html %]</td>
+ <td class="actions">
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/desks.pl?op=add_form&amp;desk_id=[% desk.desk_id | html %]"><i class="fa fa-pencil"></i> Chỉnh sửa</a>
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/desks.pl?op=delete_confirm&amp;desk_id=[% desk.desk_id | html %]"><i class="fa fa-trash"></i> Xóa</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.page-section -->
+ [% ELSE %]
+ <div class="dialog message">
+ There are no desks defined. <a href="/cgi-bin/koha/admin/desks.pl?op=add_form">Create a new desk</a>.
+ </div>
+ [% END %]
+[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        $(document).ready(function() {
+            KohaTable("table_desks", {
+                "order": [[ 1, "asc" ]]
+            });
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

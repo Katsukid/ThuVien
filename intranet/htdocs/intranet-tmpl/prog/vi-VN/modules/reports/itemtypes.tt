@@ -1,0 +1,116 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Catalog by item types &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% IF ( do_it ) %]
+[% END %]
+</head>
+
+<body id="rep_itemtypes" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/reports-home.pl">Báo cáo</a>
+ [% END %]
+ [% IF ( do_it ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/manager.pl?report_name=itemtypes">Số bản tài liệu</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kết quả</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Số bản tài liệu</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+
+[% IF ( do_it ) %]
+[% FOREACH mainloo IN mainloop %]
+ <h1>Thống kê theo kiểu tài liệu [% IF branch %] tại thư viện [% Branches.GetName( branch ) | html %][% END %]</h1>
+ <table id="itemtypest">
+ <thead>
+ <tr>
+ <th>Kiểu tài liệu</th>
+ <th>Số lượng</th>
+ </tr>
+ </thead>
+ <tfoot>
+ <tr>
+ <th>Tổng số</th>
+ <th>[% mainloo.total | html %]</th>
+ </tr>
+ </tfoot>
+ <tbody>
+ [% FOREACH loopitemtyp IN mainloo.loopitemtype %]
+ <tr>
+ <td>[% ItemTypes.GetDescription( loopitemtyp.itemtype ) | html %]</td>
+ <td>[% loopitemtyp.count | html %]</td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+[% END %]
+[% ELSE %]
+ <h1>Xem số tài liệu tại thư viện của bạn theo kiểu tài liệu</h1>
+ <form method="post" action="/cgi-bin/koha/reports/manager.pl?report_name=itemtypes">
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="value">Lựa chọn thư viện:</label>
+ <select name="value" id="value">
+ <option value=""></option>
+ [% PROCESS options_for_libraries libraries => Branches.all() %]
+ </select>
+ <div class="hint">Nếu bạn không chọn thư viện hệ thống sẽ thống kê tất cả thư viện</div>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action"><input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input type="hidden" name="report_name" value="[% report_name | html %]" />
+ <input type="hidden" name="do_it" value="1" />
+ </fieldset>
+ </form>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'reports-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% IF ( do_it ) %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+            $(document).ready(function(){
+                $("#itemtypest").dataTable($.extend(true, {}, dataTablesDefaults, {
+                    "sDom": 't',
+                    "bPaginate": false
+                }));
+            });
+        </script>
+ [% END %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

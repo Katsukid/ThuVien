@@ -1,0 +1,292 @@
+
+[% USE raw %]
+[% USE Koha %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Administration &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="admin_admin-home" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Quản trị hệ thống</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+ <h1>QUẢN TRỊ HỆ THỐNG THƯ VIỆN</h1>
+ [% IF ( CAN_user_parameters_manage_mana ) %]
+ [% IF ( Koha.Preference('Mana') == 1) && !mana_url %]
+ <div class="dialog message">
+ <h4>The Mana Knowledge Base feature is enabled but not configured.</h4>
+ <p>This feature allows you to retrieve and share data (subscription patterns and reports) with other Koha libraries.</p>
+ <p>
+ Ask your system administrator to configure this feature, or remove this note by <a href=/cgi-bin/koha/admin/share_content.pl>disabling the 'Mana' system preference</a>.
+ </p>
+ </div>
+ [% END %]
+ [% IF ( Koha.Preference('Mana') == 2 ) %]
+ <div class="dialog message">
+ <h4>Share content with Mana KB?</h4>
+ <p> You haven't decided if you want to activate Mana Knowledge Base. <a href=/cgi-bin/koha/admin/share_content.pl>Change your Mana KB settings</a>.</p>
+ </div>
+ [% END %]
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_usage_stats ) %]
+ [% IF ( Koha.Preference('UsageStats') == 2 ) %]
+ <div class="dialog message">
+ <h4>Share anonymous usage statistics with the Koha community?</h4>
+ <p> You haven't decided if you want to activate usage statistic sharing in Koha yet. <a href=/cgi-bin/koha/admin/usage_statistics.pl>Change your Hea settings</a>.</p>
+ <p> This feature gives the Koha developers valuable information regarding how Koha is being used and helps to drive decisions during the development cycle</p>
+ </div>
+ [% END %]
+ [% END %]
+ <div class="row">
+ <div class="col-md-6 sysprefs">
+ [% IF ( CAN_user_parameters_manage_sysprefs ) %]
+ <form action="/cgi-bin/koha/admin/preferences.pl" method="post">
+ <fieldset>
+ <h4><a href="/cgi-bin/koha/admin/preferences.pl">Thông số chung hệ thống</a></h4>
+ <p>Manage system preferences like MARC flavor, date format, administrator email, and templates.</p>
+ <input type="hidden" name="op" value="search" />
+ <input type="text" name="searchfield" value="[% searchfield | html %]" />
+ <input class="btn btn-primary" name="ok" type="submit" value="Tìm kiếm" />
+ </fieldset>
+ </form>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_libraries || CAN_user_parameters_manage_itemtypes || CAN_user_parameters_manage_auth_values ) %]
+ <div class="hint"><h4>Gợi ý:</h4><p>Cấu hình các thông số theo thứ tự xuất hiện.</p></div>
+ <h3>Thông số sơ bản</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_libraries ) %]
+ <dt><a href="/cgi-bin/koha/admin/branches.pl">Thư viện</a></dt>
+ <dd>Define libraries</dd>
+ <dt><a href="/cgi-bin/koha/admin/library_groups.pl">Library groups</a></dt>
+ <dd>Define hierarchical library groups</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_itemtypes ) %]
+ <dt><a href="/cgi-bin/koha/admin/itemtypes.pl">Kiểu tài liệu</a></dt>
+ <dd>Define item types used for circulation rules</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_auth_values ) %]
+ <dt><a href="/cgi-bin/koha/admin/authorised_values.pl">Giá trị định trước</a></dt>
+ <dd>Define categories and authorized values for them</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_patron_categories || CAN_user_parameters_manage_circ_rules || CAN_user_parameters_manage_patron_attributes || CAN_user_parameters_manage_transfers || CAN_user_parameters_manage_item_circ_alerts || CAN_user_parameters_manage_cities || CAN_user_parameters_manage_curbside_pickups ) %]
+ <h3>Bạn đọc và lưu thông</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_patron_categories ) %]
+ <dt><a href="/cgi-bin/koha/admin/categories.pl">để kiểm tra lại.</a></dt>
+ <dd>Define patron categories</dd>
+ [% END %]
+ [% IF CAN_user_parameters_manage_circ_rules %]
+ <dt><a href="/cgi-bin/koha/admin/smart-rules.pl">Circulation and fine rules</a></dt>
+ <dd>Define circulation and fine rules for combinations of libraries, patron categories, and item types</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_patron_attributes ) %]
+ <dt><a href="/cgi-bin/koha/admin/patron-attr-types.pl">Thuộc tính bạn đọc</a></dt>
+ <dd>Thiết lập thuộc tính mở rộng (định danh và nhóm thống kê) cho biểu ghi bạn đọc.</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_transfers ) %]
+ <dt><a href="/cgi-bin/koha/admin/branch_transfer_limits.pl">Chính sách chuyển tài liệu</a> (<a href="/cgi-bin/koha/admin/transfer_limits.pl">Advanced editor</a>)</dt>
+ <dd>Limit the ability to transfer items between libraries based on the library sending, the library receiving, and the item type involved. These rules only go into effect if the preference UseBranchTransferLimits is set to ON</dd>
+ <dt><a href="/cgi-bin/koha/admin/transport-cost-matrix.pl">Giá vận chuyển tài liệu</a></dt>
+ <dd>Thiết lập ma trận giá vận chuyển tài liệu giữa các thư viện</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_item_circ_alerts ) %]
+ <dt><a href="/cgi-bin/koha/admin/item_circulation_alerts.pl">Cảnh báo lưu thông</a></dt>
+ <dd>Thiết lập thông báo mượn, trả tài liệu theo thư viện, kiểu bạn đọc, kiểu tài liệu.</dd>
+ [% END %]
+ [% IF ( Koha.Preference('UseCirculationDesks') && CAN_user_parameters_manage_libraries ) %]
+ <dt><a href="/cgi-bin/koha/admin/desks.pl">Circulation desks</a></dt>
+ <dd>Define circulation desks</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_cities ) %]
+ <dt><a href="/cgi-bin/koha/admin/cities.pl">Thành phố</a></dt>
+ <dd>Define cities and towns that your patrons live in</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_curbside_pickups ) %]
+ <dt><a href="/cgi-bin/koha/admin/curbside_pickup.pl">Curbside pickup</a></dt>
+ <dd>Configure curbside pickup for libraries</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_patron_restrictions ) %]
+ <dt><a href="/cgi-bin/koha/admin/restrictions.pl">Patron restriction types</a></dt>
+ <dd>Define manual patron restriction types</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_accounts || ( Koha.Preference('UseCashRegisters') && CAN_user_parameters_manage_cash_registers ) ) %]
+ <h3>Thanh toán</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_accounts ) %]
+ <dt><a href="/cgi-bin/koha/admin/debit_types.pl">Debit types</a></dt>
+ <dd>Define debit types</dd>
+ <dt><a href="/cgi-bin/koha/admin/credit_types.pl">Credit types</a></dt>
+ <dd>Define credit types</dd>
+ [% END %]
+ [% IF ( Koha.Preference('UseCashRegisters') && CAN_user_parameters_manage_cash_registers ) %]
+ <dt><a href="/cgi-bin/koha/admin/cash_registers.pl">Cash registers</a></dt>
+ <dd>Define cash registers</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF CAN_user_plugins && plugins_enabled %]
+ <h3>Tính năng bổ trợ</h3>
+ <dl>
+ <dt><a href="/cgi-bin/koha/plugins/plugins-home.pl">Manage plugins</a></dt>
+ <dd>View, manage, configure and run plugins.</dd>
+ </dl>
+ [% END %]
+
+ [% IF CAN_user_parameters_manage_background_jobs %]
+ <h3>Jobs</h3>
+ <dl>
+ <dt><a href="/cgi-bin/koha/admin/background_jobs.pl">Manage jobs</a></dt>
+ <dd>View, manage and cancel jobs.</dd>
+ </dl>
+ [% END %]
+
+ </div>
+
+ <div class="col-md-6 sysprefs">
+ [% IF ( CAN_user_parameters_manage_marc_frameworks || CAN_user_parameters_manage_classifications || CAN_user_parameters_manage_matching_rules || CAN_user_parameters_manage_oai_sets || CAN_user_parameters_manage_item_search_fields || CAN_user_parameters_manage_search_engine_config || CAN_user_parameters_manage_marc_overlay_rules || ( Koha.Preference('SavedSearchFilters') && ( CAN_user_parameters_manage_search_filters ) ) ) %]
+ <h3>Tìm kiếm</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_marc_frameworks ) %]
+ <dt><a href="/cgi-bin/koha/admin/biblio_framework.pl">Khung mẫu biên mục</a></dt>
+ <dd>Create and manage Bibliographic frameworks that define the characteristics of your MARC Records (field and subfield definitions) as well as templates for the MARC editor</dd>
+ <dt><a href="/cgi-bin/koha/admin/koha2marclinks.pl">Ánh xạ KOHA_MARC</a></dt>
+ <dd>Define the mapping between the Koha transactional database (SQL) and the MARC Bibliographic records</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_marc_frameworks ) %]
+ <dt><a href="/cgi-bin/koha/admin/checkmarc.pl">Kiểm tra khung mẫu biên mục MARC</a></dt>
+ <dd>Checks the MARC structure. If you change your MARC Bibliographic framework it's recommended that you run this tool to test for errors in your definition</dd>
+ <dt><a href="/cgi-bin/koha/admin/authtypes.pl">Kiểu dữ liệu kiểm soát</a></dt>
+ <dd>Create and manage Authorities frameworks that define the characteristics of your MARC Records (field and subfield definitions)</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_classifications ) %]
+ <dt><a href="/cgi-bin/koha/admin/classsources.pl">Classification configuration</a></dt>
+ <dd>Define classification sources (i.e. call number schemes) used by your collection. Also define filing rules used for sorting call numbers and splitting rules for splitting them</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_matching_rules ) %]
+ <dt><a href="/cgi-bin/koha/admin/matching-rules.pl">Quy tắc kiểm soát biểu ghi</a></dt>
+ <dd>Manage rules for automatically matching MARC records during record imports</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_marc_overlay_rules ) %]
+ <dt><a href="/cgi-bin/koha/admin/marc-overlay-rules.pl">Record overlay rules</a></dt>
+ <dd>Managed rules for automatic overlay of MARC fields during record imports and updates</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_oai_sets ) %]
+ <dt><a href="/cgi-bin/koha/admin/oai_sets.pl">Cấu hình bộ OAI</a></dt>
+ <dd>Quản lý các nhóm OAI</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_item_search_fields ) %]
+ <dt><a href="/cgi-bin/koha/admin/items_search_fields.pl">Các trường tìm kiếm tài liệu</a></dt>
+ <dd>Manage custom fields for item search</dd>
+ [% END %]
+ [% IF Koha.Preference('SavedSearchFilters') && ( CAN_user_parameters_manage_search_filters ) %]
+ <dt><a href="/cgi-bin/koha/admin/search_filters.pl">Bộ lọc tìm kiếm</a></dt>
+ <dd>Manage custom search filters</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_search_engine_config ) %]
+ <dt><a href="/cgi-bin/koha/admin/searchengine/elasticsearch/mappings.pl">Search engine configuration (Elasticsearch)</a></dt>
+ <dd>Manage indexes, facets, and their mappings to MARC fields and subfields</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_acquisition_currencies_manage || CAN_user_acquisition_period_manage || CAN_user_acquisition_budget_manage || ( Koha.Preference('EDIFACT') && CAN_user_acquisition_edi_manage ) ) %]
+ <h3>THÔNG SỐ PHÂN HỆ BỔ SUNG</h3>
+ <dl>
+ [% IF ( CAN_user_acquisition_currencies_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/currency.pl">Tiền tệ và tỷ giá</a></dt>
+ <dd>Define currencies and exchange rates used for acquisitions</dd>
+ [% END %]
+ [% IF ( CAN_user_acquisition_period_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/aqbudgetperiods.pl">Ngân sách</a></dt>
+ <dd>Thiết lập các ngân sách của thư viện</dd>
+ [% END %]
+ [% IF ( CAN_user_acquisition_budget_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/aqbudgets.pl">Quỹ</a></dt>
+ <dd>Thiết lập các quỹ trong ngân sách của thư viện</dd>
+ [% END %]
+ [% IF ( Koha.Preference('EDIFACT') && CAN_user_acquisition_edi_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/edi_accounts.pl">EDI accounts</a></dt>
+ <dd>Manage vendor EDI accounts for import/export</dd>
+ <dt><a href="/cgi-bin/koha/admin/edi_ean_accounts.pl">Library EANs</a></dt>
+ <dd>Manage library EDI EANs</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( ( CAN_user_parameters_manage_identity_providers || CAN_user_parameters_manage_smtp_servers || CAN_user_parameters_manage_search_targets || CAN_user_parameters_manage_didyoumean || CAN_user_parameters_manage_column_config || CAN_user_parameters_manage_audio_alerts || CAN_user_parameters_manage_sms_providers && Koha.Preference('SMSSendDriver') == 'Email' ) || CAN_user_parameters_manage_usage_stats || CAN_user_parameters_manage_additional_fields || CAN_user_parameters_manage_mana || (Koha.Preference('EnableAdvancedCatalogingEditor') && CAN_user_parameters_manage_keyboard_shortcuts) ) %]
+ <h3>Thông số khác</h3>
+ <dl>
+ <!-- <dt><a href="/cgi-bin/koha/admin/printers.pl">Network Printers</a></dt>
+ <dd>Printers (UNIX paths).</dd> -->
+ [% IF ( CAN_user_parameters_manage_identity_providers) %]
+ <dt><a href="/cgi-bin/koha/admin/identity_providers.pl">Identity providers</a></dt>
+ <dd>Define which external identity providers to use</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_search_targets ) %]
+ <dt><a href="/cgi-bin/koha/admin/z3950servers.pl">Z39.50/SRU servers</a></dt>
+ <dd>Define which external servers to query for MARC data</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_smtp_servers ) %]
+ <dt><a href="/cgi-bin/koha/admin/smtp_servers.pl">SMTP servers</a></dt>
+ <dd>Define which SMTP servers to use</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_didyoumean ) %]
+ <dt><a href="/cgi-bin/koha/admin/didyoumean.pl">Tùy chỉnh riêng?</a></dt>
+ <dd>Choose which plugins to use to suggest searches to patrons and staff</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_column_config ) %]
+ <dt><a href="/cgi-bin/koha/admin/columns_settings.pl">Table settings</a></dt>
+ <dd>Configure and hide or show columns for tables</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_audio_alerts ) %]
+ <dt><a href="/cgi-bin/koha/admin/audio_alerts.pl">Audio alerts</a></dt>
+ <dd>Define which events trigger which sounds</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_sms_providers && Koha.Preference('SMSSendDriver') == 'Email' ) %]
+ <dt><a href="/cgi-bin/koha/admin/sms_providers.pl">SMS cellular providers</a></dt>
+ <dd>Define a list of cellular providers for sending SMS messages via email</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_usage_stats ) %]
+ <dt><a href="/cgi-bin/koha/admin/usage_statistics.pl">Share your usage statistics</a></dt>
+ <dd>Share with the Koha community the usage statistics of your Koha installation</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_mana ) %]
+ <dt><a href="/cgi-bin/koha/admin/share_content.pl">Share content with Mana KB</a></dt>
+ <dd>Share content (subscriptions, reports) with the Koha community</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_additional_fields ) %]
+ <dt><a href="/cgi-bin/koha/admin/additional-fields.pl">Additional fields</a></dt>
+ <dd>Add additional fields to certain tables</dd>
+ [% END %]
+ [% IF Koha.Preference('EnableAdvancedCatalogingEditor') && ( CAN_user_parameters_manage_keyboard_shortcuts ) %]
+ <dt><a href="/cgi-bin/koha/admin/adveditorshortcuts.pl">Keyboard shortcuts</a></dt>
+ <dd>Define which keys trigger actions in the advanced cataloging editor</dd>
+ [% END %]
+ </dl>
+ [% END %]
+ </div>
+ </div>
+ </div>
+</div>
+
+[% INCLUDE 'intranet-bottom.inc' %]

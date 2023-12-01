@@ -1,0 +1,150 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE Price %]
+[% USE Branches %]
+[% SET footerjs = 1 %]
+
+[% PROCESS 'accounts.inc' %]
+
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Create manual invoice &rsaquo; Patrons &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="pat_maninvoice" class="pat">
+[% WRAPPER 'header.inc' %]
+    [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+    [% WRAPPER breadcrumbs %]
+        [% WRAPPER breadcrumb_item %]
+            <a href="/cgi-bin/koha/members/members-home.pl">Patrons</a>
+        [% END %]
+        [% WRAPPER breadcrumb_item %]
+            <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' %]</a>
+        [% END %]
+        [% WRAPPER breadcrumb_item bc_active= 1 %]
+            <span>Manual invoice</span>
+        [% END %]
+    [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-push-2">
+            <main>
+
+
+            [% INCLUDE 'members-toolbar.inc' %]
+
+            <h1>Manual invoice</h1>
+
+            <!-- The manual invoice and credit buttons -->
+            <div class="toptabs">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="transactions">
+                        <a href="/cgi-bin/koha/members/boraccount.pl?borrowernumber=[% patron.borrowernumber | uri %]" role="tab">Các hóa đơn</a>
+                    </li>
+                    <li role="presentation" class="makepayment">
+                        <a href="/cgi-bin/koha/members/pay.pl?borrowernumber=[% patron.borrowernumber | uri %]" role="tab">Thanh toán</a>
+                    </li>
+                    <li role="presentation" class="manualinvoice active">
+                        <a href="/cgi-bin/koha/members/maninvoice.pl?borrowernumber=[% patron.borrowernumber | uri %]" role="tab">Create manual invoice</a>
+                    </li>
+                    [% IF CAN_user_updatecharges_manual_credit %]
+                        <li role="presentation" class="manualcredit">
+                            <a href="/cgi-bin/koha/members/mancredit.pl?borrowernumber=[% patron.borrowernumber | uri %]" role="tab">Create manual credit</a>
+                        </li>
+                    [% END %]
+                </ul> <!-- /.nav.nav-tabs -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active">
+                [% IF error == 'itemnumber' %]
+                    <div id="error_message" class="dialog alert">
+                        Error: Invalid barcode entered, please try again
+                    </div>
+                [% ELSIF error %]
+                    <div id="error_message" class="dialog alert">
+                        An error occurred, please try again: [% error | html %]
+                    </div>
+                [% END %]
+                <form action="/cgi-bin/koha/members/maninvoice.pl" method="post" id="maninvoice">
+                    <input type="hidden" name="borrowernumber" id="borrowernumber" value="[% patron.borrowernumber | html %]" />
+                    <input type="hidden" name="csrf_token" value="[% csrf_token | html %]" />
+                    <fieldset class="rows">
+                        <legend>Manual invoice</legend>
+                        <ol>
+                            <li>
+                                <label for="type">Type: </label>
+                                <select name="type" id="type">
+                                    [% FOREACH debit_type IN debit_types %]
+                                    [% IF debit_type.code == type %]
+                                    <option value="[% debit_type.code | html %]" selected="selected">[%- PROCESS debit_type_description debit_type=debit_type -%]</option>
+                                    [% ELSE %]
+                                    <option value="[% debit_type.code | html %]">[%- PROCESS debit_type_description debit_type=debit_type -%]</option>
+                                    [% END %]
+                                    [% END %]
+                                </select>
+                            </li>
+                            <li><label for="barcode">Barcode: </label><input type="text" name="barcode" id="barcode" value="[% barcode | html %]" /></li>
+                            <li><label for="desc">Description: </label><input type="text" name="desc" id="desc" size="50" value="[% desc | html %]" /></li>
+                            <li><label for="note">Note: </label><input type="text" name="note" size="50" id="note" value="[% note | html %]" /></li>
+                            <li><label for="amount">Amount: </label><input type="text" inputmode="decimal" pattern="^\d+(\.\d{2})?$" name="amount" id="amount" required="required" min="0" value="[% amount | $Price on_editing => 1 %]" /> Example: 5.00</li>
+                        </ol>
+                    </fieldset>
+
+                    [% IF available_additional_fields %]
+                        [% INCLUDE 'additional-fields-entry.inc' available=available_additional_fields values=additional_field_values %]
+                    [% END %]
+
+                    <fieldset class="action">
+                        <button type="submit" name="add" class="btn btn-primary" value="save">Save</button>
+                        <button type="submit" name="add" class="btn btn-primary" value="save and pay">Save and pay</button>
+                        <a class="cancel" href="/cgi-bin/koha/members/boraccount.pl?borrowernumber=[% patron.borrowernumber | html %]">Cancel</a>
+                    </fieldset>
+                </form>
+
+                    </div> <!-- /.tab-pane -->
+                </div> <!-- /.tab-content -->
+            </div> <!-- /.toptabs -->
+
+            </main>
+        </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+        <div class="col-sm-2 col-sm-pull-10">
+            <aside>
+                [% INCLUDE 'circ-menu.inc' %]
+            </aside>
+        </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+     </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+    [% INCLUDE 'str/members-menu.inc' %]
+    [% Asset.js("js/members-menu.js") | $raw %]
+    <script>
+        var type_fees = {};
+        [% FOREACH debit_type IN debit_types %]
+            type_fees['[% debit_type.code | html %]'] = "[% IF debit_type.default_amount %][% debit_type.default_amount | $Price on_editing => 1 %][% END %]";
+        [% END %]
+        $(document).ready(function(){
+            $('#maninvoice').preventDoubleFormSubmit();
+            $("fieldset.rows input, fieldset.rows select").addClass("noEnterSubmit");
+            $("#invoice_type").on("change",function(){
+                this.form.desc.value = this.options[this.selectedIndex].value;
+                this.form.amount.value = type_fees[this.options[this.selectedIndex].value];
+            });
+            [% UNLESS amount.defined %]
+            $("#maninvoice #desc").val($("#maninvoice #type option:selected").text());
+            $("#maninvoice #amount").val(type_fees[$("#maninvoice #type option:selected").val()]);
+            [% END %]
+            $("#maninvoice #type").change(function(){
+                $("#maninvoice #desc").val($(this).find("option:selected").text());
+                $("#maninvoice #amount").val(type_fees[$(this).val()]);
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

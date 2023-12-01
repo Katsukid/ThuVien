@@ -1,0 +1,203 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>
+[% IF ean_form %]
+ [% IF ean %]
+ Modify library EAN
+ [% ELSE %]
+ Add new library EAN
+ [% END %] &rsaquo; [% END %]
+[% IF delete_confirm %]
+ Confirm deletion of EAN &rsaquo; [% END %]
+Library EANs &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="admin_edi_ean" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Quản trị hệ thống</a>
+ [% END %]
+
+ [% IF ean_form %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/edi_ean_accounts.pl">Library EANs</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1%]
+ [% IF ean %]
+ <span>Modify library EAN</span>
+ [% ELSE %]
+ <span>Add new library EAN</span>
+ [% END %]
+ [% END %]
+
+ [% ELSIF delete_confirm %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/edi_ean_accounts.pl">Library EANs</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1%]
+ <span>Confirm deletion of EAN</span>
+ [% END %]
+
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1%]
+ <span>Library EANs</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+[% IF display %]
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="newediean" href="/cgi-bin/koha/admin/edi_ean_accounts.pl?op=ean_form">
+ <i class="fa fa-plus"></i>
+ New EAN
+ </a>
+ </div>
+[% END %]
+
+[% IF ean_form %]
+<form action="/cgi-bin/koha/admin/edi_ean_accounts.pl" name="Eanform" method="post">
+ <input type="hidden" name="op" value="save" />
+ [% IF ean %]
+ <input type="hidden" name="oldbranchcode" value="[% ean.branch.branchcode | html %]" />
+ <input type="hidden" name="id" value="[% ean.id | html %]" />
+ [% END %]
+
+ <fieldset class="rows">
+ <legend>
+ <h1>
+ [% IF ean %] Chỉnh sửa EAN [% ELSE %] EAN mới [% END %] </h1>
+ </legend>
+
+ <ol>
+ <li>
+ <label for="branchcode">Thư viện: </label>
+ <select name="branchcode" id="branchcode">
+ <option value="">Tất cả thư viện</option>
+ [% FOREACH branch IN branches %]
+ [% IF branch.branchcode == ean.branch.branchcode %]
+ <option value="[% branch.branchcode | html %]" selected="selected">[% branch.branchname | html %]</option>
+ [% ELSE %]
+ <option value="[% branch.branchcode | html %]">[% branch.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="description">Thông tin mô tả: </label>
+ <input type="text" name="description" id="description" size="30" maxlength="128" value="[% ean.description | html %]" />
+ </li>
+ <li>
+ <label for="ean">EAN: </label>
+ <input type="text" name="ean" id="ean" size="20" maxlength="15" value="[% ean.ean | html %]" />
+ </li>
+ <li>
+ <label for="id_code_qualifier">Qualifier: </label>
+ <select name="id_code_qualifier" id="id_code_qualifier">
+ [% FOREACH qualifier IN code_qualifiers %]
+ [% IF qualifier.code == ean.id_code_qualifier %]
+ <option value="[% qualifier.code | html %]" selected="selected">
+ [% qualifier.description | html %] ([% qualifier.code | html %])
+ </option>
+ [% ELSE %]
+ <option value="[% qualifier.code | html %]">
+ [% qualifier.description | html %] ([% qualifier.code | html %])
+ </option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <a href="/cgi-bin/koha/admin/edi_ean_accounts.pl" class="cancel">Hủy bỏ</a>
+ </fieldset>
+</form>
+[% END %]
+
+[% IF delete_confirm %]
+<div class="dialog alert">
+<h1>Delete EAN [% ean.ean | html %] for [% ean.branch.branchname | html %]?</h1>
+<form action="/cgi-bin/koha/admin/edi_ean_accounts.pl" method="post">
+ <input type="hidden" name="op" value="delete_confirmed" />
+ <input type="hidden" name="id" value="[% ean.id | html %]" />
+ <button type="submit" class="approve"><i class="fa fa-fw fa-check"></i> Xóa</button>
+</form>
+<form action="/cgi-bin/koha/admin/edi_ean_accounts.pl" method="get">
+ <button type="submit" class="deny"><i class="fa fa-fw fa-remove"></i> Không xóa</button>
+</form>
+</div>
+[% END %]
+
+[% IF display %]
+ <h1>Library EANs</h1>
+[% IF ( eans ) %]
+ <div class="page-section">
+ <table>
+ <tr>
+ <th>Thư viện</th>
+ <th>Thông tin mô tả</th>
+ <th>EAN</th>
+ <th>Qualifier</th>
+ <th class="noExport">Thao tác</th>
+ </tr>
+ [% FOREACH ean IN eans %]
+ <tr>
+ [% IF ean.branch %]
+ <td>[% ean.branch.branchname | html %]</td>
+ [% ELSE %]
+ <td>Tất cả thư viện</td>
+ [% END %]
+ <td>[% ean.description | html %]</td>
+ <td>[% ean.ean | html %]</td>
+ <td>
+ [% FOREACH qualifier IN code_qualifiers %]
+ [% IF qualifier.code == ean.id_code_qualifier %]
+ [% qualifier.description | html %] ([% qualifier.code | html %])
+ [% END %]
+ [% END %]
+ </td>
+ <td class="actions">
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/edi_ean_accounts.pl?op=ean_form&id=[% ean.id | html %]"><i class="fa fa-pencil"></i> Chỉnh sửa</a>
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/edi_ean_accounts.pl?op=delete_confirm&id=[% ean.id | html %]"><i class="fa fa-trash"></i> Xóa</a>
+ </td>
+ </tr>
+ [% END %]
+ </table>
+ </div> <!-- /.page-section -->
+[% ELSE %]
+ <div class="dialog message">
+ There are no library EANs.
+ </div>
+[% END %]
+[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

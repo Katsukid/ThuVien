@@ -1,0 +1,300 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>MARC check
+[% IF ( total ) %] :[% total | html %] errors found[% ELSE %] : Configuration OK![% END %] &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="admin_checkmarc" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Quản trị hệ thống</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF ( total ) %]
+ <span>MARC check: [% total | html %] errors found</span>
+ [% ELSE %]
+ <span>MARC check: Configuration OK!</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+<h1>Kiểm tra khung mẫu biên mục MARC</h1>
+
+<div class="page-section">
+<table>
+ <tr>
+ <th>Kiểm tra</th>
+ <th>Kết quả</th>
+ </tr>
+<!-- -->
+[% IF ( itemnum ) %]
+ <tr>
+ <td>itemnum</td>
+ <td><ul><li>Trường itemnum 'phải' được ánh xạ </li>
+ <li>Trường con tương ứng phải được ánh xạ tới một trường thẻ số 1 (bỏ qua)</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>itemnum : Trường itemnumber được ánh xạ tới một trường trong thẻ số 1</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( itemfields ) %]
+ <tr>
+ <td>Các trường của tài liệu</td>
+ <td>Tất cả các trường của tài liệu<br />
+ <ul><li>phải được ánh xạ tới trường tương tự,</li>
+ <li>và tất cả phải nằm trong thẻ số 10 (tài liệu)</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Tất cả các trường của tài liệu được ánh xạ tới trường tương tự và nằm trong thẻ tài liệu</td>
+ </tr>
+[% END %]
+<!-- -->
+ [% IF ( itemtags ) %]
+ <tr>
+ <td>Trường tài liệu</td>
+ <td>Phải có tối thiểu một trường MARC liên quan tới thẻ tài liệu (10): [% itemtags | html %]</td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Chỉ có một trường MARC được ánh xạ tới thẻ tài liệu</td>
+ </tr>
+ [% END %]
+ <!-- -->
+[% IF ( itemtype ) %]
+ <tr>
+ <td>itemtype không được ánh xạ</td>
+ <td>Trường biblioitems.itemtype phải <br />
+ <ul><li>được ánh xạ tới một trường con MARC, </li>
+ <li>trường con tương ứng phải có "Giá trị định trước" được thiết lập là "itemtype"</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>biblioitems.itemtype đã được định nghĩa</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( branch ) %]
+ <tr>
+ <td>homebranch không được ánh xạ</td>
+ <td>Trường items.homebranch phải <br />
+ <ul><li>được ánh xạ tới một trường con MARC,</li>
+ <li>trường con tương ứng phải có "Giá trị định trước" được thiết lập là "branches"</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>homebranch đã được định nghĩa</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( holdingbranch ) %]
+ <tr>
+ <td>holdingbranch không được ánh xạ</td>
+ <td>Trường items.holdingbranch phải <br />
+ <ul><li>được ánh xạ tới một trường con MARC, </li>
+ <li>trường con tương ứng phải có "Giá trị định trước" được thiết lập là "branches"</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>holdingbranch đã được định nghĩa</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( itemtypes_empty ) %]
+ <tr>
+ <td>Kiểu tài liệu không được định nghĩa</td>
+ <td>Phải có ít nhất một kiểu tài liệu được định nghĩa</td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Ít nhất một kiểu tài liệu đã được định nghĩa</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( branches_empty ) %]
+ <tr>
+ <td>Thư viện không được định nghĩa</td>
+ <td>Phải có ít nhất một thư viện được định nghĩa</td>
+ </tr>
+[% ELSE %] 
+ <tr>
+ <td>OK</td> 
+ <td>Ít nhất một thư viện đã được định nghĩa</td>
+ </tr> 
+[% END %]
+<!-- -->
+[% IF ( biblionumber ) %]
+ <tr>
+ <td>biblio và biblionumber</td>
+ <td>Các trường biblio.biblionumber và biblioitems.biblioitemnumber phải được ánh xạ tới một trường con MARC</td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Các trường biblionumber và biblioitemnumber đã được ánh xạ chính xác</td>
+ </tr>
+[% END %]
+
+ [% IF ( frameworknull ) %]
+ <tr>
+ <td>Các giá trị khung mẫu</td>
+ <td>Có một giá trị vô nghĩa trong mã khung mẫu. Kiểm tra lại các bảng dưới đây<br />
+ <li>select * from marc_subfield_structure where frameworkcode is NULL</li>
+ <li>select * from marc_tag_structure where frameworkcode is NULL</li>
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Không có giá trị vô nghĩa trong mã khung mẫu</td>
+ </tr>
+ [% END %]
+
+ [% IF ( inconsistent_tabs ) %]
+ <tr>
+ <td style="vertical-align:top;">Các trường con không nằm trong các thẻ phù hợp</td>
+ <td>Các trường con của các trường dưới đây không được nằm trong các thẻ phù hợp (hoặc đánh dấu là 'bỏ qua').<table>
+ <tr>
+ <th>Mã</th>
+ <th>Thông tin mô tả</th>
+ <th>Trường</th>
+ <th>Thẻ sử dụng</th>
+ </tr>
+ [% FOREACH tab_inf IN tab_info %]
+ <tr>
+ <td>[% tab_inf.frameworkcode | html %]</td>
+ [% IF ( tab_inf.frameworkcode ) %]
+ <td>[% tab_inf.frameworktext | html %]</td>
+ [% ELSE %]
+ <td>Khung mẫu mặc định</td>
+ [% END %]
+ <td>[% tab_inf.tagfield | html %]</td>
+ <td>[% tab_inf.tabs | html %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Tất cả các trường con của các trường đều nằm trong các thẻ phù hợp (hoặc đánh dấu là "bỏ qua")</td>
+ </tr>
+ [% END %]
+
+ [% IF ( invalid_authtypecodes ) %]
+ <tr>
+ <td style="vertical-align:top;">Kiểu dữ liệu kiểm soát không phù hợp</td>
+ <td>Bạn chưa định nghĩa một số kiểu dữ liệu kiểm soát liên quan đến khung mẫu. <table>
+ <tr>
+ <th>Mã khung mẫu</th>
+ <th>Mô tả của khung mẫu</th>
+ <th>Trường</th>
+ <th>Trường con</th>
+ <th>Kiểu dữ liệu kiểm soát không phù hợp</th>
+ </tr>
+ [% FOREACH authtypecode_inf IN authtypecode_info %]
+ <tr>
+ <td>[% authtypecode_inf.frameworkcode | html %]</td>
+ [% IF ( authtypecode_inf.frameworkcode ) %]
+ <td>[% authtypecode_inf.frameworktext | html %]</td>
+ [% ELSE %]
+ <td>Khung mẫu mặc định</td>
+ [% END %]
+ <td>[% authtypecode_inf.tagfield | html %]</td>
+ <td>[% authtypecode_inf.tagsubfield | html %]</td>
+ <td>[% authtypecode_inf.authtypecode | html %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Tất cả các kiểu dữ liệu kiểm soát được sử dụng trong khung mẫu đã được định nghĩa</td>
+ </tr>
+ [% END %]
+
+ [% IF ( permanent_location_mapped ) %]
+ <tr>
+ <td style="vertical-align:top;">items.permanent_location mapped</td>
+ <td>The following mappings exist for items.permanent_location, and they shouldn't.
+ <table>
+ <tr>
+ <th>Mã khung mẫu</th>
+ <th>Mô tả của khung mẫu</th>
+ <th>Trường</th>
+ <th>Trường con</th>
+ </tr>
+ [% FOREACH mapped_perm_loc IN mapped_permanent_location %]
+ <tr>
+ <td>[% mapped_perm_loc.frameworkcode | html %]</td>
+ [% IF ( mapped_perm_loc.frameworkcode ) %]
+ <td>[% mapped_perm_loc.frameworktext | html %]</td>
+ [% ELSE %]
+ <td>Khung mẫu mặc định</td>
+ [% END %]
+ <td>[% mapped_perm_loc.tagfield | html %]</td>
+ <td>[% mapped_perm_loc.tagsubfield | html %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>items.permanent_location is not mapped on the frameworks</td>
+ </tr>
+ [% END %]
+
+<!-- -->
+[% IF ( total ) %]
+ <tr>
+ <td>Tổng số</td>
+ <td>Bạn có tất cả [% total | html %] lỗi trong cấu hình khung mẫu biên mục MARC của bạn. Bạn hãy kiểm tra lại chúng trước khi sử dụng.</td>
+ </tr>
+</table>
+[% ELSE %]
+ </table>
+ <p><strong>Cấu hình OK, không có lỗi trong khung mẫu biên mục MARC của bạn.</strong></p>
+ </div> <!-- /.page-section -->
+[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

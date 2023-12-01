@@ -1,0 +1,299 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% USE Koha %]
+[% USE TablesSettings %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Z39.50/SRU search results &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>
+    #dataPreview {
+        width : 90%;
+        top: 5%;
+    }
+
+    #dataPreview pre {
+        overflow: unset;
+    }
+
+    .modal-body {
+        max-height: 380px;
+    }
+
+    .modal-header {
+        padding: 0 14px;
+    }
+
+    @media (max-width: 767px) {
+        #dataPreview {
+            margin: 0;
+            width : auto;
+        }
+    }
+</style>
+</head>
+
+<body id="cat_z3950_search" class="cat">
+ <div class="container-fluid">
+ [% IF ( opsearch ) %]
+ <h1>Z39.50/SRU search</h1>
+ <form method="post" action="z3950_search.pl" name="f" class="checkboxed">
+ <div class="row">
+ <div class="col-xs-6">
+ <input type="hidden" name="op" id="op" value="do_search" />
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="isbn">Số ISBN: </label> <input type="text" id="isbn" name="isbn" value="[% isbn | html %]" class="focus" />
+ </li>
+ <li>
+ <label for="issn">Số ISSN: </label> <input type="text" id="issn" name="issn" value="[% issn | html %]" />
+ </li>
+ <li>
+ <label for="title">Nhan đề: </label> <input type="text" id="title"  name="title" value="[% title | html %]" />
+ </li>
+ <li>
+ <label for="author">Tác giả: </label> <input type="text" id="author" name="author" value="[% author | html %]" />
+ </li>
+ <li>
+ <label for="publicationyear">Năm xuất bản: </label> <input type="text" id="publicationyear" name="publicationyear" value="[% publicationyear | html %]" />
+ </li>
+ <li>
+ <label for="subject">Đề mục chủ đề: </label> <input type="text" id="subject" name="subject" value="[% subject | html %]" />
+ </li>
+ <li>
+ <label for="srchany">Từ khóa (Bất kỳ): </label> <input type="text" id="srchany" name="srchany" value="[% srchany | html %]" />
+ </li>
+ <li>
+ <label for="lccall">Ký hiệu phân loại LC: </label> <input type="text" id="lccall" name="lccall" value="[% lccall | html %]" />
+ </li>
+ <li>
+ <label for="controlnumber">Số kiểm soát: </label> <input type="text" id="controlnumber" name="controlnumber" value="[% controlnumber | html %]" />
+ </li>
+ <li>
+ <label for="dewey">Dewey: </label> <input type="text" id="dewey" name="dewey" value="[% dewey | html %]" />
+ </li>
+ <li>
+ <label for="stdid">Số ID tiêu chuẩn: </label> <input type="text" id="stdid" name="stdid" value="[% stdid | html %]" />
+ </li>
+ <li>
+ <a id="resetZ3950Search" href="#"><i class="fa fa-trash"></i> Clear search form</a>
+ </li>
+ </ol>
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ <input type="hidden" name="frameworkcode" value="[% frameworkcode | html %]" />
+ </fieldset> <!-- /.rows -->
+ </div> <!-- /.col-xs-6 -->
+
+ <div class="col-xs-6">
+ <h2>Search targets</h2>
+ <div id="z3950_search_targets">
+ <span class="z3950checks">
+ <span class="checkall"><a id="CheckAll" href="#"><i class="fa fa-check"></i> Chọn tất cả</a></span> |
+ <span class="clearall"><a id="CheckNone" href="#"><i class="fa fa-remove"></i> Bỏ chọn tất cả</a></span>
+ </span>
+ [% FOREACH serverloo IN serverloop %]
+ <p>
+ [% IF ( serverloo.checked ) %]
+ <input type="checkbox" name="id" id="z3950_[% serverloo.id | html %]" value="[% serverloo.id | html %]" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" name="id" id="z3950_[% serverloo.id | html %]" value="[% serverloo.id | html %]" />
+ [% END %]
+ <label for="z3950_[% serverloo.id | html %]">[% serverloo.servername | html %]</label>
+ </p>
+ [% END %]
+ </div> <!-- /#z3950_search_targets -->
+ </div> <!-- /.col-xs-6 -->
+ </div> <!-- /.row -->
+
+ <nav class="navbar navbar-default navbar-fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input class="btn btn-primary" id="submit_z3950_search" type="submit" value="Tìm kiếm" />
+ <a class="btn btn-default close" href="#">Hủy bỏ</a>
+ </fieldset>
+ </div>
+ </nav>
+ </form> <!-- /.checkboxed -->
+
+ [% ELSE # IF opsearch %]
+
+ <div class="row">
+ <div class="col-xs-12">
+ <h1>Kết quả</h1>
+ <div class="page-section">
+ <p>
+ You searched for:
+ [% IF ( title ) %]<em>Nhan đề: </em><span class="term">[% title | html %]</span> [% END %]
+ [% IF ( author ) %]<em>Tác giả: </em><span class="term">[% author | html %]</span> [% END %]
+ [% IF ( publicationyear ) %]<em>Năm xuất bản: </em><span class="term">[% publicationyear | html %]</span> [% END %]
+ [% IF ( isbn ) %]<em>Số ISBN: </em><span class="term">[% isbn | html %]</span> [% END %]
+ [% IF ( issn ) %]<em>Số ISSN: </em><span class="term">[% issn | html %]</span> [% END %]
+ [% IF ( lccall ) %]<em>Ký hiệu phân loại LC: </em><span class="term">[% lccall | html %]</span> [% END %]
+ [% IF ( subject ) %]<em>Đề mục chủ đề: </em><span class="term">[% subject | html %]</span> [% END %]
+ [% IF ( controlnumber ) %]<em>Control no: </em><span class="term">[% controlnumber | html %]</span> [% END %]
+ [% IF ( dewey ) %]<em>Dewey: </em><span class="term">[% dewey | html %]</span> [%END %]
+ [% IF ( srchany ) %]<em>Raw (Bất kỳ): </em><span class="term">[% srchany | html %]</span> [% END %]
+ [% IF ( stdid ) %]<em>Số ID tiêu chuẩn: </em><span class="term">[% stdid | html %]</span> [% END %]
+ </p>
+ [% IF ( errconn ) %]
+ <div class="dialog alert">
+ <ul>
+ [% FOREACH errcon IN errconn %]
+ [% IF ( errcon.error == '10000' ) %]<li>Không thể kết nối tới máy chủ [% errcon.server | html %]</li>
+ [% ELSIF ( errcon.error == '10007' ) %]<li>Mất kết nối tới máy chủ [% errcon.server | html %]</li>
+ [% ELSIF errcon.error.match( '^XSLTH' ) %]<li>[% errcon.server | html %] biểu ghi [% errcon.seq | html %]: [% PROCESS 'xslt-handler.inc' code=errcon.error %]</li>
+ [% ELSE %]<li>[% errcon.server | html %] biểu ghi [% errcon.seq | html %]: [% errcon.error | html %]</li>
+ [% END %]
+ [% END %]
+ </ul>
+ </div>
+ [% END %]
+
+ [% IF ( breeding_loop ) %]
+ <table id="resultst">
+ <thead>
+ <tr>
+ <th>Máy chủ</th>
+ <th>Nhan đề</th>
+ <th>Tác giả</th>
+ <th>Năm</th>
+ <th>Ấn bản</th>
+ <th>Số ISBN</th>
+ <th>lccn</th>
+ [% IF Koha.Preference('AdditionalFieldsInZ3950ResultSearch') != '' %]
+ <th>Additional fields</th>
+ [% END %]
+ <th class="noExport">Thao tác</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH breeding_loo IN breeding_loop %]
+ [% IF ( breeding_loo.breedingid ) %]
+ <tr id="row[% breeding_loo.breedingid | html %]">
+ <td>[% breeding_loo.server | html %]</td>
+ <td>[% breeding_loo.title | html %]</td>
+ <td>[% breeding_loo.author | html %]</td>
+ <td>[% breeding_loo.date | html %]</td>
+ <td>[% breeding_loo.editionstatement | html %]</td>
+ <td>[% breeding_loo.isbn | html %]</td>
+ <td>[% breeding_loo.lccn | html %]</td>
+ [% IF Koha.Preference('AdditionalFieldsInZ3950ResultSearch') != '' %]
+ <td>
+ <dl>
+ [% FOREACH addnumberfield IN breeding_loo.addnumberfields %]
+ [% FOREACH string IN breeding_loo.$addnumberfield %]
+ <dt>[% addnumberfield | html %]:</dt>
+ <dd>[% string | html %]</dd>
+ [% END %]
+ [% END %]
+ </dl>
+ </td>
+ [% END %]
+ <td class="actions">
+ <div class="btn-group dropup">
+ <a class="btn btn-default btn-xs z3950actions" href="#">Hiển thị MARC</a><button class="btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+ <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="cataloguesearchactions[% breeding_loo.breedingid | html %]">
+ <li><a class="previewData" data-action="show_marc" href="/cgi-bin/koha/catalogue/showmarc.pl?importid=[% breeding_loo.breedingid | uri %]" title="Hiển thị MARC"><i class="fa fa-eye"></i> MARC preview</a></li>
+ <li><a class="previewData" data-action="show_card" href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&importid=[% breeding_loo.breedingid | uri %]" title="Tóm tắt"><i class="fa fa-eye"></i> Card preview</a></li>
+ <li><a class="chosen" data-action="import" href="/cgi-bin/koha/cataloguing/addbiblio.pl?biblionumber=[% breeding_loo.biblionumber | uri %]&z3950=1&frameworkcode=[% frameworkcode | uri %]&breedingid=[% breeding_loo.breedingid | uri %]" title="Nhập dữ liệu"><i class="fa fa-download"></i> Nhập dữ liệu</a></li>
+ </ul>
+ </div>
+ </td>
+ </tr>
+ [% END %]
+ [% END %]
+ </tbody>
+ </table> <!-- /#resultst -->
+
+ <div id="dataPreview" class="modal" tabindex="-1" role="dialog" aria-labelledby="dataPreviewLabel" aria-hidden="true">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <button type="button" class="closebtn" data-dismiss="modal" aria-hidden="true">×</button>
+ <h3 id="dataPreviewLabel">Xem trước</h3>
+ </div>
+ <div class="modal-body">
+ <div id="loading"> <img src="[% interface | html %]/[% theme | html %]/img/spinner-small.gif" alt="" /> Loading </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <form method="post" action="z3950_search.pl" id="page_form" name="page_form" class="checkboxed">
+ <input type="hidden" name="op" id="op" value="do_search" />
+ <input type="hidden" name="current_page" id="current_page" value="[% current_page | html %]" />
+ <input type="hidden" id="title"  name="title" value="[% title | html %]" />
+ <input type="hidden" id="isbn" name="isbn" value="[% isbn | html %]" />
+ <input type="hidden" id="lccall" name="lccall" value="[% lccall | html %]" />
+ <input type="hidden" id="controlnumber" name="controlnumber" value="[% controlnumber | html %]" />
+ <input type="hidden" id="srchany" name="srchany" value="[% srchany | html %]" />
+ <input type="hidden" id="author" name="author" value="[% author | html %]" />
+ <input type="hidden" id="publicationyear" name="publicationyear" value="[% publicationyear | html %]" />
+ <input type="hidden" id="subject" name="subject" value="[% subject | html %]" />
+ <input type="hidden" id="dewey" name="dewey" value="[% dewey | html %]" />
+ <input type="hidden" id="stdid" name="stdid" value="[% stdid | html %]" />
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ <input type="hidden" name="frameworkcode" value="[% frameworkcode | html %]" />
+
+ [% FOREACH server IN servers %]
+ <input type="hidden" name="id" id="z3950_[% server.id | html %]" value="[% server.id | html %]" />
+ [% END %]
+
+ [% IF ( show_prevbutton ) %]
+ <input data-currentpage="[% current_page | html %]" name="changepage_prev" type="button" value="Trang trước" />
+ [% END %]
+ <span id="result_pagenumbers">Showing page [% current_page | html %] of [% total_pages | html %]</span>
+ [% IF ( show_nextbutton ) %]
+ <input type="button" name="changepage_next" value="Next page" data-currentpage="[% current_page | html %]" />
+ [% END %]
+ <br />Đến trang : <input id="goto_page" name="goto_page" value="[% current_page | html %]" size="4" type="text" /><input class="btn btn-primary" name="changepage_goto" type="submit" value="Tìm kiếm" />
+ </form> <!-- /#page_form -->
+
+ [% ELSE %]
+ <div class="dialog message">Không tìm thấy kết quả phù hợp.</div>
+ [% END  # /IF breeding_loop %]
+ </div> <!-- /.page-section -->
+
+ <form method="get" action="/cgi-bin/koha/cataloguing/z3950_search.pl">
+ <p>
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]"/>
+ <input type="hidden" name="frameworkcode" value="[% frameworkcode | html %]"/>
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm tài liệu khác" />
+ </p>
+ </form>
+ </div> <!-- /.col-xs-12 -->
+ </div> <!-- /.row -->
+ [% END # /IF opsearch %]
+
+ [% IF ( numberpending ) %]
+ <h3 align="center">Hiện tại vẫn còn tìm kiếm trên [% numberpending | html %] máy chủ</h3>
+ [% END %]
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'z3950_search.inc' %]
+ [% Asset.js("js/z3950_search.js") | $raw %]
+ <script>
+        $(document).ready(function(){
+            var table_settings = [% TablesSettings.GetTableSettings( 'cataloguing', 'z3950_search', 'resultst', 'json' ) | $raw %];
+            var thetable = KohaTable("resultst", {
+                "aoColumnDefs": [
+                    { "aTargets": [ 1 ], "sType": "nsb-nse" },
+                ],
+                "bPaginate": false,
+                "searching": false,
+                "bInfo":false
+            }, table_settings );
+            InitLastAction();
+        });
+
+        function columnsInit(){
+            $(".dataTables_info").text( $("#result_pagenumbers").text() );
+            $("#result_pagenumbers").hide();
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

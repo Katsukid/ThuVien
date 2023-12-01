@@ -1,0 +1,70 @@
+[% USE KohaDates %]
+<h2>Mẫu dự đón</h2>
+[% IF (not_consistent_end_date) %]
+ <p><em>Ngày kết thúc không phù hợp với chiều dài ấn phẩm định kỳ.</em></p>
+[% END %]
+[% IF (ask_for_irregularities) %]
+ <p><em>Vui lòng đánh dấu các kỳ ấn phẩm không được phát hành (bất thường)</em></p>
+ [% IF (daily_options) %]
+ <p><em>
+ Nếu ấn phẩm định kỳ không được phát hành một số ngày trong tuần, bạn có thể chọn vào các ô tương ứng bên dưới.</em></p>
+ <input type="checkbox" id="monday" data-dow="1" class="skipday" />
+ <label for="monday">Thứ 2</label>
+ <input type="checkbox" id="tuesday" data-dow="2" class="skipday" />
+ <label for="tuesday">Thứ 3</label>
+ <input type="checkbox" id="wednesday" data-dow="3" class="skipday" />
+ <label for="wednesday">Thứ 4</label>
+ <input type="checkbox" id="thursday" data-dow="4" class="skipday" />
+ <label for="thursday">Thứ 5</label>
+ <input type="checkbox" id="friday" data-dow="5" class="skipday" />
+ <label for="friday">Thứ 6</label>
+ <input type="checkbox" id="saturday" data-dow="6" class="skipday" />
+ <label for="saturday">Thứ 7</label>
+ <input type="checkbox" id="sunday" data-dow="7" class="skipday" />
+ <label for="sunday">Chủ nhật</label>
+ [% END %]
+[% END %]
+[% IF (predictions_loop) %]
+<table id="predictionst">
+ <thead>
+ <tr>
+ <th>Số</th>
+ <th>Ngày xuất bản</th>
+ [% IF (ask_for_irregularities) %]
+ <th>Not published</th>
+ [% END %]
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH prediction IN predictions_loop %]
+ <tr>
+ <td>
+ [% IF ( matches = prediction.number.match('(.*)Spring(.*)') ) %] [% matches.0 | html %]Mùa xuân[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Summer(.*)') ) %] [% matches.0 | html %]Mùa hè[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Fall(.*)') ) %] [% matches.0 | html %]Mùa thu[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Winter(.*)') ) %] [% matches.0 | html %]Mùa đông[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Spr(.*)') ) %] [% matches.0 | html %]M.Xuân[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Sum(.*)') ) %] [% matches.0 | html %]M.Hè[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Fal(.*)') ) %] [% matches.0 | html %]M.Thu[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Win(.*)') ) %] [% matches.0 | html %]M.Đông[% matches.1 | html %] [% ELSE %] [% prediction.number | html %] [% END %] </td>
+ <td>
+ [% IF (prediction.publicationdate) %]
+ [% prediction.publicationdate | $KohaDates %]
+ [% ELSE %]
+ <span>Không biết</span>
+ [% END %]
+ </td>
+ [% IF (ask_for_irregularities) %]
+ <td style="text-align:center">
+ [% UNLESS (loop.first) %]
+ [% IF (prediction.not_published) %]
+ <input type="checkbox" name="irregularity" value="[% prediction.issuenumber | html %]" data-dow="[% prediction.dow | html %]" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" name="irregularity" value="[% prediction.issuenumber | html %]" data-dow="[% prediction.dow | html %]" />
+ [% END %]
+ </td>
+ [% END %]
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+</table>
+
+<fieldset class="action">
+ <button class="btn btn-default btn-sm" id="hidepredictionpattern">Thoát</button>
+</fieldset>
+
+[% END %]

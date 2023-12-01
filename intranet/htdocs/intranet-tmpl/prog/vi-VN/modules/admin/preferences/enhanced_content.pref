@@ -1,0 +1,400 @@
+---
+Nội dung nâng cao:
+  ' Amazon':
+  - - ' Sử dụng dữ liệu Amazon từ trang web'
+    - choices:
+        CA: ' nước Canada'
+        DE: ' nước Đức'
+        FR: ' nước Pháp'
+        IN: Indian
+        JP: ' nước Nhật Bản'
+        UK: ' nước Anh'
+        US: ' nước Mỹ'
+      pref: AmazonLocale
+    - ' của họ.'
+  - - ' Đặt thẻ liên kết'
+    - pref: AmazonAssocTag
+    - ' trên liên kết tới Amazon. Điều này có thể loại bỏ phí giới thiệu cho thư viện
+      của bạn nếu một bạn đọc mua một tài liệu trên đó.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      default: 1
+      pref: AmazonCoverImages
+    - ' ảnh bìa từ Amazon trên kết quả tìm kiếm và trang hiển thị chi tiết tài liệu
+      trên giao diện nhân viên.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      default: 1
+      pref: OPACAmazonCoverImages
+    - ' ảnh bìa từ Amazon trên kết quả tìm kiếm và trang hiển thị chi tiết tài liệu
+      trên giao diện OPAC.'
+  ' Babelthèque':
+  - - choices:
+        '0': ' Không bao gồm'
+        '1': ' Bao gồm'
+      pref: Babeltheque
+    - ' thông tin (như là đánh giá và trích dẫn) từ Babelthèque trong trang hiển thị
+      chi tiết tài liệu trên giao diện OPAC.'
+  - - 'Use this URL for the Babelthèque javascript file: '
+    - class: url
+      pref: Babeltheque_url_js
+    - (e.g. http://www.babeltheque.com/bw_XX.js).
+  - - 'Use this URL for the Babelthèque periodic update: '
+    - class: url
+      pref: Babeltheque_url_update
+    - (e.g. http://www.babeltheque.com/.../file.csv.bz2).
+  ' Baker và Taylor':
+  - - choices:
+        '0': ' Không thêm'
+        '1': ' Thêm'
+      pref: BakerTaylorEnabled
+    - Baker and Taylor links and cover images to the OPAC and staff interface. This
+      requires that you have entered in a username and password (which can be seen
+      in image links).
+  - - ' Liên kết "Nhà sách thư viện của tôi" của Baker và Taylor được truy cập tại
+      địa chỉ <code>https://'
+    - class: url
+      pref: BakerTaylorBookstoreURL
+    - ' <em>isbn</em></code> (bạn nên điền giá trị vào, ví dụ như <code>ocls.mylibrarybookstore.com/MLB/actions/searchHandler.do?nextPage=bookDetails&amp;parentNum=10923&amp;key=</code>).
+      Nếu bạn để trống liên kết sẽ không được kích hoạt.'
+  - - ' Truy cập Baker và Taylor sử dụng tên đăng nhập'
+    - class: password
+      pref: BakerTaylorUsername
+    - ' và mật khẩu'
+    - class: password
+      pref: BakerTaylorPassword
+    - ' .'
+  ' Google':
+  - - choices:
+        '0': ' Không thêm'
+        '1': ' Thêm'
+      pref: GoogleJackets
+    - ' ảnh bìa từ Google books tới kết quả tìm kiếm và trang hiển thị chi tiết tài
+      liệu trên giao diện OPAC.'
+  ' Library Thing':
+  - - choices:
+        '0': ' Không sử dụng'
+        '1': ' Sử dụng'
+      pref: ThingISBN
+    - the ThingISBN service to show other editions of a title (when either <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=FRBRizeEditions">FRBRizeEditions</a>
+      or <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFRBRizeEditions">OPACFRBRizeEditions</a>
+      is on). This is separate from Library Thing for Libraries.
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: LibraryThingForLibrariesEnabled
+    - ' các đánh giá, tài liệu tượng tự, các trường từ Library Thing trên trang hiển
+      thị chi tiết tài liệu trên OPAC. Nếu bạn kích hoạt tính năng này, bạn cần phải '
+    - <a href="https://www.librarything.com/forlibraries/">sign up</a>, then enter
+      in your ID below.
+  - - ' Truy cập vào Library Thing của thư viện bằng cách sử dụng ID của khách hàng'
+    - pref: LibraryThingForLibrariesID
+    - ' .'
+  - - ' Hiển thị Library Thing cho nội dung thư viện'
+    - choices:
+        '0': ' trong dòng với thông tin thư mục.'
+        '1': ' trong các thẻ.'
+      pref: LibraryThingForLibrariesTabbedView
+  ' Nhãn tài liệu':
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: TagsEnabled
+    - ' bạn đọc và cán bộ thư viện đặt các nhãn đánh dấu cho tài liệu.'
+  - - choices:
+        '0': ' Không bắt buộc'
+        '1': ' Bắt buộc'
+      pref: TagsModeration
+    - ' các nhãn đánh dấu của bạn đọc phải được cán bộ thư viện kiểm tra lại trước
+      khi hiển thị.'
+  - - ' Hiển thị'
+    - class: integer
+      pref: TagsShowOnList
+    - ' nhãn đánh dấu trên trang kết quả tìm kiếm trong OPAC.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: TagsInputOnList
+    - '  bạn đọc đánh dấu tài liệu từ kết quả tìm kiếm trên OPAC.'
+  - - ' Hiển thị'
+    - class: integer
+      pref: TagsShowOnDetail
+    - ' nhãn đánh dấu tài liệu trên trang hiển thị chi tiết tài liệu trong OPAC.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: TagsInputOnDetail
+    - ' bạn đọc đánh dấu tài liệu từ trang hiển thị chi tiết tài liệu trên OPAC.'
+  - - ' Cho phép các nhãn đánh dấu trong từ điển của các tệp tin chạy'
+    - class: file
+      pref: TagsExternalDictionary
+    - ' trên máy chủ để được thông qua mà không cần kiểm duyệt.'
+  ' Novelist Select':
+  - - choices:
+        '0': ' Không thêm'
+        '1': ' Thêm'
+      pref: NovelistSelectEnabled
+    - '  nội dung trên Novelist Select tới OPAC (yêu cầu bạn nhập tên đăng nhập và
+      mật khẩu, bạn có thể tìm thấy thông tin trong liên kết tới hình ảnh).'
+  - - ' Hiển thị nội dung Novelist Select'
+    - choices:
+        above: ' trên thẻ Holding'
+        below: ' dưới thẻ Holding'
+        right: ' dưới danh sách thả xuống "Lưu biểu ghi", về phía bên phải'
+        tab: ' trong một thẻ trên OPAC'
+      pref: NovelistSelectView
+    - ' .'
+  - - ' Truy cập Novelist Select sử dụng tên đăng nhập'
+    - pref: NovelistSelectProfile
+    - on the opac
+  - - Access Novelist Select using user profile
+    - pref: NovelistSelectStaffProfile
+    - on the staff interface.
+  - - Access Novelist Select using password
+    - class: password
+      pref: NovelistSelectPassword
+    - .
+  - - choices:
+        '0': Don't add
+        '1': Add
+      pref: NovelistSelectStaffEnabled
+    - Novelist Select content to the staff interface (requires that you have entered
+      in a user profile and password, which can be seen in image links).
+  - - Display Novelist Select staff interface content
+    - choices:
+        above: above the holdings table
+        below: below the holdings table
+        tab: in a tab
+      pref: NovelistSelectStaffView
+    - .
+  ' Open Library':
+  - - choices:
+        '0': ' Không thêm'
+        '1': ' Thêm'
+      pref: OpenLibraryCovers
+    - '  ảnh bìa từ Open Library tới kết quả tìm kiếm và trang hiển thị chi tiết tài
+      liệu trong giao diện OPAC.'
+  - - choices:
+        '0': Don't show
+        '1': Show
+      pref: OpenLibrarySearch
+    - search results from Open Library on the OPAC.
+  ' OverDrive':
+  - - ' Bao gồm các thông tin từ OverDrive với tài khoản'
+    - pref: OverDriveClientKey
+    - ' và mật khẩu'
+    - pref: OverDriveClientSecret
+    - ' .'
+  - - 'Authenticate using OverDrive website id #'
+    - pref: OverDriveWebsiteID
+    - .
+  - - Authenticate using OverDrive Authname
+    - pref: OverDriveAuthName
+    - (will be used as fallback if individual branch authname not set in the <a href="/cgi-bin/koha/admin/overdrive.pl">OverDrive
+      library authnames table</a>).
+  - - ' Hiển thị thông tin tài liệu từ OverDrive của thư viện (Nhập ID thư viện)'
+    - pref: OverDriveLibraryID
+    - ' .'
+  - - choices:
+        '0': Don't enable
+        '1': Enable
+      pref: OverDriveCirculation
+    - users to access their OverDrive circulation history, and circulate items.<br
+      />
+    - Overdrive uses the patron's
+    - choices:
+        cardnumber: cardnumber
+        userid: user name
+      pref: OverDriveUsername
+    - for user access to OverDrive. <br />
+    - A password is
+    - choices:
+        '0': Not required
+        '1': Required
+      pref: OverDrivePasswordRequired
+    - for user access to OverDrive. <br />
+    - If you enable access you must have a SIP connection registered with
+    - OverDrive for patron authentication against Koha
+  ' Syndetics':
+  - - choices:
+        '0': ' Không sử dụng'
+        '1': ' Sử dụng'
+      pref: SyndeticsEnabled
+    - ' nội dung từ Syndetics. Chú ý rằng tính năng này yêu cầu bạn phải đăng ký dịch
+      vụ và nhập mã của bạn vào tính năng dưới đây.'
+  - - ' Sử dụng mã khách hàng'
+    - pref: SyndeticsClientCode
+    - ' để truy cập Syndetics.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsCoverImages
+    - cover images from Syndetics on search results and item detail pages in the OPAC
+      and the staff interface in a
+    - choices:
+        LC: ' lớn'
+        MC: ' trung bình'
+      pref: SyndeticsCoverImageSize
+    - ' .'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsAuthorNotes
+    - ' các ghi chú về tác giả của một nhan đề tài liệu từ Syndetics trên trang hiển
+      thị chi tiết tài liệu trong OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsAwards
+    - ' thông tin từ Syndetics về các giải thưởng của một nhan đề tài liệu giành được
+      trên trang hiển thị chi tiết tài liệu trong OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsEditions
+    - information about other editions of a title from Syndetics on item detail pages
+      on the OPAC (when <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFRBRizeEditions">OPACFRBRizeEditions</a>
+      is on).
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsExcerpt
+    - ' các trích dẫn của một nhan đề tài liệu từ Syndetics trên trang hiển thị chi
+      tiết tài liệu trong OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsReviews
+    - ' bình luận của một nhan đề tài liệu từ Syndetics trên trang hiển thị chi tiết
+      tài liệu trong OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsSeries
+    - ' thông tin trên các tài liệu khác trong một dịch vụ của nhan đề từ Syndetics
+      trên trang hiển thị chi tiết tài liệu trong OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsSummary
+    - ' tóm tắt của một nhan đề từ Syndetics trên trang hiển thị chi tiết tài liệu
+      trong OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: SyndeticsTOC
+    - ' bảng nội dung của một nhan đề từ Syndetics trên trang hiển thị chi tiết tài
+      liệu trong OPAC.'
+  ' Tất cả':
+  - - <strong>NOTE:</strong> you can only choose one source of cover images from below,
+      otherwise Koha will show the images from all sources selected.
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      default: 0
+      pref: FRBRizeEditions
+    - other editions of an item on the staff interface (if found by one of the services
+      below).
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      default: 0
+      pref: OPACFRBRizeEditions
+    - ' các bản sao khác của một tài liệu trên giao diện OPAC.'
+  Coce cover images cache:
+  - - choices:
+        '0': Don't enable
+        '1': Enable
+      pref: OpacCoce
+    - a Coce image cache service in the OPAC.
+  - - choices:
+        '0': Don't enable
+        '1': Enable
+      pref: IntranetCoce
+    - a Coce image cache service in the staff interface.
+  - - ' Ảnh bìa lưu trên máy chủ'
+    - class: url
+      pref: CoceHost
+  - - ' Sử dụng mã khách hàng'
+    - multiple:
+        aws: Amazon Web Services
+        gb: Google Books
+        ol: Open Library
+      pref: CoceProviders
+  HTML5 media:
+  - - ' Hiển thị một thẻ với chương trình chạy HTML5 cho các tệp tin được biên mục
+      trong trường 856'
+    - choices:
+        both: in OPAC and staff interface.
+        not: ' không hiển thị.'
+        opac: ' trong OPAC.'
+        staff: in the staff interface.
+      pref: HTML5MediaEnabled
+  - - ' Các tệp tin mở rộng'
+    - class: multi
+      pref: HTML5MediaExtensions
+    - ' (phân cách bằng |).'
+  - - choices:
+        '0': Don't embed
+        '1': Embed
+      pref: HTML5MediaYouTube
+    - YouTube links as videos.
+  Local or remote cover images:
+  - - choices:
+        '0': Don't show
+        '1': Show
+      pref: LocalCoverImages
+    - local cover images on staff interface search and details pages.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      pref: OPACLocalCoverImages
+    - ' ảnh bìa lưu trên máy chủ trên trang tìm kiếm và trang hiển thị chi tiết tài
+      liệu trong giao diện OPAC.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: AllowMultipleCovers
+    - multiple images to be attached to each bibliographic record and item.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      pref: CustomCoverImages
+    - custom remote URL images in the staff interface.<br/>
+    - choices:
+        '0': Don't show
+        '1': Show
+      pref: OPACCustomCoverImages
+    - custom remote URL images at the OPAC.<br/>
+    - 'Using the following URL:'
+    - class: url
+      pref: CustomCoverImagesURL
+    - 'You can define it using the following patterns: {isbn}, {issn}, {normalized_isbn}.<br/>'
+    - 'Or you can use the following syntax to specify a field$subfield value: {field$subfield}.
+      For instance {024$a}.'
+    - For control fields you can use just {field}, like {001}.
+  Manual:
+  - - Location of the Koha manual
+    - class: url
+      pref: KohaManualBaseURL
+    - You can specify the location of the Koha manual to use. By default it is https://koha-community.org/manual/
+    - If starts with '/',  the value of <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=staffClientBaseURL">staffClientBaseURL</a>
+      will be used as a prefix.
+    - Note that it will be suffixed by the version / the language / the format (/17.11/en/html)
+  - - Language of the online manual
+    - choices:
+        ar: Arabic
+        cs: Czech
+        de: German
+        en: English
+        es: Spanish
+        fr: French
+        it: Italian
+        pt_BR: Portuguese – Brazil
+        tr: Turkish
+        zh_TW: Chinese – Taiwan
+      pref: KohaManualLanguage
+    - It will be used as a fallback value if the language used by the interface does
+      not have an online manual version.

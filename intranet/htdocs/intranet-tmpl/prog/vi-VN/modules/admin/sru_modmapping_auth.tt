@@ -1,0 +1,104 @@
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>SRU search fields mapping for authorities &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_sru_modmapping" class="admin">
+
+<div class="main container-fluid">
+
+ <main>
+ <h1>Modify SRU search fields mapping for authorities</h1>
+ <form id="form01" method="post">
+ <fieldset class="rows">
+ <div class="row">
+ <div class="col-xs-6">
+ <ol>
+ <li>
+ <label for="srchany">Từ khóa (Bất kỳ): </label>
+ <input id="srchany" type="text" value="[% mapping.srchany | html %]" />
+ </li>
+ <li>
+ <label for="nameany">Tên (Bất kỳ): </label>
+ <input id="nameany" type="text" value="[% mapping.nameany | html %]" />
+ </li>
+ <li>
+ <label for="authorany">Tác giả (Bất kỳ): </label>
+ <input id="authorany" type="text" value="[% mapping.authorany | html %]" />
+ </li>
+ <li>
+ <label for="authorpersonal">Tác giả (Cá nhân): </label>
+ <input id="authorpersonal" type="text" value="[% mapping.authorpersonal | html %]" />
+ </li>
+ <li>
+ <label for="authorcorp">Tác giả (Doanh nghiệp): </label>
+ <input id="authorcorp" type="text" value="[% mapping.authorcorp | html %]" />
+ </li>
+ <li>
+ <label for="authormeetingcon">Tác giả (Cuộc họp/Hội nghị): </label>
+ <input id="authormeetingcon" type="text" value="[% mapping.authormeetingcon | html %]" />
+ </li>
+ </ol>
+ </div>
+ <div class="col-xs-6">
+ <ol>
+ <li>
+ <label for="controlnumber">Control number: </label>
+ <input id="controlnumber" type="text" value="[% mapping.controlnumber | html %]" />
+ </li>
+ <li>
+ <label for="subject">Đề mục chủ đề: </label>
+ <input id="subject" type="text" value="[% mapping.subject | html %]" />
+ </li>
+ <li>
+ <label for="subjectsubdiv">Chủ đề phụ: </label>
+ <input id="subjectsubdiv" type="text" value="[% mapping.subjectsubdiv | html %]" />
+ </li>
+ <li>
+ <label for="title">Nhan đề (Bất kỳ): </label>
+ <input id="title" type="text" value="[% mapping.title | html %]" />
+ </li>
+ <li>
+ <label for="uniformtitle">Nhan đề (Thống nhất): </label>
+ <input id="uniformtitle" type="text" value="[% mapping.uniformtitle | html %]" />
+ </li>
+ </ol>
+ </div>
+ </div>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Lưu" />
+ <a class="close cancel" href="#">Hủy bỏ</a>
+ </fieldset>
+ </form>
+
+ </main>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        $(document).ready(function() {
+            $("#form01").submit(function(event) {
+                if(window.opener) {
+                    var newmap=allInputs();
+                    window.opener.$('#show_sru_fields').val(newmap);
+                    window.close();
+                } else {
+                    // In this case not called as a popup. Just do nothing.
+                    event.preventDefault();
+                }
+            });
+        });
+        function allInputs () {
+            var aInput= new Array();
+            $("form :input").each(function() {
+                if( this.id && $(this).val() ) {
+                    aInput.push(this.id+'='+$(this).val());
+                }
+            });
+            return aInput.join(',');
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

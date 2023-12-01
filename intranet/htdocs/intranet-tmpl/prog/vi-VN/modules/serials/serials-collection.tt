@@ -1,0 +1,396 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE HtmlTags %]
+[% USE KohaDates %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Serial collection information for [% bibliotitle | html %] &rsaquo; Serials &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="ser_serials-collection" class="ser">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'serials-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/serials-home.pl">Ấn phẩm định kỳ</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscriptionid | uri %]"><em>[% bibliotitle | html %]</em></a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Serial collection information</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ [% INCLUDE 'modals/serials_multi_receiving.inc' %]
+
+ [% UNLESS ( popup ) %]
+ [% INCLUDE 'serials-toolbar.inc' %]
+
+ <h1>
+ Thông tin bộ sưu tập ÂPĐK <em>[% bibliotitle | html %]</em>
+ [% IF location %] ([% AuthorisedValues.GetByCode( 'LOC', location ) | html %]) [% END %]
+ [% IF ( callnumber ) %]callnumber: [% callnumber | html %][% END %]
+ </h1>
+ [% END %]
+
+ [% IF ( delete ) %]
+ <div class="dialog alert">
+ <h3>You are about to delete [% serialnumber | html %] serial(s). Do you want to continue?</h3>
+ <form action="/cgi-bin/koha/serials/serials-collection.pl">
+ [% IF countitems > 0 %]
+ <h5>Number of items available: [% countitems | html %]</h5>
+ <p>
+ <label>Delete associated items? <input type="checkbox" name="delitems" value="Yes" />Có</label>
+ </p>
+ [% END %]
+ <input type="hidden" name="op" value="delete_confirmed" />
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ <input type="hidden" name="subscriptionid" value="[% subscriptionid | html %]" />
+ [% FOREACH serialid IN serialsid %]
+ <input type="hidden" name="serialid" value="[% serialid | html %]" />
+ [% END %]
+ <button type="submit" class="approve"><i class="fa fa-fw fa-check"></i> Xóa</button>
+ </form>
+ <form action="/cgi-bin/koha/serials/serials-collection.pl">
+ <input type="hidden" name="subscriptionid" value="[% subscriptionid | html %]" />
+ <button type="submit" class="deny"><i class="fa fa-fw fa-remove"></i> Không xóa</button>
+ </form>
+ </div>
+ [% END # /IF delete %]
+
+ [% IF ( error_delitem ) %]
+ <div class="dialog alert">
+ <p><strong>Lỗi</strong>: one or more associated items could not be deleted at this time.</p>
+ </div>
+ [% END %]
+
+ [% IF ( subscriptions ) %]
+ <table>
+ [% IF ( subscriptions.size == 1 ) %]
+ <caption> Thông tin ấn phẩm định kỳ</caption>
+ [% ELSE %]
+ <caption> Thông tin ấn phẩm định kỳ</caption>
+ [% END %]
+ <tr>
+ <th>Số ÂPĐK</th>
+ <th>Tần suất phát hành</th>
+ <th>Mẫu số kỳ</th>
+ <th>Thư viện</th>
+ <th>Ký hiệu phân loại</th>
+ <th>Ghi chú</th>
+ <th>&nbsp;</th>
+ </tr>
+ [% FOREACH subscription IN subscriptions %]
+ <tr>
+ <td><a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscription.subscriptionid | uri %]"># [% subscription.subscriptionid | html %]</a> </td>
+ <td>[% subscription.frequency.description | html %]</td>
+ <td>[% subscription.numberpattern.label | html %]</td>
+ <td>[% IF subscription.branchcode %][% Branches.GetName( subscription.branchcode ) | html %][% END %]</td>
+ <td> [% subscription.callnumber | html %]</td>
+ <td> [% subscription.notes | html | html_line_break %]
+ [% UNLESS subscription.closed %]
+ [% IF ( subscription.subscriptionexpired ) %]
+ <p class="problem"><i class="fa fa-exclamation-circle problem" aria-hidden="true"></i> ÂPĐK hết hạn</p>
+ [% END %]
+ [% ELSE %]
+ <br /> ÂPĐK kết thúc [% END %] </td>
+ [% IF ( subscription.abouttoexpire ) || ( subscription.subscriptionexpired ) %]
+ <td class="problem actions">
+ [% ELSE %]
+ <td class="actions">
+ [% END %]
+ [% UNLESS subscription.closed %]
+ [% IF ( routing && CAN_user_serials_routing ) %]
+ [% IF ( subscription.hasRouting ) %]
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/serials/routing.pl?subscriptionid=[% subscription.subscriptionid | html %]"><i class="fa fa-pencil"></i> Chỉnh sửa danh sách nhận ÂPĐK</a>
+ [% ELSE %]
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/serials/routing.pl?subscriptionid=[% subscription.subscriptionid | html %]&amp;op=new"><i class="fa fa-plus"></i> Tạo danh sách nhận</a>
+ [% END %]
+ [% END %]
+ [% IF ( subscription.abouttoexpire || subscription.subscriptionexpired) %]
+ <a class="btn btn-default btn-xs subscription_renew" data-subscriptionid="[% subscription.subscriptionid | html %]" href="/cgi-bin/koha/serials/subscription-renew.pl?subscriptionid=[% subscription.subscriptionid | html %]"><i class="fa fa-refresh"></i> Gia hạn</a>
+ [% END %]
+ [% ELSE %]
+ &nbsp;
+ [% END # /UNLESS subscription.closed %]
+ </td>
+ </tr>
+ [% END # /FOREACH subscription %]
+ [% IF ( subscr ) %]
+ [% IF ( subscriptioncount > 1 ) %]
+ <tr>
+ <td colspan="8"> <a href="serials-collection.pl?biblionumber=[% biblionumber | uri %]">Xem tất cả các kỳ ÂPĐK đính kèm với bản ghi này</a></td>
+ </tr>
+ [% END %]
+ [% END %]
+ </table>
+ [% END # /IF subscriptions %]
+
+ [% IF ( years ) %]
+ <form name="edition" action="/cgi-bin/koha/serials/serials-edit.pl" method="post">
+ [% WRAPPER tabs id= "subscription_years" %]
+ [% WRAPPER tabs_nav %]
+ [% FOREACH year IN years %]
+ [% IF ( loop.first ) %]
+ [% bt_active = 1 %]
+ [% ELSE %]
+ [% bt_active = 0 %]
+ [% END %]
+ [% IF ( year.year ) %]
+ [% IF year.year == 'manage' %]
+ [% SET tabname = "subscription-year-manage" %]
+ [% SET tab_text = "Manage" %]
+ [% ELSE %]
+ [% SET tabname = "subscription-year-${year.year}" %]
+ [% SET tab_text = year.year %]
+ [% END %]
+ [% WRAPPER tab_item tabname= tabname bt_active= bt_active %] [% tab_text | html %] [% END %]
+ [% END %]
+ [% END %]
+ [% END # /WRAPPER tabs_nav %]
+
+ [% WRAPPER tab_panels %]
+ [% FOREACH year IN years %]
+ [% IF ( loop.first ) %]
+ [% SET bt_active = 1 %]
+ [% ELSE %]
+ [% SET bt_active = 0 %]
+ [% END %]
+ [% WRAPPER tab_panel tabname="subscription-year-${year.year}" bt_active= bt_active %]
+ [% IF ( CAN_user_serials_receive_serials ) %]
+ <p>
+ <div class="btn-group"><input class="btn btn-primary btn-sm" type="submit" value="Chỉnh sửa ÂPĐK" /></div>
+ [% UNLESS subscription.closed %]
+ <div class="btn-group">
+ <input class="btn btn-default btn-sm generatenext" data-subscriptionid="[% subscriptionidlist | html %]" type="button" value="Tạo kỳ tiếp theo" />
+ </div>
+ [% IF ( subscriptions.size == 1 and !serialsadditems ) %]&nbsp;
+ <div class="btn-group"><input class="btn btn-default btn-sm" data-toggle="modal" href="#multi_receiving" type="button" value="Nhận nhiều kỳ"></div>
+ [% END %]
+ [% END %]
+ <input type="button" value="Delete selected issues" class="delete-issues btn btn-default btn-sm" data-subscriptionids="[% subscriptionidlist | html %]" />
+ </p>
+ [% END # /IF CAN_user_serials_receive_serials %]
+
+ <span class="checkall">
+ <a class="CheckAll" href="#" data-year="[% year.year | html %]">Chọn tất cả</a>
+ </span> |
+ <span class="clearall">
+ <a class="CheckNone" href="#" data-year="[% year.year | html %]">Bỏ chọn tất cả</a>
+ </span>
+
+ <table class="subscription-year-table">
+ <thead>
+ <tr>
+ [% IF ( CAN_user_serials_receive_serials ) %]
+ <th>Chỉnh sửa</th>
+ [% END %]
+ [% IF ( subscriptions.size > 1 ) %]
+ <th>Số ÂPĐK</th>
+ [% END %]
+ <th>Ngày phát hành</th>
+ <th>Date published (text)</th>
+ <th>Ngày nhận</th>
+ <th>Số</th>
+ <th>Trạng thái</th>
+ <th>Ghi chú</th>
+ <th>Thư viện</th>
+ [% IF ( routing ) %]
+ <th>Danh sách nhận</th>
+ [% END %]
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH serial IN year.serials %]
+ <tr>
+ [% IF ( CAN_user_serials_receive_serials ) %]
+ <td>
+ [% UNLESS CAN_user_serials_receive_serials %] không được kích hoạt [% ELSE %] [% IF ( serial.subscriptionexpired ) %] <input type="checkbox" name="serialid" value="[% serial.serialid | html %]" disabled="disabled" />
+ [% ELSE %]
+ [% IF ( delete ) %]
+ [% IF serialsid.grep("${serial.serialid}").size %]
+ <input type="checkbox" name="serialid" value="[% serial.serialid | html %]" disabled checked />
+ [% ELSE %]
+ <input type="checkbox" name="serialid" value="[% serial.serialid | html %]" disabled />
+ [% END %]
+ [% ELSE %]
+ [% IF serial.checked %]
+ <input type="checkbox" name="serialid" value="[% serial.serialid | html %]" checked />
+ [% ELSE %]
+ <input type="checkbox" name="serialid" value="[% serial.serialid | html %]" />
+ [% END %]
+ [% END # /IF delete %]
+ [% END # /IF serial.subscriptionexpired %]
+ [% END # /UNLESS CAN_user_serials_receive_serials %]
+ </td>
+ [% END # /IF CAN_user_serials_receive_serials %]
+ [% IF ( subscriptions.size > 1 ) %]
+ <td><a href="serials-collection.pl?subscriptionid=[% serial.subscriptionid | uri %]">[% serial.subscriptionid | html %]</a></td>
+ [% END %]
+ <td data-order="[% serial.publisheddate | html %]">
+ [% IF serial.publisheddate %]
+ [% serial.publisheddate | $KohaDates %]
+ [% ELSE %]
+ <span>Không biết</span>
+ [% END %]
+ </td>
+ <td data-order="[% serial.publisheddatetext | html %]">
+ [% IF serial.publisheddatetext %]
+ [% serial.publisheddatetext | html %]
+ [% END %]
+ </td>
+ <td data-order="[% serial.planneddate | html %]">
+ [% IF serial.planneddate %]
+ [% serial.planneddate | $KohaDates %]
+ [% ELSE %]
+ <span>Không biết</span>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( matches = serial.serialseq.match('(.*)Spring(.*)') ) %] [% matches.0 | html %]Mùa xuân[% matches.1 | html %] [% ELSIF ( matches = serial.serialseq.match('(.*)Summer(.*)') ) %] [% matches.0 | html %]Mùa hè[% matches.1 | html %] [% ELSIF ( matches = serial.serialseq.match('(.*)Fall(.*)') ) %] [% matches.0 | html %]Mùa thu[% matches.1 | html %] [% ELSIF ( matches = serial.serialseq.match('(.*)Winter(.*)') ) %] [% matches.0 | html %]Mùa đông[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Spr(.*)') ) %] [% matches.0 | html %]M.Xuân[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Sum(.*)') ) %] [% matches.0 | html %]M.Hè[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Fal(.*)') ) %] [% matches.0 | html %]M.Thu[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Win(.*)') ) %] [% matches.0 | html %]M.Đông[% matches.1 | html %] [% ELSE %] [% serial.serialseq | html %] [% END %] </td>
+ <td>
+ [% INCLUDE 'serial-status.inc' serial = serial %]
+ </td>
+ <td>
+ [% serial.notes | html %]
+ </td>
+ <td>
+ [% Branches.GetName( serial.branchcode ) | html %]
+ </td>
+ [% IF ( routing ) %]
+ <td class="actions">
+ <a href="/cgi-bin/koha/serials/routing-preview.pl?ok=1&amp;subscriptionid=[% serial.subscriptionid | uri %]&amp;issue=[% serial.serialseq.replace("'", "\\'") | uri %]%20([% serial.publisheddate | $KohaDates %])" class="btn btn-default btn-xs print_list"><i class="fa fa-print"></i> In</a>
+ </td>
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- /.subscription-year-table -->
+ [% END # /WRAPPER tab_panel#subscription-year %]
+ [% END # /FOREACH year %]
+ [% END # /WRAPPER tab_panels %]
+ <input type="hidden" name="subscriptionid" value="[% subscriptionidlist | html %]" />
+ [% END # /WRAPPER tabs#subscription_years %]
+ </form>
+ [% END # /IF years %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'serials-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        var subscriptionid = "[% subscriptionid | html %]";
+    </script>
+ [% Asset.js("js/serials-toolbar.js") | $raw %]
+
+ <script>
+
+        function deleteIssues(subscriptionid) {
+            var serialschecked = $("form[name='edition'] input[name='serialid']:checked");
+            if (serialschecked.length > 0) {
+                var location = 'serials-collection.pl?subscriptionid='+subscriptionid+'&op=delete_confirm';
+                for (i=0; i < serialschecked.length; i++) {
+                    location += '&serialid=' + serialschecked[i].value;
+                }
+                document.location = location;
+            } else {
+                alert(_("No serials selected"));
+            }
+        }
+
+        function generateNext(subscriptionid) {
+            if(confirm(_("Bạn có thật sự muốn khởi tạo ấn phẩm tiếp theo không?"))){
+                document.location = 'serials-collection.pl?op=gennext&subscriptionid='+subscriptionid;
+            }
+        }
+
+        $(document).ready(function() {
+            if( $("#subscription_years .tab-pane.active").length < 1 ){
+                $("#subscription_years a:first").tab("show");
+            }
+            $(".subscription-year-table").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "aoColumnDefs": [
+                    { "aTargets": [ 0,-1 ], "bSortable": false, "bSearchable": false }
+                ],
+                "aaSorting": [[0, 'desc']],
+                "sDom": 't',
+                "bAutoWidth": false,
+                "bPaginate": false,
+                "bInfo": false,
+                "bFilter": false,
+            } ));
+
+            $(".CheckAll").on("click", function(e){
+                e.preventDefault();
+                var years = $(this).data("year");
+                $("#subscription-year-" + years + "_panel" + " input:checkbox").prop("checked", true );
+            });
+
+            $(".CheckNone").on("click", function(e){
+                e.preventDefault();
+                var years = $(this).data("year");
+                $("#subscription-year-" + years + "_panel" + " input:checkbox").prop("checked", false );
+            });
+
+            $(".generatenext").on("click", function(e){
+                e.preventDefault();
+                var subscriptionid = $(this).data("subscriptionid");
+                generateNext( subscriptionid );
+            });
+
+            $(".subscription_renew").on("click", function(e){
+                e.preventDefault();
+                var subscriptionid = $(this).data("subscriptionid");
+                popup( subscriptionid );
+            });
+
+            $(".print_list").on("click", function(e){
+                e.preventDefault();
+                var url = $(this).attr("href");
+                window.open( url,'PrintSlip','width=500,height=500,toolbar=no,scrollbars=yes');
+            });
+
+            $('#multi_receiving').on('show', function () {
+               $(this).find(".modal-body").html($(".serials_multi_receiving")[0].outerHTML);
+            });
+
+            $("form[name='edition']").on('submit', function(e){
+                if ( $(this).find("input[name='serialid']:checked").size() == 0 ) {
+                    e.preventDefault();
+                    alert(_("You must select at least one serial to edit"));
+                    return 0;
+                }
+                return 1;
+            });
+
+            $(".delete-issues").on("click", function(e){
+                e.preventDefault();
+                deleteIssues("[% subscriptionidlist | html %]");
+            });
+        });
+
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,121 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>
+ [% UNLESS blocking_error %]
+ Statistics for [% INCLUDE 'patron-title.inc' no_html = 1 %]
+ [% END %] &rsaquo; Patrons &rsaquo; Trường CĐKTQS1
+</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="pat_statistics" class="pat">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Bạn đọc</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Thống kê</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ [% INCLUDE 'members-toolbar.inc' %]
+
+ <h1>Statistics for [% INCLUDE 'patron-title.inc' %]</h1>
+ [% IF ( datas.size ) %]
+ <div class="page-section">
+ <table id="statistics">
+ <thead>
+ <tr>
+ [% FOREACH cn IN column_names %]
+ <th>
+ [% SWITCH cn %]
+ [% CASE 'itype' %]
+ <span>Kiểu tài liệu</span>
+ [% CASE 'ccode' %]
+ <span>Bộ sưu tập</span>
+ [% CASE 'location' %]
+ <span>Kho tài liệu</span>
+ [% CASE 'homebranch' %]
+ <span>Thư viện chính</span>
+ [% CASE 'holdingbranch' %]
+ <span>Thư viện sở hữu</span>
+ [% CASE %]
+ <span>[% cn | html %]</span>
+ [% END %]
+ </th>
+ [% END %]
+ <th>Số ghi mượn trước đây</th>
+ <th>Số ghi mượn trong ngày</th>
+ <th>Số ghi trả trong ngày</th>
+ <th>Tổng số ghi mượn</th>
+ </tr>
+ </thead>
+
+ <tbody>
+ [% FOREACH r IN datas %]
+ <tr>
+ [% FOREACH c IN r %]
+ <td>[% c | html %]</td>
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+ <tfoot>
+ <tr>
+ <td colspan="[% column_names.size | html %]">Tổng số</td>
+ <td>[% count_total_precedent_state | html %]</td>
+ <td>[% count_total_issues | html %]</td>
+ <td>[% count_total_issues_returned | html %]</td>
+ <td>[% count_total_actual_state | html %]</td>
+ </tr>
+ </tfoot>
+ </table>
+ </div> <!-- /.page-section -->
+ [% ELSE %]
+ <div class="dialog message">Không có thống kê lưu thông cho bạn đọc này.</div>
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            $("#statistics").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "sDom": 't',
+                "bPaginate": false
+            }));
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,350 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE AuthorisedValues %]
+[% USE KohaDates %]
+[% USE Koha %]
+[%- USE Branches -%]
+[%- USE Price -%]
+[%- USE ItemTypes -%]
+[%- USE Categories -%]
+[%- USE TablesSettings -%]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% PROCESS 'modal-claims.inc' %]
+<title>Items overdue as of [% todaysdate | $KohaDates %] &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% FILTER collapse %]
+ <style>
+        .sql {display:none;}
+        .select2-container--open .select2-dropdown--below,
+        .select2-search.select2-search--dropdown {
+            border: 1px solid #AAA;
+        }
+        .select2-container--open .select2-dropdown--below,
+        .select2-search.select2-search--dropdown,
+        .select2-results {
+            background-color: #FFF;
+            width: 20em !important;
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="circ_overdue" class="circ">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Phân hệ lưu thông</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Overdues as of [% todaysdate | $KohaDates %]</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+[% IF ( noreport ) %]
+ <h1>Báo cáo tài liệu quá hạn</h1>
+ <p>Sử dụng bộ lọc phía bên trái giao diện để tìm kiếm dữ liệu của bạn.</p>
+[% ELSE %]
+
+[% IF ( overdueloop ) %]
+
+ <h2>[% nnoverdue | html %] [% IF ( noverdue_is_plural ) %]Tài liệu[% ELSE %]Tài liệu[% END %] quá hạn ngày [% todaysdate | $KohaDates %][% IF ( isfiltered ) %] <span style="font-size:70%;">(Dữ liệu đã được lọc. <a href="/cgi-bin/koha/circ/overdue.pl">thiết lập lại</a>)</span>[% END %]</h2>
+
+ <p>
+ [% IF ( isfiltered ) %]
+ [% SET url_params = '' %]
+ [% FOR var IN filters.keys %]
+ [% url_params = BLOCK %][% url_params | $raw %]&amp;[% var | uri %]=[% filters.$var | uri %][% END %]
+ [% END %]
+ <a href="overdue.pl?op=csv[% url_params | $raw %]">Tải thông tin tài liệu quá hạn đang được hiển thị</a>
+ [% ELSE %]
+ <a href="overdue.pl?op=csv">Tải thông tin của tất cả tài liệu quá hạn</a>
+ [% END %]
+ </p>
+
+ <div class="sql"><pre>[% sql | html %]</pre></div>
+ <div class="page-section searchresults">
+ <table id="overduest">
+ <thead>
+ <tr>
+ <th>Ngày hết hạn</th>
+ <th>Bạn đọc</th>
+ <th>Kiểu bạn đọc</th>
+ <th>Patron library</th>
+ <th class="anti-the">Nhan đề</th>
+ <th>Thư viện chính</th>
+ <th>Thư viện sở hữu</th>
+ <th>Kho tài liệu</th>
+ <th>Đăng ký cá biệt</th>
+ <th>Ký hiệu phân loại</th>
+ <th>Kiểu tài liệu</th>
+ <th>Giá tiền</th>
+ <th>Non-public note</th>
+ [% IF Koha.Preference('ClaimReturnedLostValue') %]
+ <th>Return claims</th>
+ [% END %]
+ </tr>
+ </thead>
+ [%- BLOCK subject -%]Quá hạn:[%- END -%] <tbody>
+ [% FOREACH overdueloo IN overdueloop %]
+ <tr>
+ <td data-order="[% overdueloo.duedate | html %]"><span class='overdue'>[% overdueloo.duedate | $KohaDates %]</span></td>
+ <td>
+ [% INCLUDE 'patron-title.inc' patron=overdueloo.patron hide_patron_infos_if_needed=1 %]
+ [% IF logged_in_user.can_see_patron_infos( overdueloo.patron ) %]
+ [% IF ( overdueloo.email ) %][<a href="mailto:[% overdueloo.email | uri %]?subject=[% INCLUDE subject %] [% overdueloo.title | uri %]">Thư điện tử</a>][% END %]
+ [% IF ( overdueloo.phone ) %]([% overdueloo.phone | html %])[% ELSIF ( overdueloo.mobile ) %]([% overdueloo.mobile | html %])[% ELSIF ( overdueloo.phonepro ) %]([% overdueloo.phonepro | html %])[% END %]
+ [% END %]
+ </td>
+ <td>[% Categories.GetName( overdueloo.patron.categorycode ) | html %]</td>
+ <td>[% Branches.GetName( overdueloo.patron.branchcode ) | html %]</td>
+ <td>[% INCLUDE 'biblio-title.inc' biblio=overdueloo link = 1 %] [% IF ( overdueloo.author ) %], by [% overdueloo.author | html %][% END %][% IF ( overdueloo.enumchron ) %], [% overdueloo.enumchron | html %][% END %]</td>
+ <td>[% Branches.GetName( overdueloo.homebranchcode ) | html %]</td>
+ <td>[% Branches.GetName( overdueloo.holdingbranchcode ) | html %]</td>
+ <td>[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => overdueloo.location ) | html %]</td>
+ <td><a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% overdueloo.biblionumber | uri %]&amp;itemnumber=[% overdueloo.itemnum | uri %]#item[% overdueloo.itemnum | uri %]">[% overdueloo.barcode | html %]</a></td>
+ <td>[% overdueloo.itemcallnumber | html %]</td>
+ <td>[% ItemTypes.GetDescription( overdueloo.itemtype ) | html %]</td>
+ <td>[% overdueloo.replacementprice | $Price %]</td>
+ <td>[% overdueloo.itemnotes_nonpublic | html %]</td>
+ [% IF Koha.Preference('ClaimReturnedLostValue') %]
+ <td>
+ [% IF ( overdueloo.return_claim_created_on ) %]
+ <span class="badge">[% overdueloo.return_claim_created_on | $KohaDates with_hours => 1 %]</span>
+ [% ELSE %]
+ <a class="btn btn-default btn-xs claim-returned-btn" data-itemnumber=[% overdueloo.itemnum | html %]>
+ <i class="fa fa-exclamation-circle"></i> Claim returned
+ </a>
+ [% END %]
+ </td>
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+
+ <!-- Claims Returned Modal -->
+ [% PROCESS 'modal-claims-display' %]
+
+[% ELSE %]
+
+ <h1>Báo cáo tài liệu quá hạn</h1>
+ [% IF ( isfiltered ) %]
+ <p>There are no overdues matching your search. <a href="/cgi-bin/koha/circ/overdue.pl">thiết lập lại</a></p>
+ [% ELSE %]
+ <p>There are no overdues.</p>
+ [% END %]
+
+[% END %] <!-- overdueloop -->
+[% END %] <!-- noreport -->
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+
+<form method="post" action="/cgi-bin/koha/circ/overdue.pl">
+ <fieldset class="brief">
+<h4>Bộ lọc dữ liệu:</h4>
+ <fieldset><legend>Ngày hết hạn:</legend>
+ <ol>
+ <li class="radio">
+ <label for="showall">Hiển thị tất cả các tài liệu hiện tại đang được ghi mượn:</label>
+ [% IF ( showall ) %]
+ <input type="checkbox" id="showall" name="showall" value="show" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" id="showall" name="showall" value="show" />
+ [% END %]
+ </li>
+
+ <li class="date_due_filter">
+ <label for="from">Từ ngày:</label>
+ <input type="text" id="from" name="dateduefrom" size="10" value="[% filters.dateduefrom | html %]" class="flatpickr" data-date_to="to" />
+ </li>
+ <li class="date_due_filter">
+ <label for="to">Đến ngày:</label>
+ <input type="text" id="to" name="datedueto" size="10" value="[% filters.datedueto | html %]" class="flatpickr" />
+ </li>
+ </ol>
+ </fieldset>
+ <ol>
+ <li><label>Tên/Số thẻ bạn đọc</label><input type="text" name="borname" value="[% filters.borname | html %]" /></li>
+ <li><label>Kiểu bạn đọc:</label><select name="borcat" id="borcat"><option value="">Tất cả</option>
+ [% FOREACH borcatloo IN borcatloop %]
+ [% IF ( borcatloo.selected ) %]<option value="[% borcatloo.value | html %]" selected="selected">[% borcatloo.catname | html %]</option>[% ELSE %]<option value="[% borcatloo.value | html %]">[% borcatloo.catname | html %]</option>[% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li><label>Tình trạng bạn đọc:</label>
+ <select name="borflag" id="borflag">
+ <option value="">Bất kỳ</option>
+ [% IF ( borflag_gonenoaddress ) %]<option value="gonenoaddress" selected="selected">Chưa có địa chỉ</option>
+ [% ELSE %]<option value="gonenoaddress">Chưa có địa chỉ</option>[% END %]
+ [% IF ( borflag_debarred ) %]<option value="debarred" selected="selected">Bị khóa tài khoản</option>
+ [% ELSE %]<option value="debarred">Bị khóa tài khoản</option>[% END %]
+ [% IF ( borflag_lost ) %]<option value="lost" selected="selected">Bị mất thẻ</option>
+ [% ELSE %]<option value="lost">Bị mất thẻ</option>[% END %]
+ </select>
+ </li>
+ [% FOREACH patron_attr_filter_loo IN patron_attr_filter_loop %]
+ <!-- domid cgivalue ismany isclone ordinal code description repeatable authorised_value_category -->
+ <li>
+ <label>[% patron_attr_filter_loo.description | html %]:</label>
+ [% IF ( patron_attr_filter_loo.authorised_value_category ) %]
+ [% SET authvals = AuthorisedValues.GetAuthValueDropbox( patron_attr_filter_loo.authorised_value_category ) %]
+ <select id="pattrodue-input-[% patron_attr_filter_loo.domid | html %]" name="patron_attr_filter_[% patron_attr_filter_loo.code | html %]" class="pattrodue-input">
+ <option></option>
+ [% FOREACH authval IN authvals %]
+ [% IF ( patron_attr_filter_loo.cgivalue == authval.authorised_value ) -%]
+ <option value="[% authval.authorised_value | html %]" selected="selected">[% authval.lib | html %]</option>
+ [% ELSE -%]
+ <option value="[% authval.authorised_value | html %]">[% authval.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ [% ELSE %]
+ <input type="text" name="patron_attr_filter_[% patron_attr_filter_loo.code | html %]" value="[% patron_attr_filter_loo.cgivalue | html %]"/>
+ [% END %]
+ [% IF ( patron_attr_filter_loo.repeatable ) %]
+ <a href="#" class="btn btn-link clone-attribute" data-original-id="pattrodue-input-[% patron_attr_filter_loo.domid | html %]"><i class="fa fa-plus"></i> Tạo</a>
+ [% IF ( patron_attr_filter_loo.isclone ) %]
+ <a href="#" class="btn btn-link delete_clone"><i class="fa fa-remove"></i> Xóa</a>
+ [% ELSIF ( patron_attr_filter_loo.ismany ) %]
+ <a href="#" class="btn btn-link delete_clone"><i class="fa fa-remove"></i> Xóa</a>
+ [% ELSE %]
+ <a href="#" class="btn btn-link delete_clone" style="display:none"><i class="fa fa-remove"></i> Xóa</a>
+ [% END %]
+ [% END %]
+ </li>
+ [% END %]
+
+ <li><label>Kiểu tài liệu:</label><select name="itemtype" id="itemtype"><option value="">Tất cả</option>
+ [% FOREACH itemtypeloo IN itemtypeloop %][% IF ( itemtypeloo.selected ) %]
+ <option value="[% itemtypeloo.value | html %]" selected="selected">[% itemtypeloo.itemtypename | html %]</option>[% ELSE %]
+ <option value="[% itemtypeloo.value | html %]">[% itemtypeloo.itemtypename | html %]</option>[% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label>Thư viện chính:</label>
+ <select name="homebranch" id="homebranch">
+ <option value="">Tất cả</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => filters.homebranch ) %]
+ </select>
+ </li>
+
+ <li>
+ <label>Thư viện sở hữu:</label>
+ <select name="holdingbranch" id="holdingbranch">
+ <option value="">Tất cả</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => filters.holdingbranch ) %]
+ </select>
+ </li>
+
+ <li>
+ <label>Thư viện của bạn đọc:</label>
+ <select name="branch" id="branch">
+ <option value="">Tất cả</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => filters.branch, only_from_group => 1 ) %]
+ </select>
+ </li>
+
+</ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input type="hidden" name="op" value="apply filter" />
+ </fieldset>
+ </form>
+
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'select2.inc' %]
+ [% INCLUDE 'js-date-format.inc' %]
+ [% PROCESS 'modal-claims-js' %]
+ <script>
+        function clone_input( node, original_id ) {
+            var original = node;
+            var clone = original.clone();
+            var appendid = original_id + "-" + Math.floor(Math.random()*1000+1);
+            clone.find(".delete_clone").show();
+            if( clone.find("select").length ){
+                /* <select> element is present */
+                clone.find("select").removeClass("select2-hidden-accessible").removeAttr("data-select2-id").attr("id", appendid );
+                clone.find(".select2").remove();
+                original.after( clone );
+                $("#" + appendid ).select2();
+            } else {
+                clone.attr("id", appendid );
+                original.after( clone );
+            }
+        }
+
+        function update_date_due_filters_visibility(){
+            if( $("#showall").is(":checked")) {
+                $(".date_due_filter").hide();
+                $("#from").prop("disabled", true);
+                $("#to").prop("disabled", true);
+            } else {
+                $(".date_due_filter").show();
+                $("#from").prop("disabled", false);
+                $("#to").prop("disabled", false);
+            }
+        }
+
+        $(document).ready(function(){
+            var table_settings = [% TablesSettings.GetTableSettings( 'circ', 'overdues', 'circ-overdues', 'json' ) | $raw %];
+
+            [% IF !Koha.Preference('ClaimReturnedLostValue') %]
+                table_settings['columns'].splice(13, 1);
+            [% END %]
+
+            KohaTable("overduest", {
+                "sPaginationType": "full",
+                "autoWidth": false,
+                "stateSave": true
+            }, table_settings);
+
+            $("#showall").on("change", function(){
+                update_date_due_filters_visibility();
+            });
+            update_date_due_filters_visibility();
+
+            $(".pattrodue-input").each(function(){
+                $(this).select2();
+            });
+
+            $("body").on("click", ".delete_clone", function(e){
+                e.preventDefault();
+                $(this).parent().remove();
+            });
+
+            $("body").on("click", ".clone-attribute", function(e){
+                e.preventDefault();
+                clone_input( $(this).parent(), $(this).data("original-id") );
+            })
+        });
+  </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

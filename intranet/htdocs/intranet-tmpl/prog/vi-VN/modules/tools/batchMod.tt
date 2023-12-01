@@ -1,0 +1,91 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% IF ( del ) %]Batch item deletion[% ELSE %]Batch item modification[% END %] &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="tools_batchMod" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Phân hệ biên mục</a>
+ [% END %]
+
+ [% IF ( del ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Xóa bản tài liệu theo lô</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Chỉnh sửa bản tài liệu theo lô</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ <h1>[% IF ( del ) %]Xóa[% ELSE %]Chỉnh sửa[% END %] bản tài liệu theo lô</h1>
+ <form method="post" enctype="multipart/form-data" action="/cgi-bin/koha/tools/batchMod.pl">
+ <fieldset class="rows">
+ <legend>Sử dụng tệp tin</legend>
+ <ol>
+ <li>
+ <label for="barcode_file">Tệp tin chứa đăng ký cá biệt: </label><input type="radio" name="filecontent" value="barcode_file" id="barcode_file" checked="checked" /></li>
+ <li>
+ <label for="itemid_file">Tệp tin chứa số tài liệu: </label><input type="radio" name="filecontent" value="itemid_file" id="itemid_file" />
+ </li>
+ <li><label for="uploadfile">Tệp tin: </label> <input type="file" id="uploadfile" name="uploadfile" /></li>
+ </ol>
+ </fieldset>
+ <fieldset class="rows">
+ <legend>Hoặc quét từng đăng ký cá biệt</legend>
+ <ol>
+ <li>
+ <label for="barcodelist">Danh sách ĐKCB (mỗi ĐKCB một dòng): </label>
+ <textarea rows="10" cols="30" id="barcodelist" name="barcodelist"></textarea>
+ </li>
+ </ol>
+ <input type="hidden" name="op" value="show" />
+ </fieldset>
+
+ [% UNLESS del %]
+ <fieldset class="rows">
+ <legend>Sử dụng giá trị mặc định</legend>
+ <ol class="radio">
+ <li>
+ <label for="use_default_values">Use default values:</label>
+ <input type="checkbox" name="use_default_values" id="use_default_values" />
+ <span class="hint">Populate fields with default values from default framework</span>
+ </li>
+ </ol>
+ </fieldset>
+ [% END %]
+
+ <fieldset class="action">
+ [% IF ( del ) %]<input type="hidden" name="del" value="1" />[% END %]
+ <input class="btn btn-primary" type="submit" value="Tiếp tục" />
+ <a class="cancel" href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Hủy bỏ</a>
+ </fieldset>
+
+ </form>
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

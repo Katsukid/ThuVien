@@ -1,0 +1,226 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Branches %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Item circulation alerts &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% FILTER collapse %]
+ <style>
+        table.grid thead th {
+            vertical-align: bottom;
+        }
+
+        table.grid tbody th {
+            text-align: right;
+        }
+
+        table.grid tbody td {
+            font-size: xx-small;
+        }
+
+        table.grid tbody td.info {
+            background-color: #fff !important;
+        }
+
+        table.grid.active tbody td {
+            width: 10%;
+            cursor: pointer;
+        }
+
+        table.grid tbody td {
+            background-color: #cfc !important;
+            color: #111;
+        }
+
+        table.grid td.disabled {
+            background-color: #fcc !important;
+        }
+
+        table.grid td.default {
+            background-color: #f88 !important;
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="admin_item_circulation_alerts" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Quản trị hệ thống</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Cảnh báo lưu thông</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+ <div class="row">
+ <div class="col-sm-6">
+<h1>Cảnh báo lưu thông</h1>
+<h2>Lựa chọn thư viện:</h2>
+<form id="branch_selector" method="get" action="/cgi-bin/koha/admin/item_circulation_alerts.pl">
+<select id="branch" name="branch">
+ <option value="*">Mặc định</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => branch, unfiltered => 1 ) %]
+</select>
+<input class="btn btn-primary" name="pick" type="submit" value="Chọn" />
+</form>
+</div>
+ <div class="col-sm-6">
+<table class="grid">
+<caption>Chú thích</caption>
+<thead>
+<tr>
+ <th>Màu sắc</th>
+ <th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+ <tr>
+ <td width="100" class="default">&nbsp;</td>
+ <td class="info">Không kích hoạt cho tất cả các thư viện. Để thay đổi thiết lập này, lựa chọn giá trị thư viện là "Mặc định".</td>
+ </tr>
+ <tr>
+ <td class="disabled">&nbsp;</td>
+ <td class="info">Không được kích hoạt cho thư viện hiện tại.</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td class="info">Cảnh báo lưu thông đã được kích hoạt.</td>
+ </tr>
+</tbody>
+</table>
+ </div> <!-- /.col-sm-6 -->
+ </div> <!-- /.row -->
+
+ <h2>Cảnh báo lưu thông cho thư viện [% Branches.GetName( branch ) || 'Default' | html %]</h2>
+ <p>Kích vào từng ô để thay đổi thiết lập.</p>
+
+ [% WRAPPER tabs id= "alerttabs" %]
+ [% WRAPPER tabs_nav %]
+ [% WRAPPER tab_item tabname= "checkout" bt_active= 1 %] <span>Ghi mượn</span> [% END %]
+ [% WRAPPER tab_item tabname= "checkin" %] <span>Ghi trả</span> [% END %]
+ [% END %]
+
+ [% WRAPPER tab_panels %]
+ [% WRAPPER tab_panel tabname="checkout" bt_active= 1 %]
+ <h3>Ghi mượn</h3>
+ <table class="grid active" width="100%">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ [% FOREACH item_type IN item_types %]
+ <th>[% item_type.description | html %]</th>
+ [% END %]
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH grid_checkou IN grid_checkout %]
+ <tr>
+ <th>[% grid_checkou.description | html %]</th>
+ [% FOREACH item IN grid_checkou.items %]
+ <td class="[% item.class | html %]" id="[% item.id | html %]">[% item.text | html %]</td>
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- /.grid.active -->
+ [% END #/ #checkout %]
+
+ [% WRAPPER tab_panel tabname="checkin" %]
+ <h3>Ghi trả</h3>
+ <table class="grid active" width="100%">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ [% FOREACH item_type IN item_types %]
+ <th>[% item_type.description | html %]</th>
+ [% END %]
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH grid_checki IN grid_checkin %]
+ <tr>
+ <th>[% grid_checki.description | html %]</th>
+ [% FOREACH item IN grid_checki.items %]
+ <td class="[% item.class | html %]" id="[% item.id | html %]">[% item.text | html %]</td>
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% END # /#checkin %]
+ [% END # /.tab_panels %]
+
+ [% END # //#alerttabs %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ <script>
+        var $branch = "[% branch | html %]";
+        $(function(){
+
+            var blocked            = _("Bị khóa!");
+            var saving             = _("Đang lưu lại...");
+            var disabledForAll     = _("Không kích hoạt tất cả");
+            var disabledForCurrent = _("Disabled for %s").format($branch);
+
+            $('#branch_selector input:submit').hide();
+            $('#branch').change(function(){
+                $('#branch_selector').submit();
+            });
+
+            $('table.grid.active tbody td').click(function(ev){
+                var id = this.id;
+                var td = $(this);
+                if (td.hasClass('default') && $branch != '*') {
+                    td.html(blocked);
+                    window.setTimeout(
+                      function(){ td.html(disabledForAll) },
+                      3000
+                    );
+                } else {
+                    td.html(saving);
+                    $.ajax({
+                        url      : '/cgi-bin/koha/admin/item_circulation_alerts.pl',
+                        type     : 'POST',
+                        dataType : 'json',
+                        data     : { action: 'toggle', id: id, branch: $branch },
+                        success  : function(response){
+                            if ($branch == '*' && response.classes.match(/default/)) {
+                                td.html(disabledForAll);
+                            } else if (response.classes.match(/disabled/)) {
+                                td.html(disabledForCurrent);
+                            } else {
+                                td.html(' ');
+                            }
+                            td.attr('class', response.classes);
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

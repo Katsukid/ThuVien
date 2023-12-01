@@ -1,0 +1,482 @@
+Administration:
+# Only used internally, omitted: FrameworksLoaded, Version
+    Interface options:
+        -
+            - "Email address for the administrator of Koha: "
+            - pref: KohaAdminEmailAddress
+              class: email
+            - "(This is the default From: address for emails unless there is one for the particular library, and is referred to when an internal error occurs.)"
+        -
+            - "Email address to be set as the replyto in emails: "
+            - pref: ReplytoDefault
+              class: email
+        -
+            - "Return path or bounce address for undeliverable mail messages: "
+            - pref: ReturnpathDefault
+              class: email
+            - "If you leave this empty, the From address will be used (often defaulting to the admin address)."
+        -
+            - "Email to redirect all messages to: "
+            - pref: SendAllEmailsTo
+              class: email
+            - "(Leave this field empty to send messages to their normal recipient.)"
+        -
+            - "Email address failed overdue notices are sent to: "
+            - pref: AddressForFailedOverdueNotices
+              class: email
+            - 'If left empty then it will fallback to the first defined address in the following list: Library ReplyTo, Library Email, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a> and <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>'
+        -
+
+            - "How much debugging information to show in the browser when an internal error occurs: "
+            - pref: DebugLevel
+              default: 0
+              choices:
+                  0: None
+                  1: Some
+                  2: All
+        -
+            - pref: noItemTypeImages
+              default: 0
+              choices:
+                  1: "Don't show"
+                  0: "Show"
+            - "itemtype icons in the staff interface."
+        -
+            - "Default separator for columns in an exported CSV file: "
+            - pref: CSVDelimiter
+              default: ","
+              choices:
+                  ';': semicolons
+                  tabulation: tabs
+                  ',': commas
+                  '/': slashes
+                  '\': backslashes
+                  '#': "#'s"
+        -
+            - "Allow staff and patrons to create and view saved lists of books: "
+            - pref: virtualshelves
+              choices:
+                  1: "Yes"
+                  0: "No"
+        -
+            - "Default view when editing circulation rules: "
+            - pref: DefaultToLoggedInLibraryCircRules
+              choices:
+                  1: "The logged-in library"
+                  0: "All libraries"
+        -
+            - "Default view when editing notices and slips: "
+            - pref: DefaultToLoggedInLibraryNoticesSlips
+              choices:
+                  1: "The logged-in library"
+                  0: "All libraries"
+        -
+            - "Default view when editing overdue notice/status triggers: "
+            - pref: DefaultToLoggedInLibraryOverdueTriggers
+              choices:
+                  1: "The logged-in library"
+                  0: "All libraries"
+
+        -
+            - pref: EmailOverduesNoEmail
+              choices:
+                  1: "Send"
+                  0: "Don't send"
+            - "overdue notices for patrons without email address to staff."
+
+    Login options:
+        -
+            - "Inactivity timeout in seconds to automatically log out users: "
+            - pref: timeout
+              class: integer
+            - Adding d will specify it in days, e.g. 1d is timeout of one day.
+        -
+            - "Require staff to log in from a computer in the IP address range specified by their library (if any): "
+            - pref: AutoLocation
+              default: 0
+              choices:
+                  1: "Yes"
+                  0: "No"
+            - <a href="/cgi-bin/koha/admin/branches.pl">Link to library administration</a>
+        -
+            - "Enable check for change in remote IP address for session security: "
+            - pref: SessionRestrictionByIP
+              default: 1
+              choices:
+                  1: "Yes"
+                  0: "No"
+            - (Disable only when remote IP address changes frequently.)
+        # PostgreSQL is supported by CGI::Session but not by Koha.
+        -
+            - "Storage of login session information: "
+            - pref: SessionStorage
+              default: mysql
+              choices:
+                  mysql: MySQL database
+                  Pg: PostgreSQL database (not supported)
+                  tmp: Temporary files
+                  memcached: Memcached server
+        -
+            - "Prevent staff (but not superlibrarians) from modifying objects (holds, items, patrons, etc.) belonging to other libraries: "
+            - pref: IndependentBranches
+              default: 0
+              choices:
+                  1: "Yes"
+                  0: "No"
+            - "<p class='text-danger'><strong>Warning:</strong> Changing this system preference will radically alter the behavior of Koha. Changing preference on a production system is highly discouraged.</p>"
+        -
+            - "Prevent staff (but not superlibrarians) from viewing and approving/denying patron modification requests for patrons belonging to other libraries: "
+            - pref: IndependentBranchesPatronModifications
+              default: 0
+              choices:
+                  1: "Yes"
+                  0: "No"
+        -
+            - "Prevent staff (but not superlibrarians) from transfering items to other libraries: "
+            - pref: IndependentBranchesTransfers
+              default: 0
+              choices:
+                  1: "Yes"
+                  0: "No"
+    CAS authentication:
+        -
+            - "Use CAS for login authentication: "
+            - pref: casAuthentication
+              default: 0
+              choices:
+                  1: "Yes"
+                  0: "No"
+        -
+            - "Logout of CAS when logging out of Koha: "
+            - pref: casLogout
+              default: 0
+              choices:
+                  1: "Yes"
+                  0: "No"
+        -
+            - "URL of the Central Authentication Service (CAS) server: "
+            - pref: casServerUrl
+              class: url
+        -
+            - "Version of the CAS server Koha will connect to: "
+            - pref: casServerVersion
+              choices:
+                2: 'CAS 2 or earlier'
+                3: 'CAS 3 or later'
+    SSL client certificate authentication:
+        -
+            - "Field to use for SSL client certificate authentication: "
+            - pref: AllowPKIAuth
+              default: None
+              choices:
+                  None: "None"
+                  Common Name: Common Name
+                  emailAddress: emailAddress
+    Google OpenID Connect:
+        -
+            - "Use Google OpenID Connect login in the OPAC: "
+            - pref: GoogleOpenIDConnect
+              choices:
+                1: "Yes"
+                0: "No"
+            - You will need to select OAuth2 when creating an app in the Google cloud console, and set the web origin to your_opac_url and the redirect url to your_opac_url/cgi-bin/koha/svc/auth/googleopenidconnect. Requires <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOAuth2ClientID">GoogleOAuth2ClientID</a> and <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOAuth2ClientSecret">GoogleOAuth2ClientSecret</a> to be set.
+        -
+            - "Google OAuth2 Client ID: "
+            - pref: GoogleOAuth2ClientID
+            -  Along with <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOAuth2ClientSecret">GoogleOAuth2ClientSecret</a>, enables <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect.</a>
+        -
+            - "Google OAuth2 Client Secret: "
+            - pref: GoogleOAuth2ClientSecret
+            -  Along with <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOAuth2ClientID">GoogleOAuth2ClientID</a>, enables <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect.</a>
+        -
+            - "Restrict Google OpenID Connect to this domain (or subdomain of this domain): "
+            - pref: GoogleOpenIDConnectDomain
+            - Leave blank for all Google domains. Requires <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>.
+        -
+            - pref: GoogleOpenIDConnectAutoRegister
+              choices:
+                1: Allow
+                0: "Don't allow"
+            - patrons logging in with Google Open ID to automatically register. Requires <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>.
+        -
+            - "Use this category code when automatically registering a Google Open ID patron: "
+            - pref: GoogleOpenIDConnectDefaultCategory
+              choices: patron-categories
+            - Requires <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>.
+        -
+            - "Use this branch code when automatically registering a Google Open ID patron: "
+            - pref: GoogleOpenIDConnectDefaultBranch
+            - Requires <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>.
+    Share anonymous usage statistics:
+        -
+            - "Share anonymous Koha usage data with the Koha community: "
+            - pref: UsageStats
+              default: 2
+              choices:
+                  1: "Yes"
+                  0: "No"
+                  2: "No, let me think about it"
+            - "."
+            - "<br>Website where usage statistics are published: <a href=\"https://hea.koha-community.org\">Hea Koha community website</a>."
+            - <br><strong>NOTE:</strong> The other <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a> system preferences have no effect if this system preference is set to "No" (don't share).
+            - "<br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/share_usage_with_koha_community.pl</code> cronjob. Ask your system administrator to schedule it."
+            - "<br><strong>NOTE:</strong> Use the <a href=\"/cgi-bin/koha/admin/usage_statistics.pl\">dedicated configuration page</a> to edit the statistics you share."
+        -
+            - "Use the following library name to be shown on the Hea Community website: "
+            - pref: UsageStatsLibraryName
+            - . If this field is empty the data will be sent anonymously.
+            - <br><strong>NOTE:</strong> This value has no effect if the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a> system preference is set to "No" (don't share).
+        -
+            - "The country where your library is located to be shown on the Hea Community website: "
+            - pref: UsageStatsCountry
+              default: ""
+              choices:
+                ""             : ""
+                Afghanistan    : "Afghanistan"
+                Albania        : "Albania"
+                Algeria        : "Algeria"
+                Andorra        : "Andorra"
+                Angola         : "Angola"
+                Antigua & Deps : "Antigua & Deps"
+                Argentina      : "Argentina"
+                Armenia        : "Armenia"
+                Australia      : "Australia"
+                Austria        : "Austria"
+                Azerbaijan     : "Azerbaijan"
+                Bahamas        : "Bahamas"
+                Bahrain        : "Bahrain"
+                Bangladesh     : "Bangladesh"
+                Barbados       : "Barbados"
+                Belarus        : "Belarus"
+                Belgium        : "Belgium"
+                Belize         : "Belize"
+                Benin          : "Benin"
+                Bhutan         : "Bhutan"
+                Bolivia        : "Bolivia"
+                Bosnia Herz.   : "Bosnia Herz."
+                Botswana       : "Botswana"
+                Brazil         : "Brazil"
+                Brunei         : "Brunei"
+                Bulgaria       : "Bulgaria"
+                Burkina        : "Burkina"
+                Burundi        : "Burundi"
+                Cambodia       : "Cambodia"
+                Cameroon       : "Cameroon"
+                Canada         : "Canada"
+                Cape Verde     : "Cape Verde"
+                Centr. Afr. Rep: "Centr. Afr. Rep"
+                Chad           : "Chad"
+                Chile          : "Chile"
+                China          : "China"
+                Colombia       : "Colombia"
+                Comoros        : "Comoros"
+                Congo          : "Congo"
+                Costa Rica     : "Costa Rica"
+                Croatia        : "Croatia"
+                Cuba           : "Cuba"
+                Cyprus         : "Cyprus"
+                Czech Republic : "Czech Republic"
+                Denmark        : "Denmark"
+                Djibouti       : "Djibouti"
+                Dominica       : "Dominica"
+                Dominican Rep. : "Dominican Rep."
+                East Timor     : "East Timor"
+                Ecuador        : "Ecuador"
+                Egypt          : "Egypt"
+                El Salvador    : "El Salvador"
+                Equator. Guinea: "Equator. Guinea"
+                Eritrea        : "Eritrea"
+                Estonia        : "Estonia"
+                Ethiopia       : "Ethiopia"
+                Fiji           : "Fiji"
+                Finland        : "Finland"
+                France         : "France"
+                Gabon          : "Gabon"
+                Gambia         : "Gambia"
+                Georgia        : "Georgia"
+                Germany        : "Germany"
+                Ghana          : "Ghana"
+                Greece         : "Greece"
+                Grenada        : "Grenada"
+                Guatemala      : "Guatemala"
+                Guinea         : "Guinea"
+                Guinea-Bissau  : "Guinea-Bissau"
+                Guyana         : "Guyana"
+                Haiti          : "Haiti"
+                Honduras       : "Honduras"
+                Hungary        : "Hungary"
+                Iceland        : "Iceland"
+                India          : "India"
+                Indonesia      : "Indonesia"
+                Iran           : "Iran"
+                Iraq           : "Iraq"
+                Ireland        : "Ireland"
+                Israel         : "Israel"
+                Italy          : "Italy"
+                Ivory Coast    : "Ivory Coast"
+                Jamaica        : "Jamaica"
+                Japan          : "Japan"
+                Jordan         : "Jordan"
+                Kazakhstan     : "Kazakhstan"
+                Kenya          : "Kenya"
+                Kiribati       : "Kiribati"
+                Korea North    : "Korea North"
+                Korea South    : "Korea South"
+                Kosovo         : "Kosovo"
+                Kuwait         : "Kuwait"
+                Kyrgyzstan     : "Kyrgyzstan"
+                Laos           : "Laos"
+                Latvia         : "Latvia"
+                Lebanon        : "Lebanon"
+                Lesotho        : "Lesotho"
+                Liberia        : "Liberia"
+                Libya          : "Libya"
+                Liechtenstein  : "Liechtenstein"
+                Lithuania      : "Lithuania"
+                Luxembourg     : "Luxembourg"
+                Macedonia      : "Macedonia"
+                Madagascar     : "Madagascar"
+                Malawi         : "Malawi"
+                Malaysia       : "Malaysia"
+                Maldives       : "Maldives"
+                Mali           : "Mali"
+                Malta          : "Malta"
+                Marshall Isl.  : "Marshall Isl."
+                Mauritania     : "Mauritania"
+                Mauritius      : "Mauritius"
+                Mexico         : "Mexico"
+                Micronesia     : "Micronesia"
+                Moldova        : "Moldova"
+                Monaco         : "Monaco"
+                Mongolia       : "Mongolia"
+                Montenegro     : "Montenegro"
+                Morocco        : "Morocco"
+                Mozambique     : "Mozambique"
+                Myanmar        : "Myanmar"
+                Namibia        : "Namibia"
+                Nauru          : "Nauru"
+                Nepal          : "Nepal"
+                Netherlands    : "Netherlands"
+                New Zealand    : "New Zealand"
+                Nicaragua      : "Nicaragua"
+                Niger          : "Niger"
+                Nigeria        : "Nigeria"
+                Norway         : "Norway"
+                Oman           : "Oman"
+                Pakistan       : "Pakistan"
+                Palau          : "Palau"
+                Panama         : "Panama"
+                Papua N. Guinea: "Papua N. Guinea"
+                Paraguay       : "Paraguay"
+                Peru           : "Peru"
+                Philippines    : "Philippines"
+                Poland         : "Poland"
+                Portugal       : "Portugal"
+                Qatar          : "Qatar"
+                Romania        : "Romania"
+                Russian Fed.   : "Russian Fed."
+                Rwanda         : "Rwanda"
+                St Kitts & Nev.: "St Kitts & Nev."
+                St Lucia       : "St Lucia"
+                St Vincent     : "Saint Vincent"
+                Samoa          : "Samoa"
+                San Marino     : "San Marino"
+                Sao Tome       : "Sao Tome"
+                Saudi Arabia   : "Saudi Arabia"
+                Senegal        : "Senegal"
+                Serbia         : "Serbia"
+                Seychelles     : "Seychelles"
+                Sierra Leone   : "Sierra Leone"
+                Singapore      : "Singapore"
+                Slovakia       : "Slovakia"
+                Slovenia       : "Slovenia"
+                Solomon Islands: "Solomon Islands"
+                Somalia        : "Somalia"
+                South Africa   : "South Africa"
+                Spain          : "Spain"
+                Sri Lanka      : "Sri Lanka"
+                Sudan          : "Sudan"
+                Suriname       : "Suriname"
+                Swaziland      : "Swaziland"
+                Sweden         : "Sweden"
+                Switzerland    : "Switzerland"
+                Syria          : "Syria"
+                Taiwan         : "Taiwan"
+                Tajikistan     : "Tajikistan"
+                Tanzania       : "Tanzania"
+                Thailand       : "Thailand"
+                Togo           : "Togo"
+                Tonga          : "Tonga"
+                Trinidad & Tob.: "Trinidad & Tob."
+                Tunisia        : "Tunisia"
+                Turkey         : "Turkey"
+                Turkmenistan   : "Turkmenistan"
+                Tuvalu         : "Tuvalu"
+                Uganda         : "Uganda"
+                Ukraine        : "Ukraine"
+                UAE            : "UAE"
+                United Kingdom : "United Kingdom"
+                USA            : "USA"
+                Uruguay        : "Uruguay"
+                Uzbekistan     : "Uzbekistan"
+                Vanuatu        : "Vanuatu"
+                Vatican City   : "Vatican City"
+                Venezuela      : "Venezuela"
+                Vietnam        : "Vietnam"
+                Yemen          : "Yemen"
+                Zambia         : "Zambia"
+                Zimbabwe       : "Zimbabwe"
+
+            - . This will be shown on the <a href="https://hea.koha-community.org">Hea Koha community website</a>.
+            - <br><strong>NOTE:</strong> This value has no effect if the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a> system preference is set to "No" (don't share).
+        -
+            - "The library URL to be shown on the Hea Community website: "
+            - pref: UsageStatsLibraryUrl
+              class: url
+            - <br><strong>NOTE:</strong> This value has no effect if the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a> system preference is set to "No" (don't share).
+        -
+            - "The library type to be shown on the Hea Community website: "
+            - pref: UsageStatsLibraryType
+              default: ""
+              choices:
+                  ""          : ""
+                  public      : "public"
+                  school      : "school"
+                  academic    : "academic"
+                  research    : "research"
+                  private     : "private"
+                  societyAssociation: "society or association"
+                  corporate   : "corporate"
+                  government  : "government"
+                  religiousOrg: "religious organization"
+                  subscription: "subscription"
+            - <br><strong>NOTE:</strong> This value has no effect if the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a> system preference is set to "No" (don't share).
+        -
+            - pref: UsageStatsLibrariesInfo
+              choices:
+                  1: "Share"
+                  0: "Don't share"
+            - "libraries information (name, URL, country)."
+            - <br><strong>NOTE:</strong> This value has no effect if the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a> system preference is set to "No" (don't share).
+        -
+            - "Geolocation of the main library: "
+            - pref: UsageStatsGeolocation
+            - <br><strong>NOTE:</strong> This value has no effect if the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a> system preference is set to "No" (don't share).
+            - "<br><strong>NOTE:</strong> You must use the <a href=\"/cgi-bin/koha/admin/usage_statistics.pl\">dedicated configuration page</a> to set and edit this system preference."
+    Search engine:
+        -
+            - "Use following search engine: "
+            - pref: SearchEngine
+              default: Zebra
+              choices:
+                Zebra: Zebra
+                Elasticsearch: Elasticsearch
+        -
+            - "Elasticsearch MARC format: "
+            - pref: ElasticsearchMARCFormat
+              default: "ISO2709"
+              choices:
+                "ISO2709": "ISO2709 (exchange format)"
+                "ARRAY": "Searchable array"
+            - <br>ISO2709 format is recommended as it is faster and takes less space, whereas array format makes the full MARC record searchable.
+            - <br><strong>NOTE:</strong> Making the full record searchable may have a negative effect on relevance ranking of search results.

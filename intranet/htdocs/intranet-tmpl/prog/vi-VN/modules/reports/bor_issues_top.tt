@@ -1,0 +1,229 @@
+[% USE raw %]
+[% USE Branches %]
+[% USE KohaDates %]
+[% USE ItemTypes %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Patrons with the most checkouts &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="rep_bor_issues_top" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/reports-home.pl">Báo cáo</a>
+ [% END %]
+ [% IF ( do_it ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/bor_issues_top.pl">Bạn đọc ghi mượn nhiều nhất</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kết quả</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Bạn đọc ghi mượn nhiều nhất</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+[% IF ( do_it ) %]
+ [% FOREACH mainloo IN mainloop %]
+ <h1>Bạn đọc ghi mượn nhiều nhất</h1>
+ [% IF ( mainloo.loopfilter ) %]
+ [% IF mainloo.loopfilter.size %]
+ <p>Bộ lọc dữ liệu:</p>
+ <ul>
+ [% FOREACH loopfilte IN mainloo.loopfilter %]
+ <li>
+ [% SWITCH loopfilte.crit -%]
+ [% CASE "Issue From" -%]
+ <span>Checked out after [% loopfilte.filter | $KohaDates %]</span>
+ [% CASE "Issue To" -%]
+ <span>Checked out before [% loopfilte.filter | $KohaDates %]</span>
+ [% CASE "Return From" -%]
+ <span>Checked in after [% loopfilte.filter | $KohaDates %]</span>
+ [% CASE "Return To" -%]
+ <span>Checked in before [% loopfilte.filter | $KohaDates %]</span>
+ [% CASE "Branch" -%]
+ <span>Library is [% Branches.GetName( loopfilte.filter ) | html %]</span>
+ [% CASE "Doc Type" -%]
+ <span>Item type is [% ItemTypes.GetDescription( loopfilte.filter ) | html %]</span>
+ [% CASE "Bor Cat" -%]
+ <span>Patron category code is [% loopfilte.filter | html %]</span>
+ [% CASE "Day" -%]
+ <span>Day is [% loopfilte.filter | html %]</span>
+ [% CASE "Month" -%]
+ <span>Month is [% loopfilte.filter | html %]</span>
+ [% CASE "Year" -%]
+ <span>Year is [% loopfilte.filter | html %]</span>
+ [% CASE # default case -%]
+ <span>[% loopfilte.crit | html %] = [% loopfilte.filter | html %]</span>
+ [% END -%]
+ </li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% END %]
+ 
+ <table>
+ <tr>
+ <th rowspan="2">Thứ tự</th>
+ [% FOREACH loopco IN mainloo.loopcol %]
+ <th colspan="2">[% loopco.coltitle | html %]</th>
+ [% END %]
+ </tr>
+ <tr>
+ [% FOREACH loopco IN mainloo.loopcol %]
+ <th>Bạn đọc</th>
+ <th>Số lần ghi mượn</th>
+ [% END %]
+ </tr>
+ [% FOREACH loopro IN mainloo.looprow %]
+ <tr>
+ [% IF ( loopro.hilighted ) %]<td>[% ELSE %]<td>[% END %]
+ [% loopro.rowtitle | html %]</td>
+ [% FOREACH loopcel IN loopro.loopcell %]
+ [% IF ( loopcel.hilighted ) %]<td>[% ELSE %]<td>[% END %]
+ [% IF ( loopcel.reference ) %]<a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% loopcel.reference | uri %]">[% END %]
+ [% IF ( loopcel.value ) %][% loopcel.value | html %][% END %]
+ [% IF ( loopcel.reference ) %]</a>[% END %]
+ </td>
+ [% IF ( loopcel.hilighted ) %]<td>[% ELSE %]<td>[% END %]
+ [% IF ( loopcel.count ) %][% loopcel.count | html %][% END %]
+ </td>
+ [% END %]
+ </tr>
+ [% END %]
+ </table>
+ [% END %]
+[% ELSE %]
+ <h1>Bạn đọc ghi mượn nhiều nhất</h1>
+ <form method="post" action="/cgi-bin/koha/reports/bor_issues_top.pl">
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="checkoutfrom">Ghi mượn từ ngày:</label>
+ <input type="text" size="10" id="checkoutfrom" name="Filter" class="flatpickr" data-date_to="checkoutto" />
+
+ <label class="inline" for="checkoutto">Đến ngày: </label>
+ <input size="10" id="checkoutto" name="Filter" value="" type="text" class="flatpickr" />
+ <span class="hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ <li>
+ <label for="checkinfrom">Ghi trả từ ngày:</label>
+ <input type="text" size="10" id="checkinfrom" name="Filter" class="flatpickr" data-date_to="checkinto" />
+
+ <label class="inline" for="checkinto">Đến ngày: </label>
+ <input type="text" size="10" id="checkinto" name="Filter" value="" class="flatpickr" />
+ <span class="hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ <li> 
+ <label for="branch">Thư viện: </label>
+<select name="Filter" id="branch"><option value="" > Tất cả</option>
+ [% FOREACH l IN Branches.all( unfiltered => 1 ) %]
+ <option value="[% l.branchcode | html %]" >[% l.branchname | html %] </option>
+ [% END %] 
+ </select> </li>
+ <li> 
+ <label for="documenttype">Kiểu tài liệu: </label><select name="Filter" id="documenttype"><option value="" > Tất cả</option>
+ [% FOREACH itemtype IN itemtypes %]
+ <option value="[% itemtype.itemtype | html %]" >[% itemtype.translated_description | html %] </option>
+ [% END %] 
+ </select>
+ </li>
+ <li> 
+ <label for="patroncategory">Kiểu bạn đọc: </label><select name="Filter" id="patroncategory"><option value="" > Tất cả</option>
+ [% FOREACH patron_category IN patron_categories%]
+ <option value="[% patron_category.categorycode | html %]" >[% patron_category.description | html %] </option>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+ 
+ <fieldset class="rows">
+ <ol>
+ <li><label for="numlimit">Số lượng hiển thị: </label> <select name="Limit" id="numlimit">
+ <option value ="5" selected="selected"> 5</option>
+ <option value ="10">10</option>
+ <option value ="15">15</option>
+ <option value ="20">20</option>
+ <option value ="">Tất cả</option>
+ <!-- <option value ="25">25</option>
+ <option value ="40">40</option>
+ <option value ="50">50</option>
+ <option value ="100">100</option>-->
+ </select></li>
+ <li><label for="criteria">Liệt kê theo: </label> <select name="Criteria" id="criteria">
+ <option value ="" selected="selected">Bất kỳ</option>
+ <option value ="branchcode">Thư viện</option>
+ <option value ="categorycode">Kiểu bạn đọc</option>
+ <option value ="itemtype">Kiểu tài liệu</option>
+ <option value ="Day">Ngày</option>
+ <option value ="Week">Tuần</option>
+ <option value ="Month">Tháng</option>
+ <option value ="Year">Năm</option>
+ </select></li>
+ </ol>
+ </fieldset>
+
+<fieldset class="rows">
+ <legend>Hiển thị báo cáo</legend>
+ <ol><li><label for="outputscreen">Trên màn hình hiển thị: </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" /></li>
+ <li><label for="outputfile">Xuất ra tệp tin: </label><input type="radio" name="output" value="file" id="outputfile" />
+ <label class="inline" for="basename">Tên tệp tin: </label><input id="basename" name="basename" type="text" value="Xuất dữ liệu" />
+ <label class="inline" for="MIME">Định dạng: </label>
+ <select name="MIME" id="MIME">
+ [% FOREACH mimeloo IN mimeloop %]
+ <option value="[% mimeloo.type | html %]">[% mimeloo.type | html %]</option>
+ [% END %]
+ </select>
+ <label class="inline" for="sep">Dấu phân cách: </label>
+ <select name="sep" id="sep">
+ [% FOREACH value IN CGIseplist.values.sort() %]
+ [% IF ( value == CGIseplist.default ) %]
+ <option value="[% value | html %]" selected="selected">[% value | html %]</option>
+ [% ELSE %]
+ <option value="[% value | html %]">[% value | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input type="hidden" name="report_name" value="[% report_name | html %]" />
+ <input type="hidden" name="do_it" value="1" />
+ </fieldset>
+ </form>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'reports-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

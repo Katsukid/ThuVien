@@ -1,0 +1,71 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Self checkout help &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha [% END %]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Koha [% Version | html %]" /> <!-- leave this for stats -->
+<link rel="shortcut icon" href="[% IF ( Koha.Preference('OpacFavicon')  ) %][% Koha.Preference('OpacFavicon') | url %][% ELSE %][% interface | html %]/[% theme | html %]/images/logo-cdktqs1.png[% END %]" type="image/x-icon" />
+[% Asset.css("lib/font-awesome/css/font-awesome.min.css") | $raw %]
+[% Asset.css("css/sco.css") | $raw %]
+[% IF ( Koha.Preference('OPACUserCSS') ) %]<style>[% Koha.Preference('OPACUserCSS') | $raw %]</style>[% END %]
+[% IF ( SCOUserCSS ) %]<style>[% SCOUserCSS | $raw %]</style>[% END %]
+<script>
+    var Koha = {};
+    function _(s) { return s } // dummy function for gettext
+</script>
+[% IF lang && lang != 'en' %]
+ [% Asset.js(lang _ '/js/locale_data.js') | $raw %]
+[% END %]
+[% Asset.js('js/Gettext.js') | $raw %]
+[% Asset.js('js/i18n.js') | $raw %]
+</head>
+<body id="sco_help" class="sco">
+ [% INCLUDE 'masthead-sco.inc' %]
+
+ <div class="main">
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col order-first order-md-first order-lg-2">
+ <h1>Trợ giúp hệ thống mượn trả tự động</h1>
+
+ [% IF ( SelfCheckHelpMessage ) %]
+ <div id="selfcheckhelpmessage">
+ [% SelfCheckHelpMessage | $raw %]
+ </div>
+ [% END %]
+
+ <div id="selfcheckdefaulthelpmessage">
+ <p>Nếu hệ thống mượn trả tự động hoạt động không tốt, bạn có thể tham khảo theo hướng dẫn này để có thể tự bạn kiểm tra.</p>
+
+ <h2>Step one: Enter your user ID[% IF ( SelfCheckoutByLogin ) %] and password[% END %]</h2>
+
+ <p>Enter your user ID[% IF ( SelfCheckoutByLogin ) %] and password[% END %], and click the
+ submit button (or press the enter key).</p>
+
+ <h2>Bước 2: Quét ĐKCB cho từng tài liệu, bạn có thể quét nhiều ĐKCB cùng một lúc</h2>
+
+ <p>Scan each item and wait for the page to reload before scanning the next item.
+ The checked-out item should appear in your checkouts list.
+ The submit button only needs to be clicked if you enter the barcode manually.</p>
+
+ <h2>Bước 3: Nhấn nút 'Hoàn thành'.</h2>
+
+ <p>Nếu bạn không nhấn nút  'Hoàn thành', phiên làm việc của bạn sẽ tự động đóng lại trong [% SelfCheckTimeout | html %] giây.</p>
+ </div>
+
+ <div class="button">
+ <a href="javascript:history.go(-1)">Quay lại hệ thống mượn trả tự động</a>
+ </div>
+
+ </div> <!-- / .col -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+ [% IF ( SCOUserJS ) %]<script>[% SCOUserJS | $raw %]</script>[% END %]
+[% END %]

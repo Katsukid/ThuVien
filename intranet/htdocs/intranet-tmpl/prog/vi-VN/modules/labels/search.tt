@@ -1,0 +1,107 @@
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Labels &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="labels_search" class="tools labels">
+ <div class="main container-fluid">
+
+<h1>Tìm kiếm tài liệu [% IF ( batch_id ) %] thêm vào lô nhãn gáy số [% batch_id | html %] [% END %] </h1>
+
+<form name="f" method="post" action="/cgi-bin/koha/labels/label-item-search.pl">
+ <input type="hidden" name="op" value="do_search" />
+ <input type="hidden" name="batch_id" value="[% batch_id | html %]" />
+ <input type="hidden" name="type" value="[% type | html %]" />
+
+ <fieldset class="rows">
+<ol><li>
+<select name="idx" > <!-- FIXME: script does keyword search regardless -->
+
+[% IF idx == 'kw' %]<option value="kw" selected="selected">Từ khóa</option>
+[% ELSE %]<option value="kw">Từ khóa</option>[% END %]
+
+[% IF idx == 'au'  %]<option value="au" selected="selected">Tác giả</option>
+[% ELSE %]<option value="au">Tác giả</option>[% END %]
+
+[% IF idx == 'yr'  %]<option value="yr" selected="selected">Ngày xuất bản</option>
+[% ELSE %]<option value="yr">Ngày xuất bản</option>[% END %]
+
+[% IF idx == 'sn' %]<option value="ident" selected="selected">Số tiêu chuẩn</option>
+[% ELSE %]<option value="sn">Số tiêu chuẩn</option>[% END %]
+
+[% IF idx == 'nb' %]<option value="nb" selected="selected">Số ISBN</option>
+[% ELSE %]<option value="nb">Số ISBN</option>[% END %]
+
+[% IF idx == 'ns' %]<option value="ns" selected="selected">Số ISSN</option>
+[% ELSE %]<option value="ns">Số ISSN</option>[% END %]
+
+[% IF idx == 'lcn,phr' %]<option value="lcn,phr" selected="selected">Ký hiệu phân loại</option>
+[% ELSE %]<option value="lcn,phr">Ký hiệu phân loại</option>[% END %]
+
+[% IF idx == 'su' %]<option value="su" selected="selected">Chủ đề</option>
+[% ELSE %]<option value="su">Chủ đề</option>[% END %]
+
+[% IF idx == 'ti' %]
+ <option value="ti" selected="selected">Nhan đề</option>
+[% ELSE %]
+ <option value="ti">Nhan đề</option>[% END %]
+
+[% IF idx == 'ti,phr' %]<option value="ti,phr" selected="selected">Cụm từ nhan đề</option>
+[% ELSE %]<option value="ti,phr">Cụm từ nhan đề</option>[% END %]
+
+[% IF idx == 'se' %]<option value="se" selected="selected">Nhan đề tùng thư</option>
+[% ELSE %]<option value="se">Nhan đề tùng thư</option>[% END %]
+
+[% IF idx == 'bc' or not idx %]<option value="bc" selected="selected">Đăng ký cá biệt</option>
+[% ELSE %]<option value="bc">Đăng ký cá biệt</option>[% END %]
+
+[% IF idx == 'acqdate' %]<option value="acqdate" selected="selected">Ngày bổ xung</option>
+[% ELSE %]<option value="acqdate">Ngày bổ xung</option>[% END %]
+</select>
+
+ <input class="focus" id="ccl_textbox" name="ccl_textbox" size="30" title="Nhập từ khóa tìm kiếm" type="text" value="" />
+
+</li>
+</ol>
+</fieldset>
+
+[% IF ( sort_by_loop ) %]
+<fieldset><legend>Sắp xếp theo: </legend>
+ <p><select id="sort_by" name="sort_by">
+ <option value="">Trường chính, mức độ liên quan</option>
+ [% FOREACH sort_by_loo IN sort_by_loop %]
+
+[% IF ( sort_by_loo.selected ) %]<option value="[% sort_by_loo.value | html %]" selected="selected">[% sort_by_loo.label | html %]</option>[% ELSE %]<option value="[% sort_by_loo.value | html %]">[% sort_by_loo.label | html %]</option>[% END %]
+
+ [% END %]
+ </select>
+ </p>
+</fieldset>[% END %]
+
+
+
+
+<fieldset class="rows">
+<ol>
+ <li>
+ <label for="from">Từ ngày: </label>
+ <input type="text" size="10" id="from" name="datefrom" class="flatpickr" data-date_to="to" value="" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ <li>
+ <label for="to">Đến ngày: </label>
+ <input type="text" size="10" id="to" name="dateto" class="flatpickr" value="" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+</ol>
+</fieldset>
+
+<fieldset class="action"><input class="btn btn-primary" type="submit" value="Tìm kiếm" /> <a class="cancel close" href="#">Hủy bỏ</a></fieldset>
+</form>
+</div>
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

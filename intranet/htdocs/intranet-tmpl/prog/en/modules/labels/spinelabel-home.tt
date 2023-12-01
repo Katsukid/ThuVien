@@ -1,0 +1,66 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]<title>Quick spine label creator &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="labels_spinelabel-home" class="tools labels">
+[% WRAPPER 'header.inc' %]
+    [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+    [% WRAPPER breadcrumbs %]
+        [% WRAPPER breadcrumb_item %]
+            <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Cataloging</a>
+        [% END %]
+        [% WRAPPER breadcrumb_item bc_active= 1 %]
+            <span>Quick spine label creator</span>
+        [% END %]
+    [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-push-2">
+            <main>
+
+<h1>Quick spine label creator</h1>
+                <form action="/cgi-bin/koha/labels/spinelabel-print.pl" method="post" id="spinelabelprint">
+				<fieldset class="brief">
+				<ol>
+					<li><label for="barcode">Barcode: </label>
+                        <input type="text" name="barcode" id="barcode" class="focus" required="required" />
+					</li>
+				</ol>
+				</fieldset>
+                    <fieldset class="action">
+                        <input type="submit" class="btn btn-primary" value="View spine label" />
+                    </fieldset>
+				</form>
+
+            </main>
+        </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+        <div class="col-sm-2 col-sm-pull-10">
+            <aside>
+                [% INCLUDE 'cat-menu.inc' %]
+            </aside>
+        </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+     </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+    <script>
+        $(document).ready(function(){
+            $("#spinelabelprint").on("submit", function(e){
+                e.preventDefault();
+                var params = $(this).serialize();
+                openWindow("/cgi-bin/koha/labels/spinelabel-print.pl?" + params,"Print spine label",400,400);
+                $("#barcode").val("").focus();
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

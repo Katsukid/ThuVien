@@ -1,0 +1,140 @@
+[% USE Koha %]
+[% USE AdditionalContents %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Share a list &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+
+[% INCLUDE 'bodytag.inc' bodyid='opac-shareshelf' bodyclass='scrollto' %]
+[% INCLUDE 'masthead.inc' %]
+<div class="main">
+ <nav id="breadcrumbs" aria-label="Breadcrumb" class="breadcrumbs">
+ <ol class="breadcrumb">
+ <li class="breadcrumb-item">
+ <a href="/cgi-bin/koha/opac-main.pl">Trang chủ</a>
+ </li>
+ [% IF ( loggedinusername ) %]
+ <li class="breadcrumb-item">
+ <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
+ </li>
+ [% END %]
+ <li class="breadcrumb-item">
+ <a href="/cgi-bin/koha/opac-shelves.pl">Giá sách ảo</a>
+ </li>
+ <li class="breadcrumb-item active">
+ <a href="#" aria-current="page">Share a list</a>
+ </li>
+ </ol> <!-- / .breadcrumb -->
+ </nav> <!-- /#breadcrumbs -->
+
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( OpacNav ) %]
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ [% END %]
+
+ <div class="col-10 order-first order-md-first order-lg-2">
+ <div id="shareshelf" class="maincontent">
+
+ [%# This section contains the essential code for error messages and three operations: invite, confirm_invite and accept. %]
+ <h1>Chia sẻ giá sách ảo cho bạn đọc khác</h1>
+
+ [% IF errcode %]
+ [% IF errcode==1 && op %]
+ <div class="alert alert-warning">Thao tác [% op | html %] không được hỗ trợ.</div>
+ [% END %]
+ [% IF errcode==1 && !op %]
+ <div class="alert alert-warning">Không có thông số hoạt động nào được thông qua.</div>
+ [% END %]
+ [% IF errcode==2 %]
+ <div class="alert alert-warning">Invalid shelf number.</div>
+ [% END %]
+ [% IF errcode==3 %]
+ <div class="alert alert-warning">Tính năng chia sẻ giá sách ảo không được sử dụng trong thư viện này.</div>
+ [% END %]
+ [% IF errcode==4 %]
+ <div class="alert alert-warning">Bạn chỉ có thể chia sẻ giá sách ảo nếu bạn là người tạo ra giá sách ảo.</div>
+ [% END %]
+ [% IF errcode==5 %]
+ <div class="alert alert-warning">Bạn không thể chia sẻ một giá sách ảo cộng đồng.</div>
+ [% END %]
+ [% IF errcode==6 %]
+ <div class="alert alert-warning">Xin lỗi, Thông tin thư điện tử của bạn không hợp lệ.</div>
+ [% END %]
+ [% IF errcode==7 %]
+ <div class="alert alert-warning">Xin lỗi, chúng tôi không thể chấp nhận đáp ứng của bạn. Lời mời có thể đã hết hạn. Bạn vui lòng liên hệ với bạn đọc đã gửi lời mời cho bạn.</div>
+ [% END %]
+ [% IF errcode==8 %]
+ <div class="alert alert-warning">Là chủ sở hữu giá sách ảo, bạn không thể chấp nhập lời mời chia sẻ giá sách ảo này.</div>
+ [% END %]
+ <p><a href="/cgi-bin/koha/opac-shelves.pl?op=list">Return to your lists</a></p>
+
+ [% ELSIF op=='invite' %]
+ <div id="invite">
+ <form id="share_list">
+ <legend class="sr-only">Share list</legend>
+ <fieldset class="rows">
+ <input type="hidden" name="op" value="conf_invite"/>
+ <input type="hidden" name="shelfnumber" value="[% shelfnumber | html %]"/>
+ <ol>
+ <li>
+ <label for="name">Tên giá sách ảo:</label> [% shelfname | html %]
+ </li>
+ <li>
+ <label for="invite_address">Địa chỉ Email:</label>
+ <input type="text" id="invite_address" name="invite_address" size="40" />
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Gửi thư" />
+ <a href="/cgi-bin/koha/opac-shelves.pl?op=list" class="cancel">Hủy bỏ</a>
+ </fieldset>
+ </form> <!-- /#share_list -->
+ </div> <!-- /#invite -->
+
+ [% ELSIF op=='conf_invite' %]
+ <div id="conf_invite">
+ [% IF approvedaddress %]
+ <p>Lời mời chia sẻ giá sách ảo <em>[% shelfname | html %]</em> will be sent shortly to [% approvedaddress | html %].</p>
+ [% END %]
+ [% IF failaddress %]
+ <p>Phát hiện lỗi khi hệ thống xử lý địa chỉ sau đây. Bạn vui lòng kiểm tra lại. Địa chỉ: [% failaddress | html %]</p>
+ [% END %]
+ [% IF approvedaddress %]
+ <p>You will receive an email notification if someone accepts your share before it expires.</p>
+ [% END %]
+ <p><a href="/cgi-bin/koha/opac-shelves.pl?op=list">Return to your lists</a></p>
+ </div>
+
+ [% ELSIF op=='accept' %]
+ [%# Nothing to do: we already display an error or we redirect. %]
+ [% END %]
+ [%# End of essential part %]
+
+ </div> <!-- / #shareshelf.maincontent -->
+ </div> <!-- / .span10 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+</div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+ <script>
+        $(document).ready(function(){
+            $("#share_list").on('submit', function(e) {
+                var address = $("#invite_address").val();
+                if ( address.length == 0) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+[% END %]

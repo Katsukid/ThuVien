@@ -1,0 +1,274 @@
+[% USE raw %]
+[% USE HtmlTags %]
+[% USE Branches %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% PROCESS 'i18n.inc' %]
+<title>[% IF is_edit || course_reserve %]Edit reserve[% ELSE %]Add reserves[% END %] &rsaquo; [% course.course_name | html %] &rsaquo; Course reserves &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="courses_add_items_step2" class="course">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/course_reserves/course-reserves.pl">CSDL khóa học</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/course_reserves/course-details.pl?course_id=[% course.course_id | uri %]">[% course.course_name | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF is_edit || course_reserve %]
+ [% tp("Edit course reserve", "Edit") | html %]
+ [% ELSE %]
+ [% tp("Place course reserve", "Reserve") | html %]
+ [% END %]
+ [% biblio.title | html | $HtmlTags tag="em" %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-8 col-md-offset-2">
+ <h1>
+ [% IF is_edit || course_reserve %]<span>Chỉnh sửa</span> [% ELSE %]<span>Reserve</span> [% END %]<em>[% biblio.title | html %]</em> Cho <em>[% course.course_name | html %]</em>
+ </h1>
+
+ [% IF course_reserve && !is_edit%]<div class="dialog message" id="already_on_reserve_this">Tài liệu đã tồn tại trong CSDL khóa học này.</div>[% END %]
+ [% IF course_item %]
+ [% IF item %]
+ <div class="dialog message" id="already_on_reserve">Số khóa học: [% course_item.course_reserves.count | html %]</div>
+ [% ELSE %]
+ <div class="dialog message" id="already_on_reserve">Number of courses reserving this bibliographic record: [% course_item.course_reserves.count | html %]</div>
+ [% END %]
+ [% END %]
+
+ <form method="post" action="/cgi-bin/koha/course_reserves/add_items.pl">
+ <input type="hidden" name="course_id" value="[% course.course_id | html %]" />
+ <input type="hidden" name="return" value="[% return | html %]" />
+ <input type="hidden" name="action" value="add" />
+
+ [% IF item # adding an item to course items %]
+
+ <fieldset class="rows">
+ [% IF is_edit || course_reserve %]
+ <legend>Chỉnh sửa <em>[% biblio.title | html %]</em> trong <em>[% course.course_name | html %]</em></legend>
+ [% ELSE %]
+ <legend>Tạo <em>[% biblio.title | html %]</em> đến <em>[% course.course_name | html %]</em></legend>
+ [% END %]
+ <ol>
+ <li>
+ <span class="label">Đăng ký cá biệt:</span>
+ <span id="barcode">[% item.barcode | html %]</span>
+ <input type="hidden" name="itemnumber" value="[% item.itemnumber | html %]" />
+ </li>
+
+ [% IF item_level_itypes %]
+ <li>
+ <label class="required" for="itype">Kiểu tài liệu:</label>
+
+ [% IF course_item.itype_enabled %]
+ <input type="checkbox" class="field-toggle" data-pulldown="itype" value="1" name="itype_enabled" id="itype_enabled" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" class="field-toggle" data-pulldown="itype" value="1" name="itype_enabled" id="itype_enabled" />
+ [% END %]
+
+ [% IF course_item.itype_enabled %]
+ <select id="itype" name="itype">
+ [% ELSE %]
+ <select id="itype" name="itype" disabled="disabled">
+ [% END %]
+
+ <option value=""></option>
+ [% FOREACH it IN itypes %]
+ [% IF it.itemtype == course_item.itype %]
+ <option value="[% it.itemtype | html %]" selected="selected">[% it.description | html %]</option>
+ [% ELSE %]
+ <option value="[% it.itemtype | html %]">[% it.description | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [% END %]
+
+ <li>
+ <label class="required" for="ccode">Bộ sưu tập:</label>
+
+ [% IF course_item.ccode_enabled %]
+ <input type="checkbox" class="field-toggle" data-pulldown="ccode" value="1" name="ccode_enabled" id="ccode_enabled" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" class="field-toggle" data-pulldown="ccode" value="1" name="ccode_enabled" id="ccode_enabled" />
+ [% END %]
+
+ [% IF course_item.ccode_enabled %]
+ <select id="ccode" name="ccode">
+ [% ELSE %]
+ <select id="ccode" name="ccode" disabled="disabled">
+ [% END %]
+
+ <option value=""></option>
+ [% FOREACH c IN ccodes %]
+ [% IF c.authorised_value == course_item.ccode %]
+ <option value="[% c.authorised_value | html %]" selected="selected">[% c.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% c.authorised_value | html %]">[% c.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label class="required" for="location">Kho tài liệu:</label>
+
+ [% IF course_item.location_enabled %]
+ <input type="checkbox" class="field-toggle" data-pulldown="location" value="1" name="location_enabled" id="location_enabled" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" class="field-toggle" data-pulldown="location"  value="1" name="location_enabled" id="location_enabled" />
+ [% END %]
+
+ [% IF course_item.location_enabled %]
+ <select id="location" name="location">
+ [% ELSE %]
+ <select id="location" name="location" disabled="disabled">
+ [% END %]
+
+ <option value=""></option>
+ [% FOREACH s IN locations %]
+ [% IF s.authorised_value == course_item.location %]
+ <option value="[% s.authorised_value | html %]" selected="selected">[% s.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% s.authorised_value | html %]">[% s.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label class="required" for="homebranch">Thư viện chính:</label>
+
+ [% IF course_item.homebranch_enabled %]
+ <input type="checkbox" value="1" class="field-toggle" data-pulldown="homebranch" name="homebranch_enabled" id="homebranch_enabled" checked />
+ [% ELSE %]
+ <input type="checkbox" value="1" class="field-toggle" data-pulldown="homebranch" name="homebranch_enabled" id="homebranch_enabled" />
+ [% END %]
+
+ [% IF course_item.homebranch_enabled %]
+ <select id="homebranch" name="homebranch">
+ [% ELSE %]
+ <select id="homebranch" name="homebranch" disabled="disabled">
+ [% END %]
+
+ <option value=""></option>
+ [% FOREACH b IN Branches.all() %]
+ [% IF course_item.homebranch.defined && ( ( course.enabled == 'yes' && b.branchcode == item.homebranch ) || ( course.enabled == 'no' && b.branchcode == course_item.homebranch ) ) %]
+ <option value="[% b.branchcode | html %]" selected="selected">[% b.branchname | html %]</option>
+ [% ELSE %]
+ <option value="[% b.branchcode | html %]">[% b.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label class="required" for="holdingbranch">Thư viện sở hữu:</label>
+
+ [% IF course_item.holdingbranch_enabled %]
+ <input type="checkbox" value="1" class="field-toggle" data-pulldown="holdingbranch" name="holdingbranch_enabled" id="holdingbranch_enabled" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" value="1" class="field-toggle" data-pulldown="holdingbranch" name="holdingbranch_enabled" id="holdingbranch_enabled" />
+ [% END %]
+
+ [% IF course_item.holdingbranch_enabled %]
+ <select id="holdingbranch" name="holdingbranch">
+ [% ELSE %]
+ <select id="holdingbranch" name="holdingbranch" disabled="disabled">
+ [% END %]
+
+ <option value=""></option>
+ [% FOREACH b IN Branches.all() %]
+ [% IF b.branchcode == course_item.holdingbranch %]
+ <option value="[% b.branchcode | html %]" selected="selected">[% b.branchname | html %]</option>
+ [% ELSE %]
+ <option value="[% b.branchcode | html %]">[% b.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label for="staff_note">Ghi chú thủ thư:</label>
+ <textarea name="staff_note" id="staff_note">[% course_reserve.staff_note | html %]</textarea>
+ </li>
+
+ <li>
+ <label for="public_note">Ghi chú:</label>
+ <textarea name="public_note" id="public_note">[% course_reserve.public_note | html %]</textarea>
+ </li>
+
+ </ol>
+ </fieldset>
+ <p>
+ Checking the box next to the field label will enable changes to that field. Leave boxes unchecked to make no change.<br>
+ Any items with existing course reserves will have their <em>on reserve</em> values updated.
+ </p>
+
+ [% ELSE # adding a biblio to course items %]
+
+ <fieldset class="rows">
+ [% IF is_edit || course_reserve %]
+ <legend>Chỉnh sửa <em>[% biblio.title | html %]</em> trong <em>[% course.course_name | html %]</em></legend>
+ [% ELSE %]
+ <legend>Tạo <em>[% biblio.title | html %]</em> đến <em>[% course.course_name | html %]</em></legend>
+ [% END %]
+ <ol>
+ <li>
+ <span class="label">Số biểu ghi:</span>
+ <span id="biblionumber">[% biblio.biblionumber | html %]</span>
+ <input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]" />
+ </li>
+
+ <li>
+ <label for="staff_note">Ghi chú thủ thư:</label>
+ <textarea name="staff_note" id="staff_note">[% course_reserve.staff_note | html %]</textarea>
+ </li>
+
+ <li>
+ <label for="public_note">Ghi chú:</label>
+ <textarea name="public_note" id="public_note">[% course_reserve.public_note | html %]</textarea>
+ </li>
+
+ </ol>
+ </fieldset>
+
+ [% END %]
+ <fieldset class="action">
+ <input class="btn btn-primary focus" id="submit" type="submit" value="Lưu" />
+
+ <a href="/cgi-bin/koha/course_reserves/course-details.pl?course_id=[% course.course_id | uri %]" class="cancel">Hủy bỏ</a>
+ </fieldset>
+ </form>
+ </div>
+</div>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        $(document).ready(function(){
+            $('.field-toggle').change(function() {
+                if( this.checked ) {
+                    $('#' + $(this).data('pulldown') ).removeAttr('disabled');
+                } else {
+                    $('#' + $(this).data('pulldown') ).val('');
+                    $('#' + $(this).data('pulldown') ).attr('disabled', 'disabled');
+                }
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

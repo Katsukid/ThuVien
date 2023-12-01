@@ -1,0 +1,78 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Preview notice template &rsaquo; Tools &rsaquo; Trường CĐKTQS1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body id="preview_letter" class="catalog">
+        <div class="main container-fluid">
+            <h1>Preview notice template</h1>
+            [% FOR m IN messages %]
+                [%# FIXME The message block does not appear at the top of the modal! %]
+                <div class="dialog [% m.type | html %]">
+                    [% SWITCH m.code %]
+                    [% CASE 'no_data_for_preview' %]<span>You did not specify data for preview.</span>
+                    [% CASE 'preview_not_available' %]<span>Preview is not available for letters '[% m.letter_code | html %]'.</span>
+                    [% CASE 'not_checked_in_yet' %]<span>Do not forget that the item has not been checked in yet.</span>
+                    [% CASE 'not_checked_out_yet' %]<span>Do not forget that the item has not been checked out yet.</span>
+                    [% CASE 'no_checkout' %]<span>This item is not checked out.</span>
+                    [% CASE 'no_item_or_no_patron' %]<span>The item or the patron does not exist.</span>
+                    [% CASE 'no_hold' %]<span>No hold is placed by this patron on this bibliographic record.</span>
+                    [% CASE %]<span>[% m.code | html %]</span>
+                    [% END %]
+                </div>
+            [% END %]
+
+            [% IF rendered_tt_message %]
+                [% IF messages_are_similar %]
+                    <div class="dialog message">The generated notices are exactly the same!</div>
+                [% ELSE %]
+                    <div class="dialog alert">The generated notices are different!</div>
+                [% END %]
+            [% END %]
+
+            [% IF rendered_message %]
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3>Original version</h3>
+                        <span style="font-family:monospace">
+                            [% FILTER html_line_break %]
+                                [% original_content | html %]
+                            [% END %]
+                        </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <h3>Original message, rendered:</h3>
+                        <span style="font-family:monospace">
+                            [% FILTER html_line_break %]
+                                [% rendered_message.content | html %]
+                            [% END %]
+                        </span>
+                    </div>
+                </div>
+            [% END %]
+
+
+            [% IF rendered_tt_message %]
+            <hr />
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3>Converted version</h3>
+                        <span style="font-family:monospace">
+                            [% FILTER html_line_break %]
+                                [% tt_content | html %]
+                            [% END %]
+                        </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <h3>Converted message, rendered:</h3>
+                        <span style="font-family:monospace">
+                            [% FILTER html_line_break %]
+                                [% rendered_tt_message.content | html %]
+                            [% END %]
+                        </span>
+                    </div>
+                </div>
+            [% END %]
+        </div> <!-- /.main -->
+
+    </body>
+</html>

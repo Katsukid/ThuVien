@@ -1,0 +1,204 @@
+[% USE raw %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% BLOCK translate_label_element %]
+[%-  SWITCH element -%]
+[%-  CASE 'layout'    -%][% t('layout') | html %]
+[%-  CASE 'Layouts'   -%][% t('Layouts') | html %]
+[%-  CASE 'template'  -%][% t('template') | html %]
+[%-  CASE 'Templates' -%][% t('Templates') | html %]
+[%-  CASE 'profile'   -%][% t('profile') | html %]
+[%-  CASE 'Profiles'  -%][% t('Profiles') | html %]
+[%-  CASE 'batch'     -%][% t('batch') | html %]
+[%-  CASE 'Batches'   -%][% t('Batches') | html %]
+[%-  END -%]
+[% END %]
+ [% INCLUDE 'doc-head-open.inc' %]
+ <title>[% PROCESS translate_label_element element=label_element_title %] &rsaquo; Label creator &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+ [% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="labels_label-manage" class="tools labels">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Phân hệ biên mục</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/labels/label-home.pl">Tạo nhãn gáy</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% PROCESS translate_label_element element=label_element_title %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ [% INCLUDE 'labels-toolbar.inc' %]
+ <h1>Manage labels</h1>
+
+ [% IF ( error ) %]
+ <div class="dialog alert">
+ <strong>Cảnh báo:</strong> Có lỗi sảy ra và [% op | html %]  hoạt động cho [% label_element | html %] [% element_id | html %] không hoàn thành. Bạn vui lòng kiểm tra lại lịch sử lỗi hệ thống để có thông tin chi tiết.</div>
+ [% END %]
+
+ <div id="manage-label-layouts" class="page-section">
+ [% IF ( table_loop ) %]
+ <form name="layouts" action="/cgi-bin/koha/label-manage.pl?label_element=[% label_element | html %]">
+ [% IF    ( label_element == 'layout' ) %]
+ <h2>Currently available layouts</h2>
+ [% ELSIF ( label_element == 'template' ) %]
+ <h2>Currently available templates</h2>
+ [% ELSIF ( label_element == 'profile' ) %]
+ <h2>Currently available profiles</h2>
+ [% ELSIF ( label_element == 'batch' ) %]
+ <h2>Currently available batches</h2>
+ [% END %]
+
+ <div class="page-section">
+ <table id="labels-table">
+ [% FOREACH table_loo IN table_loop %]
+ [% IF ( table_loo.header_fields ) %]
+ <thead>
+ <tr>
+ [% FOREACH header_field IN table_loo.header_fields %]
+ [% SWITCH header_field.field_label %]
+ [% CASE 'Layout ID'       %]<th>Layout ID</th>
+ [% CASE 'Layout'          %]<th>Layout</th>
+ [% CASE 'Barcode Type'    %]<th>Barcode type</th>
+ [% CASE 'Print Type'      %]<th>Print type</th>
+ [% CASE 'Template ID'     %]<th>Template ID</th>
+ [% CASE 'Template Name'   %]<th>Template name</th>
+ [% CASE 'Description'     %]<th>Thông tin mô tả</th>
+ [% CASE 'Actions'         %]<th class="noExport">Thao tác</th>
+ [% CASE 'Profile ID'      %]<th>Profile ID</th>
+ [% CASE 'Printer Name'    %]<th>Printer name</th>
+ [% CASE 'Paper Bin'       %]<th>Paper bin</th>
+ [% CASE 'Batch ID'        %]<th>Batch ID</th>
+ [% CASE 'Item Count'      %]<th>Số tài liệu</th>
+ [% CASE 'Fields to Print' %]<th>Fields to print</th>
+ [% CASE                   %]<th>[% header_field.field_label | html %]</th>
+ [% END %]
+ [% END %]
+ </tr>
+ </thead>
+ [% ELSE %]
+ <tr>
+ [% FOREACH text_field IN table_loo.text_fields %]
+ [% IF ( text_field.select_field ) %]
+ <td class="actions">
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/labels/label-edit-[% label_element |url %].pl?op=edit&amp;element_id=[% text_field.field_value |url %]"><i class="fa fa-edit"></i> Chỉnh sửa</a>
+ <a class="btn btn-default btn-xs delete" href="/cgi-bin/koha/labels/label-manage.pl?op=delete&amp;label_element=[% label_element | html %]&amp;element_id=[% text_field.field_value |url %]"><i class="fa fa-trash"></i> Xóa</a>
+ </td>
+ [% IF label_element == 'batch' %] <td><input type="checkbox" name="action" value="[% text_field.field_value | html %]" /></td>[% END %]
+ [% ELSIF ( text_field.field_value ) %]
+ <td>[% text_field.field_value | html %]</td>
+ [% ELSE %]
+ <td>&nbsp;</td>
+ [% END %]
+ [% END %]
+ </tr>
+ [% END %]
+ [% END %]
+ </table>
+ </div> <!-- /.page-section -->
+ [% IF ( print ) %]<button type="button" class="btn btn-default" id="print">Export selected</button>[% END %]
+ </fieldset>
+ </form>
+ [% ELSE %]
+ <div class="dialog message">
+ <h4>Hiện tại không có [% PROCESS translate_label_element element=label_element_title %] thẻ bạn đọc sẵn sàng.</h4>
+ <p>Sử dụng thanh công cụ bên trên để tạo [% PROCESS translate_label_element element=label_element %] thẻ bạn đọc mới.</p></div>
+ [% END %]
+ </div>
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'greybox.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        function Xport() {
+            batches= new Array;
+            if(document.layouts.action.length > 0) {
+                for (var i=0; i < document.layouts.action.length; i++) {
+                    if (document.layouts.action[i].checked) {
+                        batches.push("batch_id=" +  document.layouts.action[i].value);
+                    }
+                }
+                if (batches.length < 1) {
+                    alert(_("Vui lòng chọn lô nhãn gáy bạn muốn in."));
+                    return;     // no batch selected
+                }
+                getstr = batches.join("&");
+            }
+            else if (document.layouts.action.checked) {
+                getstr = "batch_id="+document.layouts.action.value;
+            }
+            else {
+                alert(_("Vui lòng chọn lô nhãn gáy bạn muốn in."));
+                return;     // no batch selected
+            }
+            return GB_showCenter(_("Export labels"), "/cgi-bin/koha/labels/label-print.pl?" + getstr, 400, 800);
+        }
+        function selected_layout(op) {
+            var selected = new Array;
+            if (document.layouts.action.length) {
+                for (i=0;i<document.layouts.action.length;i++){
+                    if (document.layouts.action[i].checked){
+                        selected.push(i);
+                    }
+                };
+                if (selected.length == 1) {
+                    return(document.layouts.action[selected[0]].value);
+                }
+                else {
+                    alert(_("Vui lòng chỉ lựa chọn một %s để %s.").format("[% label_element | html %]", op));
+                    return (-1);
+                }
+            }
+            else {
+                if (document.layouts.action.checked){
+                    return(document.layouts.action.value);
+                }
+            };
+            alert(_("Vui lòng lựa chọn %s.").format("[% label_element | html %]"));
+            return (-1);
+        }
+        $(document).ready(function(){
+            $('#navmenulist a[href$="/cgi-bin/koha/labels/label-home.pl"]').addClass("current");
+            $("#print").click(function(e){
+                e.preventDefault();
+                Xport();
+            });
+            $(".delete").on("click", function(){
+                return confirmDelete( _("Are you sure you want to delete this?") );
+            });
+            $("#labels-table").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "sPaginationType": "full",
+                "aaSorting": [[ 1, "asc" ]],
+                "aoColumnDefs": [
+                    { "aTargets": [ -1 ], "bSortable": false, "bSearchable": false },
+                ]
+            }));
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

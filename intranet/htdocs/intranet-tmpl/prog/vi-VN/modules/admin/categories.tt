@@ -1,0 +1,715 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE KohaDates %]
+[% USE Price %]
+[% USE TablesSettings %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op == 'add_form' %]
+ [% IF ( categorycode ) %]
+ Modify category '[% categorycode | html %]'
+ [% ELSE %]
+ New category
+ [% END %]
+ &rsaquo;
+ [% END %]
+ [% IF op == 'delete_confirm' %]
+ [% IF ( patrons_in_category > 0 ) %]
+ Cannot delete: category [% categorycode | html %] in use
+ [% ELSE %]
+ Confirm deletion of category '[% categorycode | html %]'
+ [% END %]
+ &rsaquo;
+ [% END %]
+ Patron categories &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>#enrolmentmessage.hint { display : none; }</style>
+</head>
+
+<body id="admin_categorie" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patrons-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Quản trị hệ thống</a>
+ [% END %]
+
+ [% IF op == 'add_form' || op == 'delete_confirm' || op == 'delete_confirmed' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/categories.pl">để kiểm tra lại.</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>để kiểm tra lại.</span>
+ [% END %]
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% IF ( categorycode ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Modify category '[% categorycode | html %]'</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tạo kiểu bạn đọc</span>
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% IF op == 'delete_confirm' %]
+ [% IF ( patrons_in_category > 0 ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Cannot delete: Category [% categorycode | html %] in use</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Confirm deletion of category '[% categorycode | html %]'</span>
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% IF op == 'delete_confirmed' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Category deleted</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+[% FOR m IN messages %]
+ <div class="dialog [% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>An error occurred when updating this patron category. Perhaps it already exists.</span>
+ [% CASE 'error_on_insert' %]
+ <span>An error occurred when inserting this patron category. The patron category might already exist.</span>
+ [% CASE 'error_on_delete' %]
+ <span>An error occurred when deleting this patron category. Check the logs.</span>
+ [% CASE 'success_on_update' %]
+ <span>Patron category updated successfully.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Patron category inserted successfully.</span>
+ [% CASE 'success_on_delete' %]
+ <span>Patron category deleted successfully.</span>
+ [% CASE 'already_exists' %]
+ <span>This patron category already exists.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+[% IF op == 'add_form' %]
+ <form id="category_form" action="/cgi-bin/koha/admin/categories.pl" method="post">
+ <input type="hidden" name="op" value="add_validate" />
+ <input type="hidden" name="checked" value="0" />
+ [% IF category %]
+ <h1>Chỉnh sửa kiểu bạn đọc [% categorycode | html %]</h1>
+ [% ELSE %]
+ <h1>Tạo kiểu bạn đọc</h1>
+ [% END %]
+ <fieldset class="rows">
+ <ol>
+ [% IF category %]
+ <li>
+ <span class="label">Mã kiểu bạn đọc: </span>[% categorycode | html %]
+ <input type="hidden" name="categorycode" value="[% category.categorycode | html %]" /><input type="hidden" name="is_a_modif" value="1" />
+ </li>
+ [% ELSE %]
+ <li>
+ <label for="categorycode" class="required">Mã kiểu bạn đọc: </label>
+ <input type="text" name="categorycode" id="categorycode" size="10" maxlength="10" class="required focus" required="required" />
+ <span class="required">Bắt buộc</span>
+ </li>
+ [% END %]
+ <li>
+ <label for="description" class="required">Thông tin mô tả: </label>
+ <input type="text" name="description" id="description" size="40" maxlength="80" class="required" required="required" value="[% category.description | html %]" />
+ <span class="required">Bắt buộc</span>
+ </li>
+ <li>
+ <span class="label">Thời hạn tài khoản: </span>
+ <fieldset>
+ <legend>Lựa chọn</legend>
+ <ol>
+ <li>
+ <label for="enrolmentperiod">Theo tháng: </label>
+ [% IF category.enrolmentperiod %]
+ <input type="text" class="enrollmentperiod" name="enrolmentperiod" id="enrolmentperiod" size="3" maxlength="3" value="[% category.enrolmentperiod | html %]" /> months
+ [% ELSE %]
+ <input type="text" class="enrollmentperiod" name="enrolmentperiod" id="enrolmentperiod" size="3" maxlength="3" value="" /> months
+ [% END %]
+ </li>
+ <li>
+ <label for="enrolmentperioddate">Ngày hết hạn: </label>
+ <input type="text" class="enrollmentperiod flatpickr" data-flatpickr-futuredate="true" name="enrolmentperioddate" id="enrolmentperioddate" value="[% category.enrolmentperioddate | html %]" />
+ </li>
+ </ol>
+ </fieldset>
+ </li>
+ <li>
+ <label for="password_expiry_days">Password expiration: </label>
+ <input type="text" name="password_expiry_days" id="password_expiry_days" value="[% category.password_expiry_days | html %]" size="3" maxlength="5" /> ngày </li>
+ <li>
+ <label for="dateofbirthrequired">Giới hạn từ: </label>
+ <input type="text" name="dateofbirthrequired" id="dateofbirthrequired" value="[% category.dateofbirthrequired | html %]" size="3" maxlength="3" /> years
+ </li>
+ <li>
+ <label for="upperagelimit">Đến: </label>
+ <input type="text" name="upperagelimit" id="upperagelimit" size="3" maxlength="3" value="[% category.upperagelimit | html %]" /> years
+ </li>
+ <li>
+ <label for="enrolmentfee">Phí tạo tài khoản: </label>
+ <input type="text" name="enrolmentfee" id="enrolmentfee" size="6" value="[% category.enrolmentfee | $Price on_editing => 1 %]" />
+ </li>
+ <li>
+ <label for="overduenoticerequired">Thông báo quá hạn: </label>
+ <select name="overduenoticerequired" id="overduenoticerequired">
+ [% IF category.overduenoticerequired %]
+ <option value="0">Không xóa</option>
+ <option value="1" selected="selected">Có</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Không xóa</option>
+ <option value="1">Có</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="hidelostitems">Lost items in staff interface: </label>
+ <select name="hidelostitems" id="hidelostitems">
+ [% IF category.hidelostitems %]
+ <option value="0">Hiển thị</option>
+ <option value="1" selected="selected">Không hiển thị</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Hiển thị</option>
+ <option value="1">Không hiển thị</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="reservefee">Phí đặt mượn tài liệu: </label>
+ <input type="text" name="reservefee" id="reservefee" size="6" value="[% category.reservefee | $Price on_editing => 1 %]" />
+ </li>
+ <li>
+ <label for="category_type" class="required">Kiểu nhóm </label>
+ <select name="category_type" id="category_type">
+ [% UNLESS category %]<option value="" selected="selected">Lựa chọn đơn vị quản lý</option>[% ELSE %]<option value="">Lựa chọn đơn vị quản lý</option>[% END %]
+ [% IF category and category.category_type == 'A' %]<option value="A" selected="selected">Người lớn</option>[% ELSE %]<option value="A">Người lớn</option>[% END %]
+ [% IF category and category.category_type == 'C' %]<option value="C" selected="selected">Trẻ em</option>[% ELSE %]<option value="C">Trẻ em</option>[% END %]
+ [% IF category and category.category_type == 'S' %]<option value="S" selected="selected">Cán bộ thư viện</option>[% ELSE %]<option value="S">Cán bộ thư viện</option>[% END %]
+ [% IF category and category.category_type == 'I' %]<option value="I" selected="selected">Cơ quan, tổ chức</option>[% ELSE %]<option value="I">Cơ quan, tổ chức</option>[% END %]
+ [% IF category and category.category_type == 'P' %]<option value="P" selected="selected">Cán bộ chuyên trách</option>[% ELSE %]<option value="P">Cán bộ chuyên trách</option>[% END %]
+ [% IF category and category.category_type == 'X' %]<option value="X" selected="selected">Thống kê</option>[% ELSE %]<option value="X">Thống kê</option>[% END %]
+ </select>
+ <span class="required">Bắt buộc</span>
+ </li>
+ <li>
+ <label for="can_be_guarantee">Can be guarantee</label>
+ <select name="can_be_guarantee" id="can_be_guarantee">
+ [% IF category.can_be_guarantee %]
+ <option value="1" selected>Có</option>
+ <option value="0">Không xóa</option>
+ [% ELSE %]
+ <option value="1">Có</option>
+ <option value="0" selected>Không xóa</option>
+ [% END %]
+ <select>
+ </li>
+ <li><label for="branches">Library limitations: </label>
+ <select id="branches" name="branches" multiple size="10">
+ <option value="">Tất cả thư viện</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => category.get_library_limits, unfiltered => 1, do_not_select_my_library => 1 ) %]
+ </select>
+ <div class="hint">Select <em>Tất cả thư viện</em> if this category type must to be displayed all the time. Otherwise select libraries you want to associate with this value.
+ </div>
+ </li>
+ <li>
+ <label for="reset_password">Password reset in OPAC: </label>
+ <select name="reset_password" id="reset_password">
+ [% IF category.reset_password.defined %]
+ [% IF category.reset_password %]
+ [% IF Koha.Preference('OpacResetPassword') %]
+ <option value="-1">Follow system preference OpacResetPassword (enabled)</option>
+ [% ELSE %]
+ <option value="-1">Follow system preference OpacResetPassword (disabled)</option>
+ [% END %]
+ <option value="1" selected="selected">Allowed</option>
+ <option value="0">Not allowed</option>
+ [% ELSE %]
+ [% IF Koha.Preference('OpacResetPassword') %]
+ <option value="-1">Follow system preference OpacResetPassword (enabled)</option>
+ [% ELSE %]
+ <option value="-1">Follow system preference OpacResetPassword (disabled)</option>
+ [% END %]
+ <option value="1">Allowed</option>
+ <option value="0" selected="selected">Not allowed</option>
+ [% END %]
+ [% ELSE %]
+ [% IF Koha.Preference('OpacResetPassword') %]
+ <option value="-1" selected="selected">Follow system preference OpacResetPassword (enabled)</option>
+ [% ELSE %]
+ <option value="-1" selected="selected">Follow system preference OpacResetPassword (disabled)</option>
+ [% END %]
+ <option value="1">Allowed</option>
+ <option value="0">Not allowed</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="change_password">Password change in OPAC: </label>
+ <select name="change_password" id="change_password">
+ [% IF category.change_password.defined %]
+ [% IF category.change_password %]
+ [% IF Koha.Preference('OpacPasswordChange') %]
+ <option value="-1">Follow system preference OpacPasswordChange (enabled)</option>
+ [% ELSE %]
+ <option value="-1">Follow system preference OpacPasswordChange (disabled)</option>
+ [% END %]
+ <option value="1" selected="selected">Allowed</option>
+ <option value="0">Not allowed</option>
+ [% ELSE %]
+ [% IF Koha.Preference('OpacPasswordChange') %]
+ <option value="-1">Follow system preference OpacPasswordChange (enabled)</option>
+ [% ELSE %]
+ <option value="-1">Follow system preference OpacPasswordChange (disabled)</option>
+ [% END %]
+ <option value="1">Allowed</option>
+ <option value="0" selected="selected">Not allowed</option>
+ [% END %]
+ [% ELSE %]
+ [% IF Koha.Preference('OpacPasswordChange') %]
+ <option value="-1" selected="selected">Follow system preference OpacPasswordChange (enabled)</option>
+ [% ELSE %]
+ <option value="-1" selected="selected">Follow system preference OpacPasswordChange (disabled)</option>
+ [% END %]
+ <option value="1">Allowed</option>
+ <option value="0">Not allowed</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="min_password_length">Minimum password length:</label>
+ <input id="min_password_length" type="text" inputmode="numeric" name="min_password_length" value="[% category.min_password_length | html %]"/>
+ <div class="hint">Leave blank to use system default ([% Koha.Preference('minPasswordLength') | html %])</div>
+ </li>
+ <li class="pwd_setting_wrapper">
+ <label for="require_strong_password">Require strong password:</label>
+ <select id="require_strong_password" name="require_strong_password">
+ [% IF category.require_strong_password.defined %]
+ [% IF category.require_strong_password %]
+ [% IF Koha.Preference('RequireStrongPassword') %]
+ <option value="-1">Follow system preference RequireStrongPassword (yes)</option>
+ [% ELSE %]
+ <option value="-1">Follow system preference RequireStrongPassword (no)</option>
+ [% END %]
+ <option value="1" selected="selected">Có</option>
+ <option value="0">Không xóa</option>
+ [% ELSE %]
+ [% IF Koha.Preference('RequireStrongPassword') %]
+ <option value="-1">Follow system preference RequireStrongPassword (yes)</option>
+ [% ELSE %]
+ <option value="-1">Follow system preference RequireStrongPassword (no)</option>
+ [% END %]
+ <option value="1">Có</option>
+ <option value="0" selected="selected">Không xóa</option>
+ [% END %]
+ [% ELSE %]
+ [% IF Koha.Preference('RequireStrongPassword') %]
+ <option value="-1">Follow system preference RequireStrongPassword (yes)</option>
+ [% ELSE %]
+ <option value="-1">Follow system preference RequireStrongPassword (no)</option>
+ [% END %]
+ <option value="1">Có</option>
+ <option value="0">Không xóa</option>
+ [% END %]
+ </select>
+ </li>
+ <li><label for="block_expired">Block expired patrons:</label>
+ <select name="BlockExpiredPatronOpacActions" id="block_expired">
+ [% IF not category or category.BlockExpiredPatronOpacActions == -1%]
+ <option value="-1" selected="selected"> Thông số hệ thống BlockExpiredPatronOpacActions </option>
+ [% ELSE %]
+ <option value="-1"> Thông số hệ thống BlockExpiredPatronOpacActions </option>
+ [% END %]
+
+ [% IF category and category.BlockExpiredPatronOpacActions == 1 %]
+ <option value="1" selected="selected"> Khóa </option>
+ [% ELSE %]
+ <option value="1"> Khóa </option>
+ [% END %]
+
+ [% IF category and category.BlockExpiredPatronOpacActions == 0 %]
+ <option value="0" selected="selected"> Không khóa </option>
+ [% ELSE %]
+ <option value="0"> Không khóa </option>
+ [% END %]
+ </select>
+ <div class="hint">
+ Chọn bạn đọc của kiểu bạn đọc này để khóa các chức năng gia hạn và đặt mượn trên giao diện Opac khi tài khoản của bạn đọc hết hạn. </div>
+ </li>
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' )  %]
+ <li><label for="checkprevcheckout">Check for previous checkouts: </label>
+ <select name="checkprevcheckout" id="checkprevcheckout">
+ [% IF category.checkprevcheckout == 'yes' %]
+ <option value="yes" selected="selected">Yes and try to override system preferences</option>
+ <option value="no">No and try to override system preferences</option>
+ <option value="inherit">Inherit from system preferences</option>
+ [% ELSIF category.checkprevcheckout == 'no' %]
+ <option value="yes">Yes and try to override system preferences</option>
+ <option value="no" selected="selected">No and try to override system preferences</option>
+ <option value="inherit">Inherit from system preferences</option>
+ [% ELSE %]
+ <option value="yes">Yes and try to override system preferences</option>
+ <option value="no">No and try to override system preferences</option>
+ <option value="inherit" selected="selected">Inherit from system preferences</option>
+ [% END %]
+ </select>
+ <div class="hint">
+ Choose whether patrons of this category by default are reminded if they try to borrow an item they borrowed before.
+ </div>
+ </li>
+ [% END %]
+ <li>
+ <label for="default_privacy">Default privacy: </label>
+ <select id="default_privacy" name="default_privacy">
+ [% SET default_privacy = 'default' %]
+ [% IF category %][% SET default_privacy = category.default_privacy %][% END %]
+ [% SWITCH default_privacy %]
+ [% CASE 'forever' %]
+ <option value="default">Mặc định</option>
+ <option value="never">Chưa có</option>
+ <option value="forever" selected="selected">Lâu dài</option>
+ [% CASE 'never' %]
+ <option value="default">Mặc định</option>
+ <option value="never" selected="selected">Chưa có</option>
+ <option value="forever">Lâu dài</option>
+ [% CASE %]
+ <option value="default" selected="selected">Mặc định</option>
+ <option value="never">Chưa có</option>
+ <option value="forever">Lâu dài</option>
+ [% END %]
+ </select>
+ <div class="hint">Controls how long a patrons checkout history is kept for new patrons of this category. "Never" anonymizes checkouts on return, and "Forever" keeps a patron's checkout history indefinitely. When set to "Default", the amount of history kept is controlled by the cronjob <em>batch_anonymise.pl</em> which should be set up by your system administrator.</div>
+ </li>
+ <li>
+ <label for="exclude_from_local_holds_priority">Exclude from local holds priority:</label>
+ <select id="exclude_from_local_holds_priority" name="exclude_from_local_holds_priority">
+ [% IF category.exclude_from_local_holds_priority %]
+ <option value="1" selected>Có</option>
+ <option value="0">Không xóa</option>
+ [% ELSE %]
+ <option value="1">Có</option>
+ <option value="0" selected>Không xóa</option>
+ [% END %]
+ </select>
+ <div class="hint">If <i>Có</i>, holds placed by patrons of this category will not be given priority</div>
+ </li>
+ </ol>
+ </fieldset>
+
+ [% IF ( EnhancedMessagingPreferences ) %]
+ <fieldset class="rows">
+ <legend>Thiết lập các tin nhắn gửi tới kiểu bạn đọc.</legend>
+ [% INCLUDE 'messaging-preference-form.inc' %]
+ </fieldset>
+ [% END %]
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Lưu" />
+ <a href="/cgi-bin/koha/admin/categories.pl" class="cancel">Hủy bỏ</a>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'delete_confirm' %]
+ <form action="/cgi-bin/koha/admin/categories.pl" method="post">
+ <fieldset>
+ <legend>
+ <h1>
+ [% IF patrons_in_category > 0 %]
+ <span>Category [% categorycode | html %] is in use. Deletion not possible!</span>
+ [% ELSE %]
+ <span>Confirm deletion of category [% categorycode | html %]</span>
+ [% END %]
+ </h1>
+ </legend>
+
+ [% IF patrons_in_category > 0  %]
+ <div class="dialog alert">
+ <strong>Kiểu bạn đọc này được sử dụng trong [% patrons_in_category | html %]  biểu ghi</strong>. Deletion not possible
+ </div>
+ [% END %]
+ <table>
+ <tr><th scope="row">Mã kiểu bạn đọc: </th><td>[% category.categorycode | html %]</td></tr>
+ <tr><th scope="row">Thông tin mô tả: </th><td>[% category.description | html %]</td></tr>
+ <tr><th scope="row">Thời hạn tài khoản: </th>
+ <td>
+ [% IF category.enrolmentperiod %] [% category.enrolmentperiod | html %] tháng [% ELSE %] Ngày hết hạn: [% category.enrolmentperioddate | $KohaDates %] [% END %] </td>
+ </tr>
+ <tr><th scope="row">Password expiration: </th><td>[% category.password_expiry_days | html %] ngày</td></tr>
+ <tr><th scope="row">Giới hạn từ: </th><td>[% category.dateofbirthrequired | html %] tuổi</td></tr>
+ <tr><th scope="row">Đến: </th><td>[% category.upperagelimit | html %] tuổi</td></tr>
+ <tr><th scope="row">Phí tạo tài khoản: </th><td>[% category.enrolmentfee | $Price %]</td></tr>
+ <tr><th scope="row">Thông báo quá hạn: </th><td>[% IF category. overduenoticerequired %]Có[% ELSE %]Không[% END %]</td></tr>
+ <tr><th scope="row">Lost items in staff interface</th><td>[% IF category.hidelostitems %]Không hiển thị[% ELSE %]Hiển thị[% END %]</td></tr>
+ <tr><th scope="row">Phí đặt mượn tài liệu: </th><td>[% category.reservefee | $Price %]</td></tr>
+
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' ) %]
+ <tr>
+ <th scope="row">Check previous checkouts: </th>
+ <td>
+ [% SWITCH category.checkprevcheckout %]
+ [% CASE 'yes' %]
+ <span>Có</span>
+ [% CASE 'no' %]
+ <span>Không xóa</span>
+ [% CASE 'inherit' %]
+ <span>Inherit</span>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ <tr><th scope="row">Can be guarantee</th><td>[% IF category.can_be_guarantee %]Có[% ELSE %]Không[% END %]</td></tr>
+ <tr>
+ <th scope="row">Default privacy: </th>
+ <td>
+ [% SWITCH category.default_privacy %]
+ [% CASE 'default' %]
+ <span>Mặc định</span>
+ [% CASE 'never' %]
+ <span>Chưa có</span>
+ [% CASE 'forever' %]
+ <span>Lâu dài</span>
+ [% END %]
+ </td>
+ </tr>
+ </table>
+ <fieldset class="action">
+ [% IF patrons_in_category > 0 %]
+ <input type="submit" class="btn btn-primary" value="OK" />
+ [% ELSE %]
+ <input type="hidden" name="op" value="delete_confirmed" />
+ <input type="hidden" name="categorycode" value="[% categorycode | html %]" />
+ <input class="btn btn-primary" type="submit" value="Xóa kiểu bạn đọc" />
+ <a class="cancel" href="/cgi-bin/koha/admin/categories.pl">Hủy bỏ</a>
+ [% END %]
+ </fieldset>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'list' %]
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="newcategory" href="/cgi-bin/koha/admin/categories.pl?op=add_form"><i class="fa fa-plus"></i> Tạo kiểu bạn đọc</a>
+ </div>
+
+ <h1>để kiểm tra lại.</h1>
+ <div class="page-section">
+ [% IF searchfield %] Bạn tìm kiếm [% searchfield | html %]</span>
+ [% END %]
+ [% IF categories %]
+ <table id="patron_categories">
+ <thead>
+ <tr>
+ <th scope="col">Mã</th>
+ <th scope="col">Kiểu bạn đọc</th>
+ <th scope="col">Type</th>
+ <th scope="col">Thời hạn tài khoản:</th>
+ <th scope="col">Password expiration</th>
+ <th scope="col">Tuổi thấp nhất</th>
+ <th scope="col">Tuổi cao nhất</th>
+ <th scope="col">Phí tạo tài khoản</th>
+ <th scope="col">Thông báo quá hạn</th>
+ <th scope="col">Tài liệu bị mất</th>
+ <th scope="col">Phí đặt mượn</th>
+ [% IF ( EnhancedMessagingPreferences ) %]
+ <th scope="col">Tin nhắn</th>
+ [% END %]
+ <th scope="col">Library limitations</th>
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' ) %]
+ <th scope="col">Check previous checkout?</th>
+ [% END %]
+ <th scope="col">Can be guarantee</th>
+ <th scope="col">Default privacy</th>
+ <th scope="col">Exclude from local holds priority</th>
+ <th scope="col">Thao tác</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH category IN categories %]
+ <tr>
+ <td>[% category.categorycode | html %]</td>
+ <td>
+ <a href="/cgi-bin/koha/admin/categories.pl?op=add_form&amp;categorycode=[% category.categorycode |uri %]">[% category.description | html %]</a>
+ </td>
+ <td>
+ [% SWITCH category.category_type %]
+ [% CASE 'A' %]<span>Người lớn</span>
+ [% CASE 'C' %]<span>Trẻ em</span>
+ [% CASE 'P' %]<span>Prof.</span>
+ [% CASE 'I' %]<span>Org.</span>
+ [% CASE 'S' %]<span>Cán bộ thư viện</span>
+ [% CASE 'X' %]<span>Thống kê</span>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( category.enrolmentperiod ) %] [% category.enrolmentperiod | html %] tháng [% ELSE %] Ngày hết hạn: [% category.enrolmentperioddate | $KohaDates %] [% END %] </td>
+ [% IF (category.password_expiry_days) %]
+ <td>[% category.password_expiry_days | html %] ngày</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ [% IF (category.dateofbirthrequired) %]
+ <td>[% category.dateofbirthrequired | html %] tuổi</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ [% IF (category.upperagelimit) %]
+ <td>[% category.upperagelimit | html %] tuổi</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ [% IF (category.enrolmentfee > 0) %]
+ <td>[% category.enrolmentfee | $Price %]</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ <td>[% IF ( category.overduenoticerequired ) %]Có[% ELSE %]Không[% END %]</td>
+ <td>[% IF ( category.hidelostitems ) %]Không hiển thị[% ELSE %]Hiển thị[% END %]</td>
+ [% IF (category.reservefee > 0) %]
+ <td>[% category.reservefee | $Price %]</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ [% IF Koha.Preference('EnhancedMessagingPreferences') %]
+ <td style="white-space: nowrap; font-size:80%;">
+ [% SET default_messaging = category.default_messaging %]
+ [% IF default_messaging.size %]
+ [% FOREACH prefs IN default_messaging %]
+ [% NEXT IF !Koha.Preference( 'ILLModule' ) && prefs.message_name.match('^Ill_') %]
+ [% FOREACH transport IN prefs.transports %]
+ [% IF ( transport.transport ) %]
+ [% IF ( prefs.Item_Due ) %]<span>Item due</span>
+ [% ELSIF ( prefs.Advance_Notice ) %]<span>Advance notice</span>
+ [% ELSIF ( prefs.Hold_Filled ) %]<span>Hold filled</span>
+ [% ELSIF ( prefs.Item_Check_in ) %]<span>Item check-in</span>
+ [% ELSIF ( prefs.Item_Checkout ) %]<span>Item checkout</span>
+ [% ELSIF ( prefs.Ill_ready ) %]<span>Interlibrary loan ready</span>
+ [% ELSIF ( prefs.Ill_unavailable ) %]<span>Interlibrary loan unavailable</span>
+ [% ELSIF ( prefs.Ill_update ) %]<span>Interlibrary loan updated</span>
+ [% ELSIF ( prefs.Auto_Renewals ) %]<span>Auto renewal</span>
+ [% ELSIF ( prefs.Hold_Reminder ) %]<span>Hold reminder</span>
+ [% ELSE %]<span>Không biết</span>
+ [% END %]:
+ <strong>[% transport.transport | html %]</strong><br />
+ [% ELSE %]<span>Bất kỳ</span><br />[% END %]
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ <span>Bất kỳ</span>
+ [% END %]
+ </td>
+ [% END %]
+ <td>
+ [% SET library_limits = category.library_limits %]
+ [% IF library_limits.count > 0 %]
+ [% library_str = "" %]
+ [% FOREACH library IN library_limits %]
+ [%- IF loop.first -%]
+ [% library_str = library.branchname _ " (" _ library.branchcode _ ")" %]
+ [% ELSE %]
+ [% library_str = library_str _ "\n" _ library.branchname _ " (" _ library.branchcode _ ")" %]
+ [% END %]
+ [% END %]
+ <span class="library_limitation" title="[% library_str | html %]">
+ [% IF library_limits.count > 1 %]
+ <span>[% library_limits.count | html %] library limitations</span>
+ [% ELSE %]
+ <span>[% library_limits.count | html %] library limitation</span>
+ [% END %]
+ [% ELSE %]
+ <span>No limitation</span>
+ [% END %]
+ </td>
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' ) %]
+ <td>
+ [% SWITCH category.checkprevcheckout %]
+ [% CASE 'yes' %]
+ <span>Có</span>
+ [% CASE 'no' %]
+ <span>Không xóa</span>
+ [% CASE 'inherit' %]
+ <span>Inherit</span>
+ [% END %]
+ </td>
+ [% END %]
+ <td>[% IF category.can_be_guarantee %] Yes [% ELSE %] No [% END %]</td>
+ <td>
+ [% SWITCH category.default_privacy %]
+ [% CASE 'default' %]
+ <span>Mặc định</span>
+ [% CASE 'never' %]
+ <span>Chưa có</span>
+ [% CASE 'forever' %]
+ <span>Lâu dài</span>
+ [% END %]
+ </td>
+ <td>
+ [% IF category.exclude_from_local_holds_priority %]
+ <span>Có</span>
+ [% ELSE %]
+ <span>Không xóa</span>
+ [% END %]
+ </td>
+ <td class="actions">
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/categories.pl?op=add_form&amp;categorycode=[% category.categorycode |uri %]"><i class="fa fa-pencil"></i> Chỉnh sửa</a>
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/categories.pl?op=delete_confirm&amp;categorycode=[% category.categorycode |uri %]"><i class="fa fa-trash"></i> Xóa</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% ELSE %]
+ <div class="dialog alert">Không có kiểu bạn đọc được định nghĩa. <a href="/cgi-bin/koha/admin/categories.pl?op=add_form">Tạo kiểu bạn đọc mới</a>.</div>
+ [% END %]
+ </div>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        var TalkingTechItivaPhoneNotification = [% Koha.Preference('TalkingTechItivaPhoneNotification') || 0 | html %];
+        var PhoneNotification = [% Koha.Preference('PhoneNotification') || 0 | html %];
+    </script>
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% Asset.js("js/messaging-preference-form.js") | $raw %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        var table_settings = [% TablesSettings.GetTableSettings( 'admin', 'categories', 'patron_categories', 'json' ) | $raw %];
+    </script>
+ [% Asset.js("js/categories.js") | $raw %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,287 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Categories %]
+[% USE AdditionalContents %]
+[% USE AuthClient %]
+[% PROCESS 'html_helpers.inc' %]
+[% SET OpacLoginInstructions = AdditionalContents.get( location => "OpacLoginInstructions", lang => lang, library => branchcode || default_branch ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>
+[% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ Log in to your account
+[% ELSE %]
+ Catalog login disabled
+[% END %] &rsaquo;
+ [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog
+</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-login-page' bodyclass='scrollto' %]
+[% INCLUDE 'masthead.inc' %]
+
+<div class="main">
+ <nav id="breadcrumbs" aria-label="Breadcrumb" class="breadcrumbs">
+ <ol class="breadcrumb">
+ <li class="breadcrumb-item">
+ <a href="/cgi-bin/koha/opac-main.pl">Trang chủ</a>
+ </li>
+ <li class="breadcrumb-item active">
+ <a href="#" aria-current="page">Đăng nhập</a>
+ </li>
+ </ol>
+ </nav> <!-- /#breadcrumbs -->
+
+ <div class="container-fluid">
+ <div class="row justify-content-center">
+ <div class="col-md-10 col-lg-6">
+ <div id="opac-auth" class="maincontent">
+ <!--CONTENT-->
+ [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ [% IF ( nopermission ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-warning">
+ <h1>Xác định truy cập</h1>
+ <p>Xin lỗi! Bạn không được phân quyền để truy cập vào trang này. </p>
+ [% IF SCO_login %]
+ <p><a href="/cgi-bin/koha/sco/sco-main.pl?logout.x=1">Log out and try again with a different user.</a></p>
+ [% ELSIF SCI_login %]
+ <p><a href="/cgi-bin/koha/sci/sci-main.pl?logout.x=1">Log out and try again with a different user.</a></p>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF ( loginprompt ) %]
+ <!-- login prompt time-->
+ <h1>Đăng nhập</h1>
+
+ [% IF ( timed_out ) %]
+ <!-- This is what is displayed if login has timed out -->
+ <div class="alert alert-info">
+ <p>Xin lỗi! Phiên làm việc của bạn đã hết hạn. Bạn hãy đăng nhập lại.</p>
+ </div>
+ [% END %]
+
+ [% IF ( different_ip ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-info">
+ <p>Bạn đăng nhập từ dải IP không phù hợp! Bạn hãy cấu hình lại IP rồi tiến hành đăng nhập lại.</p>
+ </div>
+ [% END %]
+
+
+ [% IF invalid_username_or_password || too_many_login_attempts %]
+ <!-- This is what is displayed if user doesn't have permission or account is locked. (Do not expose more information than needed.) -->
+ <div class="alert alert-info">
+ <p>You entered an incorrect username or password. Please try again! But note that passwords are case sensitive[% IF Koha.Preference('FailedLoginAttempts') %] and that your account will be locked out after a fixed number of failed login attempts[% END %]. Please contact a library staff member if you continue to have problems.</p>
+ </div>
+ [% END %]
+
+ [% IF auth_error %]
+ <div class="alert alert-info">
+ <p>There was an error authenticating to external identity provider</p>
+ <p>[% auth_error | html %]</p>
+ </div>
+ [% END %]
+
+ [% IF ( shibbolethAuthentication ) %]
+ [% IF ( invalidShibLogin ) %]
+ <!-- This is what is displayed if shibboleth login has failed to match a koha user -->
+ <div class="alert alert-info">
+ <p>Sorry, your Shibboleth identity does not match a valid library identity.</p>
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ [% IF ( invalidCasLogin ) %]
+ <!-- This is what is displayed if cas login has failed -->
+ <p>Sorry, the CAS login also failed. If you have a local login you may use that below.</p>
+ [% ELSE %]
+ <p>Nếu bạn có tài khoản CAS, bạn có thể dùng tài khoản đó dưới đây.</p>
+ [% END %]
+ [% ELSE %]
+ <p>Nếu bạn có một tài khoản, bạn có thể dùng tài khoản đó dưới đây.</p>
+ [% END %]
+ [% END %]
+ </div>
+ [% ELSE %]
+ <h2>Shibboleth Login</h2>
+ <p><a href="[% shibbolethLoginUrl | $raw %]">Log in using a Shibboleth account.</a></p>
+ [% END # /IF invalidShibLogin %]
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ <h2>CAS login</h2>
+ <p>If you do not have a Shibboleth account, but you do have a CAS account, you can use CAS.</p>
+ [% ELSE %]
+ <h2>Tài khoản thư viện</h2>
+ <p>If you do not have a Shibboleth account, but you do have a local login, then you may login below.</p>
+ [% END %]
+ [% END %]
+ [% END # /IF shibbolethAuthentication %]
+
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ [% IF ( shibbolethAuthentication ) %]
+ [% IF ( casServerUrl ) %]
+ <p><a href="[% casServerUrl | $raw %]">Log in.</a><p>
+ [% END %]
+
+ [% IF ( casServersLoop ) %]
+ <p>Hãy chọn lại sự xác thực của bạn: </p>
+ <ul>
+ [% FOREACH casServer IN casServersLoop %]
+ <li><a href="[% casServer.value | $raw %]">[% casServer.name | html %]</a></li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% ELSE %]
+ <h2>CAS login</h2>
+
+ [% IF ( invalidCasLogin ) %]
+ <!-- This is what is displayed if cas login has failed -->
+ <p>Xin lỗi! Đăng nhập CAS bị lỗi.</p>
+ [% END %]
+
+ [% IF ( casServerUrl ) %]
+ <p><a href="[% casServerUrl | $raw %]">Log in using a CAS account.</a><p>
+ [% END %]
+
+ [% IF ( casServersLoop ) %]
+ <p>Nếu bạn đã có tài khoản CAS, vui lòng chọn tài khoản nào bạn muốn xác thực:</p>
+ <ul>
+ [% FOREACH casServer IN casServersLoop %]
+ <li><a href="[% casServer.value | $raw %]">[% casServer.name | html %]</a></li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% END # /IF shibbolethAuthentication %]
+
+ [% IF ( shibbolethAuthentication ) %]
+ <p>Nothing</p>
+ [% ELSE %]
+ <h2>Tài khoản thư viện</h2>
+ <p>If you do not have a CAS account, but do have a local account, you can still log in: </p>
+ [% END %]
+
+ [% END # / IF casAuthentication %]
+
+ [% SET identity_providers = AuthClient.get_providers('opac') %]
+ [% IF ( ! identity_providers.empty ) %]
+ [% FOREACH provider IN identity_providers %]
+ <p class="clearfix">
+ <a href="[% provider.url | url %]" class="btn btn-light col-md-12" id="provider_[% provider.code | html %]">
+ [% IF provider.icon_url %]
+ <img src="[% provider.icon_url | url %]" style="max-height: 20px; max-width: 20px;"/>
+ [% ELSE %]
+ <i class="fa fa-user" aria-hidden="true"></i>
+ [% END %]
+ Log in with [% provider.description | html %]
+ </a>
+ </p>
+ [% END %]
+ <hr/>
+ <p>If you do not have an external account, but do have a local account, you can still log in: </p>
+ [% END # /IF  identity_providers %]
+
+ [% IF ( Koha.Preference('GoogleOpenIDConnect') == 1 ) %]
+ [% IF ( invalidGoogleOpenIDConnectLogin ) %]
+ <h2>Google login</h2>
+ <p>Sorry, your Google login failed. <span class="error">[% invalidGoogleOpenIDConnectLogin | html %]</span></p>
+ <p>Please note that the Google login will only work if you are using the e-mail address registered with this library.</p>
+ <p>If you want to, you can try to <a href="/cgi-bin/koha/svc/auth/googleopenidconnect?reauthenticate=select_account">log in using a different account</a>
+ [% END %]
+ <a href="/cgi-bin/koha/svc/auth/googleopenidconnect" class="btn btn-light" id="openid_connect"><i class="fa fa-google" aria-hidden="true"></i> Log in with Google</a>
+ <p>If you do not have a Google account, but do have a local account, you can still log in: </p>
+ [% END # /IF GoogleOpenIDConnect %]
+ [% END # /UNLESS OPACShibOnly %]
+
+ [% IF !(invalid_username_or_password || too_many_login_attempts) and password_has_expired %]
+ <div class="alert alert-info">
+ <p><strong>Error: </strong>Your password has expired!</p>
+ </div>
+ [% IF Koha.Preference('EnableExpiredPasswordReset') %]
+ <a href="/cgi-bin/koha/opac-reset-password.pl">Reset your password</a>.
+ [% ELSIF Koha.Preference('OpacPasswordChange') && Categories.can_any_reset_password %]
+ <div id="resetpassword">
+ <a href="/cgi-bin/koha/opac-password-recovery.pl">Reset your password</a>
+ </div>
+ [% ELSE %]
+ <p>You must contact the library to reset your password</p>
+ [% END %]
+ [% ELSIF !Koha.Preference('OPACShibOnly') or SCO_login or SCI_login %]
+ [% IF SCO_login %]
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="auth" id="auth" method="post" autocomplete="off">
+ [% ELSIF SCI_login %]
+ <form action="/cgi-bin/koha/sci/sci-main.pl" name="auth" id="auth" method="post" autocomplete="off">
+ [% ELSE %]
+ <form action="[% script_name | html %]" name="auth" id="auth" method="post" autocomplete="off">
+ [% END %]
+ <input type="hidden" name="koha_login_context" value="opac" />
+
+ <div class="local-login">
+ <fieldset class="brief">
+ [% FOREACH INPUT IN INPUTS %]
+ [% NEXT IF INPUT.name == 'logout.x' %]
+ <input type="hidden" name="[% INPUT.name | html %]" value="[% INPUT.value | html %]" />
+ [% END %]
+ <div class="form-group">
+ <label for="userid">Tên đăng nhập:</label>
+ <input class="form-control" type="text"  size="25" id="userid"  name="userid" autocomplete="off" />
+ </div>
+ <div class="form-group">
+ <label for="password">Mật khẩu:</label>
+ <input class="form-control" type="password"  size="25" id="password"  name="password" autocomplete="off" />
+ </div>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Đăng nhập" />
+ </fieldset>
+ </fieldset>
+ </div>
+
+ <div id="nologininstructions">
+ [% IF OpacLoginInstructions %]
+ [% PROCESS koha_news_block news => OpacLoginInstructions %]
+ [% ELSE %]
+ <h2>Quên mật khẩu đăng nhập?</h2>
+ <p>Quên mật khẩu đăng nhập? Nếu bạn quên mật khẩu đăng nhập, hãy mang theo thẻ thư viện và liên hệ với cán bộ thư viện để lấy lại mật khẩu.</p>
+ <h2>Bạn chưa có thẻ thư viện?</h2>
+ <p>Nếu bạn không có thẻ thư viện, hãy ghé qua thư viện địa phương để đăng ký.</p>
+ [% END # / IF OpacLoginInstructions %]
+ </div>
+ [% IF Koha.Preference('OpacPasswordChange') && Categories.can_any_reset_password %]
+ <div id="forgotpassword">
+ <a href="/cgi-bin/koha/opac-password-recovery.pl">Forgot your password?</a>
+ </div>
+ [% END %]
+ [% IF PatronSelfRegistration && PatronSelfRegistrationDefaultCategory %]
+ <div id="registrationinstructions">
+ <span>
+ <a href="/cgi-bin/koha/opac-memberentry.pl">You may register here.</a>
+ </span>
+ </div>
+ [% END %]
+ </form>
+ [% END # / IF password_has_expired / ELSIF !OPACShibOnly or SCO_login or SCI_login %]
+ [% END # / IF loginprompt %]
+
+ [% ELSE %]
+ <h1>Quá trình đăng nhập hiện tại không thực hiện được.</h1>
+ <ul>
+ <li>To report this error, you can email the Koha Administrator. <a href="mailto:[% Koha.Preference( 'KohaAdminEmailAddress' ) | uri %]">Thư điện tử</a></li>
+ <li>Bạn có thể sử dụng thanh công cụ bên trên để chuyển tới các tính năng khác của Koha.</li>
+ </ul>
+ [% END # / IF opacuserlogin %]
+
+ </div> <!-- /.opac-auth -->
+ </div> <!-- /.col-md-10 col-lg-6 -->
+ </div> <!-- /.row -->
+ </div> <!-- /.container-fluid -->
+</div> <!-- /.main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+<script>
+    // Hide circular 'Log in to Your Account' link in opac-auth.pl
+    $(document).ready(function() {
+        if ( $("#auth" ) ) { $("#members ul li a").hide(); }
+    });
+</script>
+[% END %]

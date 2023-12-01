@@ -1,0 +1,24 @@
+---
+description:
+- Default Koha system patron restriction types
+tables:
+- restriction_types:
+    multiline: []
+    rows:
+    - code: MANUAL
+      display_text: Manual
+      is_default: 1
+      is_system: 0
+    - code: OVERDUES
+      display_text: Overdues
+      is_default: 0
+      is_system: 1
+    - code: SUSPENSION
+      display_text: Suspension
+      is_default: 0
+      is_system: 1
+    - code: DISCHARGE
+      display_text: Discharge
+      is_default: 0
+      is_system: 1
+    translatable: []

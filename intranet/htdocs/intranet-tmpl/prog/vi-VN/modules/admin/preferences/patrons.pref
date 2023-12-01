@@ -1,0 +1,464 @@
+---
+bạn đọc:
+  General:
+  - - choices:
+        hardno: Do not
+        hardyes: Do
+        softno: Unless overridden by patron category, do not
+        softyes: Unless overridden by patron category, do
+      default: no
+      pref: CheckPrevCheckout
+    - ' check borrower checkout history to see if the current item has been checked
+      out before.'
+  - - Trigger a warning if the current item has been checked out no longer than
+    - default: 0
+      pref: CheckPrevCheckoutDelay
+    - days ago.
+    - Requires <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CheckPrevCheckout'>CheckPrevCheckout</a>
+      to be enabled. There is no time limit if 0 or empty.
+  - - choices:
+        '0': ' Không kích hoạt'
+        '1': ' Kích hoạt'
+      pref: ExtendedPatronAttributes
+    - ' việc tìm kiếm, chỉnh sửa và hiển thị các thuộc tính tùy chỉnh của bạn đọc.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: intranetreadinghistory
+    - staff to access a patron's checkout and hold history (checkout history is still
+      stored, regardless of staff being allowed access or not).
+  - - When deleting a patron who owns public or shared lists,
+    - choices:
+        delete: delete these lists.
+        transfer: change owner of these lists.
+      pref: ListOwnershipUponPatronDeletion
+    - All public or shared lists of this patron are either deleted or transferred
+      to a new owner according to your choice; other private lists (not shared) are
+      deleted.
+    - '<br/>When changing owner at patron deletion, use borrowernumber '
+    - class: integer
+      pref: ListOwnerDesignated
+    - as new list owner, or leave this field empty in order to change owner to the
+      active staff member who deletes the patron.
+  - - ' Số tiền phạt tối đa bạn đọc được phép nợ thư viện'
+    - class: currency
+      pref: MaxFine
+    - ' [% local_currency %].'
+    - ' Nếu bạn bỏ trống có nghĩa là không bị giới hạn. Số tiền nợ tối đa với mỗi
+      tài liệu được quy định trong chính sách lưu thông.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: patronimages
+    - images to be uploaded and shown for patrons on the staff interface.
+  - - ' Theo mặc định, hiển thị'
+    - class: integer
+      pref: PatronsPerPage
+    - results per page in the staff interface.
+  - - 'Comma separated list defining the default fields to be used during a patron
+      search using the "standard" option in the patrons or circulation module:'
+    - class: multi
+      pref: DefaultPatronSearchFields
+    - If empty Koha will default to "firstname,middle_name,surname,othernames,cardnumber,userid".
+      Additional fields added to this preference will be added as search options in
+      the dropdown menu on the patron search page.
+  - - choices:
+        contains: Contains
+        starts_with: Starts with
+      pref: DefaultPatronSearchMethod
+    - Enable this search method to determine whether to use Starts with or Contains
+      for autocomplete patron searches.
+  - - ' Hiển thị các trường sau đây từ cơ sở dữ liệu các tài liệu thành các cột trong
+      bảng thông kê trên biểu ghi bạn đọc: '
+    - pref: StatisticsFields
+      source: items
+      type: modalselect
+    - 'If empty, defaults to: location|itype|ccode'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: EnableBorrowerFiles
+    - ' tải các tệp tin đính kèm tới biểu ghi bạn đọc.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: useDischarge
+    - librarians to discharge borrowers and borrowers to request a discharge.
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: FeeOnChangePatronCategory
+    - charge a fee when a patron changes to a category with an enrollment fee.
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: TrackLastPatronActivity
+    - track last patron activity.
+    - The first time each day that a patron logs into the OPAC, connects to Koha via
+      SIP or ILS-DI, or checks an item out the borrowers.lastseen will update with
+      the current date and time.
+  - - choices:
+        '0': Disable
+        '1': Enable
+      pref: AutoApprovePatronProfileSettings
+    - automatic approval of patron detail changes from the OPAC.
+    - Requires <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACPatronDetails">OPACPatronDetails</a>
+      to be activated.
+  - - choices:
+        '0': Allow all permitted users
+        '1': Allow only superlibrarians
+      pref: ProtectSuperlibrarianPrivileges
+    - to access/change superlibrarian privileges.
+    - <br><strong>NOTE:</strong> A permitted user needs to have the 'permissions'
+      flag (if no superlibrarian).
+  - - choices:
+        '0': Allow only staff
+        '1': Allow patrons
+      pref: AllowPatronToControlAutorenewal
+    - to allow/disallow auto-renewal for account. If allowed a patron will be able
+      to update their own account to allow/disallow auto-renewal.
+  - - Lock expired patrons after
+    - class: integer
+      pref: LockExpiredDelay
+    - days. Leave empty to disable this behavior.
+    - <br><strong>NOTE:</strong> This system preference requires the misc/cronjobs/cleanup_database.pl
+      cronjob. Ask your system administrator to schedule it.
+  Membership expiry:
+  - - ' Khi gia hạn tài khoản bạn đọc, ngày hết hạn tài khoản mới dựa trên'
+    - choices:
+        combination: the latter of the current and expiry date.
+        dateexpiry: ' ngày hết hạn cũ.'
+        now: ' ngày hiện tại.'
+      pref: BorrowerRenewalPeriodBase
+  - - ' Hiển thị một thông báo cho bạn đọc nếu tài khoản của bạn đọc sắp hết hạn hoặc
+      đã hết hạn '
+    - class: integer
+      pref: NotifyBorrowerDeparture
+    - ' ngày.'
+  - - Send an account expiration notice when a patron's card will expire in
+    - class: integer
+      pref: MembershipExpiryDaysNotice
+    - days.
+    - <br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/membership_expiry.pl</code>
+      cronjob. Ask your system administrator to schedule it.
+  Notices and notifications:
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: EnhancedMessagingPreferences
+    - staff to manage which notices patrons will receive and when they will receive
+      them.
+    - <br><strong>NOTE:</strong> This only applies to courtesy notices. To manage
+      if patrons have also access to these settings, use <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EnhancedMessagingPreferencesOPAC">EnhancedMessagingPreferencesOPAC</a>.
+    - <br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/process_message_queue.pl</code>
+      and the <code>misc/cronjobs/advance_notices.pl</code> cronjob. Ask your system
+      administrator to schedule them.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      pref: EnhancedMessagingPreferencesOPAC
+    - patron messaging setting on the OPAC.
+    - <br><strong>NOTE:</strong> <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EnhancedMessagingPreferences">EnhancedMessagingPreferences</a>
+      must be enabled.
+  - - choices:
+        '0': Don't send
+        '1': Send
+      pref: AutoEmailNewUser
+    - an email to newly created patrons.
+    - <br><strong>NOTE:</strong> This uses the WELCOME notice.
+  - - choices:
+        '0': Don't notify
+        '1': Notify
+      pref: NotifyPasswordChange
+    - patrons whenever their password is changed.
+  - - choices:
+        '0': Don't send
+        '1': Send
+      pref: UseEmailReceipts
+    - email receipts to patrons for payments and writeoffs.
+  - - Use the patron's
+    - choices:
+        B_email: alternate email
+        OFF: first valid email address
+        cardnumber: cardnumber
+        email: primary email
+        emailpro: secondary email
+      default: OFF
+      pref: EmailFieldPrimary
+    - for sending out email notices.
+    - <br><strong>NOTE:</strong> If set to "first valid", the order in which the email
+      addresses are checked is set in <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailFieldPrecedence">EmailFieldPrecedence</a>.
+  - - 'When <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailFieldPrimary''>EmailFieldPrimary</a>
+      is set to ''<strong>first valid</strong>'', check the patron email address fields
+      in the following order and use the first valid email address found:'
+    - class: multi
+      pref: EmailFieldPrecedence
+    - <br><strong>NOTE:</strong> All patron fields can be used, but to work correctly
+      they must contain a valid email address or an empty string.
+    - Valid options are the <a href='http://schema.koha-community.org/__VERSION__/tables/borrowers.html'
+      target='blank'>database columns</a> of the borrowers table, separated by | (pipe).
+    - 'Example: email|emailpro|B_email'
+  - - choices:
+        '0': ' Không kích hoạt'
+        '1': ' Kích hoạt'
+      pref: TalkingTechItivaPhoneNotification
+    - ' việc gửi các thông báo vào điện thoại bạn đọc bằng cách sử dụng Talking Tech
+      itiva (hiện tại hệ thống hỗ trợ các thông báo quá hạn, gia hạn, đặt mượn).'
+    - <br/><i class="fa fa-exclamation-triangle"></i> If <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=TalkingTechItivaPhoneNotification">TalkingTechItivaPhoneNotification</a>
+      is enabled, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PhoneNotification">PhoneNotification</a>
+      should be disabled.
+  - - choices:
+        '0': Disable
+        '1': Enable
+      pref: PhoneNotification
+    - patron phone notifications generation. A plugin will be required to process
+      the phone notifications.
+    - <br/><i class="fa fa-exclamation-triangle"></i> If <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PhoneNotification">PhoneNotification</a>
+      is enabled, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=TalkingTechItivaPhoneNotification">TalkingTechItivaPhoneNotification</a>
+      should be disabled.
+  - - ' Sử dụng trình điều khiển SMS::Send::'
+    - pref: SMSSendDriver
+    - ' để gửi tin nhắn SMS.'
+    - '<br>If you would prefer to send SMS via E-mail, set SMSSendDriver to: Email'
+    - <br><strong>NOTE:</strong> Many mobile providers have deprecated support for
+      this feature and it is not recommended for use unless you have a dedicated SMS
+      to Email gateway.
+  - - Define a username/login
+    - pref: SMSSendUsername
+    - and a password
+    - pref: SMSSendPassword
+    - . Override from address with
+    - class: email
+      pref: EmailSMSSendDriverFromAddress
+    - for emails sent using "Email" send driver.
+  - - choices:
+        '0': Disable
+        '1': Enable
+      pref: FallbackToSMSIfNoEmail
+    - sending purchase suggestion messages by SMS if no patron email is defined.
+  - - 'Send automatic renewal notices: '
+    - choices:
+        cron: (Deprecated) according to --send-notices cron switch
+        never: never
+        preferences: according to patron messaging preferences
+      pref: AutoRenewalNotices
+  Patron forms:
+  - - 'The following <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>database columns</a> must be filled in on the patron entry
+      screen:'
+    - exclusions: flags
+      pref: BorrowerMandatoryField
+      source: borrowers
+      type: modalselect
+    - <strong>NOTE:</strong> If <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=autoMemberNum">autoMemberNum</a>
+      is enabled, the system preference <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerMandatoryField">BorrowerMandatoryField</a>
+      must not contain the field <code>cardnumber</code>.
+  - - 'The following <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>database columns</a> will not appear on the patron entry screen:'
+    - exclusions: branchcode|categorycode|flags
+      pref: BorrowerUnwantedField
+      source: borrowers
+      type: modalselect
+  - - ' Các chức danh sau đây có thể được đi kèm với bạn đọc:'
+    - class: multi
+      pref: BorrowersTitles
+    - ' (các chức danh phân cách bằng ký tự |)'
+  - - choices:
+        '0': ' Không mặc định'
+        '1': ' Mặc định'
+      pref: autoMemberNum
+    - '  trường số thẻ bạn đọc được hệ thống tự động sinh ra và số thẻ sẽ tăng dần
+      (Ví dụ như số thẻ bạn đọc cuối cùng 26345000012941, thì số thẻ của bạn đọc tiếp
+      theo sẽ là 26345000012942).'
+    - <strong>NOTE:</strong> If <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=autoMemberNum">autoMemberNum</a>
+      is enabled, the system preference <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerMandatoryField">BorrowerMandatoryField</a>
+      must not contain the field <code>cardnumber</code>.
+  - - ' Số thẻ bạn đọc phải chứa'
+    - pref: CardnumberLength
+    - ' ký tự. Bạn có thể khai báo theo các định dạng (''Min,Max''), hoặc ('',Max'')
+      hoặc (''Min,'') hoặc một số cụ thể tùy theo yêu cầu của bạn.'
+    - If <code>cardnumber</code> is included in the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerMandatoryField">BorrowerMandatoryField</a>
+      list, the minimum length, if not specified here, defaults to one. Maximum cannot
+      be bigger than the database field size of 32.
+  - - choices:
+        '0': ' Không thực hiện'
+        '1': ' Thực hiện'
+      pref: uppercasesurnames
+    - ' lưu và hiển thị tên bạn đọc ở dạng chữ hoa.'
+  - - 'The following <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>database columns</a>:'
+    - pref: PatronQuickAddFields
+      source: borrowers
+      type: modalselect
+    - will be added to the patron quick add form when entering a new patron. Displays
+      only mandatory fields and fields specified here. If applicable the guarantor
+      form will be shown as well, individual fields in that form will be ignored.
+  - - 'When adding new patrons or editing existing patrons, collapse the following
+      fields from the full form (can still be expanded later):'
+    - multiple:
+        additional: Additional attributes and identifiers
+        alt_address: Alternate address
+        alt_contact: Alternate contact
+        debarments: Patron restrictions (existing patrons)
+        flags: Patron account flags (existing patrons)
+        guarantor: Guarantor information
+        housebound: Housebound roles
+        identity: Định danh bạn đọc
+        lib_mgmt: Library management
+        lib_setup: Thiết lâp thư viện
+        login: Đăng nhập giao diện Người dùng/Nhân viên
+        messaging: Patron messaging preferences
+        primary_address: Main address
+        primary_contact: Contact information
+      pref: CollapseFieldsPatronAddForm
+  - - 'The following <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>database columns</a>:'
+    - pref: PatronDuplicateMatchingAddFields
+      source: borrowers
+      type: modalselect
+    - will be used to detect possible duplicates when adding a new patron.
+  Patron relationships:
+  - - ' Các trường sau đây được sử dụng để khai báo thông tin cho các bạn đọc thuộc
+      nhóm đối tượng cần bảo lãnh:'
+    - class: multi
+      pref: borrowerRelationship
+    - (input multiple choices separated by |). Leave empty to deactivate.
+  - - 'When adding a guarantee to a guarantor patron fill the following fields in
+      the guarantee''s member entry form from the guarantors record:'
+    - multiple:
+        B_address: Alternate address - Address
+        B_address2: Alternate address - Address 2
+        B_city: Alternate address - City
+        B_country: Alternate address - Country
+        B_email: Alternate address - Email
+        B_phone: Alternate address - Phone
+        B_state: Alternate address - State
+        B_streetnumber: Alternate address - Street number
+        B_streettype: Alternate address - Street type
+        B_zipcode: Alternate address - ZIP/Postal code
+        address: Main address - Address
+        address2: Main address - Address 2
+        altcontactaddress1: Alternate contact - Address
+        altcontactaddress2: Alternate contact - Address 2
+        altcontactaddress3: Alternate contact - City
+        altcontactcountry: Alternate contact - Country
+        altcontactfirstname: Alternate contact - First name
+        altcontactphone: Alternate contact - Phone
+        altcontactstate: Alternate contact - State
+        altcontactsurname: Alternate contact - Surname
+        altcontactzipcode: Alternate contact - ZIP/Postal code
+        city: Main address - City
+        contactnote: Alternate address - Contact note
+        country: Main address - Country
+        email: Contact - Primary email
+        emailpro: Contact - Secondary email
+        fax: Contact - Fax
+        mobile: Contact - Other phone
+        phone: Contact - Primary phone
+        phonepro: Contact - Secondary phone
+        state: Main address - State
+        streetnumber: Main address - Street number
+        streettype: Main address - Street type
+        surname: Surname
+        zipcode: Main address - ZIP/Postal code
+      pref: PrefillGuaranteeField
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      pref: AllowStaffToSetCheckoutsVisibilityForGuarantor
+    - staff to set the ability for a patron's checkouts to be viewed by linked patrons
+      in the OPAC.
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      pref: AllowStaffToSetFinesVisibilityForGuarantor
+    - staff to set the ability for a patron's charges to be viewed by linked patrons
+      in the OPAC.
+  Privacy:
+  - - Use the following URL
+    - class: url
+      pref: PrivacyPolicyURL
+    - to refer to your local privacy policy in messages about privacy and data protection.
+      (If you enforce a data privacy policy, make sure that this page is not blocked.)
+    - <br><strong>NOTE:</strong> The URL will only be displayed if <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PrivacyPolicyConsent">PrivacyPolicyConsent</a>
+      is set.
+  - - 'Set data privacy policy consent to:'
+    - choices:
+        '': disabled
+        Enforced: enforced
+        Permissive: permissive
+      pref: PrivacyPolicyConsent
+    - . When you enforce a data privacy policy, patrons need to give consent before
+      using the OPAC. If you set to permissive, Koha will warn but not enforce.
+    - <br><strong>NOTE:</strong> If you enable this you will also have to set the
+      URL of your public privacy policy with the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PrivacyPolicyURL">PrivacyPolicyURL</a>
+      setting.
+  - - Lock/expire patrons that submitted an unsubscribe request (refused consent)
+      after
+    - pref: UnsubscribeReflectionDelay
+    - days, anonymize locked/expired accounts after
+    - pref: PatronAnonymizeDelay
+    - days and remove anonymized patron accounts after
+    - pref: PatronRemovalDelay
+    - 'days.<br>IMPORTANT: No action is performed when these delays are empty (no
+      text). But a zero value (''0'') is interpreted as no delay (do it now)! The
+      actions are performed by the cleanup database cron job.'
+  Security:
+  - - ' Mật khẩu đăng nhập cho cán bộ thư viện và bạn đọc phải có chiều dài tối thiểu
+      là'
+    - class: integer
+      pref: minPasswordLength
+    - ' ký tự.'
+  - - choices:
+        '0': Don't require
+        '1': Require
+      pref: RequireStrongPassword
+    - a strong password for staff and patrons
+    - (must contain at least one digit, one lowercase and one uppercase).
+  - - choices:
+        '0': Don't enable
+        '1': Enable
+      pref: EnableExpiredPasswordReset
+    - the ability for patrons to directly reset their password when it is expired.
+    - If not enabled patrons must either use the 'Forgot your password' feature or
+      have staff
+    - reset their password.
+  - - Block a patron's account if it reaches
+    - class: integer
+      pref: FailedLoginAttempts
+    - failed login attempts.
+  - - choices:
+        '0': Disable
+        '1': Enable
+      pref: Pseudonymization
+    - pseudonymization to comply with data privacy policies and regulations like GDPR
+      for managing personal information.
+    - Patrons and transactions will be copied to a separate table for statistical
+      purposes.
+    - '<br/>Use the following fields for patrons:'
+    - multiple:
+        branchcode: Patron's library
+        categorycode: Patron category
+        city: City
+        country: Country
+        dateenrolled: Date the patron was added to Koha
+        sex: Patron's gender
+        sort1: Sort 1
+        sort2: Sort 2
+        state: State
+        title: Patron's title
+        zipcode: ZIP/Postal code
+      pref: PseudonymizationPatronFields
+    - '<br/> And the following fields for the transactions:'
+    - multiple:
+        ccode: Collection
+        datetime: Date and time of the transaction
+        holdingbranch: Holding library
+        homebranch: Home library
+        itemcallnumber: Item's callnumber
+        itemnumber: Itemnumber
+        itemtype: Item type
+        location: Location
+        transaction_branchcode: Library where the transaction occurred
+        transaction_type: Transaction type
+      pref: PseudonymizationTransactionFields

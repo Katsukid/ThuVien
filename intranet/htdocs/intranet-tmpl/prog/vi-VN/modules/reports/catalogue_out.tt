@@ -1,0 +1,225 @@
+[% USE raw %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Items with no checkouts &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>
+    .sql {display: none;}
+</style>
+</head>
+
+<body id="rep_catalogue_out" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/reports-home.pl">Báo cáo</a>
+ [% END %]
+ [% IF ( do_it ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/catalogue_out.pl">Tài liệu không lưu thông</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kết quả</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tài liệu không lưu thông</span>
+ [% END %]
+ [% END # /IF ( do_it ) %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+ [% IF ( do_it ) %]
+ <h1>Tài liệu không lưu thông</h1>
+ [% FOREACH mainloo IN mainloop %]
+ [% IF ( mainloo.loopfilter ) %]
+ <p>Bộ lọc dữ liệu:</p>
+ <ul>
+ [% FOREACH loopfilte IN mainloo.loopfilter %]
+ [% IF ( loopfilte.err ) %]
+ <p class="error">Lỗi: [% loopfilte.filter | html %]</p>
+ [% ELSIF ( loopfilte.sql ) %]
+ <span class="sql">
+ [% loopfilte.crit | html %] = [% loopfilte.filter | html %]
+ </span>
+ [% ELSE %]
+ [% SWITCH loopfilte.crit %]
+ [% CASE 'homelibrary' %]<li>Thư viện chính: [% Branches.GetName( loopfilte.filter ) | html %]</li>
+ [% CASE 'itemtype' %]<li>Item type: [% ItemTypes.GetDescription( loopfilte.filter ) | html %]</li>
+ [% CASE 'limit' %]<li>Limit: [% loopfilte.filter | html %]</li>
+ [% CASE 'by' %]
+ <li>By:
+ [% group_by = loopfilte.filter %]
+ [% IF ( group_by == "homebranch") %]
+ Home library
+ [% ELSIF ( group_by == "itype" ) %]
+ Item type
+ [% ELSE %]
+ None
+ [% END %]
+ </li>
+ [% CASE %]<li>[% loopfilte.crit | html %]: [% loopfilte.filter | html %]</li>
+ [% END %]
+ [% END %]
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% IF ( mainloo.looptables ) %]
+ <div class="page-section">
+ <h3><a name="summary" id="summary"></a>Tóm tắt</h3>
+ <table id="summary_table">
+ <tr>
+ <th>Nhóm</th>
+ <th>Phạm vi ký hiệu phân loại</th>
+ <th>Số bản tài liệu hiển thị</th>
+ <th>Số bản tài liệu trong nhóm</th>
+ </tr>
+ [% FOREACH looptable IN mainloo.looptables %]
+ <tr>
+ <td>
+ [% IF ( group_by=="itype" ) %]
+ <a href="#table[% looptable.coltitle | uri %]">[% ItemTypes.GetDescription( looptable.coltitle ) | html %]</a>
+ [% ELSIF ( group_by=="homebranch" ) %]
+ <a href="#table[% looptable.coltitle | uri %]">[% Branches.GetName( looptable.coltitle ) | html %]</a>
+ [% ELSE %]
+ <a href="#table[% looptable.coltitle | uri %]">Ungrouped</a>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( looptable.looptable_count ) %] [% looptable.looptable_first | html %] tới [% looptable.looptable_last | html %] [% END %] </td>
+ <td>[% looptable.looptable_count | html %]</td>
+ <td>[% looptable.coltitle_count | html %]</td>
+ </tr>
+ [% END %]
+ <tr>
+ <th>Tổng số</th>
+ <th></th>
+ <th>[% mainloo.total_looptable_count | html %]</th>
+ <th>[% mainloo.total_coltitle_count | html %]</th>
+ </tr>
+ </table>
+ </div>
+ [% END %]
+
+ [% FOREACH looptable IN mainloo.looptables %]
+ <div class="page-section">
+ <h3>
+ [% IF ( group_by=="itype" ) %]
+ <a id="table[% looptable.coltitle | html %]" >[% ItemTypes.GetDescription( looptable.coltitle ) | html %]</a>
+ [% ELSIF ( group_by=="homebranch" ) %]
+ <a id="table[% looptable.coltitle | html %]" >[% Branches.GetName( looptable.coltitle ) | html %]</a>
+ [% ELSE %]
+ Ungrouped
+ [% END %]
+ </h3>
+ <table>
+ <tr>
+ <th>#</th>
+ <th>Ký hiệu phân loại</th>
+ <th>Đăng ký cá biệt</th>
+ <th>Thông tin tài liệu</th>
+ </tr>
+ [% IF ( looptable.looprow ) %]
+ [% FOREACH loopro IN looptable.looprow %]
+ <tr>
+ <td>[% loop.count | html %]</td>
+ <td>[% IF ( loopro.itemcallnumber ) %][% loopro.itemcallnumber | html %][% ELSE %]No call number[% END %]</td>
+ <td>[% IF ( loopro.barcode ) %][% loopro.barcode | html %][% ELSE %]No barcode[% END %]</td>
+ <td>
+ <p><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% loopro.biblionumber | uri %]">[% IF ( loopro.title ) %][% loopro.title | html %][% ELSE %]NO TITLE[% END %]</a> [% IF ( loopro.author ) %] by [% loopro.author | html %][% END %]</p>
+ [% IF ( loopro.branch ) %]at [% Branches.GetName( loopro.branch ) | html %][% END %]
+ </td>
+ </tr>
+ [% END %]
+ [% ELSE %]
+ <tr>
+ <td colspan="4">Không có bản tài liệu của [% looptable.coltitle | html %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </div>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+
+ <h1>Tài liệu không lưu thông</h1>
+
+ <form method="post" action="/cgi-bin/koha/reports/catalogue_out.pl">
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="branch">Thư viện: </label>
+ <select name="Filter" id="branch">
+ <option value="">Tất cả</option>
+ [% PROCESS options_for_libraries libraries => Branches.all() %]
+ </select>
+ </li>
+ <li>
+ <label for="documenttype">Kiểu tài liệu: </label>
+ <select name="Filter" id="documenttype">
+ <option value="">Tất cả</option>
+ [% FOREACH itemtype IN itemtypes %]
+ <option value="[% itemtype.itemtype | html %]">[% itemtype.translated_description | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+ <legend>Giới hạn</legend>
+ <ol>
+ <li>
+ <label for="numberlimit">Số lượng hiển thị: </label>
+ <select name="Limit" id="numberlimit">
+ <option value ="10">10</option>
+ <option value ="20">20</option>
+ <option value ="50">50</option>
+ <option value ="100">100</option>
+ <option value ="200">200</option>
+ <option value ="300">300</option>
+ <option value ="400">400</option>
+ <option value ="500">500</option>
+ <option value ="1000">1000</option>
+ </select>
+ </li>
+ <li>
+ <label for="criteria">Liệt kê theo: </label>
+ <select name="Criteria" id="criteria">
+ <option value ="" selected="selected">Bất kỳ</option>
+ <option value ="homebranch">Thư viện</option>
+ <option value ="itype">Kiểu tài liệu</option>
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input type="hidden" name="report_name" value="[% report_name | html %]" />
+ <input type="hidden" name="do_it" value="1" />
+ <input type="hidden" name="output" value="screen" />
+ </fieldset>
+ </form>
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'reports-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+</div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

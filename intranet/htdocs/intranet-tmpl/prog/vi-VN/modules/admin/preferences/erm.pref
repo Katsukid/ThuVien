@@ -1,0 +1,17 @@
+---
+E-resource management:
+  Interface:
+  - - choices:
+        '0': Disable
+        '1': Enable
+      pref: ERMModule
+    - the e-resource management module
+  - - Providers for the e-resource management module
+    - multiple:
+        ebsco: EBSCO
+        local: Local
+      pref: ERMProviders
+  - - Customer ID for EBSCO HoldingsIQ
+    - pref: ERMProviderEbscoCustomerID
+  - - API key for EBSCO HoldingsIQ
+    - pref: ERMProviderEbscoApiKey

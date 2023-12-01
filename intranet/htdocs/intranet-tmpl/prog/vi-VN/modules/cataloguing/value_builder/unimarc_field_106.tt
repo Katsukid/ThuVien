@@ -1,0 +1,102 @@
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>UNIMARC field 106 builder</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_unimarc_field_106" class="cat" style="padding:1em;">
+ <h1>UNIMARC field 106 builder</h1>
+ <div class="page-section">
+ <form name="f_pop" action="">
+ <table>
+ <tr>
+ <td><label for="f1">Form of item: Coded data: Medium designator (not repeatable)</label></td>
+ <td>
+ <select name="f1" id="f1">
+
+ [% IF ( f1r ) %]
+ <option value="r" selected="selected">In thường</option>
+ [% ELSE %]
+ <option value="r">In thường</option>
+ [% END %]
+ [% IF ( f1b ) %]
+ <option value="d" selected="selected">In khổ lớn</option>
+ [% ELSE %]
+ <option value="d">In khổ lớn</option>
+ [% END %]
+ [% IF ( f1e ) %]
+ <option value="e" selected="selected">Định dạng báo</option>
+ [% ELSE %]
+ <option value="e">Định dạng báo</option>
+ [% END %]
+
+ [% IF ( f1f ) %]
+ <option value="f" selected="selected">Sách chữ nổi Braille và bản khắc</option>
+ [% ELSE %]
+ <option value="f">Sách chữ nổi Braille và bản khắc</option>
+
+ [% END %]
+ [% IF ( f1g ) %]
+ <option value="g" selected="selected">micro phim</option>
+ [% ELSE %]
+ <option value="g">micro phim</option>
+
+ [% END %]
+ [% IF ( f1h ) %]
+ <option value="h" selected="selected">handwritten</option>
+ [% ELSE %]
+ <option value="h">handwritten</option>
+
+ [% END %]
+ [% IF ( f1i ) %]
+ <option value="i" selected="selected">multimedia (e.g. an item in regular print with a microfiche supplement)</option>
+ [% ELSE %]
+ <option value="i">multimedia (e.g. an item in regular print with a microfiche supplement)</option>
+
+ [% END %]
+ [% IF ( f1j ) %]
+ <option value="j" selected="selected">mini-print</option>
+ [% ELSE %]
+ <option value="j">mini-print</option>
+
+ [% END %]
+ [% IF ( f1s ) %]
+ <option value="s" selected="selected">Điện tử</option>
+ [% ELSE %]
+ <option value="s">Điện tử</option>
+
+ [% END %]
+ [% IF ( f1t ) %]
+ <option value="t" selected="selected">micro phim</option>
+ [% ELSE %]
+ <option value="t">micro phim</option>
+
+ [% END %]
+ [% IF ( f1z ) %]
+ <option value="z" selected="selected">other form of material</option>
+ [% ELSE %]
+ <option value="z">other form of material</option>
+
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ </table>
+ <fieldset class="action"><input type="button" class="btn btn-primary" value="OK"  onclick="report();" /> <a href="#" class="cancel close">Hủy bỏ</a></fieldset>
+ </form>
+ </div> <!-- /.page-section -->
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        function report() {
+            var doc   = opener.document;
+            var field = doc.getElementById("[% index | html %]");
+
+            field.value = document.f_pop.f1.value;
+            self.close();
+            return false;
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

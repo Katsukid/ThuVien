@@ -1,0 +1,314 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE AuthorisedValues %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>
+ [% IF ( add_form ) %]
+ [% IF ( use_heading_flags_p ) %]
+ [% IF ( heading_modify_tag_p ) %]
+ Modify tag &rsaquo; [% IF ( authtypecode ) %]
+ [% authtypecode | html %] Framework
+ [% ELSE %]
+ Default framework
+ [% END %] &rsaquo; [% END %]
+ [% IF ( heading_add_tag_p ) %]
+ New tag &rsaquo; [% IF ( authtypecode ) %]
+ [% authtypecode | html %] Framework
+ [% ELSE %]
+ Default framework
+ [% END %] &rsaquo; [% END %]
+ [% ELSE %]
+ [% action | html %] &rsaquo; [% END %]
+ [% END %]
+ [% IF ( delete_confirm ) %]
+ Confirm deletion &rsaquo; [% IF ( authtypecode ) %]
+ [% authtypecode | html %] Framework
+ [% ELSE %]Default framework
+ [% END %] &rsaquo; [% END %]
+ [% IF ( delete_confirmed ) %]
+ Data deleted &rsaquo; [% IF ( authtypecode ) %]
+ [% authtypecode | html %] Framework
+ [% ELSE %]Default framework
+ [% END %] &rsaquo; [% END %]
+Authority MARC framework &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+</title>
+[% INCLUDE 'doc-head-close.inc' %]
+
+</head>
+
+<body id="admin_auth_tag_structure" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Quản trị hệ thống</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/authtypes.pl">Kiểu dữ liệu kiểm soát</a>
+ [% END %]
+
+ [% IF ( add_form || delete_confirm || delete_confirmed ) %]
+ [% IF ( authtypecode ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=[% authtypecode | uri %]">[% authtypecode | html %] Khung mẫu</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Khung mẫu mặc định</a>
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% IF ( add_form ) %]
+ [% IF ( use_heading_flags_p ) %]
+ [% IF ( heading_modify_tag_p ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Modify tag</span>
+ [% END %]
+ [% END %]
+
+ [% IF ( heading_add_tag_p ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tạo trường mới</span>
+ [% END %]
+ [% END %]
+
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% action | html %]
+ [% END %]
+ [% END %]
+
+ [% ELSE %]
+ [% IF ( delete_confirm ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Xác nhận xóa</span>
+ [% END %]
+ [% ELSE %]
+ [% IF ( delete_confirmed ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Dữ liệu đã bị xóa</span>
+ [% END %]
+ [% ELSE %]
+ [% IF ( authtypecode ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% authtypecode | html %] Framework
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Khung mẫu mặc định</span>
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+<h1>Khung mẫu MARC của [% IF ( authtypecode ) %][% authtypecode | html %][% ELSE %]Khung mẫu mặc định[% END %]</h1>
+
+
+[% IF ( add_form ) %]
+
+ <h2>
+ [% IF ( heading_modify_tag_p ) %]
+ <span>Modify tag</span>
+ [% END %]
+ [% IF ( heading_add_tag_p ) %]
+ <span>Tạo trường mới</span>
+ [% END %]
+ </h2>
+ <form action="[% script_name | html %]" name="Aform" method="post" class="validated">
+ <input type="hidden" name="op" value="add_validate" />
+ [% IF ( heading_modify_tag_p ) %]<input type="hidden" name="modif" value="1" />[% END %]
+ <input type="hidden" name="authtypecode" value="[% authtypecode | html %]" />
+ <fieldset class="rows">
+ <ol>
+ [% IF ( heading_modify_tag_p ) %]
+ <li>
+ <span class="label">Trường: </span>
+ <input type="hidden" name="tagfield" value="[% searchfield | html %]" />
+ [% searchfield | html %]
+ </li>
+ [% ELSE %]
+ <li>
+ <label for="tagfield" class="required">Trường: </label><input type="text" id="tagfield" name="tagfield" size="5" maxlength="3" required="required" class="required" />
+ <span class="required">Bắt buộc</span>
+ </li>
+ [% END %]
+
+ <li><label for="liblibrarian">Mô tả cho thủ thư: </label><input type="text" name="liblibrarian" id="liblibrarian" value="[% liblibrarian | html %]" size="40" maxlength="100" /></li>
+ <li><label for="libopac">Mô tả trên OPAC: </label><input type="text" name="libopac" id="libopac" value="[% libopac | html %]" size="40" maxlength="100" /></li>
+ <li><label for="repeatable">Lặp lại: </label>
+ [% IF ( repeatable ) %]
+ <input type="checkbox" name="repeatable" id="repeatable" value="1" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" name="repeatable" id="repeatable" value="1" />
+ [% END %]
+ </li>
+ <li><label for="mandatory">Bắt buộc: </label>
+ [% IF ( mandatory ) %]
+ <input type="checkbox" name="mandatory" id="mandatory" value="1" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" name="mandatory" id="mandatory" value="1" />
+ [% END %]
+ </li>
+ <li><label for="authorised_value">Giá trị định trước: </label>
+ <select name="authorised_value" id="authorised_value">
+ <option value=""></option>
+ [% PROCESS options_for_authorised_value_categories authorised_value_categories => AuthorisedValues.GetCategories( selected => authorised_value ) %]
+ </select>
+ <div class="hint">If you select a value here, the indicators will be limited to the authorized value list</div>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=[% authtypecode | uri %]" class="cancel">Hủy bỏ</a>
+ </fieldset>
+ </form>
+[% END %]
+
+
+[% IF ( delete_confirm ) %]
+ <div class="dialog alert">
+ <h3>Xác nhận xóa</h3>
+ <form action="[% script_name | html %]" method="post">
+ <table>
+ <tr><th scope="row">Trường: </th><td>[% searchfield | html %] [% liblibrarian | html %]</td></tr>
+ </table>
+ <input type="hidden" name="op" value="delete_confirmed" />
+ <input type="hidden" name="authtypecode" value="[% authtypecode | html %]" />
+ <input type="hidden" name="searchfield" value="[% searchfield | html %]" />
+ <button type="submit" class="approve"><i class="fa fa-fw fa-check"></i> Xóa</button>
+ </form>
+ <form action="[% script_name | html %]" method="get">
+ <button type="submit" class="deny"><i class="fa fa-fw fa-remove"></i> Không xóa</button>
+ </form>
+ </div>
+[% END %]
+
+[% IF ( delete_confirmed ) %]
+
+ <div class="dialog message"> <h3>Dữ liệu đã bị xóa</h3>
+ <form action="[% script_name | html %]" method="post">
+ <input type="hidden" name="authtypecode" value="[% authtypecode | html %]" />
+ <input type="hidden" name="searchfield" value="[% searchfield | html %]" />
+ <input type="submit" value="OK" class="btn btn-primary" />
+ </form></div>
+[% END %]
+[% IF ( authtype_create ) %]
+
+ <form action="[% script_name | html %]" method="post">
+ <input type="hidden" name="op" value="authtype_create_confirm" />
+ <input type="hidden" name="authtypecode" value="[% authtypecode | html %]" />
+ Tạo khung mẫu biên mục biểu ghi nhất quán cho [% authtypecode | html %] bằng cách sử dụng khung mẫu <select name="existingauthtypecode">
+ [% FOREACH existingauthtypeloo IN existingauthtypeloop %]
+ [% IF existingauthtypeloo.value == "" %]
+ <option value="" selected="selected">[% existingauthtypeloo.authtypetext | html %]</option>
+ [% ELSE %]
+ <option value="[% existingauthtypeloo.value | html %]">[% existingauthtypeloo.authtypetext | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <input type="submit" value="OK" class="btn btn-primary" />
+ </form>
+[% END %]
+
+
+[% IF ( else ) %]
+
+<div id="toolbar" class="btn-toolbar">
+ <div class="btn-group"><a class="btn btn-default" id="newtag" href="/cgi-bin/koha/admin/auth_tag_structure.pl?op=add_form&amp;authtypecode=[% authtypecode | uri %]"><i class="fa fa-plus"></i> Tạo trường mới</a></div>
+</div>
+
+<h2>Lựa chọn khung mẫu biểu ghi nhất quán</h2>
+<form action="[% script_name | html %]" method="post">
+ <select name="authtypecode">
+ [% FOREACH authority_type IN authority_types%]
+ [% IF authority_type.authtypecode == authtypecode%]
+ <option value="[% authority_type.authtypecode | html %]" selected="selected">[% authority_type.authtypetext | html %]</option>
+ [% ELSE %]
+ <option value="[% authority_type.authtypecode | html %]">[% authority_type.authtypetext | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <input type="text" name="searchfield" value="[% searchfield | html %]" />
+ <input type="submit" value="OK" class="btn btn-primary" />
+</form><br />
+<div id="pagertable_authtagstructure">
+</div>
+
+<div class="page-section">
+<table id="table_authtagstructure">
+ <thead>
+ <tr>
+ <th>Trường</th>
+ <th>Hiển thị cho thư viện</th>
+ <th>Lặp lại</th>
+ <th>Bắt buộc</th>
+ <th>Giá trị<br />Giá trị</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH loo IN loop %]
+ <tr>
+ <td><strong>[% loo.tagfield | html %]</strong></td>
+ <td>[% loo.liblibrarian | html %]</td>
+ <td>[% IF ( loo.repeatable ) %]Có[% ELSE %]Không[% END %]</td>
+ <td>[% IF ( loo.mandatory ) %]Có[% ELSE %]Không[% END %]</td>
+ <td>[% loo.authorised_value | html %]</td>
+ <td>
+ <div class="btn-group dropup">
+ <a class="btn btn-default btn-xs dropdown-toggle" id="authtagactions[% loo.tagfield | html %]" role="button" data-toggle="dropdown" href="#">
+ Thao tác <b class="caret"></b></a>
+ <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="authtagactions[% loo.tagfield | html %]">
+ <li><a href="auth_subfields_structure.pl?tagfield=[% loo.tagfield | uri %]&amp;authtypecode=[% authtypecode | uri %]"><i class="fa fa-eye"></i> Trường con</a></li>
+ <li><a href="?op=add_form&amp;searchfield=[% loo.tagfield | uri %]&amp;authtypecode=[% authtypecode | uri %]"><i class="fa fa-pencil"></i> Chỉnh sửa</a></li>
+ <li><a href="?op=delete_confirm&amp;searchfield=[% loo.tagfield | uri %]&amp;authtypecode=[% authtypecode | uri %]"><i class="fa fa-trash"></i> Xóa</a></li>
+ </ul>
+ </div>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+</div> <!-- /.page-section -->
+[% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ <script>
+        $(document).ready(function() {
+            $("#table_authtagstructure").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "aoColumnDefs": [
+                    { "aTargets": [ -1 ], "bSortable": false, "bSearchable": false },
+                ],
+                "sPaginationType": "full"
+            }));
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

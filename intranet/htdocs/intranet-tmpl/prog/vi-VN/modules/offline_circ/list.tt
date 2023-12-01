@@ -1,0 +1,164 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% SET footerjs = 1 %]
+ [% INCLUDE "doc-head-open.inc" %]
+ <title>Offline circulation &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+ [% INCLUDE "doc-head-close.inc" %]
+</head>
+
+<body id="ocirc_list" class="circ ocirc">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ <nav id="breadcrumbs" aria-label="Breadcrumb" class="breadcrumb">
+ <ol>
+ <li>
+ <a href="/cgi-bin/koha/mainpage.pl">Trang chủ</a>
+ </li>
+ <li>
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Phân hệ lưu thông</a>
+ </li>
+ <li>
+ <a href="#" aria-current="page">
+ Offline circulation
+ </a>
+ </li>
+ </ol>
+ </nav>
+ [% END %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+ <h1>Lưu thông ngoại tuyến</h1>
+
+ [% IF ( pending_operations ) %]
+
+ <form>
+ <p>
+ <a id="CheckAll" href="#"><i class="fa fa-check"></i> Chọn tất cả</a>
+ <a id="CheckNone" href="#"><i class="fa fa-remove"></i> Bỏ tất cả</a>
+ </p>
+
+ <div class="page-section">
+ <table id="operations">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ <th>Thời gian</th>
+ <th>Thao tác</th>
+ <th>Đăng ký cá biệt</th>
+ <th>Số thẻ bạn đọc</th>
+ <th>Số lượng</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH operation IN pending_operations %]
+ <tr class="oc-[% operation.action | html %]">
+ <td><input type="checkbox" name="operationid" id="operationid[% operation.operationid | html %]" value="[% operation.operationid | html %]" /></td>
+ <td>
+ <label for="operationid[% operation.operationid | html %]">[% operation.timestamp | $KohaDates with_hours=1 %]</label>
+ </td>
+ <td>
+ [% SWITCH ( operation.action ) -%]
+ [%   CASE "issue" -%]
+ <span>Ghi mượn</span>
+ [%   CASE "return" -%]
+ <span>Ghi Trả</span>
+ [%   CASE "payment" -%]
+ <span>Payment</span>
+ [%   CASE # default case -%]
+ <span>[% operation.action | html %]</span>
+ [% END -%]
+ </td>
+ <td>
+ [% IF ( operation.biblionumber ) %]
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% operation.biblionumber | uri %]" title="[% operation.bibliotitle | html %]">[% operation.barcode | html %]</a>
+ [% ELSE %]
+ <span class="error">[% operation.barcode | html %]</span>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( operation.actionissue || operation.actionpayment) %]
+ [% IF ( operation.borrowernumber ) %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% operation.borrowernumber | uri %]" title="[% operation.borrower | html %]">[% operation.cardnumber | html %]</a>
+ [% ELSE %]
+ <span class="error">[% operation.cardnumber | html %]</span>
+ [% END %]
+ [% END %]
+ </td>
+ <td>[% operation.amount | html %]</td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.page-section -->
+
+ <p id="actions">Xử lý dữ liệu được lựa chọn: <input id="process" type="button" value="Xử lý" />
+ <input id="delete" type="button" value="Xóa" /></p>
+
+ </form>
+
+ [% ELSE %]
+
+ <p>Hiện tại bạn không có giao dịch lưu thông ngoài tuyến nào.</p>
+
+ [% END %]
+
+ </div>
+</div>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        $(document).ready(function() {
+
+            $('#CheckNone').click(function(e) {
+                e.preventDefault();
+                $("#operations input:checkbox").prop("checked", false );
+            });
+            $('#CheckAll').click(function(e) {
+                e.preventDefault();
+                $("#operations input:checkbox").prop("checked", true );
+            });
+            $('#process,#delete').click(function() {
+                var action = $(this).attr("id");
+                $(":checkbox[name=operationid]:checked").each(function() {
+                    var cb = $(this);
+                    $.ajax({
+                        url: "process.pl",
+                        data: { 'action': action, 'operationid': this.value },
+                        async: false,
+                        dataType: "text",
+                        success: function(data) {
+                            if( data == "Added." ){
+                                cb.replaceWith(_("Được thêm."));
+                            } else if ( data == "Deleted."){
+                                cb.replaceWith(_("Bị xóa."));
+                            } else if ( data == "Success."){
+                                cb.replaceWith(_("Thành công."));
+                            } else if ( data == "Item not issued."){
+                                cb.replaceWith(_("Tài liệu không được ghi mượn."));
+                            } else if ( data == "Item not found."){
+                                cb.replaceWith(_("Không tìm thấy tài liệu."));
+                            } else if ( data == "Barcode not found."){
+                                cb.replaceWith(_("Không tìm thấy tài liệu."));
+                            } else if ( data == "Borrower not found."){
+                                cb.replaceWith(_("Không tìm thấy bạn đọc."));
+                            } else {
+                                cb.replaceWith(data);
+                            }
+                        }});
+                });
+                if( $('#operations tbody :checkbox').size() == 0 ) {
+                    $('#actions').hide();
+                }
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

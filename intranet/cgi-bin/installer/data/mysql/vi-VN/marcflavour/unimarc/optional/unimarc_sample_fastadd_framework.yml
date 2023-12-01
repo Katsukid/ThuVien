@@ -1,0 +1,25 @@
+---
+description:
+- '''FA'', a ''Fast Add'' minimal UNIMARC framework suitable for ILL or on-the-fly
+  cataloguing.'
+sql_statements:
+- INSERT IGNORE INTO marc_tag_structure (tagfield, liblibrarian, libopac, repeatable,
+  mandatory, authorised_value, frameworkcode) SELECT tagfield, liblibrarian, libopac,
+  repeatable, mandatory, authorised_value, 'FA' FROM marc_tag_structure WHERE frameworkcode
+  = '' AND tagfield IN ('000', '001', '090', '099', '100', '200', '205', '210', '225',
+  '995');
+- INSERT IGNORE INTO marc_subfield_structure (tagfield, tagsubfield, liblibrarian,
+  libopac, repeatable, mandatory, kohafield, tab, authorised_value, authtypecode,
+  value_builder, isurl, hidden, frameworkcode, seealso, link, defaultvalue) SELECT
+  tagfield, tagsubfield, liblibrarian, libopac, repeatable, mandatory, kohafield,
+  tab, authorised_value, authtypecode, value_builder, isurl, hidden, 'FA', seealso,
+  link, defaultvalue FROM marc_subfield_structure WHERE frameworkcode = '' AND tagfield
+  IN ('000', '001', '090', '099', '100', '200', '205', '210', '225', '995');
+tables:
+- biblio_framework:
+    multiline: []
+    rows:
+    - frameworkcode: FA
+      frameworktext: Fast Add Framework
+    translatable:
+    - frameworktext

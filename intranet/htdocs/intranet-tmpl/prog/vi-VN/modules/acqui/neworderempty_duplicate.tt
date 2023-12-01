@@ -1,0 +1,87 @@
+[% USE raw %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Duplicate warning &rsaquo; Basket [% basketno | html %] &rsaquo; Acquisitions &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="acq_neworderempty_duplicate" class="acq">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'acquisitions-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/acqui-home.pl">Phân hệ bổ sung</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/basket.pl?basketno=[% basketno | uri %]">Giỏ đặt hàng số [% basketno | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Cảnh báo trùng lặp biểu ghi</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+<div class="dialog alert">
+<h1>Cảnh báo trùng lặp biểu ghi</h1>
+<p>You selected a record from an external source that matches an existing record in your catalog: <a href="[% PROCESS biblio_a_href biblionumber => biblionumber %]" target="_blank" title="Mở trong cửa sổ mới"><i class="fa fa-window-restore"></i> [% duplicatetitle | html %]</a></p>
+</div>
+
+<div class="row">
+<div class="col-sm-4">
+<div style="border: 1px solid #DDD; padding:1em;">
+<form action="/cgi-bin/koha/acqui/neworderempty.pl">
+<h4>Sử dụng biểu ghi hiện tại</h4>
+<p>Không tạo biểu ghi trùng lặp ở trên. Sử dụng biểu ghi thư mục hiện tại trong cơ sở dữ liệu để tạo đơn hàng.</p>
+<input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+<input type="hidden" name="basketno" value="[% basketno | html %]" />
+<input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+<input type="submit" class="btn btn-primary" value="Use existing" />
+</form>
+</div>
+</div>
+
+<div class="col-sm-4">
+<div style="border: 1px solid #DDD; padding:1em;">
+<form action="/cgi-bin/koha/acqui/basket.pl">
+<h4>Hủy và quay lại giỏ đặt hàng</h4>
+<p>Không tạo đơn hàng mới và quay lại giỏ đặt hàng.</p>
+<input type="hidden" name="basketno" value="[% basketno | html %]" />
+<input class="btn btn-primary" type="submit" value="Hủy bỏ" />
+</form>
+</div>
+</div>
+
+<div class="col-sm-4">
+<div style="border: 1px solid #DDD; padding:1em;">
+<form action="/cgi-bin/koha/acqui/neworderempty.pl">
+<h4>Tạo biểu ghi thư mục</h4>
+<p>Tạo biểu ghi thư mục từ nguồn dữ liệu bên ngoài.</p>
+<input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+<input type="hidden" name="basketno" value="[% basketno | html %]" />
+<input type="hidden" name="breedingid" value="[% breedingid | html %]" />
+<input type="hidden" name="use_external_source" value="1" />
+<input type="submit" class="btn btn-primary" value="Create new" />
+</form>
+</div>
+</div>
+
+</div>
+
+</main>
+</div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+<div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'acquisitions-menu.inc' %]
+ </aside>
+</div> <!-- /.col-sm-2.col-sm-pull-10 -->
+</div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

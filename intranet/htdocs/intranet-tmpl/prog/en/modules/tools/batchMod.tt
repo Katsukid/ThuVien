@@ -1,0 +1,91 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% IF ( del ) %]Batch item deletion[% ELSE %]Batch item modification[% END %] &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="tools_batchMod" class="tools">
+[% WRAPPER 'header.inc' %]
+    [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+    [% WRAPPER breadcrumbs %]
+        [% WRAPPER breadcrumb_item %]
+            <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Cataloging</a>
+        [% END %]
+
+        [% IF ( del ) %]
+            [% WRAPPER breadcrumb_item bc_active= 1 %]
+                <span>Batch item deletion</span>
+            [% END %]
+        [% ELSE %]
+            [% WRAPPER breadcrumb_item bc_active= 1 %]
+                <span>Batch item modification</span>
+            [% END %]
+        [% END %]
+    [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-push-2">
+            <main>
+
+                <h1>Batch item [% IF ( del ) %]deletion[% ELSE %]modification[% END %]</h1>
+                        <form method="post" enctype="multipart/form-data" action="/cgi-bin/koha/tools/batchMod.pl">
+                            <fieldset class="rows">
+                                <legend>Use a file</legend>
+                                  <ol>
+                      <li>
+                    <label for="barcode_file">Barcode file: </label><input type="radio" name="filecontent" value="barcode_file" id="barcode_file" checked="checked" /></li>
+                    <li>
+                    <label for="itemid_file">Item number file: </label><input type="radio" name="filecontent" value="itemid_file" id="itemid_file" />
+                      </li>
+                                    <li><label for="uploadfile">File: </label> <input type="file" id="uploadfile" name="uploadfile" /></li>
+                                </ol>
+                            </fieldset>
+                            <fieldset class="rows">
+                                <legend>Or scan items one by one</legend>
+                                <ol>
+                                    <li>
+                                      <label for="barcodelist">Barcode list (one barcode per line): </label>
+                                      <textarea rows="10" cols="30" id="barcodelist" name="barcodelist"></textarea>
+                                    </li>
+                                </ol>
+                                <input type="hidden" name="op" value="show" />
+                            </fieldset>
+
+                            [% UNLESS del %]
+                                <fieldset class="rows">
+                                    <legend>Use default values</legend>
+                                    <ol class="radio">
+                                        <li>
+                                            <label for="use_default_values">Use default values:</label>
+                                            <input type="checkbox" name="use_default_values" id="use_default_values" />
+                                            <span class="hint">Populate fields with default values from default framework</span>
+                                        </li>
+                                    </ol>
+                                </fieldset>
+                            [% END %]
+
+                            <fieldset class="action">
+                                [% IF ( del ) %]<input type="hidden" name="del" value="1" />[% END %]
+                                <input type="submit" class="btn btn-primary" value="Continue" />
+                                <a class="cancel" href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Cancel</a>
+                            </fieldset>
+
+                        </form>
+
+            </main>
+        </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+        <div class="col-sm-2 col-sm-pull-10">
+            <aside>
+                [% INCLUDE 'cat-menu.inc' %]
+            </aside>
+        </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+     </div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

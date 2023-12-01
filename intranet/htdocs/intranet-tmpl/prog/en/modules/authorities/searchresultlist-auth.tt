@@ -1,0 +1,139 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% SET footerjs = 1 %]
+[% PROCESS 'authorities-search-results.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Cataloging authority plugin &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% Asset.css("css/addbiblio.css") | $raw %]
+<style>
+.usefor {
+    padding: 0;
+    margin: 0;
+}
+.usefor li {
+    list-style-type: none;
+}
+</style>
+</head>
+
+<body id="auth_searchresultlist_auth" class="auth">
+    <div class="container-fluid">
+
+    	<h1>Authority search results</h1>
+    	[% INCLUDE 'auth-finder-search.inc' %]
+        [% IF ( total ) %]<div class="resultnumber">
+            [% IF ( displayprev ) %]
+                    <a href="auth_finder.pl?startfrom=[% startfromprev | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranet&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+                        &lt;&lt;
+                    </a>
+                [% END %]
+                [% FOREACH number IN numbers %]
+                    [% IF ( number.highlight ) %]
+                        [% number.number | html %]
+                    [% ELSE %]
+                        <a href="auth_finder.pl?startfrom=[% number.startfrom | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN number.searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranet&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+                            [% number.number | html %]</a>
+                    [% END %]
+                [% END %]
+                [% IF ( displaynext ) %]
+                    <a href="auth_finder.pl?startfrom=[% startfromnext | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranet&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+                        &gt;&gt;</a>
+                [% END %]
+            <div>
+                
+                    <p><strong>Results [% from | html %] to [% to | html %] of [% total | html %]</strong></p>
+                [% ELSE %]
+                    
+                
+            </div><p>No results found</p>[% END %]
+        </div>
+        [% IF ( result ) %]<div id="resultlist">
+            <table>
+                <tr>
+                    <th>Summary</th>
+                    <th>Heading type</th>
+                    <th>Used</th>
+                    [% IF Koha.Preference('ShowHeadingUse') %]
+                        <th class="heading_use">Heading use</th>
+                    [% END %]
+                    <th>Get it!</th>
+                    <th>Other action</th>
+                </tr>
+                [% FOREACH resul IN result %]
+                    <tr>
+                        <td>[% PROCESS authresult summary=resul.summary authid=resul.authid auth_preview=1 %]</td>
+                        <td>[% resul.summary.label | html %]</td>
+                        <td>[% resul.used | html %] times</td>
+                        [% IF Koha.Preference('ShowHeadingUse') %]
+                            <td class="heading_use"><ul class="usefor">
+                                <li>[% IF resul.main %]<i class="fa fa-check"></i>[% ELSE %]<i class="fa fa-times"></i>[% END %] Main/Added Entry</li>
+                                <li>[% IF resul.subject %]<i class="fa fa-check"></i>[% ELSE %]<i class="fa fa-times"></i>[% END %] Subject</li>
+                                <li>[% IF resul.series %]<i class="fa fa-check"></i>[% ELSE %]<i class="fa fa-times"></i>[% END %] Series Title</li>
+                            </ul></td>
+                        [% END %]
+                        <td>
+                            [% IF resul.summary && resul.summary.authorized && resul.summary.authorized.size > 1 %]
+                                [% FOREACH authorized IN resul.summary.authorized %]
+                                    <a href="javascript:doauth('[% resul.authid | uri %]', '[% index | uri %]', '[% loop.count | uri %]')" title="[% authorized.heading | html %]">[% loop.count | html %]</a>
+                                [% END %]
+                          [% ELSE %]
+                                <a class="btn btn-xs btn-default" href="javascript:doauth('[% resul.authid | html %]', '[% index | html %]', '')"><i class="fa fa-plus"></i> Choose</a>
+                          [% END %]
+                        </td>
+                        <td><a class="btn btn-xs btn-default" href="authorities.pl?authid=[% resul.authid | html %]"><i class="fa fa-pencil"></i> Edit authority</a></td>
+                    </tr>
+                [% END %]
+            </table>
+    
+        </div>
+        <div class="resultnumber">
+            [% IF ( displayprev ) %]
+                    <a href="auth_finder.pl?startfrom=[% startfromprev | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranetamp;&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+                        &lt;&lt;
+                    </a>
+                [% END %]
+                [% FOREACH number IN numbers %]
+                    [% IF ( number.highlight ) %]
+                        [% number.number | html %]
+                    [% ELSE %]
+                        <a href="auth_finder.pl?startfrom=[% number.startfrom | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN number.searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranet&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+                            [% number.number | html %]</a>
+                    [% END %]
+                [% END %]
+                [% IF ( displaynext ) %]
+                    <a href="auth_finder.pl?startfrom=[% startfromnext | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranet&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+                        &gt;&gt;</a>
+                [% END %]
+        </div>[% END %]
+    </div>
+
+[% INCLUDE 'authority-detail-modal.inc' %]
+
+[% MACRO jsinclude BLOCK %]
+    <script>
+        var index = "[% index | html %]";
+        var authtypecode = "[% authtypecode | html %]";
+    </script>
+    [% Asset.js("js/auth-finder-search.js") | $raw %]
+    [% Asset.js("js/authorities-detail-modal.js") | $raw %]
+    <script>
+        function jumpfull(page){
+            window.open(page,'','width=100,height=100,resizable=yes,toolbar=false,scrollbars=yes,top');
+        }
+
+        function doauth(authid, index, repet){
+            [% IF source == 'auth' %]
+                var e = document.getElementById("relationship");
+                var relationship = e.options[e.selectedIndex].value;
+
+                jumpfull('blinddetail-biblio-search.pl?authid=' + authid + '&index=' + index + '&repet=' + repet + '&relationship=' + relationship);
+            [% ELSE %]
+                jumpfull('blinddetail-biblio-search.pl?authid=' + authid + '&index=' + index + '&repet=' + repet);
+            [% END %]
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window = 1 %]

@@ -1,0 +1,105 @@
+---
+description:
+- Debit types used in Koha
+tables:
+- account_debit_types:
+    multiline: []
+    rows:
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: ACCOUNT
+      default_amount: ~
+      description: Account creation fee
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: ACCOUNT_RENEW
+      default_amount: ~
+      description: Account renewal fee
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: ARTICLE_REQUEST
+      default_amount: ~
+      description: Article request fee
+      is_system: '1'
+    - can_be_invoiced: '1'
+      can_be_sold: '0'
+      code: LOST
+      default_amount: ~
+      description: Lost item
+      is_system: '1'
+    - can_be_invoiced: '1'
+      can_be_sold: '0'
+      code: MANUAL
+      default_amount: ~
+      description: Manual fee
+      is_system: '0'
+    - can_be_invoiced: '1'
+      can_be_sold: '0'
+      code: NEW_CARD
+      default_amount: ~
+      description: New card fee
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: OVERDUE
+      default_amount: ~
+      description: Overdue fine
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: PROCESSING
+      default_amount: ~
+      description: Lost item processing fee
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: PAYOUT
+      default_amount: ~
+      description: Payment from library to patron
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: RENT
+      default_amount: ~
+      description: Rental fee
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: RENT_DAILY
+      default_amount: ~
+      description: Daily rental fee
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: RENT_DAILY_RENEW
+      default_amount: ~
+      description: Renewal of daily rental item
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: RENT_RENEW
+      default_amount: ~
+      description: Renewal of rental item
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: RESERVE
+      default_amount: ~
+      description: Hold fee
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: RESERVE_EXPIRED
+      default_amount: ~
+      description: Hold waiting too long
+      is_system: '1'
+    - can_be_invoiced: '0'
+      can_be_sold: '0'
+      code: VOID
+      default_amount: ~
+      description: Credit has been voided
+      is_system: '1'
+    translatable:
+    - description

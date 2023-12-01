@@ -1,0 +1,112 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% SET footerjs = 1 %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Circulation statistics for [% title | html %] &rsaquo; Catalog &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="catalog_bookcount" class="catalog">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Tìm kiếm</a>
+ [% END %]
+ [% IF blocking_error %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lỗi</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ [% INCLUDE 'biblio-title.inc' link = 1 %]
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% biblionumber | uri %]">Tài liệu</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Báo cáo phân hệ lưu thông</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ <h1>
+ [% IF ( author ) %]
+ Circulation statistics for [% INCLUDE 'biblio-title.inc' %] by [% author |html %]
+ [% ELSE %]
+ Circulation statistics for [% INCLUDE 'biblio-title.inc' %]
+ [% END %]
+ </h1>
+
+[% INCLUDE 'blocking_errors.inc' %]
+
+<h3>Đăng ký cá biệt [% barcode | html %]</h3>
+<div class="page-section">
+ <table>
+ <tr><th>Thư viện chính</th><th>Thư viện hiện tại</th><th>Ngày nhận<br />thư viện hiện tại </th><th>Số lần cho mượn<br />từ lần chuyển cuối</th></tr>
+
+ <tr><td>[% Branches.GetName( homebranch ) | html %]</td>
+ <td>[% Branches.GetName( holdingbranch ) | html %]</td>
+ <td>[% IF ( lastdate ) %][% lastdate | $KohaDates %][% ELSE %]Tài liệu chưa được chuyển[% END %]</td>
+ <td>[% count | html %]</td>
+ </tr>
+ </table>
+</div> <!-- /.page-section -->
+
+<div class="page-section">
+ <table>
+ <tr>
+ <th>Thư viện</th>
+ <th>Số lần mượn</th>
+ <th>Cập nhật lần cuối</th>
+ </tr>
+ [% FOREACH library IN libraries %]
+ [% IF library.selected %]
+ <tr class="mybranch">
+ [% ELSE %]
+ <tr>
+ [% END %]
+ <td>[% library.branchname | html %]</td>
+ <td>[% library.issues | html %]</td>
+ <td>[% IF library.seen %]
+ [% library.seen | $KohaDates  with_hours => 1 %]
+ [% ELSE %]
+ <span>Chưa có</span>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </table>
+</div> <!-- /.page-section -->
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'biblio-view-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        $(document).ready(function(){
+        $("tr.mybranch td").css("background-color", "#CFE7FF");
+    });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

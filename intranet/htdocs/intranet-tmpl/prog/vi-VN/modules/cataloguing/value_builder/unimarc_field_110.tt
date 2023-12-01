@@ -1,0 +1,663 @@
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>UNIMARC field 110 builder</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_unimarc_field_110" class="cat" style="padding:1em;">
+ <h1>UNIMARC field 110 builder</h1>
+ <div class="page-section">
+ <form name="f_pop" action="">
+ <table>
+ <tr>
+ <td><label for="f1">Type of continuing resource designator</label></td>
+ <td>
+ <select name="f1" id="f1">
+ [% IF ( f1pipe ) %]
+ <option value="|" selected="selected">|- Filling character</option>
+ [% ELSE %]
+ <option value="|">|- Filling character</option>
+ [% END %]
+
+ [% IF ( f1a ) %]
+ <option value="a" selected="selected">Định kỳ</option>
+ [% ELSE %]
+ <option value="a">Định kỳ</option>
+ [% END %]
+ [% IF ( f1b ) %]
+ <option value="b" selected="selected">Chuyên khảo</option>
+ [% ELSE %]
+ <option value="b">Chuyên khảo</option>
+ [% END %]
+ [% IF ( f1c ) %]
+ <option value="c" selected="selected">Bài báo</option>
+ [% ELSE %]
+ <option value="c">Bài báo</option>
+ [% END %]
+ [% IF ( f1d ) %]
+ <option value="d" selected="selected">Thư mục</option>
+ [% ELSE %]
+ <option value="d">Thư mục</option>
+ [% END %]
+ [% IF ( f1e ) %]
+ <option value="e" selected="selected">updating loose-leaf</option>
+ [% ELSE %]
+ <option value="e">updating loose-leaf</option>
+ [% END %]
+ [% IF ( f1f ) %]
+ <option value="f" selected="selected">updating database</option>
+ [% ELSE %]
+ <option value="f">updating database</option>
+ [% END %]
+ [% IF ( f1g ) %]
+ <option value="g" selected="selected">updating website</option>
+ [% ELSE %]
+ <option value="g">updating website</option>
+ [% END %]
+ [% IF ( f1h ) %]
+ <option value="h" selected="selected">blog</option>
+ [% ELSE %]
+ <option value="h">blog</option>
+ [% END %]
+ [% IF ( f1i ) %]
+ <option value="i" selected="selected">repository</option>
+ [% ELSE %]
+ <option value="i">repository</option>
+ [% END %]
+ [% IF ( f1j ) %]
+ <option value="j" selected="selected">journal</option>
+ [% ELSE %]
+ <option value="j">journal</option>
+ [% END %]
+ [% IF ( f1m ) %]
+ <option value="m" selected="selected">magazine</option>
+ [% ELSE %]
+ <option value="m">magazine</option>
+ [% END %]
+ [% IF ( f1n ) %]
+ <option value="n" selected="selected">newsletter</option>
+ [% ELSE %]
+ <option value="n">newsletter</option>
+ [% END %]
+
+ [% IF ( f1z ) %]
+ <option value="z" selected="selected">Báo cáo khác</option>
+ [% ELSE %]
+ <option value="z">Báo cáo khác</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f2">Frequency of issue</label></td>
+ <td>
+ <select name="f2" id="f2">
+ [% IF ( f2pipe ) %]
+ <option value="|" selected="selected">|- Filling character</option>
+ [% ELSE %]
+ <option value="|">|- Filling character</option>
+ [% END %]
+
+ [% IF ( f2a ) %]
+ <option value="a" selected="selected">1 số/ngày</option>
+ [% ELSE %]
+ <option value="a">1 số/ngày</option>
+ [% END %]
+ [% IF ( f2b ) %]
+ <option value="b" selected="selected">semiweekly (twice a week)</option>
+ [% ELSE %]
+ <option value="b">semiweekly (twice a week)</option>
+ [% END %]
+ [% IF ( f2c ) %]
+ <option value="c" selected="selected">1 số/tuần</option>
+ [% ELSE %]
+ <option value="c">1 số/tuần</option>
+ [% END %]
+
+ [% IF ( f2d ) %]
+ <option value="d" selected="selected">biweekly (every two weeks)</option>
+ [% ELSE %]
+ <option value="d">biweekly (every two weeks)</option>
+ [% END %]
+
+ [% IF ( f2e ) %]
+ <option value="e" selected="selected">semimonthly (twice a month)</option>
+ [% ELSE %]
+ <option value="e">semimonthly (twice a month)</option>
+ [% END %]
+
+ [% IF ( f2f ) %]
+ <option value="f" selected="selected">1 số/tháng</option>
+ [% ELSE %]
+ <option value="f">1 số/tháng</option>
+ [% END %]
+
+ [% IF ( f2g ) %]
+ <option value="g" selected="selected">bimonthly (every two months)</option>
+ [% ELSE %]
+ <option value="g">bimonthly (every two months)</option>
+ [% END %]
+
+ [% IF ( f2h ) %]
+ <option value="h" selected="selected">1 số/quý</option>
+ [% ELSE %]
+ <option value="h">1 số/quý</option>
+ [% END %]
+
+ [% IF ( f2i ) %]
+ <option value="i" selected="selected">3 năm/số</option>
+ [% ELSE %]
+ <option value="i">3 năm/số</option>
+ [% END %]
+
+ [% IF ( f2j ) %]
+ <option value="j" selected="selected">semiannual (twice a year)</option>
+ [% ELSE %]
+ <option value="j">semiannual (twice a year)</option>
+ [% END %]
+ [% IF ( f2k ) %]
+ <option value="k" selected="selected">1 số/năm</option>
+ [% ELSE %]
+ <option value="k">1 số/năm</option>
+ [% END %]
+ [% IF ( f2l ) %]
+ <option value="l" selected="selected">biennial (every two years)</option>
+ [% ELSE %]
+ <option value="l">biennial (every two years)</option>
+ [% END %]
+ [% IF ( f2m ) %]
+ <option value="m" selected="selected">triennial (every three years)</option>
+ [% ELSE %]
+ <option value="m">triennial (every three years)</option>
+ [% END %]
+ [% IF ( f2n ) %]
+ <option value="n" selected="selected">3 số/tuần</option>
+ [% ELSE %]
+ <option value="n">3 số/tuần</option>
+ [% END %]
+ [% IF ( f2o ) %]
+ <option value="o" selected="selected">3 số/tháng</option>
+ [% ELSE %]
+ <option value="o">3 số/tháng</option>
+ [% END %]
+ [% IF ( f2p ) %]
+ <option value="p" selected="selected">continuously updated</option>
+ [% ELSE %]
+ <option value="p">continuously updated</option>
+ [% END %]
+ [% IF ( f2u ) %]
+ <option value="u" selected="selected">Không biết</option>
+ [% ELSE %]
+ <option value="u">Không biết</option>
+ [% END %]
+ [% IF ( f2y ) %]
+ <option value="y" selected="selected">no frequency (i.e. irregular)</option>
+ [% ELSE %]
+ <option value="y">no frequency (i.e. irregular)</option>
+ [% END %]
+ [% IF ( f2i ) %]
+ <option value="i" selected="selected">Báo cáo khác</option>
+ [% ELSE %]
+ <option value="i">Báo cáo khác</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f3">Quy tắc</label></td>
+ <td>
+ <select name="f3" id="f3">
+ [% IF ( f3pipe ) %]
+ <option value="|" selected="selected">|- Filling character</option>
+ [% ELSE %]
+ <option value="|">|- Filling character</option>
+ [% END %]
+
+ [% IF ( f3u ) %]
+ <option value="u" selected="selected">not known</option>
+ [% ELSE %]
+ <option value="u">not known</option>
+ [% END %]
+
+ [% IF ( f3a ) %]
+ <option value="a" selected="selected">Có quy tắc</option>
+ [% ELSE %]
+ <option value="a">Có quy tắc</option>
+ [% END %]
+
+ [% IF ( f3b ) %]
+ <option value="b" selected="selected">normalised irregular</option>
+ [% ELSE %]
+ <option value="b">normalised irregular</option>
+ [% END %]
+
+ [% IF ( f3y ) %]
+ <option value="y" selected="selected">Không qui tắc</option>
+ [% ELSE %]
+ <option value="y">Không qui tắc</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f4">Type of material code</label></td>
+ <td>
+ <select name="f4" id="f4">
+ [% IF ( f4pipe ) %]
+ <option value="|" selected="selected">|- Filling character</option>
+ [% ELSE %]
+ <option value="|">|- Filling character</option>
+ [% END %]
+
+ [% IF ( f4space ) %]
+ <option value=" " selected="selected">non required value</option>
+ [% ELSE %]
+ <option value=" ">non required value</option>
+ [% END %]
+
+ [% IF ( f4a ) %]
+ <option value="a" selected="selected">Tiểu sử</option>
+ [% ELSE %]
+ <option value="a">Tiểu sử</option>
+
+ [% END %]
+
+ [% IF ( f4b ) %]
+ <option value="b" selected="selected">Từ khóa</option>
+ [% ELSE %]
+ <option value="b">Từ khóa</option>
+ [% END %]
+
+ [% IF ( f4c ) %]
+ <option value="c" selected="selected">Chỉ số</option>
+ [% ELSE %]
+ <option value="c">Chỉ số</option>
+ [% END %]
+
+ [% IF ( f4d ) %]
+ <option value="d" selected="selected">Trừu tượng hoặc tóm tắt</option>
+ [% ELSE %]
+ <option value="d">Trừu tượng hoặc tóm tắt</option>
+ [% END %]
+
+ [% IF ( f4e ) %]
+ <option value="e" selected="selected">Từ điển</option>
+ [% ELSE %]
+ <option value="e">Từ điển</option>
+ [% END %]
+
+ [% IF ( f4f ) %]
+ <option value="f" selected="selected">Bách khoa toàn thư</option>
+ [% ELSE %]
+ <option value="f">Bách khoa toàn thư</option>
+ [% END %]
+
+ [% IF ( f4g ) %]
+ <option value="g" selected="selected">Thư mục</option>
+ [% ELSE %]
+ <option value="g">Thư mục</option>
+ [% END %]
+
+ [% IF ( f4h ) %]
+ <option value="h" selected="selected">yearbook</option>
+ [% ELSE %]
+ <option value="h">yearbook</option>
+ [% END %]
+
+ [% IF ( f4i ) %]
+ <option value="i" selected="selected">Thống kê</option>
+ [% ELSE %]
+ <option value="i">Thống kê</option>
+ [% END %]
+
+ [% IF ( f4j ) %]
+ <option value="j" selected="selected">Tài liệu lập trình</option>
+ [% ELSE %]
+ <option value="j">Tài liệu lập trình</option>
+ [% END %]
+
+ [% IF ( f4k ) %]
+ <option value="k" selected="selected">Bài phê bình</option>
+ [% ELSE %]
+ <option value="k">Bài phê bình</option>
+ [% END %]
+
+ [% IF ( f4l ) %]
+ <option value="l" selected="selected">Luật và pháp chế</option>
+ [% ELSE %]
+ <option value="l">Luật và pháp chế</option>
+ [% END %]
+
+ [% IF ( f4m ) %]
+ <option value="m" selected="selected">Báo cáo luật</option>
+ [% ELSE %]
+ <option value="m">Báo cáo luật</option>
+ [% END %]
+
+ [% IF ( f4n ) %]
+ <option value="n" selected="selected">Bài viết pháp luật</option>
+ [% ELSE %]
+ <option value="n">Bài viết pháp luật</option>
+ [% END %]
+
+ [% IF ( f4o ) %]
+ <option value="o" selected="selected">Ghi chú</option>
+ [% ELSE %]
+ <option value="o">Ghi chú</option>
+ [% END %]
+
+ [% IF ( f4p ) %]
+ <option value="p" selected="selected">Hồi ký, tiểu sử</option>
+ [% ELSE %]
+ <option value="p">Hồi ký, tiểu sử</option>
+ [% END %]
+
+ [% IF ( f4r ) %]
+ <option value="r" selected="selected">Khảo sát văn học</option>
+ [% ELSE %]
+ <option value="r">Khảo sát văn học</option>
+ [% END %]
+
+ [% IF ( f4t ) %]
+ <option value="t" selected="selected">Thư giãn</option>
+ [% ELSE %]
+ <option value="t">Thư giãn</option>
+ [% END %]
+
+ [% IF ( f4z ) %]
+ <option value="z" selected="selected">other kinds of contents</option>
+ [% ELSE %]
+ <option value="z">other kinds of contents</option>
+ [% END %]
+
+ </select>
+ </td>
+
+ </tr>
+ <tr>
+ <td><label for="f5">Nature of contents code</label></td>
+ <td><input type="text" name="f5" id="f5" maxlength="3" size="4" value="[% f5 | html %]" /></td>
+
+ </tr>
+ <tr>
+ <td><label for="f6">Conference publication indicator</label></td>
+ <td>
+ <select name="f6" id="f6">
+ [% IF ( f6pipe ) %]
+ <option value="|" selected="selected">|- Filling character</option>
+ [% ELSE %]
+ <option value="|">|- Filling character</option>
+ [% END %]
+
+ [% IF ( f60 ) %]
+ <option value="0" selected="selected">not a conference publication</option>
+ [% ELSE %]
+ <option value="0">not a conference publication</option>
+ [% END %]
+ [% IF ( f61 ) %]
+ <option value="1" selected="selected">conference publication</option>
+ [% ELSE %]
+ <option value="1">conference publication</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f7">Title-page availability code</label></td>
+ <td>
+ <select name="f7" id="f7">
+ [% IF ( f7pipe ) %]
+ <option value="|" selected="selected">|- Filling character</option>
+ [% ELSE %]
+ <option value="|">|- Filling character</option>
+ [% END %]
+
+ [% IF ( f7a ) %]
+ <option value="a" selected="selected">in last issue of volume - loose</option>
+ [% ELSE %]
+ <option value="a">in last issue of volume - loose</option>
+ [% END %]
+
+ [% IF ( f7b ) %]
+ <option value="b" selected="selected">in last issue of volume - attached</option>
+ [% ELSE %]
+ <option value="b">in last issue of volume - attached</option>
+ [% END %]
+
+
+ [% IF ( f7c ) %]
+ <option value="c" selected="selected">in first issue of next volume - loose</option>
+ [% ELSE %]
+ <option value="c">in first issue of next volume - loose</option>
+ [% END %]
+
+
+ [% IF ( f7d ) %]
+ <option value="d" selected="selected">in first issue of next volume - attached</option>
+ [% ELSE %]
+ <option value="d">in first issue of next volume - attached</option>
+ [% END %]
+
+
+ [% IF ( f7e ) %]
+ <option value="e" selected="selected">published separately - free upon request</option>
+ [% ELSE %]
+ <option value="e">published separately - free upon request</option>
+ [% END %]
+
+ [% IF ( f7f ) %]
+ <option value="f" selected="selected">published separately-free - sent automatically</option>
+ [% ELSE %]
+ <option value="f">published separately-free - sent automatically</option>
+ [% END %]
+
+
+ [% IF ( f7g ) %]
+ <option value="g" selected="selected">published separately - purchase-request</option>
+ [% ELSE %]
+ <option value="g">published separately - purchase-request</option>
+ [% END %]
+
+ [% IF ( f7u ) %]
+ <option value="u" selected="selected">unknown at time of record creation</option>
+ [% ELSE %]
+ <option value="u">unknown at time of record creation</option>
+ [% END %]
+
+ [% IF ( f7x ) %]
+ <option value="x" selected="selected">not applicable</option>
+ [% ELSE %]
+ <option value="x">not applicable</option>
+ [% END %]
+
+ [% IF ( f7y ) %]
+ <option value="y" selected="selected">no title-page issued</option>
+ [% ELSE %]
+ <option value="y">no title-page issued</option>
+ [% END %]
+
+ [% IF ( f7z ) %]
+ <option value="z" selected="selected">Báo cáo khác</option>
+ [% ELSE %]
+ <option value="z">Báo cáo khác</option>
+ [% END %]
+
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f8">Index availability code</label></td>
+ <td>
+ <select name="f8" id="f8">
+ [% IF ( f8pipe ) %]
+ <option value="|" selected="selected">|- Filling character</option>
+ [% ELSE %]
+ <option value="|">|- Filling character</option>
+ [% END %]
+
+ [% IF ( f8a ) %]
+ <option value="a" selected="selected">each issue contains an index to its own contents - loose</option>
+ [% ELSE %]
+ <option value="a">each issue contains an index to its own contents - loose</option>
+ [% END %]
+
+
+ [% IF ( f8b ) %]
+ <option value="b" selected="selected">in last issue of volume-loose - separately paged</option>
+ [% ELSE %]
+ <option value="b">in last issue of volume-loose - separately paged</option>
+ [% END %]
+
+
+ [% IF ( f8c ) %]
+ <option value="c" selected="selected">in last issue of volume - unpaged</option>
+ [% ELSE %]
+ <option value="c">in last issue of volume - unpaged</option>
+ [% END %]
+
+
+ [% IF ( f8d ) %]
+ <option value="d" selected="selected">in last issue of volume - attached</option>
+ [% ELSE %]
+ <option value="d">in last issue of volume - attached</option>
+ [% END %]
+
+
+ [% IF ( f8e ) %]
+ <option value="e" selected="selected">in first issue of next volume loose - separately paged</option>
+ [% ELSE %]
+ <option value="e">in first issue of next volume loose - separately paged</option>
+ [% END %]
+
+
+ [% IF ( f8f ) %]
+ <option value="f" selected="selected">in first issue of next volume loose - unpaged</option>
+ [% ELSE %]
+ <option value="f">in first issue of next volume loose - unpaged</option>
+ [% END %]
+
+
+ [% IF ( f8g ) %]
+ <option value="g" selected="selected">in first issue of next volume - attached</option>
+ [% ELSE %]
+ <option value="g">in first issue of next volume - attached</option>
+ [% END %]
+
+
+ [% IF ( f8h ) %]
+ <option value="h" selected="selected">published separately free - sent automatically</option>
+ [% ELSE %]
+ <option value="h">published separately free - sent automatically</option>
+ [% END %]
+
+
+ [% IF ( f8i ) %]
+ <option value="i" selected="selected">published separately - free upon request</option>
+ [% ELSE %]
+ <option value="i">published separately - free upon request</option>
+ [% END %]
+
+
+ [% IF ( f8j ) %]
+ <option value="j" selected="selected"> published separately - bound from publisher free - sent automatically</option>
+ [% ELSE %]
+ <option value="j"> published separately - bound from publisher free - sent automatically</option>
+ [% END %]
+
+
+ [% IF ( f8k ) %]
+ <option value="k" selected="selected"> published separately-bound from publisher - free upon request</option>
+ [% ELSE %]
+ <option value="k"> published separately-bound from publisher - free upon request</option>
+ [% END %]
+
+
+ [% IF ( f8l ) %]
+ <option value="l" selected="selected"> published separately-bound from publisher - purchase uponrequest</option>
+ [% ELSE %]
+ <option value="l"> published separately-bound from publisher - purchase uponrequest</option>
+ [% END %]
+
+
+ [% IF ( f8m ) %]
+ <option value="m" selected="selected"> this continuing resource is a supplement or subseries indexed in its parent continuing resource</option>
+ [% ELSE %]
+ <option value="m"> this continuing resource is a supplement or subseries indexed in its parent continuing resource</option>
+ [% END %]
+
+
+ [% IF ( f8u ) %]
+ <option value="u" selected="selected">unknown at time of record creation</option>
+ [% ELSE %]
+ <option value="u">unknown at time of record creation</option>
+ [% END %]
+
+
+ [% IF ( f8x ) %]
+ <option value="x" selected="selected">not applicable</option>
+ [% ELSE %]
+ <option value="x">not applicable</option>
+ [% END %]
+
+
+ [% IF ( f8y ) %]
+ <option value="y" selected="selected">index is not available</option>
+ [% ELSE %]
+ <option value="y">index is not available</option>
+ [% END %]
+
+
+ [% IF ( f8z ) %]
+ <option value="z" selected="selected">Báo cáo khác</option>
+ [% ELSE %]
+ <option value="z">Báo cáo khác</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f9">Cumulative index availability code</label></td>
+ <td>
+ <select name="f9" id="f9">
+ [% IF ( f9pipe ) %]
+ <option value="|" selected="selected">|- Filling character</option>
+ [% ELSE %]
+ <option value="|">|- Filling character</option>
+ [% END %]
+
+ [% IF ( f90 ) %]
+ <option value="0" selected="selected">no cumulative index or table of contents</option>
+ [% ELSE %]
+ <option value="0">no cumulative index or table of contents</option>
+ [% END %]
+ [% IF ( f91 ) %]
+ <option value="1" selected="selected">cumulative index or table of contents available</option>
+ [% ELSE %]
+ <option value="1">cumulative index or table of contents available</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ </table>
+ <fieldset class="action"><input type="button" class="btn btn-primary" value="OK" onclick="report();" /> <a href="#" class="cancel close">Hủy bỏ</a></fieldset>
+ </form>
+ </div> <!-- /.page-section -->
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        function report() {
+            document.f_pop.f5.value=document.f_pop.f5.value+'   ';
+            document.f_pop.f5.value=document.f_pop.f5.value.substring(0,3);
+            var doc   = opener.document;
+            var field = doc.getElementById("[% index | html %]");
+            field.value =  document.f_pop.f1.value +document.f_pop.f2.value+document.f_pop.f3.value+document.f_pop.f4.value+document.f_pop.f5.value+document.f_pop.f6.value+document.f_pop.f7.value+document.f_pop.f8.value+document.f_pop.f9.value;
+            self.close();
+            return false;
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

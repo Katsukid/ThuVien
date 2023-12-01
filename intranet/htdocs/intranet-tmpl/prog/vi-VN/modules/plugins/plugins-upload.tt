@@ -1,0 +1,59 @@
+[% USE raw %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Upload plugin &rsaquo; Plugins &rsaquo; Tools &rsaquo; Trường CĐKTQS1 </title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% INCLUDE 'calendar.inc' %]
+</head>
+
+<body id="plugins_plugins_upload" class="plugins">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/plugins/plugins-home.pl">Tính năng bổ trợ</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <wrap>Upload plugins</wrap>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+
+ <h1>Upload Koha plugin</h1>
+ [% IF ( ERRORS ) %]
+ <div class="dialog alert">
+ [% FOREACH ERROR IN ERRORS %]
+ [% IF ( ERROR.NOTKPZ ) %]<li><strong>The upload file does not appear to be a kpz file. The extension is not '.kpz'.</strong></li>
+ [% ELSIF ( ERROR.NOWRITETEMP ) %]<li><strong>Bộ cài không thể khởi tạo/ghi dữ liệu cần thiết vào thư mục tạm thời.</strong></li>
+ [% ELSIF ( ERROR.EMPTYUPLOAD ) %]<li><strong>Tệp tin tải lên không có dữ liệu.</strong></li>
+ [% ELSIF ( ERROR.UZIPFAIL ) %]<li><strong>[% ERROR.UZIPFAIL | html %] có lỗi khi giải nén tệp tin.<br />Xin hãy kiểm tra lại tính đồng nhất của tệp tin nén và thử lại.</strong></li>
+ [% ELSIF ( ERROR.NOWRITEPLUGINS ) %]<li><strong>Không thể ghi dữ liệu vào thư mục bổ trợ.<br />Xin hãy kiểm tra và chắc chắn rằng người sử dụng Apache có quyền được ghi vào thư mục bổ trợ.</strong></li>
+ [% ELSE %]<li><strong>[% ERROR.CORERR | html %] Một lỗi không xác định đã xảy ra.<br />Bạn vui lòng kiểm tra lại nhật ký lỗi hệ thống để có thông tin chi tiết.</strong></li>[% END %]
+ [% END %]
+ </div>
+ [% END %]
+ <form method="post" action="/cgi-bin/koha/plugins/plugins-upload.pl" enctype="multipart/form-data">
+ <fieldset class="brief">
+ <div class="hint"><strong>Chú ý:</strong> Chỉ có file định dạng KPZ được hỗ trợ.</div>
+ <ol>
+ <li>
+ <label for="uploadfile">Chọn tệp tin tải lên:  </label><input type="file" id="uploadfile" name="uploadfile" accept=".kpz" />
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="Upload" />
+ <input class="btn btn-primary" type="submit" value="Tải lên" />
+ </fieldset>
+ </form>
+
+ </div>
+ </div>
+
+[% INCLUDE 'intranet-bottom.inc' %]

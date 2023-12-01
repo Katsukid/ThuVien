@@ -1,0 +1,149 @@
+[% USE Koha %]
+[% USE KohaDates %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Add a patron category &rsaquo; Web installer &rsaquo; Trường CĐKTQS1</title>
+[%# The following if statement checks if the categories variable handed to this template %]
+[%# by onboarding.pl has data in it. If the categories variable does have data %]
+[%# in it this means that the user has previously imported sample patron category %]
+[%# data and so we do not need to show them the create patron category screen 1, %]
+[%#instead we can display a screen with ubtton redirecting the user to step 3 %]
+[% IF (categories && categories.count > 1 ) %]
+ <meta http-equiv="refresh" content="0; url=/cgi-bin/koha/installer/onboarding.pl?step=3">
+[% END %]
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="onboarding-step2" class="installer-main col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+ <div id="logo"><a href="#">Koha</a></div>
+
+ <h1>Web installer &rsaquo; Create a patron category</h1>
+
+ [% INCLUDE 'onboarding_messages.inc' %]
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square-o" aria-hidden="true"></i> Installation</li>
+ <li class="current open"><i class="fa fa-square-o" aria-hidden="true"></i> Onboarding
+ <ol>
+ <li class="complete"><i class="fa fa-check-square-o" aria-hidden="true"></i> Create a library</li>
+ <li class="current open"><i class="fa fa-square-o" aria-hidden="true"></i> Create a patron category</li>
+ <li class="open"><i class="fa fa-square-o" aria-hidden="true"></i> Create Koha administrator patron</li>
+ <li class="open"><i class="fa fa-square-o" aria-hidden="true"></i> Create a new item type</li>
+ <li class="open"><i class="fa fa-square-o" aria-hidden="true"></i> Create a new circulation rule</li>
+ </ol>
+ </li>
+ </ol>
+ </div>
+
+ <p> The patron category you create will be used by the <span class="bg-info">administrator account</span>.</p>
+
+ <form id="category_form" method="post" action="onboarding.pl">
+ <fieldset class="rows">
+ <input type="hidden" name="step" value="2" />
+ <input type="hidden" name="op" value="add_validate_category" />
+ <ol>
+ <li>
+ <label for="categorycode" class="required">Mã kiểu bạn đọc: </label>
+ <input type="text" pattern="[0-9A-Za-z]{1,10}" id="categorycode" name="categorycode" value="[% category.categorycode | html %]" size="10" maxlength="10" class="required" required="required" />
+ <span class="required">Bắt buộc</span>
+ </li>
+
+ <li>
+ <label for="description" class="required">Thông tin mô tả: </label>
+ <input type="text" id="description" name="description" size="40" maxlength="80" class="required" required="required" value="[% category.description | html %]" />
+ <span class="required">Bắt buộc</span>
+ </li>
+
+ <li>
+ <label for="overduenoticerequired">Thông báo quá hạn: </label>
+ <select name="overduenoticerequired" id="overduenoticerequired">
+ [% IF category.overduenoticerequired %]
+ <option value="0">Không xóa</option>
+ <option value="1" selected="selected">Có</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Không xóa</option>
+ <option value="1">Có</option>
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <span class="label">Kiểu nhóm </span>
+ <input type="hidden" name="category_type" value="S" />
+ Staff </li>
+
+ <li>
+ <label for="default_privacy">Default privacy: </label>
+ <select id="default_privacy" name="default_privacy" required="required">
+ [% SET default_privacy = 'default' %]
+
+ [% IF category %]
+ [% SET default_privacy = category.default_privacy %]
+ [% END %]
+
+ [% SWITCH default_privacy %]
+ [% CASE 'forever' %]
+ <option value="default">Mặc định</option>
+ <option value="never">Chưa có</option>
+ <option value="forever" selected="selected">Lâu dài</option>
+ [% CASE 'never' %]
+ <option value="default">Mặc định</option>
+ <option value="never" selected="selected">Chưa có</option>
+ <option value="forever">Lâu dài</option>
+ [% CASE %]
+ <option value="default" selected="selected">Mặc định</option>
+ <option value="never">Chưa có</option>
+ <option value="forever">Lâu dài</option>
+ [% END %]
+ </select>
+ <div class="hint">
+ Controls how long a patrons checkout history is kept for new patrons of this category. "Never" anonymizes checkouts on return, and "Forever" keeps a patron's checkout history indefinitely. When set to "Default", the amount of history kept is controlled by the cronjob <code>batch_anonymise.pl</code> which should be set up by your system administrator.
+ </div>
+ </li>
+ <li>
+ <span class="label">Enrolment period: </span>
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <span class="label"></span><strong>Lựa chọn</strong>
+ </li>
+ <li>
+ <label for="enrolmentperiod">Theo tháng: </label>
+ [% IF category.enrolmentperiod %]
+ <input type="text" inputmode="numeric" pattern="[0-9]*" class="enrolmentperiod" name="enrolmentperiod" id="enrolmentperiod" size="3" value="[% category.enrolmentperiod | html %]" />
+ [% ELSE %]
+ <input type="text" inputmode="numeric" pattern="[0-9]*" class="enrolmentperiod" name="enrolmentperiod" id="enrolmentperiod" size="3" value="" />
+ [% END %]
+ </li>
+ <li>
+ <label for="enrolmentperioddate">Ngày hết hạn: </label>
+ <input type="text" class="enrolmentperioddate" name="enrolmentperioddate" id="enrolmentperioddate" value="[% category.enrolmentperioddate | html %]" />
+ <div class="hint">[% INCLUDE 'date-format.inc' dateformat = Koha.Preference('dateformat') %]</div>
+ </li>
+ </ol>
+ </fieldset>
+ </li>
+ </ol>
+
+ <p>
+ To add another patron category and for more settings go to:
+ <span class="breadcrumbs"> Administration <strong>&rsaquo;</strong> để kiểm tra lại.</span>
+ </p>
+
+ <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ </fieldset>
+ </form>
+ </div> <!-- / #onboarding-step2 -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'validator-strings.inc' %]
+ [% INCLUDE 'installer-strings.inc' %]
+ <script src="[% interface | html %]/[% theme | html %]/js/onboarding.js"></script>
+[% END %]
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

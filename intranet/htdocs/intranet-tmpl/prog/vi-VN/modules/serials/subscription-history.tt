@@ -1,0 +1,90 @@
+[% USE raw %]
+[% USE KohaDates %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Subscription history &rsaquo; Serials &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="ser_subscription_history" class="ser">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'serials-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/serials-home.pl">Ấn phẩm định kỳ</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscriptionid | uri %]"><em>[% title | html %]</em></a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Subscription history</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ <h1>Lịch sử phát hành của ÂPĐK [% title | html %]</h1>
+
+ <div id="subscription_form_history">
+ <form method="post" action="/cgi-bin/koha/serials/subscription-history.pl">
+ <input type="hidden" name="op" value="mod" />
+ <input type="hidden" name="subscriptionid" value="[% subscriptionid | html %]" />
+ <p>Hint : you can update the serial history manually. This can be useful for an old subscription or to clean the existing history. Modify those fields with care, as future serial receive will continue to update them automatically.</p>
+ <table>
+ <tr>
+ <td>Ngày bắt đầu</td>
+ <td>
+ <input type="text" size="10" name="histstartdate" value="[% histstartdate | html %]" class="flatpickr" data-date_to="histenddate" /> (start date of the 1st subscription)
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </td>
+ </tr>
+ <tr>
+ <td>Ngày kết thúc</td>
+ <td>
+ <input type="text" size="10" id="histenddate" name="histenddate" value="[% histenddate | html %]" class="flatpickr" />(if empty, subscription is still active)
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </td>
+ </tr>
+ <tr>
+ <td>Kỳ nhận về</td>
+ <td><textarea name="receivedlist" cols="60" rows="5">[% receivedlist | html %]</textarea></td>
+ </tr>
+ <tr>
+ <td>Kỳ ấn phẩm thiếu</td>
+ <td><textarea name="missinglist" cols="60" rows="5">[% missinglist | html %]</textarea></td>
+ </tr>
+ <tr>
+ <td>Ghi chú bạn đọc</td>
+ <td><textarea name="opacnote" cols="60" rows="5">[% opacnote | html %]</textarea></td>
+ </tr>
+ <tr>
+ <td>Ghi chú thử thư</td>
+ <td><textarea name="librariannote" cols="60" rows="5">[% librariannote | html %]</textarea></td>
+ </tr>
+ </table>
+ <input class="btn btn-primary" type="submit" value="Lưu ÂPĐK thư viện có" />
+ </form>
+ </div>
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'serials-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

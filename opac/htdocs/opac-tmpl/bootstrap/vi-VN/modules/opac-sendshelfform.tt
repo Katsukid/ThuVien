@@ -1,0 +1,60 @@
+[% USE Koha %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Sending your list &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='sendshelf' bodyclass='popup' %]
+ <div class="main">
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col order-first order-md-first order-lg-2">
+ <div id="usersendshelfform" class="maincontent">
+ [% IF ( email ) %]
+ [% IF ( SENT ) %]
+ <h1>Gửi tin nhắn cho bạn đọc</h1>
+ <div class="alert alert-success">
+ <p>Thông tin tài liệu trong giá sách ảo đã được gửi tới hòm thư: [% email | html %]</p>
+ </div>
+ <p><a class="focus close" href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=[% shelfid | html %]">Quay lại</a></p>
+ [% END %]
+ [% IF ( error ) %]
+ <div class="alert alert-warning">
+ <p>There was an error sending the list.</p>
+ </div>
+ [% END %]
+ [% ELSE %]
+ [% IF ( invalidlist ) %]
+ <div class="alert alert-warning">
+ <p>Bạn không được phép gửi thông tin của giá sách ảo này.</p>
+ </div>
+ <p><a class="button close" href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=[% shelfid | html %]">Quay lại</a></p>
+ [% ELSE %]
+ <form action="/cgi-bin/koha/opac-sendshelf.pl" method="post" id="sendshelfform">
+ <fieldset class="brief">
+ <legend><h1>Gửi giá sách ảo của bạn</h1></legend>
+ <label for="email">Địa chỉ Email:</label>
+ <input type="text" id="email" name="email" size="43" class="focus form-control" />
+
+ <label for="comment">Bình luận:</label>
+ <textarea id="comment" name="comment" rows="4" cols="40" class="form-control"></textarea>
+
+ <input type="hidden" name="shelfid" value="[% shelfid | html %]" />
+ </fieldset>
+ [% IF Koha.Preference('OPACHoldRequests') || Koha.Preference('OpacRenewalAllowed') %]<p id="donotrequestbymail">Please do not use this mail to request or renew books.</p>[% END %]
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Gửi thư" />
+ <a class="cancel close" href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=[% shelfid | html %]">Hủy bỏ</a>
+ </fieldset>
+ </form>
+
+ [% END # / IF invalidlist %]
+ [% END # / IF email %]
+ </div> <!-- / #usersendshelfform -->
+ </div> <!-- / .span12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' is_popup=1 %]
+[% BLOCK jsinclude %][% END %]

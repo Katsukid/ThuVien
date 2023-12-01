@@ -1,0 +1,935 @@
+---
+giao diện Opac:
+  ' Bảo mật':
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: opacreadinghistory
+    - '  bạn đọc xem lại lịch sử ghi mượn tài liệu.'
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      pref: OPACHoldsHistory
+    - patrons to see the list of their past holds.
+  - - choices:
+        '0': ' Không lưu lại'
+        '1': ' Lưu lại'
+      default: 0
+      pref: EnableOpacSearchHistory
+    - ' lịch sử tìm kiếm của bạn đọc trên OPAC.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      default: 0
+      pref: OPACPrivacy
+    - patrons to choose their own privacy settings for their checkout history. This
+      requires <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=opacreadinghistory">opacreadinghistory</a>
+      and <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AnonymousPatron">AnonymousPatron</a>
+      system preferences.
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      default: 0
+      pref: AllowPatronToSetCheckoutsVisibilityForGuarantor
+    - patrons to choose their own privacy settings for showing the patron's checkouts
+      to the patron's guarantor.
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      default: 0
+      pref: AllowPatronToSetFinesVisibilityForGuarantor
+    - patrons to choose their own privacy settings for showing the patron's charges
+      to the patron's guarantor.
+  - - ' Sử dụng số thẻ bạn đọc'
+    - class: integer
+      pref: AnonymousPatron
+    - as the anonymous patron (for anonymous suggestions and checkout history).
+  - - choices:
+        '0': ' Không kiểm soát'
+        anonymous: ' Kiểm soát (không lưu lại bạn đọc)'
+        track: ' Kiểm soát (lưu lại bạn đọc)'
+      default: 0
+      pref: TrackClicks
+    - links that patrons click on.
+  ' Chính sách':
+  - - choices:
+        '0': ' Không giới hạn'
+        '1': ' Giới hạn'
+      pref: SearchMyLibraryFirst
+    - ' bạn đọc tìm kiếm tài liệu trong thư viện quản lý của mình.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: OpacRenewalAllowed
+    - ' bạn đọc gia hạn tài liệu trên OPAC.'
+  - - ' Sử dụng'
+    - choices:
+        checkoutbranch: ' thư viện ghi mượn tài liệu'
+        itemhomebranch: ' thư viện quản lý tài liệu'
+        none: ' NULL'
+        opacrenew: ' ''OPACRenew'''
+        patronhomebranch: ' thư viện quản lý bạn đọc'
+      pref: OpacRenewalBranch
+    - ' như là mã thư viện để lưu trữ trong bảng thống kê.'
+  - - ' Chỉ cho phép bạn đọc gia hạn tài liệu trên OPAC nếu số tiền phạt của bạn đọc
+      nhỏ hơn'
+    - class: currency
+      pref: OPACFineNoRenewals
+    - '[% local_currency %] in charges (leave blank to disable).'
+  - - choices:
+        '0': Don't include
+        '1': Include
+      pref: OPACFineNoRenewalsIncludeCredits
+    - outstanding/unapplied credits when applying the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFineNoRenewals">OPACFineNoRenewals</a>
+      rule to patrons.
+  - - class: code
+      pref: OpacHiddenItems
+      syntax: text/x-yaml
+      type: textarea
+    - Define custom rules to hide specific items from search and view on the OPAC.
+      How to write these rules is documented on the <a href="http://wiki.koha-community.org/wiki/OpacHiddenItems"
+      target="_blank">Koha wiki</a>.
+  - - 'List of patron categories, that can see items otherwise hidden by <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacHiddenItems">OpacHiddenItems</a>:'
+    - choices: patron-categories
+      class: multiple
+      pref: OpacHiddenItemsExceptions
+  - - choices:
+        '0': Don't hide
+        '1': Hide
+      default: 1
+      pref: OpacHiddenItemsHidesRecord
+    - the bibliographic record when all its items are hidden by <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacHiddenItems'>OpacHiddenItems</a>.
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      default: 1
+      pref: OpacAllowPublicListCreation
+    - OPAC users to create public lists.
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      default: 0
+      pref: OpacAllowSharingPrivateLists
+    - OPAC users to share private lists with other patrons.
+  - - choices:
+        '0': ' Không khóa'
+        '1': ' Khóa'
+      pref: BlockExpiredPatronOpacActions
+    - expired patrons from OPAC actions such as placing a hold or renewing. Note that
+      the setting for a patron category takes priority over this system preference.
+  ' Giao diện':
+  - - choices:
+        '0': Don't show
+        '1': Show
+      pref: OPACUserSummary
+    - a summary of a logged in patron's checkouts, overdues, holds and charges on
+      the OPAC start page.
+  - - For search results in the OPAC, show the item's
+    - choices:
+        holdingbranch: current library
+        homebranch: home library
+      pref: OPACResultsLibrary
+    - . Please note that this feature is currently available for MARC21 and UNIMARC.
+  - - ' Sử dụng kiểu dao diện'
+    - choices: opac-templates
+      pref: opacthemes
+    - ' trên OPAC.'
+  - - Use the
+    - choices:
+        bootstrap: bootstrap
+        prog: prog
+      pref: OPACFallback
+    - theme as the fallback theme on the OPAC.
+  - - 'The OPAC is located at '
+    - class: url
+      pref: OPACBaseURL
+    - . This should be a complete URL, starting with <code>http://</code> or <code>https://</code>.
+      Do not include a trailing slash in the URL. (This must be filled in correctly
+      for RSS, unAPI, and search plugins to work.)
+  - - ' Hiển thị'
+    - class: long
+      pref: LibraryName
+    - ' là tên thư viện trên giao diện OPAC.'
+  - - choices:
+        '0': ' Không kích hoạt'
+        '1': ' Kích hoạt'
+      pref: OpacPublic
+    - 'Koha OPAC as public. Private OPAC requires authentication before accessing
+      the OPAC. '
+    - 'Note: This does not affect the public API, see the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RESTPublicAnonymousRequests">RESTPublicAnonymousRequests</a>
+      to control the API.'
+  - - ' Hiển thị bình chọn trên'
+    - choices:
+        all: results, details, and patron
+        details: ' Hiển thị chi tiết'
+        disable: ' Không hiển thị'
+      pref: OpacStarRatings
+    - ' .'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: OpacMaintenance
+    - ' Cảnh báo OPAC đang được bảo trì. Chú ý: Thông báo này hiển thị khi CSDL được
+      nâng cấp.'
+  - - 'Show the following HTML when <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacMaintenance">OpacMaintenance</a>
+      is enabled:'
+    - class: code
+      pref: OpacMaintenanceNotice
+      syntax: text/html
+      type: textarea
+  - - This description will show in search engine results (160 characters).
+    - pref: OpacMetaDescription
+      type: textarea
+  - - By default, show bibliographic records
+    - choices:
+        isbd: ' trong mẫu ISBD đã được thiết lập.'
+        marc: ' trong mẫu MARC.'
+        normal: ' trong mẫu đơn giản.'
+      pref: BiblioDefaultView
+  - - ' Khi bạn đọc kích vào một liên kết tới trang web khác từ giao diện OPAC (như
+      Amazon hoặc OCLC),'
+    - choices:
+        '0': ' không mở'
+        '1': ' mở'
+      pref: OPACURLOpenInNewWindow
+    - ' trang web trong một cửa sổ mới.'
+  - - choices:
+        '0': ' Hiển thị'
+        '1': ' Không hiển thị'
+      pref: hidelostitems
+    - ' các tài liệu bị mất trên trang hiển thị kết quả tìm kiếm hoặc chi tiết biểu
+      ghi tài liệu.'
+  - - 'Display lists in the OPAC using XSLT stylesheet at: '
+    - class: file
+      pref: OPACXSLTListsDisplay
+    - <br />Options:<ul><li>Enter "<a href="#" class="set_syspref" data-syspref="OPACXSLTListsDisplay"
+      data-value="default">default</a>" for the default stylesheet</li><li>Put a path
+      to define an xslt file</li><li>Put a URL for an external specific stylesheet.</li></ul>If
+      you have multiple stylesheets for different languages the placeholder {langcode}
+      will be replaced with current interface language.
+  - - ' Hiển thị kết quả tìm kiếm trên OPAC theo kiểu mẫu XSLT tại: '
+    - class: file
+      pref: OPACXSLTResultsDisplay
+    - '<br />Options:<ul><li>Enter "<a href="#" class="set_syspref" data-syspref="OPACXSLTResultsDisplay"
+      data-value="default">default</a>" for the default stylesheet</li><li>Put a path
+      to define an xslt file</li><li>Put a URL for an external specific stylesheet.</li><li>NOTE:
+      The system preference <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PassItemMarcToXSLT">PassItemMarcToXSLT</a>
+      must be enabled if your custom stylesheet utilizes data in the item fields</li></ul>If
+      you have multiple stylesheets for different languages the placeholder {langcode}
+      will be replaced with current interface language.'
+  - - ' Hiển thị chi tiết tài liệu trên OPAC theo kiểu mẫu XLST tại: '
+    - class: file
+      pref: OPACXSLTDetailsDisplay
+    - <br />Options:<ul><li>Enter "<a href="#" class="set_syspref" data-syspref="OPACXSLTDetailsDisplay"
+      data-value="default">default</a>" for the default stylesheet</li><li>Put a path
+      to define an xslt file</li><li>Put a URL for an external specific stylesheet.</li></ul>If
+      you have multiple stylesheets for different languages the placeholder {langcode}
+      will be replaced with current interface language.
+  - - 'Display authority results in the OPAC using the XSLT stylesheet at: '
+    - class: file
+      pref: AuthorityXSLTOpacResultsDisplay
+    - '<br />Options:<ul><li>Empty. No XSLT will be applied (<strong>default</strong>)</li><li>Enter
+      a path to a custom XSLT file.</li><li>Enter a URL for an external stylesheet.</li></ul>If
+      you have multiple stylesheets for: <ul><li>different languages: use the placeholder
+      {langcode} - this will be replaced with the current interface language</li><li>authority
+      types: use the placeholder {authtypecode} - this will be replaced with the authority
+      type code'
+  - - 'Display authority details in the OPAC using the XSLT stylesheet at: '
+    - class: file
+      pref: AuthorityXSLTOpacDetailsDisplay
+    - '<br />Options:<ul><li>Empty. No XSLT will be applied (<strong>default</strong>)</li><li>Enter
+      a path to a custom XSLT file.</li><li>Enter a URL for an external stylesheet.</li></ul>If
+      you have multiple stylesheets for: <ul><li>different languages: use the placeholder
+      {langcode} - this will be replaced with the current interface language</li><li>authority
+      types: use the placeholder {authtypecode} - this will be replaced with the authority
+      type code'
+  - - choices:
+        '0': Show
+        '1': Don't show
+      default: 0
+      pref: OpacNoItemTypeImages
+    - itemtype icons in the OPAC.
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: DisplayOPACiconsXSLT
+    - the format, audience, and material type icons and descriptions in XSLT MARC21
+      results and detail pages in the OPAC.
+  - - choices:
+        '0': ' Không bao gồm'
+        '1': ' Bao gồm'
+      pref: COinSinOPACResults
+    - ' COinS / OpenURL / Z39.88 trong kết quả tìm kiếm trên OPAC.  <br/>Cảnh báo:
+      Kích hoạt chức năng này sẽ làm chậm quá trình tìm kiếm trên OPAC.'
+    - '<br/>If you want to display a link to an OpenURL resolver, look at the following
+      system preferences:'
+    - <br/><a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLResolverURL">OpenURLResolverURL</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACShowOpenURL">OPACShowOpenURL</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACOpenURLItemTypes">OPACOpenURLItemTypes</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLText">OpenURLText</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLImageLocation">OpenURLImageLocation</a>
+  - - choices:
+        '0': Don't show
+        '1': ' Hiển thị'
+      pref: OPACShowUnusedAuthorities
+    - ' các biểu ghi nhất quán không được sử dụng trong kết quả tìm kiếm biểu ghi
+      nhất quán trên OPAC.'
+  - - choices:
+        holds: ' Hiển thị số lượng đặt mượn'
+        holds_priority: ' Hiển thị số lượng và mức ưu tiên của đặt mượn'
+        none: ' Không hiển thị chi tiết đặt mượn'
+        priority: ' Hiển thị mức ưu tiên của đặt mượn'
+      pref: OPACShowHoldQueueDetails
+    - ' tới bạn đọc trong giao diện OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      default: 0
+      pref: OPACShowCheckoutName
+    - ' tên bạn đọc ghi mượn tài liệu trên trang hiển thị chi tiết tài liệu trong
+      OPAC.'
+  - - Display the
+    - choices:
+        both: home and holding libraries
+        holding: holding library
+        home: home library
+      pref: OpacLocationBranchToDisplay
+    - for items on the OPAC record details page.
+  - - 'Display the shelving location '
+    - choices:
+        both: below both home and holding libraries
+        column: on a separate column
+        holding: below the holding library
+        home: below the home library
+      pref: OpacLocationOnDetail
+    - for items on the OPAC record details page.
+    - '<br />Note: If ''on a separate column'' is selected, you still need to enable
+      the item_shelving_location display on the <a href=''/cgi-bin/koha/admin/columns_settings.pl''>configure
+      columns</a> administration page.'
+  - - choices:
+        '0': Don't show
+        '1': Show
+      default: 0
+      pref: OPACShowMusicalInscripts
+    - musical inscripts on the OPAC record details page.
+  - - choices:
+        '0': Don't play
+        '1': Play
+      default: 0,'','If displayed musical inscripts, play midi conversion for items
+        on the OPAC record details page.'
+      pref: OPACPlayMusicalInscripts
+    - MIDI representation of musical inscripts on the OPAC record details page.
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      default: 0
+      pref: OpacKohaUrl
+    - ' dòng chữ ''Được cung cấp bởi Koha'' ở góc dưới giao diện OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      default: 0
+      pref: OpacShowRecentComments
+    - ' một liên kết tới bình luận mới nhất trong giao diện OPAC.'
+  - - choices:
+        '0': ' Không đánh dấu'
+        '1': ' Đánh dấu'
+      pref: OpacHighlightedWords
+    - 'words the patron searched for in their search results and detail pages. To
+      prevent certain words from ever being highlighted, enter a list of stopwords
+      here:'
+    - class: multi
+      pref: NotHighlightedWords
+    - (separate columns with |).
+  - - ' Sử dụng hình ảnh tại'
+    - class: url
+      pref: OpacFavicon
+    - ' cho hình đại diện của OPAC. (Bạn cần nhập một URL hoàn chỉnh, bắt đầu với
+      <code>http://</code>.)'
+  - - 'Include the following JavaScript on all pages in the OPAC:'
+    - class: code
+      pref: OPACUserJS
+      syntax: javascript
+      type: textarea
+  - - ' Bao gồm các kiểu mẫu CSS'
+    - class: file
+      pref: OpacAdditionalStylesheet
+    - to override specific settings from the default stylesheet (leave blank to disable).
+      Enter just a filename, a full local path or a complete URL starting with <code>http://</code>
+      (if the file lives on a remote server). Please note that if you just enter a
+      filename, the file should be in the css subdirectory for each active theme and
+      language within the Koha templates directory. A full local path is expected
+      to start from your HTTP document root.
+  - - ' Sử dụng kiểu mẫu CSS'
+    - class: file
+      pref: opaclayoutstylesheet
+    - on all pages in the OPAC, instead of the default CSS (used when leaving this
+      field blank). Enter just a filename, a full local path or a complete URL starting
+      with <code>http://</code> (if the file lives on a remote server). Please note
+      that if you just enter a filename, the file should be in the css subdirectory
+      for each active theme and language within the Koha templates directory. A full
+      local path is expected to start from your HTTP document root.
+  - - ' Bao gồm các CSS sau đây cho tất cả các trang OPAC:'
+    - class: code
+      pref: OPACUserCSS
+      syntax: css
+      type: textarea
+  - - ' Bao gồm một ô "Mở rộng tìm kiếm" trên trang hiển thị chi tiết tài liệu trong
+      OPAC, với các HTML sau đây (bỏ trống để không kích hoạt):'
+    - '<br />Note: The placeholders {BIBLIONUMBER}, {CONTROLNUMBER}, {OCLC_NO}, {TITLE},
+      {ISBN}, {ISSN} and {AUTHOR} will be replaced with information from the displayed
+      record.'
+    - class: code
+      pref: OPACSearchForTitleIn
+      syntax: text/html
+      type: textarea
+  - - 'Include a "Links" column on the "my summary" and "my checkout history" tabs
+      when a patron is logged in to the OPAC, with the following HTML (leave blank
+      to disable):'
+    - ' <br />Chú ý: Các thông số {BIBLIONUMBER}, {TITLE}, {ISBN} và {AUTHOR} sẽ được
+      thay thế bằng thông tin của biểu ghi hiện tại.'''
+    - class: code
+      pref: OPACMySummaryHTML
+      syntax: text/html
+      type: textarea
+  - - ' Bao gồm các HTML sau đây bên dưới các thông số trong kết quả tìm kiếm OPAC:'
+    - class: code
+      pref: OPACResultsSidebar
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: OpacAddMastheadLibraryPulldown
+    - ' bạn đọc lựa chọn giới hạn tìm kiếm tài liệu theo thư viện trong công cụ tìm
+      kiếm nhanh.'
+  - - ' Hiển thị các HTML sau đây khi không tìm thấy tài liệu trên OPAC:'
+    - ' <br />Chú ý: Bạn cần phải có thông số {QUERY_KW}, thông số này sẽ được thay
+      thế bằng từ khóa tìm kiếm.'
+    - class: code
+      pref: OPACNoResultsFound
+      syntax: text/html
+      type: textarea
+  - - ' Hiển thị URL trong trường 856u như là một hình ảnh trên: '
+    - choices:
+        Both: both detail and result pages
+        Details: detail page only
+        OFF: neither detail or result pages
+        Results: result page only
+      pref: OPACDisplay856uAsImage
+    - '. Note: The corresponding <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACXSLT">OPACXSLT</a>
+      option must be turned on.'
+  - - 'Select export options that should be available from OPAC detail page:'
+    - multiple:
+        bibtex: BibTeX
+        dc: Dublin Core
+        isbd: ISBD
+        marc8: MARC-8 encoded MARC
+        marcstd: Unicode/UTF-8 encoded MARC without local use -9xx, x9x, xx9- fields
+          and subfields
+        marcxml: MARCXML
+        mods: MODS
+        ris: RIS
+        utf8: Unicode/UTF-8 encoded MARC
+      pref: OpacExportOptions
+  - - choices:
+        '0': ' Không tách riêng'
+        '1': ' Tách riêng'
+      pref: OpacSeparateHoldings
+    - ' hiển thị tài liệu trong hai thẻ, thẻ đầu tiên chứa các tài liệu của'
+    - choices:
+        holdingbranch: ' thư viện sở hữu'
+        homebranch: ' thư viện chính'
+      pref: OpacSeparateHoldingsBranch
+    - is the logged in patrons's library. The second tab will contain all other items.
+  - - choices:
+        first_column: First column of the table
+        holdingbranch: Holding library
+        homebranch: Home library
+      pref: OPACHoldingsDefaultSortField
+    - is the default sort field for the holdings table.
+  - - ' Hiển thị tối đa'
+    - class: integer
+      pref: OpacMaxItemsToDisplay
+    - items on the bibliographic record detail page (if the bibliographic record has
+      more items than this, a link is displayed instead that allows the patron to
+      choose to display all items).
+  - - 'Display language selector on '
+    - choices:
+        both: both top and footer
+        footer: only footer
+        top: top
+      pref: OpacLangSelectorMode
+    - .
+  - - 'List the following not for loan statuses as available for reference in OPAC
+      search results:'
+    - pref: Reference_NFL_Statuses
+    - (Use | as delimiter.)
+  - - Show no more than
+    - pref: OPACResultsMaxItems
+    - individual (available) items on the OPAC XSLT search results.<br>
+    - If <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACResultsUnavailableGroupingBy">OPACResultsUnavailableGroupingBy</a>
+      is set to "library and substatus", show no more than
+    - pref: OPACResultsMaxItemsUnavailable
+    - individual (unavailable) items per library and category (like Checked out, Damaged,
+      On hold, etc.)<br>
+    - Group unavailable items by
+    - choices:
+        branch: library and substatus
+        branchonly: library only
+        substatus: substatus only
+      pref: OPACResultsUnavailableGroupingBy
+    - '. (NOTE: For large consortia we recommend to group unavailable items by ''substatus
+      only'', listing item counts per substatus. Similarly the option ''library only''
+      results in unavailable item counts per library.)'
+  ' Tính năng':
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      default: 0
+      pref: OpacCatalogConcerns
+    - OPAC users to report concerns about bibliographic records.
+    - <p><strong>NOTE:</strong> Enabling `<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CatalogConcerns">CatalogConcerns</a>`
+      will allow concern submissions from the staff interface.</p>
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      pref: OPACReportProblem
+    - patrons to submit problem reports for OPAC pages to the library or Koha administrator.
+    - <br/>
+    - <strong>NOTE:</strong> You must have <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>
+      enabled.
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: opacuserlogin
+    - ' bạn đọc đăng nhập vào giao diện OPAC.'
+  - - ' Hiển thị'
+    - choices:
+        callnum: library and call number
+        ccode: library, collection code, and call number
+        library: only library
+        location: library, location, and call number
+      pref: OpacItemLocation
+    - ' của tài liệu trên kết quả tìm kiếm trong OPAC.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: OpacPasswordChange
+    - ' bạn đọc thay đổi mật khẩu tài khoản đăng nhập trên giao diện OPAC. Chú ý rằng
+      tính năng này phải thiết lập "Không cho phép" nếu bạn sử dụng LDAP.'
+  - - 'Library patrons are '
+    - choices:
+        '0': not allowed
+        '1': allowed
+      default: 1
+      pref: OpacResetPassword
+    - ' to recover their password via e-mail in the OPAC.'
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: OPACpatronimages
+    - ' hình ảnh bạn đọc trên trang thông tin tài khoản bạn đọc trong OPAC.'
+  - - choices:
+        '0': Disable
+        '1': Enable
+      pref: OPACDetailQRCode
+    - the option to show a QR Code on the OPAC bibliographic detail page.
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: OPACFinesTab
+    - patrons to access the charges tab on their account page on the OPAC.
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: OpacBrowser
+    - patrons to browse subject authorities on the OPAC.
+    - <br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/build_browser_and_cloud.pl</code>
+      cronjob. Ask your system administrator to schedule it.
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: OpacCloud
+    - a subject cloud on the OPAC.
+    - <br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/build_browser_and_cloud.pl</code>
+      cronjob. Ask your system administrator to schedule it.
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: OpacAuthorities
+    - ' bạn đọc tìm kiếm các biểu ghi nhất quán của họ trên OPAC.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: opacbookbag
+    - ' bạn đọc lưu tài liệu vào trong "Giỏ tài liệu" trên OPAC.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: OpacTopissue
+    - ' bạn đọc xem danh sách các tài liệu được mượn nhiều nhất trên OPAC.'
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      pref: OPACComments
+    - patrons to make comments on items on the OPAC.
+  - - ' Hiển thị'
+    - choices:
+        first: ' tên'
+        firstandinitial: ' họ và tên'
+        full: ' tên đầy đủ'
+        none: ' không hiển thị tên'
+        surname: ' họ'
+        username: ' tên đăng nhập'
+      pref: ShowReviewer
+    - ' của người bình luận, với các bình luận trên OPAC.'
+  - - choices:
+        '0': Don't show
+        '1': ' Hiển thị'
+      pref: ShowReviewerPhoto
+    - reviewer's avatar beside comments in OPAC. The avatar will be searched on <a
+      href="https://www.libravatar.org" target="_blank">Libravatar</a> using the patron's
+      e-mail address.
+  - - choices:
+        '0': Don't allow
+        '1': Allow
+      pref: OPACHoldRequests
+    - patrons to place holds on items from the OPAC.
+  - - ' Hiển thị'
+    - class: long
+      pref: numSearchRSSResults
+    - ' kết quả tìm kiếm trong một trang hiển thị trên OPAC.'
+  - - Show
+    - multiple:
+        email: Email
+        facebook: Facebook
+        linkedin: LinkedIn
+        twitter: Twitter
+      pref: SocialNetworks
+    - social network links on the OPAC detail pages.
+  - - choices:
+        '0': ' Không kích hoạt'
+        '1': ' Kích hoạt'
+      default: 1
+      pref: OpacBrowseResults
+    - ' tính năng xem kết quả tìm kiếm trong trang hiển thị chi tiết tài liệu trên
+      OPAC.'
+  - - Show quote of the day in the
+    - multiple:
+        intranet: staff interface
+        opac: OPAC
+      pref: QuoteOfTheDay
+    - main page.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      default: 0
+      pref: OPACPopupAuthorsSearch
+    - ' danh sách các tác giả/chủ đề trong một kết quả tìm kiếm tổng hợp trong trang
+      Hiển thị chi tiết tài liệu trên OPAC.'
+  - - choices:
+        '0': Don't allow
+        '1': ' Cho phép'
+      default: 0
+      pref: OpacHoldNotes
+    - patrons to add a note when placing a hold.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      default: 0
+      pref: OPACAcquisitionDetails
+    - the acquisition details on OPAC detail pages.
+  - - choices:
+        '0': Don't show
+        '1': Show
+      default: 0
+      pref: OpacNewsLibrarySelect
+    - a library selection list for news items in the OPAC.
+  - - 'Use the following as the OPAC ISBD template:'
+    - class: code
+      pref: OPACISBD
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: 0
+      pref: OpacBrowseSearch
+    - interface for browsing all holdings (Elasticsearch only).
+  - - choices:
+        '0': Don't display
+        '1': Display
+      default: 0
+      pref: OPACAuthorIdentifiers
+    - identifiers for authors and contributors to the detail pages in the OPAC.
+    - This feature requires authorities with 024$2 and 024$a.
+    - 'Valid source codes in $2 are currently: orcid, scopus, loop, rid and viaf.'
+  - - 'Calculate the amount a patron has ''saved'' by using the library based on replacement
+      prices, and display:'
+    - multiple:
+        checkouthistory: on patron's checkout history page (the system preference
+          <em>opacreadinghistory</em> must be enabled)
+        summary: in user summary box on OPAC homepage (the system preference <em>OPACUserSummary</em>
+          must be enabled)
+        user: on patron's 'your summary' page
+      pref: OPACShowSavings
+    - . Note that displayed savings may be inaccurate if checkout history is anonymized.
+  Advanced search options:
+  - - 'Show search options:'
+    - multiple:
+        itemtype: Item types
+        language: Language
+        location: Location and availability
+        pubdate: Publication date
+        sorting: Sorting
+        subtype: Subtypes
+      pref: OpacAdvSearchOptions
+  - - 'Show search options for the expanded view:'
+    - multiple:
+        itemtype: Item types
+        language: Language
+        location: Location and availability
+        pubdate: Publication date
+        sorting: Sorting
+        subtype: Subtypes
+      pref: OpacAdvSearchMoreOptions
+  - - Show tabs in the OPAC advanced search for limiting searches on the
+    - class: long
+      pref: OpacAdvancedSearchTypes
+    - fields (separate values with |). Tabs appear in the order listed.<br/>
+    - '<em>Currently supported values</em>: Item types (<strong>itemtypes</strong>),
+      Collection, (<strong>ccode</strong>) and Shelving location (<strong>loc</strong>).'
+  Authentication:
+  - - choices:
+        '0': Allow
+        '1': Don't allow
+      pref: OPACShibOnly
+    - patrons to login by means other than Shibboleth.
+  OpenURL:
+  - - 'Complete URL of OpenURL resolver (starting with <code>http://</code> or <code>https://</code>):'
+    - class: url
+      pref: OpenURLResolverURL
+  - - 'Text of OpenURL links (or image title if <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLImageLocation">OpenURLImageLocation</a>
+      is defined):'
+    - pref: OpenURLText
+  - - 'Location of image for OpenURL links:'
+    - class: url
+      pref: OpenURLImageLocation
+    - <br />Can be an absolute URL starting with <code>http://</code> or
+    - <code>https://</code> or a relative URL
+    - '<br />Examples:'
+    - <br />- <code>http://www.example.com/img/openurl.png</code>
+    - <br />- <code>/opac-tmpl/bootstrap/images/OpenURL.png</code>
+  - - choices:
+        '0': Disable
+        '1': Enable
+      pref: OPACShowOpenURL
+    - display of OpenURL link in OPAC search results and detail page.
+  - - 'List of item type codes (separated by spaces) for those you want to show the
+      OpenURL link:'
+    - pref: OPACOpenURLItemTypes
+    - <br />
+  Restricted page:
+  - - Access from IP addresses beginning with
+    - pref: RestrictedPageLocalIPs
+    - 'do not need to be authenticated (comma separated - ex: ''127.0.0,127.0.1'').'
+  - - HTML content of your restricted page (available at /cgi-bin/koha/opac-restrictedpage.pl)
+    - class: HTML
+      pref: RestrictedPageContent
+      syntax: text/html
+      type: textarea
+  - - Use
+    - class: long
+      pref: RestrictedPageTitle
+    - as title of your restricted page (appears in the breadcrumb and on the top of
+      the restricted page).
+  Self registration and modification:
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: PatronSelfRegistration
+    - library patrons to register for an account via the OPAC.
+    - <br><strong>NOTE:</strong> This needs <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfRegistrationDefaultCategory'>PatronSelfRegistrationDefaultCategory</a>
+      to be set to a valid patron category code.
+  - - choices:
+        '0': ' Không bắt buộc'
+        '1': ' Bắt buộc'
+      pref: PatronSelfRegistrationVerifyByEmail
+    - that a self-registering patron verify themselves via email.
+    - <br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/cleanup_database.pl</code>
+      cronjob. Ask your system administrator to schedule it.
+  - - Use
+    - choices: patron-categories
+      pref: PatronSelfRegistrationDefaultCategory
+    - ' làm kiểu bạn đọc mặc định cho các bạn đọc tự đăng ký tài khoản qua OPAC.'
+    - '<br><strong>WARNING: Do not use a regular patron category for self registration.</strong>'
+    - <br>If the <code>misc/cronjobs/cleanup_database.pl</code> cronjob is setup to
+      delete unverified and unfinished OPAC self registrations, it will permanently
+      and unrecoverably delete all patrons that have registered more than <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfRegistrationExpireTemporaryAccountsDelay'>PatronSelfRegistrationExpireTemporaryAccountsDelay</a>
+      days ago (unless that delay is empty or zero).
+  - - Delete patrons still in the category indicated by <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfRegistrationDefaultCategory">PatronSelfRegistrationDefaultCategory</a>
+    - class: integer
+      pref: PatronSelfRegistrationExpireTemporaryAccountsDelay
+    - days after account creation.
+    - <br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/cleanup_database.pl</code>
+      cronjob. Ask your system administrator to schedule it.<br>No patrons will be
+      deleted if you set the pref to zero or make it empty.
+  - - 'The following <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>database columns</a> must be filled in on the patron modification
+      screen:'
+    - exclusions: password|cardnumber|dateexpiry|categorycode|sort1|sort2|opacnote|borrowernotes|gonenoaddress|lost|flags
+      pref: PatronSelfModificationMandatoryField
+      source: borrowers
+      type: modalselect
+  - - 'The following <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>database columns</a> must be filled in on the patron entry
+      screen:'
+    - exclusions: sort1|sort2|opacnote|borrowernotes|gonenoaddress|lost|flags
+      pref: PatronSelfRegistrationBorrowerMandatoryField
+      source: borrowers
+      type: modalselect
+  - - 'The following <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>database columns</a> will not appear on the patron self-registration
+      screen:'
+    - exclusions: branchcode|sort1|sort2|gonenoaddress|lost|flags
+      pref: PatronSelfRegistrationBorrowerUnwantedField
+      source: borrowers
+      type: modalselect
+  - - 'The following <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>database columns</a> will not appear on the patron self-modification
+      screen:'
+    - exclusions: sort1|sort2|gonenoaddress|lost|flags
+      pref: PatronSelfModificationBorrowerUnwantedField
+      source: borrowers
+      type: modalselect
+  - - ' Hiển thị các hướng dẫn dưới đây tới bạn đọc tự đăng ký qua OPAC ( Nhập mã
+      HTML ):'
+    - class: html
+      pref: PatronSelfRegistrationAdditionalInstructions
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': Don't consider
+        '1': Consider
+      pref: PatronSelfRegistrationEmailMustBeUnique
+    - patron's email (borrowers.email) as unique on self registering. An email won't
+      be accepted if it already exists in the database.
+  - - 'Enable the self registration for the following libraries:'
+    - pref: PatronSelfRegistrationLibraryList
+    - (separate branchcode with |).
+    - If empty, all libraries will be listed.
+  - - choices:
+        '0': Don't show and prefill
+        '1': Show and prefill
+      pref: PatronSelfRegistrationPrefillForm
+    - password and login form after a patron has self registered.
+  - - choices:
+        '0': Don't require
+        '1': Require
+      pref: PatronSelfRegistrationConfirmEmail
+    - patrons to confirm their email address by entering it twice.
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: OPACPatronDetails
+    - ' bạn đọc thay đổi thông tin tài khoản của mình từ giao diện OPAC.'
+  - - 'Choose email address that new patron self-registrations will be sent to: '
+    - choices:
+        '0': none
+        BranchEmailAddress: email address of library
+        EmailAddressForPatronRegistrations: EmailAddressForPatronRegistrations
+        KohaAdminEmailAddress: KohaAdminEmailAddress
+      default: 0
+      pref: EmailPatronRegistrations
+    - '<br>If you chooose <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForPatronRegistrations">EmailAddressForPatronRegistrations</a>
+      you have to enter a valid email address: '
+    - class: email
+      pref: EmailAddressForPatronRegistrations
+  Shelf browser:
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: OPACShelfBrowser
+    - ' công cụ tìm kiếm theo giá sách trên trang hiển thị chi tiết tài liệu, tính
+      năng này cho phép bạn đọc xem các tài liệu có trên giá. Chú ý rằng tính năng
+      này sẽ làm chậm hệ thống của bạn, nên cần cân nhắc khi sử dụng.'
+  - - choices:
+        '0': ' Không sử dụng'
+        '1': ' Sử dụng'
+      default: 1
+      pref: ShelfBrowserUsesLocation
+    - ' kho tài liệu khi tìm kiếm tài liệu theo giá sách.'
+  - - choices:
+        '0': ' Không sử dụng'
+        '1': ' Sử dụng'
+      default: 1
+      pref: ShelfBrowserUsesHomeBranch
+    - ' thư viện chính tài liệu khi tìm kiếm tài liệu theo giá sách.'
+  - - choices:
+        '0': ' Không sử dụng'
+        '1': ' Sử dụng'
+      default: 0
+      pref: ShelfBrowserUsesCcode
+    - ' mã bộ sưu tập tài liệu khi tìm kiếm tài liệu theo giá sách.'
+  Suggestions:
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: OpacSuggestionManagedBy
+    - ' tên của cán bộ thư viện quản lý đề xuất mua trên giao diện Opac.'
+  - - choices:
+        '0': ' Không cho phép'
+        '1': ' Cho phép'
+      pref: AnonSuggestions
+    - patrons that aren't logged in to make purchase suggestions. Suggestions are
+      connected to the <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AnonymousPatron">AnonymousPatron</a>
+      system preference.
+  - - Limit patrons to
+    - class: integer
+      pref: MaxOpenSuggestions
+    - 'open suggestions. Leave empty for no limit. **Note: this setting does not affect
+      anonymous suggestions.'
+  - - Number of total suggestions allowed
+    - class: integer
+      pref: MaxTotalSuggestions
+    - in
+    - class: integer
+      pref: NumberOfSuggestionDays
+    - days.
+  - - choices:
+        '0': ' Không hiển thị'
+        '1': ' Hiển thị'
+      pref: OPACViewOthersSuggestions
+    - ' đề xuất mua từ bạn đọc khác trên OPAC.'
+  - - 'Fields that should be mandatory for patron purchase suggestions:'
+    - pref: OPACSuggestionMandatoryFields
+      required: title
+      source: suggestions
+      type: modalselect
+    - '<br />Note: if none of the above options are selected, ''Title'' field would
+      be mandatory anyway, by default.'
+  - - 'Fields that should be hidden for patron purchase suggestions:'
+    - exclusions: title
+      pref: OPACSuggestionUnwantedFields
+      source: suggestions
+      type: modalselect
+    - '<br />Note: Do not make <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACSuggestionMandatoryFields">OPACSuggestionMandatoryFields</a>
+      unwanted fields '
+  - - choices:
+        '0': Disable
+        '1': Enable
+      pref: suggestion
+    - purchase suggestions in the OPAC.<br>
+    - 'When <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=suggestion">suggestion</a>
+      is enabled and <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AnonSuggestions">AnonSuggestions</a>
+      is disabled, following patron categories are not allowed to make purchase suggestions:'
+    - choices: patron-categories
+      class: multiple
+      pref: suggestionPatronCategoryExceptions
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: 0
+      pref: OPACSuggestionAutoFill
+    - OPAC suggestions form automatically filling with data from Google Books API.

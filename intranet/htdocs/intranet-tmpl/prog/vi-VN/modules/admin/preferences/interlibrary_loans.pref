@@ -1,0 +1,56 @@
+---
+Interlibrary loans:
+  Features:
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: 0
+      pref: ILLModule
+    - the interlibrary loans module (master switch).
+  - - Adding text will enable the copyright clearance stage in request creation. The
+      text you enter will be the text displayed.
+    - class: long
+      pref: ILLModuleCopyrightClearance
+      type: textarea
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: 0
+      pref: ILLModuleUnmediated
+    - unmediated interlibrary loan requests. If enabled and the ILL backend supports
+      it, the newly created requests are immediately requested by backend.
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: 0
+      pref: CirculateILL
+    - the circulation of ILL requested items.
+  - - choices:
+        '0': Don't check
+        '1': Check
+      default: 0
+      pref: ILLCheckAvailability
+    - external sources for availability during the request process.
+  - - 'ILL statuses that are considered finished and should not be displayed in the
+      ILL module: '
+    - class: multi
+      pref: ILLHiddenRequestStatuses
+    - (separated with |). If left empty, all ILL requests will be displayed. The request
+      codes are defined in the backends and additional aliases can be configured via
+      the <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=ILL_STATUS_ALIAS">ILL_STATUS_ALIAS</a>
+      authorized value category.
+  Notifications:
+  - - 'Send these ILL notices to staff when appropriate:'
+    - class: multi
+      pref: ILLSendStaffNotices
+    - (separated with |). e.g. ILL_REQUEST_CANCEL|ILL_REQUEST_MODIFIED If left empty,
+      no staff ILL notices will be sent.
+  - - 'Fallback email address for staff ILL notices to be sent to in the absence of
+      a library address:'
+    - class: email
+      pref: ILLDefaultStaffEmail
+  OPAC:
+  - - 'Enabled ILL backends for OPAC initiated requests:'
+    - class: multi
+      pref: ILLOpacbackends
+    - (separated with |). If left empty, all installed backends will be enabled.

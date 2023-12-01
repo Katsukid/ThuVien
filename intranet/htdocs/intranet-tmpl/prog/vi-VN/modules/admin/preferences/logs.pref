@@ -1,0 +1,120 @@
+---
+Nhật ký hệ thống:
+  Debugging:
+  - - When logging actions, store a stack trace that goes at most
+    - class: integer
+      pref: ActionLogsTraceDepth
+    - levels deep.
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: DumpTemplateVarsIntranet
+    - dump all Template Toolkit variables to a comment in the HTML source for the
+      staff interface.
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: DumpTemplateVarsOpac
+    - dump all Template Toolkit variables to a comment in the HTML source for the
+      OPAC.
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: DumpSearchQueryTemplate
+    - dump search query to a comment in the HTML source for the OPAC and staff interface.
+  Logging:
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: ClaimsLog
+    - when an acquisitions claim or a serials claim notice is sent.
+  - - choices:
+        '0': ' Không ghi lại'
+        '1': ' Ghi lại'
+      pref: BorrowersLog
+    - ' thay đổi của các biểu ghi bạn đọc.'
+  - - choices:
+        '0': ' Không ghi lại'
+        '1': ' Ghi lại'
+      pref: CataloguingLog
+    - any changes to bibliographic or item records.
+  - - choices:
+        '0': ' Không ghi lại'
+        '1': ' Ghi lại'
+      pref: AuthoritiesLog
+    - ' các thay đổi của biểu ghi nhất quán.'
+  - - choices:
+        '0': ' Không ghi lại'
+        '1': ' Ghi lại'
+      pref: FinesLog
+    - ' khi khoản tiền phạt thay đổi, được thanh toán hoặc được miễn giảm.'
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: HoldsLog
+    - any actions on holds (create, cancel, suspend, resume, etc).
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: IllLog
+    - when changes to ILL requests take place.
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: AcquisitionLog
+    - when acquisition actions take place.
+  - - choices:
+        '0': ' Không ghi lại'
+        '1': ' Ghi lại'
+      pref: IssueLog
+    - ' khi các tài liệu được cho bạn đọc mượn.'
+  - - choices:
+        '0': ' Không ghi lại'
+        '1': ' Ghi lại'
+      pref: ReturnLog
+    - when items are checked in.
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: RenewalLog
+    - when items are renewed.
+  - - choices:
+        '0': ' Không ghi lại'
+        '1': ' Ghi lại'
+      pref: SubscriptionLog
+    - ' khi các ấn phẩm định kỳ được thêm vào, bị xóa hoặc thay đổi.'
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: CronjobLog
+    - information from cron jobs.
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: ReportsLog
+    - when reports are added, deleted or changed.
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: AuthFailureLog
+    - ' authentication failures.'
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: AuthSuccessLog
+    - ' successful authentications.'
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: NoticesLog
+    - ' changes to notice templates.'
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: NewsLog
+    - ' changes to news entries and other contents managed in the news tool.'
+  - - choices:
+        '0': Don't log
+        '1': Log
+      pref: RecallsLog
+    - any actions on recalls (create, cancel, expire, fulfill).

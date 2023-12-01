@@ -1,0 +1,202 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% USE TablesSettings %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Hold ratios &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>
+    .sql { display: none; }
+    .ulined { text-decoration: underline; }
+    #holdst ul li {  list-style: outside url("[% interface | html %]/[% theme | html %]/img/item-bullet.svg") disc; }
+</style>
+</head>
+
+<body id="circ_reserveratios" class="circ">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Phân hệ lưu thông</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tỉ lệ đặt mượn</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+<h1>Tỷ lệ đặt mượn để thư viện xác định các bản tài liệu cần thiết.</h1>
+ <h3>Thống kê vào ngày [% todaysdate | $KohaDates %]. Kết quả thống kê từ ngày [% from | $KohaDates %] đến ngày [% to | $KohaDates %]</h3>
+<p>Tài liệu có tỷ lệ đặt mượn &ge; [% ratio | html %].</p>
+<div class="sql">[% sql | html %]</div>
+
+[% IF ( reserveloop ) %]
+ <table id="holdst">
+ <thead>
+ <tr>
+ <th>Sách đang giữ/th>
+ <th>Tài liệu</th>
+ <th>Tỷ lệ đặt mượn</th>
+ <th class="anti-the">Nhan đề</th>
+ <th>Thư viện chính</th>
+ <th>Thư viện sở hữu</th>
+ <th>Kho tài liệu</th>
+ <th>Kiểu tài liệu</th>
+ <th class="natural">Ký hiệu phân loại</th>
+ <th>Số bản cần</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH reserveloo IN reserveloop %]
+ <tr>
+ <td><p>[% reserveloo.reservecount | html %]</p></td>
+ <td><p>[% reserveloo.itemcount | html %]</p></td>
+ <td><a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% reserveloo.biblionumber | uri %]" >[% reserveloo.thisratio | html %]</a></td>
+ <td>
+ [% INCLUDE 'biblio-title.inc' biblio=reserveloo link = 1 %][% IF ( reserveloo.author ) %] by [% reserveloo.author | html %][% END %]
+ </td>
+ <td>
+ <ul>
+ [% FOREACH homebranch IN reserveloo.homebranch_list %]
+ <li>[% Branches.GetName ( homebranch ) | html %]</li>
+ [% END %]
+ </ul>
+ </td>
+ <td>
+ <ul>
+ [% FOREACH holdingbranch IN reserveloo.holdingbranch_list %]
+ <li>[% Branches.GetName ( holdingbranch ) | html %]</li>
+ [% END %]
+ </ul>
+ </td>
+ <td>
+ <ul>
+ [% FOREACH location IN reserveloo.location %]
+ <li>[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => location ) | html %]</li>
+ [% END %]
+ </ul>
+ </td>
+ <td>
+ <ul>
+ [% FOREACH itype IN reserveloo.itype %]
+ <li>[% ItemTypes.GetDescription( itype ) | html %]</li>
+ [% END %]
+ </ul>
+ </td>
+ <td>
+ <ul>
+ [% FOREACH listcall IN reserveloo.listcall %]
+ <li>[% listcall | html %]</li>
+ [% END %]
+ </ul>
+ </td>
+ <td class="actions">
+ <p>
+ [% IF ( reserveloo.thisratio_atleast1 ) %]
+ [% IF ( CAN_user_acquisition && basketno && booksellerid ) %]<!-- [% reserveloo.copies_to_buy | html %] -->
+ <a href="/cgi-bin/koha/acqui/neworderempty.pl?biblionumber=[% reserveloo.biblionumber | uri %]&amp;booksellerid=[% booksellerid | uri %]&amp;basketno=[% basketno | uri %]&amp;rr_quantity_to_order=[% reserveloo.copies_to_buy | uri %]" class="btn btn-default btn-xs"><i class="fa fa-plus"></i> Bản tài liệu [% reserveloo.copies_to_buy | html %] </a>
+ [% ELSE %]
+ <strong>Bản tài liệu [% reserveloo.copies_to_buy | html %] </strong>
+ [% END %]
+ [% IF ( reserveloo.pendingorders ) %]<br><strong>[% reserveloo.pendingorders | html %] pending</strong>[% END %]
+ [% ELSE %]
+ <span>0 to order</span>
+ [% END %]
+ </p>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% ELSE %]
+ <strong>Không tìm thấy tài liệu</strong>
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+
+<form action="/cgi-bin/koha/circ/reserveratios.pl" method="post" >
+<fieldset class="brief">
+<h4>Bộ lọc dữ liệu:</h4>
+<ol>
+ <li>
+ <label for="ratio">Hold ratio (greater than or equal to):</label>
+ <input type="text" size="5" id="ratio" name="ratio" value="[% ratio | html %]" />
+ </li>
+
+ <li class="checkbox">
+ [% IF include_ordered %]
+ <input id="include_ordered" name="include_ordered" type="checkbox" checked="checked"/>
+ [% ELSE %]
+ <input id="include_ordered" name="include_ordered" type="checkbox"/>
+ [% END %]
+ <label for="include_ordered">Include ordered</label>
+ </li>
+
+ <li class="checkbox">
+ [% IF include_suspended %]
+ <input id="include_suspended" name="include_suspended" type="checkbox" checked="checked"/>
+ [% ELSE %]
+ <input id="include_suspended" name="include_suspended" type="checkbox"/>
+ [% END %]
+ <label for="include_suspended">Include suspended</label>
+ </li>
+
+ <li>
+ <label for="from">Ngày bắt đầu:</label>
+ <input type="text" size="10" id="from" name="from" value="[% from | html %]" class="flatpickr" data-date_to="to" />
+ </li>
+
+ <li>
+ <label for="to">Ngày kết thúc:</label>
+ <input size="10" id="to" name="to" value="[% to | html %]" type="text" class="flatpickr" />
+ </li>
+</ol>
+(bao gồm) <fieldset class="action"><input class="submit" type="submit" value="Tìm kiếm" /></fieldset>
+</fieldset>
+[% IF ( CAN_user_acquisition && basketno && booksellerid ) %]
+<input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+<input type="hidden" name="basketno" value="[% basketno | html %]" />
+[% END %]
+</form>
+
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        var table_settings = [% TablesSettings.GetTableSettings( 'circ', 'holdsratios', 'holds-ratios', 'json' ) | $raw %];
+        $(document).ready(function() {
+            KohaTable("holdst", {
+                "aaSorting": [ [2,'desc'], [3,'asc'] ],
+                  "aoColumnDefs": [
+                      { "sType": "anti-the", "aTargets" : [ "anti-the" ] },
+                      { "sType": "natural", "aTargets" : [ "natural" ] },
+                    ],
+                "sPaginationType": "full",
+                "autoWidth": false
+            }, table_settings);
+       });
+  </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

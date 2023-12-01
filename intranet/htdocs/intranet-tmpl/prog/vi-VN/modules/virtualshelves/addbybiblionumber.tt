@@ -1,0 +1,118 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Add to list &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="lists_addbybiblionumber" class="lists">
+ <div class="container-fluid">
+
+[% UNLESS (authorized) %]
+<h1>Error adding to list</h1>
+ <p align="center">
+ [% IF (errcode==1) %]Bạn không thể tạo giá sách ảo mới, vui lòng kiểm tra lại tên giá sách ảo.<br/>[% END %] [% IF (errcode==2) %]Xin lỗi, bạn không được phân quyền để thêm tài liệu vào giá sách ảo này.<br/>[% END %]
+ <a href="javascript:self.close();">Đóng.</a>
+ </p>
+[% ELSE %]
+
+ [% IF ( multiple ) %]
+ <h1>Thêm [% total | html %] tài liệu vào giá sách ảo [% IF ( singleshelf ) %]<em>[% shelfname | html %]</em>: [% ELSE %]giá sách ảo:[% END %]</h1>
+ [% ELSE %]
+ <h1>Thêm tài liệu vào giá sách ảo [% IF ( singleshelf ) %]<em>[% shelfname | html %]</em>[% ELSE %]giá sách ảo:[% END %]</h1>
+ [% END %]
+ <ul>
+ [% FOREACH biblio IN biblios %]
+ <li> <span class="title">[% biblio.title | html %]</span>
+ [% IF ( biblio.author ) %]<span class="author"> [% biblio.author | html %] </span>[% END %]
+ </li>
+ [% END %]
+ </ul>
+
+ <form name="f1" action="/cgi-bin/koha/virtualshelves/addbybiblionumber.pl" method="post">
+ [% FOREACH biblio IN biblios %] <input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]" />[% END %]
+ <input type="hidden" name="confirmed" value="1" />
+ [% IF ( shelfnumber ) %]<input type="hidden" name="shelfnumber" value="[% shelfnumber | html %]" />[% END %]
+
+[% UNLESS ( shelfnumber ) %]
+
+[% UNLESS ( newshelf ) %]
+ [% IF private_shelves.count OR public_shelves.count OR private_shelves_shared_with_me.count %]
+ <fieldset class="rows">
+ <legend>Chọn giá sách ảo hiện tại</legend>
+ <ol>
+ <li>
+ <label>Chọn giá sách ảo</label>
+ <select name="shelfnumber" id="shelfnumber">
+ [% IF private_shelves.count %]
+ <optgroup label="Giá sách ảo cá nhân">
+ [% FOREACH private_shelf IN private_shelves %]
+ <option value="[% private_shelf.shelfnumber | html %]">[% private_shelf.shelfname | html %]</option>
+ [% END %]
+ </optgroup>
+ [% END %]
+ [% IF private_shelves_shared_with_me.count %]
+ <optgroup label="Private lists shared with me">
+ [% FOREACH private_shelf IN private_shelves_shared_with_me %]
+ <option value="[% private_shelf.shelfnumber | html %]">[% private_shelf.shelfname | html %]</option>
+ [% END %]
+ </optgroup>
+ [% END %]
+ [% IF public_shelves.count %]
+ <optgroup label="Giá sách ảo cộng đồng">
+ [% FOREACH public_shelf IN public_shelves %]
+ <option value="[% public_shelf.shelfnumber | html %]">[% public_shelf.shelfname | html %]</option>
+ [% END %]
+ </optgroup>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ [% FOREACH biblio IN biblios %]<input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]" />[% END %]
+ [% UNLESS ( biblionumbers ) %]
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ [% ELSE %]
+ <input type="hidden" name="biblionumbers" value="[% biblionumbers | html %]" />
+ [% END %]
+ </fieldset>
+
+ <p>... Hoặc...</p>
+[% END %]
+[% END %]
+
+ <fieldset class="rows"><legend>Thêm vào giá sách ảo mới:</legend>
+ <ol><li>
+ <label for="newvirtualshelf">
+ Tên giá sách ảo: </label>
+ [% FOREACH biblio IN biblios %]<input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]" />[% END %]
+ [% UNLESS ( biblionumbers ) %]
+ <input type="hidden" name="biblionumber" id="biblionumber" value="[% biblionumber | html %]" />
+ [% ELSE %]
+ <input type="hidden" name="biblionumbers" id="biblionumbers" value="[% biblionumbers | html %]" />
+ [% END %]
+ <input type="text" name="newvirtualshelf" id="newvirtualshelf" size="40" />
+ <input type="hidden" name="confirmed" value="1" />
+ </li>
+ <li>
+ <label for="category">Kiểu:</label>
+ <select name="public" id="public">
+ <option value="0">Cá nhân</option>
+ <option value="1">Cộng đồng</option>
+ </select>
+ </li></ol>
+ </fieldset>
+
+
+[% END %]
+
+
+<!-- SAVE -->
+ <fieldset class="action">
+ <input type="hidden" name="sortfield" value="title" />
+ <input class="btn btn-primary" type="submit" value="Lưu" /> <a class="close cancel" href="#">Hủy bỏ</a>
+ </fieldset>
+ </form>
+<!-- /SAVE -->
+
+[% END %]
+
+[% SET popup_window = 1 %]
+[% INCLUDE 'intranet-bottom.inc' %]

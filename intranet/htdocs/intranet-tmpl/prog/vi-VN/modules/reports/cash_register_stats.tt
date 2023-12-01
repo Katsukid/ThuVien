@@ -1,0 +1,252 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Branches %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Price %]
+[% USE ItemTypes %]
+[% USE Registers %]
+[% SET footerjs = 1 %]
+[% PROCESS 'accounts.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% IF ( do_it ) %]Cash register statistics &rsaquo; Results[% ELSE %]Cash register statistics[% END %] &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cash_register_stats" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+<nav id="breadcrumbs" aria-label="Breadcrumb" class="breadcrumb">
+ <ol>
+ <li>
+ <a href="/cgi-bin/koha/mainpage.pl">Trang chủ</a>
+ </li>
+ <li>
+ <a href="/cgi-bin/koha/reports/reports-home.pl">Báo cáo</a>
+ </li>
+
+ [% IF ( do_it ) %]
+ <li>
+ <a href="/cgi-bin/koha/reports/cash_register_stats.pl">Cash register statistics</a>
+ </li>
+ <li>
+ <a href="#" aria-current="page">
+ Results
+ </a>
+ </li>
+ [% ELSE %]
+ <li>
+ <a href="#" aria-current="page">
+ Cash register statistics
+ </a>
+ </li>
+ [% END %]
+ </ol>
+</nav>
+[% END %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-10 col-sm-push-2">
+ <main>
+
+ <h1>Cash register statistics</h1>
+ <form method="post" action="/cgi-bin/koha/reports/cash_register_stats.pl" id="frmCashRegister">
+ <fieldset class="rows">
+ <legend>Cash register statistics [% beginDate | $KohaDates %] to [% endDate | $KohaDates %]</legend>
+ <ol>
+ <br>
+ <li>
+ <label for="from">Từ: </label>
+ <input type="text" size="10" id="from" name="from" value="[% beginDate | html %]" class="flatpickr" data-date_to="to" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ <li>
+ <label for="to">Đến ngày: </label>
+ <input type="text" size="10" id="to" name="to" value="[% endDate | html %]" class="flatpickr" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+
+ <li>
+ <label for="">Loại hình thanh toán:</label>
+ <select name="transaction_type" id="transaction_type">
+ [% IF transaction_type == "ALL" %]
+ <option value="ALL" selected="selected">All Các hóa đơn</option>
+ [% ELSE %]
+ <option value="ALL">All Các hóa đơn</option>
+ [% END %]
+
+ [% IF transaction_type == "ACT" %]
+ <option value="ACT" selected="selected">All payments to the library</option>
+ [% ELSE %]
+ <option value="ACT">All payments to the library</option>
+ [% END %]
+
+ [% IF transaction_type == "FORW" %]
+ <option value="FORW" selected="selected">Hủy phạt</option>
+ [% ELSE %]
+ <option value="FORW">Hủy phạt</option>
+ [% END %]
+
+ [% FOREACH debit_type IN debit_types %]
+ [% IF transaction_type == debit_type.code %]
+ <option value="[% debit_type.code | html %]" selected="selected">[% debit_type.description | html %]</option>
+ [% ELSE %]
+ <option value="[% debit_type.code | html %]">[% debit_type.description | html %]</option>
+ [% END %]
+ [% END %]
+ 
+ [% FOREACH credit_type IN credit_types %]
+ [% IF transaction_type == credit_type.code %]
+ <option value="[% credit_type.code | html %]" selected="selected">[% credit_type.description | html %]</option>
+ [% ELSE %]
+ <option value="[% credit_type.code | html %]">[% credit_type.description | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label>Transaction library</label>
+ <select name="branch" id="branch">
+ <option value="ALL">Tất cả</option>
+ [% FOREACH branchloo IN branchloop %]
+ [% IF ( branchloo.selected ) %]
+ <option value="[% branchloo.branchcode | html %]" selected="selected">[% branchloo.branchname | html %]</option>
+ [% ELSE %]
+ <option value="[% branchloo.branchcode | html %]">[% branchloo.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [% IF Koha.Preference('UseCashRegisters') %]
+ <li>
+ <label for="registerid">Cash register: </label>
+ <select name="registerid" id="registerid">
+ <option id="noregister" selected="selected" value="">-- Tất cả --</option>
+ [% PROCESS options_for_registers registers => Registers.all( selected => registerid ) %]
+ </select>
+ </li>
+ [% END %]
+ </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+ <legend>Hiển thị báo cáo</legend>
+ <ol>
+ <li>
+ <label for="outputscreen">Trên màn hình hiển thị: </label>
+ <input type="radio" checked="checked" name="output" id="outputscreen" value="screen" />
+ </li>
+ <li>
+ <label for="outputfile">Xuất ra tệp tin:</label>
+ <input type="radio" name="output" value="file" id="outputfile" />
+ <label class="inline" for="basename">Tên tệp tin: </label><input id="basename" name="basename" type="text" value="Xuất dữ liệu" />
+
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-default" name="do_it" type="submit" value="Tìm kiếm" />
+ </fieldset>
+ </form>
+
+ [% IF ( do_it ) %]
+ <div>&nbsp;</div>
+ <table id="tbl_cash_register_stats">
+ <thead>
+ <tr>
+ <th>Manager name</th>
+ <th>Patron card number</th>
+ <th>Tên bạn đọc</th>
+ <th>Transaction library</th>
+ <th>Transaction date</th>
+ <th>Ngày cập nhật</th>
+ <th>Transaction type</th>
+ <th>Ghi chú</th>
+ <th>Số lượng</th>
+ <th>Bibliographic record title</th>
+ <th>Đăng ký cá biệt</th>
+ <th>Kiểu tài liệu</th>
+ </tr>
+ </thead>
+ [% FOREACH loopresul IN loopresult %]
+ <tr>
+ <td>[% loopresul.mfirstname | html %] [% loopresul.msurname | html %]</td>
+ <td><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% loopresul.borrowernumber | uri %]">[% loopresul.cardnumber | html %]</a></td>
+ <td>[% loopresul.bfirstname | html %] [% loopresul.bsurname | html %]</td>
+ <td>[% loopresul.branchname | html %]</td>
+ <td>[% loopresul.date | $KohaDates %]</td>
+ <td>[% loopresul.timestamp | $KohaDates with_hours = 1 %]</td>
+ <td>[% loopresul.type_description | html %]</td>
+ <td>[% loopresul.note | html %]</td>
+ <td style="text-align:right;">[% loopresul.amount | $Price %]</td>
+ <td><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% loopresul.biblionumber | uri %]">[% loopresul.title | html %]</a></td>
+ <td>[% loopresul.barcode | html %]</td>
+ <td>[% ItemTypes.GetDescription(loopresul.itype) | html %]</td>
+ </tr>
+ [% END %]
+ <tfoot>
+ <tr>
+ [% IF transaction_type == "ACT" %]
+ <th colspan="8" style="text-align:right;">Tổng số</th>
+ <th style="text-align:right;">[% total  | $Price %]</th>
+ <th colspan="3">&nbsp;</th>
+ [% END %]
+ </tr>
+ </tfoot>
+ </table>
+
+ [% END %] [%# do_it %]
+
+ </main>
+ </div> <!-- /.col-sm-10.col-sm-push-2 -->
+
+ <div class="col-sm-2 col-sm-pull-10">
+ <aside>
+ [% INCLUDE 'reports-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2.col-sm-pull-10 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/register_selection.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ <script id="js">
+        $(document).ready(function() {
+            $("#tbl_cash_register_stats").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "iDisplayLength": 50,
+                "sPaginationType": "full_numbers"
+            }));
+        });
+    </script>
+ [% INCLUDE 'calendar.inc' %]
+ <script>
+        actTotal = "";
+
+        $(document).ready(function() {
+
+            $('#frmCashRegister').submit(function() {
+                var isFormValid = true;
+                var alertString= _("Phát hiện các lỗi sau đây, bạn vui lòng kiểm tra và chỉnh sửa lại:")+"\n";
+
+                alertString +="-------------------------------------------------------------------\n\n";
+
+                if ( !$('#from').val() || !$('#to').val()){
+                    isFormValid = false;
+                    alertString += "\n- " + _("Dates cannot be empty");
+                }
+
+                if (!isFormValid) {
+                   alert(alertString);
+                   return false;
+                }
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]
