@@ -41,9 +41,9 @@
                                         <div class="search-term-input">
                                             [% IF ( expanded_options ) %]
                                                     <select name="op" class="form-control">
-                                                        <option value="AND" selected="selected">and</option>
-                                                        <option value="OR">or</option>
-                                                        <option value="NOT">not</option>
+                                                        <option value="AND" selected="selected">và</option>
+                                                        <option value="OR">hoặc</option>
+                                                        <option value="NOT">không</option>
                                                     </select>
                                             [% ELSE %]
                                                 <label for="search-field_[% loop.index | html %]">
@@ -286,7 +286,7 @@
                         <div id="pubrange" class="advsearch_limit">
                             <!-- PUB RANGE OPTION -->
                             <fieldset>
-                                <label for="limit-yr">Publication date range</label>
+                                <label for="limit-yr">Phạm vi ngày xuất bản</label>
                                 <input type="text" size="30" id="limit-yr" name="limit-yr" title="Enter search terms" value="" />
                                 <div class="hint">For example:  1999-2001.  You could also use "-1987" for everything published in and before 1987 or "2008-" for everything published in 2008 and after.</div>
                             </fieldset>
@@ -444,13 +444,13 @@
 
         [% IF ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.size > 0 ) %]
             [% IF expanded_options %]
-                <a href="/cgi-bin/koha/opac-search.pl?expanded_options=0" class="btn btn-default more-less-options">Fewer options</a>
+                <a href="/cgi-bin/koha/opac-search.pl?expanded_options=0" class="btn btn-default more-less-options">Ít lựa chọn hơn</a>
             [% ELSIF not expanded_options %]
-                <a href="/cgi-bin/koha/opac-search.pl?expanded_options=1" class="btn btn-default more-less-options">More options</a>
+                <a href="/cgi-bin/koha/opac-search.pl?expanded_options=1" class="btn btn-default more-less-options">Lựa chọn khác</a>
             [% END %]
         [% END %]
 
-        <a href="/cgi-bin/koha/opac-search.pl?do=Clear" class="btn btn-default new-search">New search</a>
+        <a href="/cgi-bin/koha/opac-search.pl?do=Clear" class="btn btn-default new-search">Tìm kiếm mới</a>
     </p>
 [% END %]
 
