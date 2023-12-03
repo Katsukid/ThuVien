@@ -45,8 +45,8 @@ tables:
     rows:
     - authorised_value: ''
       frameworkcode: ''
-      liblibrarian: SYSTEM CONTROL NUMBERS (KOHA)
-      libopac: SYSTEM CONTROL NUMBERS (KOHA)
+      liblibrarian: SYSTEM CONTROL NUMBERS
+      libopac: SYSTEM CONTROL NUMBERS
       mandatory: 0
       repeatable: 1
       tagfield: '999'

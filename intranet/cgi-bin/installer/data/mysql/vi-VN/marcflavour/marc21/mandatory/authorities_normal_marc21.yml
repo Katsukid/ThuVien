@@ -3,12 +3,12 @@ description:
 - 'Default MARC21 Standard Authority types:'
 - ''
 - Tên cá nhân
-- Corporate Name
+- Tên tập thể
 - Tên hội nghị
-- Uniform Title
+- Tiêu đề thống nhất
 - Thuật ngữ thời gian
 - Thuật ngữ chuyên đề
-- Geographic Name
+- Tên địa lý
 - Thể loại/Hình thức
 sql_statements:
 - INSERT INTO auth_tag_structure (authtypecode, tagfield, liblibrarian, libopac, repeatable,
@@ -152,16 +152,16 @@ tables:
       summary: Thuật ngữ thời gian
     - auth_tag_to_report: 110
       authtypecode: CORPO_NAME
-      authtypetext: Corporate Name
-      summary: Corporate Names
+      authtypetext: Tên tập thể
+      summary: Tên tập thểs
     - auth_tag_to_report: 155
       authtypecode: GENRE/FORM
       authtypetext: Thể loại/Hình thức
       summary: Thể loại/Hình thức
     - auth_tag_to_report: 151
       authtypecode: GEOGR_NAME
-      authtypetext: Geographic Name
-      summary: Geographic Name
+      authtypetext: Tên địa lý
+      summary: Tên địa lý
     - auth_tag_to_report: 111
       authtypecode: MEETI_NAME
       authtypetext: Tên hội nghị
@@ -176,8 +176,8 @@ tables:
       summary: Thuật ngữ chuyên đề
     - auth_tag_to_report: 130
       authtypecode: UNIF_TITLE
-      authtypetext: Uniform Title
-      summary: Uniform Title
+      authtypetext: Tiêu đề thống nhất
+      summary: Tiêu đề thống nhất
     translatable:
     - authtypetext
     - summary
@@ -200,8 +200,8 @@ tables:
       tagfield: '001'
     - authorised_value: ~
       authtypecode: ''
-      liblibrarian: CONTROL NUMBER IDENTIFIER
-      libopac: CONTROL NUMBER IDENTIFIER
+      liblibrarian: Số kiểm soát
+      libopac: Số kiểm soát
       mandatory: 1
       repeatable: 0
       tagfield: '003'

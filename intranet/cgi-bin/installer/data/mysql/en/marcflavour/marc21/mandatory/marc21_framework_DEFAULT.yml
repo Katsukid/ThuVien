@@ -33,8 +33,8 @@ tables:
       multiline: []
       rows:
         - tagfield: "999"
-          liblibrarian: "SYSTEM CONTROL NUMBERS (KOHA)"
-          libopac: "SYSTEM CONTROL NUMBERS (KOHA)"
+          liblibrarian: "SỐ ĐIỀU KHIỂN HỆ THỐNGS (KOHA)"
+          libopac: "SỐ ĐIỀU KHIỂN HỆ THỐNGS (KOHA)"
           repeatable: 1
           mandatory: 0
           authorised_value: ""
@@ -1095,8 +1095,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "016"
-          liblibrarian: "NATIONAL BIBLIOGRAPHIC AGENCY CONTROL NUMBER"
-          libopac: "NATIONAL BIBLIOGRAPHIC AGENCY CONTROL NUMBER"
+          liblibrarian: "SỐ KIỂM SOÁT CƠ QUAN THƯ MỤC QUỐC GIA"
+          libopac: "SỐ KIỂM SOÁT CƠ QUAN THƯ MỤC QUỐC GIA"
           repeatable: 1
           mandatory: 0
           authorised_value: ""
@@ -1119,16 +1119,16 @@ tables:
           frameworkcode: ""
 
         - tagfield: "020"
-          liblibrarian: "INTERNATIONAL STANDARD BOOK NUMBER"
-          libopac: "INTERNATIONAL STANDARD BOOK NUMBER"
+          liblibrarian: "SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN"
+          libopac: "SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN"
           repeatable: 1
           mandatory: 0
           authorised_value:
           frameworkcode: ""
 
         - tagfield: "022"
-          liblibrarian: "INTERNATIONAL STANDARD SERIAL NUMBER"
-          libopac: "INTERNATIONAL STANDARD SERIAL NUMBER"
+          liblibrarian: "SỐ SERIES TIÊU CHUẨN QUỐC TẾ"
+          libopac: "SỐ SERIES TIÊU CHUẨN QUỐC TẾ"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -1143,8 +1143,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "024"
-          liblibrarian: "OTHER STANDARD IDENTIFIER"
-          libopac: "OTHER STANDARD IDENTIFIER"
+          liblibrarian: "MÃ NHẬN DẠNG TIÊU CHUẨN KHÁC"
+          libopac: "MÃ NHẬN DẠNG TIÊU CHUẨN KHÁC"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -1183,8 +1183,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "029"
-          liblibrarian: "OTHER SYSTEM CONTROL NUMBER (OCLC)"
-          libopac: "OTHER SYSTEM CONTROL NUMBER (OCLC)"
+          liblibrarian: "OTHER SỐ ĐIỀU KHIỂN HỆ THỐNG (OCLC)"
+          libopac: "OTHER SỐ ĐIỀU KHIỂN HỆ THỐNG (OCLC)"
           repeatable: 1
           mandatory: 0
           authorised_value: ""
@@ -1199,8 +1199,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "031"
-          liblibrarian: "MUSICAL INCIPITS INFORMATION"
-          libopac: "MUSICAL INCIPITS INFORMATION"
+          liblibrarian: "THÔNG TIN INCIPITS ÂM NHẠC"
+          libopac: "THÔNG TIN INCIPITS ÂM NHẠC"
           repeatable: 1
           mandatory: 0
           authorised_value: ""
@@ -1223,16 +1223,16 @@ tables:
           frameworkcode: ""
 
         - tagfield: "034"
-          liblibrarian: "CODED CARTOGRAPHIC MATHEMATICAL DATA"
-          libopac: "CODED CARTOGRAPHIC MATHEMATICAL DATA"
+          liblibrarian: "DỮ LIỆU TOÁN HỌC BẢN ĐỒ ĐƯỢC MÃ HÓA"
+          libopac: "DỮ LIỆU TOÁN HỌC BẢN ĐỒ ĐƯỢC MÃ HÓA"
           repeatable: 1
           mandatory: 0
           authorised_value: ""
           frameworkcode: ""
 
         - tagfield: "035"
-          liblibrarian: "SYSTEM CONTROL NUMBER"
-          libopac: "SYSTEM CONTROL NUMBER"
+          liblibrarian: "SỐ ĐIỀU KHIỂN HỆ THỐNG"
+          libopac: "SỐ ĐIỀU KHIỂN HỆ THỐNG"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -1271,8 +1271,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "040"
-          liblibrarian: "CATALOGING SOURCE"
-          libopac: "CATALOGING SOURCE"
+          liblibrarian: "NGUỒN DANH MỤC"
+          libopac: "NGUỒN DANH MỤC"
           repeatable: 0
           mandatory: 1
           authorised_value:
@@ -1287,16 +1287,16 @@ tables:
           frameworkcode: ""
 
         - tagfield: "042"
-          liblibrarian: "AUTHENTICATION CODE"
-          libopac: "AUTHENTICATION CODE"
+          liblibrarian: "MÃ XÁC THỰC"
+          libopac: "MÃ XÁC THỰC"
           repeatable: 0
           mandatory: 0
           authorised_value: ""
           frameworkcode: ""
 
         - tagfield: "043"
-          liblibrarian: "GEOGRAPHIC AREA CODE"
-          libopac: "GEOGRAPHIC AREA CODE"
+          liblibrarian: "MÃ VÙNG ĐỊA LÝ"
+          libopac: "MÃ VÙNG ĐỊA LÝ"
           repeatable: 0
           mandatory: 0
           authorised_value:
@@ -1319,8 +1319,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "046"
-          liblibrarian: "SPECIAL CODED DATES"
-          libopac: "SPECIAL CODED DATES"
+          liblibrarian: "NGÀY MÃ ĐẶC BIỆT"
+          libopac: "NGÀY MÃ ĐẶC BIỆT"
           repeatable: 1
           mandatory: 0
           authorised_value: ""
@@ -1351,8 +1351,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "050"
-          liblibrarian: "LIBRARY OF CONGRESS CALL NUMBER"
-          libopac: "LIBRARY OF CONGRESS CALL NUMBER"
+          liblibrarian: "SỐ ĐIỆN THOẠI CỦA THƯ VIỆN QUỐC HỘI"
+          libopac: "SỐ ĐIỆN THOẠI CỦA THƯ VIỆN QUỐC HỘI"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -1367,8 +1367,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "052"
-          liblibrarian: "GEOGRAPHIC CLASSIFICATION"
-          libopac: "GEOGRAPHIC CLASSIFICATION"
+          liblibrarian: "PHÂN LOẠI ĐỊA LÝ"
+          libopac: "PHÂN LOẠI ĐỊA LÝ"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -1383,8 +1383,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "060"
-          liblibrarian: "NATIONAL LIBRARY OF MEDICINE CALL NUMBER"
-          libopac: "NATIONAL LIBRARY OF MEDICINE CALL NUMBER"
+          liblibrarian: "SỐ ĐIỆN THOẠI THƯ VIỆN Y HỌC QUỐC GIA"
+          libopac: "SỐ ĐIỆN THOẠI THƯ VIỆN Y HỌC QUỐC GIA"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -1399,16 +1399,16 @@ tables:
           frameworkcode: ""
 
         - tagfield: "066"
-          liblibrarian: "CHARACTER SETS PRESENT"
-          libopac: "CHARACTER SETS PRESENT"
+          liblibrarian: "BỘ NHÂN VẬT HIỆN TẠI"
+          libopac: "BỘ NHÂN VẬT HIỆN TẠI"
           repeatable: 0
           mandatory: 0
           authorised_value:
           frameworkcode: ""
 
         - tagfield: "070"
-          liblibrarian: "NATIONAL AGRICULTURAL LIBRARY CALL NUMBER"
-          libopac: "NATIONAL AGRICULTURAL LIBRARY CALL NUMBER"
+          liblibrarian: "SỐ GỌI THƯ VIỆN NÔNG NGHIỆP QUỐC GIA"
+          libopac: "SỐ GỌI THƯ VIỆN NÔNG NGHIỆP QUỐC GIA"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -1463,8 +1463,8 @@ tables:
           frameworkcode: ""
 
         - tagfield: "084"
-          liblibrarian: "OTHER CLASSIFICATION NUMBER"
-          libopac: "OTHER CLASSIFICATION NUMBER"
+          liblibrarian: "SỐ PHÂN LOẠI KHÁC"
+          libopac: "SỐ PHÂN LOẠI KHÁC"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -4556,8 +4556,8 @@ tables:
 
         - tagfield: "020"
           tagsubfield: "a"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 0
           mandatory: 0
           kohafield: biblioitems.isbn
@@ -28046,8 +28046,8 @@ tables:
 
         - tagfield: "534"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -30530,8 +30530,8 @@ tables:
 
         - tagfield: "556"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -31412,8 +31412,8 @@ tables:
 
         - tagfield: "581"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -44678,8 +44678,8 @@ tables:
 
         - tagfield: "765"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -45110,8 +45110,8 @@ tables:
 
         - tagfield: "767"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -45542,8 +45542,8 @@ tables:
 
         - tagfield: "770"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -45974,8 +45974,8 @@ tables:
 
         - tagfield: "772"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -46460,8 +46460,8 @@ tables:
 
         - tagfield: "773"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -46874,8 +46874,8 @@ tables:
 
         - tagfield: "774"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -47342,8 +47342,8 @@ tables:
 
         - tagfield: "775"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -47774,8 +47774,8 @@ tables:
 
         - tagfield: "776"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -48206,8 +48206,8 @@ tables:
 
         - tagfield: "777"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield: ""
@@ -48638,8 +48638,8 @@ tables:
 
         - tagfield: "780"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -49070,8 +49070,8 @@ tables:
 
         - tagfield: "785"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -49538,8 +49538,8 @@ tables:
 
         - tagfield: "786"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -49970,8 +49970,8 @@ tables:
 
         - tagfield: "787"
           tagsubfield: "z"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 1
           mandatory: 0
           kohafield:

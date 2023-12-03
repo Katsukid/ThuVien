@@ -28,7 +28,7 @@ description:
   - "Default MARC21 Standard Authority types:"
   - ""
   - "Tên cá nhân"
-  - "Corporate Name"
+  - "Tên tập thể"
   - "Tên hội nghị"
   - "Tiêu đề thống nhất
   - "Thuật ngữ thời gian"
@@ -52,9 +52,9 @@ tables:
           summary: Thuật ngữ thời gian
 
         - authtypecode: CORPO_NAME
-          authtypetext: "Corporate Name"
+          authtypetext: "Tên tập thể"
           auth_tag_to_report: 110
-          summary: Corporate Names
+          summary: Tên tập thểs
 
         - authtypecode: GENRE/FORM
           authtypetext: "Thể loại/Hình thức"
@@ -92,176 +92,176 @@ tables:
       rows:
         - authtypecode: ""
           tagfield: "000"
-          liblibrarian: "LEADER"
-          libopac: "LEADER"
+          liblibrarian: "ĐẦU BIỂU"
+          libopac: "ĐẦU BIỂU"
           repeatable: 0
           mandatory: 1
           authorised_value:
 
         - authtypecode: ""
           tagfield: "001"
-          liblibrarian: "CONTROL NUMBER"
-          libopac: "CONTROL NUMBER"
+          liblibrarian: "SỐ ĐIỀU KHIỂN"
+          libopac: "SỐ ĐIỀU KHIỂN"
           repeatable: 0
           mandatory: 1
           authorised_value:
 
         - authtypecode: ""
           tagfield: "003"
-          liblibrarian: "CONTROL NUMBER IDENTIFIER"
-          libopac: "CONTROL NUMBER IDENTIFIER"
+          liblibrarian: "Mã cơ quan gán số kiểm soát"
+          libopac: "Mã cơ quan gán số kiểm soát"
           repeatable: 0
           mandatory: 1
           authorised_value:
 
         - authtypecode: ""
           tagfield: "005"
-          liblibrarian: "DATE AND TIME OF LATEST TRANSACTION"
-          libopac: "DATE AND TIME OF LATEST TRANSACTION"
+          liblibrarian: "NGÀY VÀ THỜI GIAN GIAO DỊCH LẦN CUỐI VỚI BIỂU GHI"
+          libopac: "NGÀY VÀ THỜI GIAN GIAO DỊCH LẦN CUỐI VỚI BIỂU GHI"
           repeatable: 0
           mandatory: 1
           authorised_value:
 
         - authtypecode: ""
           tagfield: "008"
-          liblibrarian: "FIXED-LENGTH DATA ELEMENTS"
-          libopac: "FIXED-LENGTH DATA ELEMENTS"
+          liblibrarian: "CÁC YẾU TỐ DỮ LIỆU CÓ ĐỘ DÀI CỐ ĐỊNH"
+          libopac: "CÁC YẾU TỐ DỮ LIỆU CÓ ĐỘ DÀI CỐ ĐỊNH"
           repeatable: 0
           mandatory: 1
           authorised_value:
 
         - authtypecode: ""
           tagfield: "010"
-          liblibrarian: "LIBRARY OF CONGRESS CONTROL NUMBER"
-          libopac: "LIBRARY OF CONGRESS CONTROL NUMBER"
+          liblibrarian: "THƯ VIỆN SỐ KIỂM SOÁT QUỐC HỘI" ####
+          libopac: "THƯ VIỆN SỐ KIỂM SOÁT QUỐC HỘI"
           repeatable: 0
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "014"
-          liblibrarian: "LINK TO BIBLIOGRAPHIC RECORD FOR SERIAL OR MULTIPART ITEM"
-          libopac: "LINK TO BIBLIOGRAPHIC RECORD FOR SERIAL OR MULTIPART ITEM"
+          liblibrarian: "LIÊN KẾT TỚI BẢN GHI THƯ VIỆN CHO MỤC DÀI TẬP HOẶC NHIỀU PHẦN"
+          libopac: "LIÊN KẾT TỚI BẢN GHI THƯ VIỆN CHO MỤC DÀI TẬP HOẶC NHIỀU PHẦN"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "016"
-          liblibrarian: "NATIONAL BIBLIOGRAPHIC AGENCY CONTROL NUMBER"
-          libopac: "NATIONAL BIBLIOGRAPHIC AGENCY CONTROL NUMBER"
+          liblibrarian: "SỐ KIỂM SOÁT CƠ QUAN THƯ MỤC QUỐC GIA"
+          libopac: "SỐ KIỂM SOÁT CƠ QUAN THƯ MỤC QUỐC GIA"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "020"
-          liblibrarian: "INTERNATIONAL STANDARD BOOK NUMBER"
-          libopac: "INTERNATIONAL STANDARD BOOK NUMBER"
+          liblibrarian: "SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN"
+          libopac: "SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "022"
-          liblibrarian: "INTERNATIONAL STANDARD SERIAL NUMBER"
-          libopac: "INTERNATIONAL STANDARD SERIAL NUMBER"
+          liblibrarian: "SỐ SERIES TIÊU CHUẨN QUỐC TẾ"
+          libopac: "SỐ SERIES TIÊU CHUẨN QUỐC TẾ"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "024"
-          liblibrarian: "OTHER STANDARD IDENTIFIER"
-          libopac: "OTHER STANDARD IDENTIFIER"
+          liblibrarian: "MÃ NHẬN DẠNG TIÊU CHUẨN KHÁC"
+          libopac: "MÃ NHẬN DẠNG TIÊU CHUẨN KHÁC"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "031"
-          liblibrarian: "MUSICAL INCIPITS INFORMATION"
-          libopac: "MUSICAL INCIPITS INFORMATION"
+          liblibrarian: "THÔNG TIN INCIPITS ÂM NHẠC"
+          libopac: "THÔNG TIN INCIPITS ÂM NHẠC"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "034"
-          liblibrarian: "CODED CARTOGRAPHIC MATHEMATICAL DATA"
-          libopac: "CODED CARTOGRAPHIC MATHEMATICAL DATA"
+          liblibrarian: "DỮ LIỆU TOÁN HỌC BẢN ĐỒ ĐƯỢC MÃ HÓA"
+          libopac: "DỮ LIỆU TOÁN HỌC BẢN ĐỒ ĐƯỢC MÃ HÓA"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "035"
-          liblibrarian: "SYSTEM CONTROL NUMBER"
-          libopac: "SYSTEM CONTROL NUMBER"
+          liblibrarian: "SỐ ĐIỀU KHIỂN HỆ THỐNG"
+          libopac: "SỐ ĐIỀU KHIỂN HỆ THỐNG"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "040"
-          liblibrarian: "CATALOGING SOURCE"
-          libopac: "CATALOGING SOURCE"
+          liblibrarian: "NGUỒN DANH MỤC"
+          libopac: "NGUỒN DANH MỤC"
           repeatable: 0
           mandatory: 1
           authorised_value:
 
         - authtypecode: ""
           tagfield: "042"
-          liblibrarian: "AUTHENTICATION CODE"
-          libopac: "AUTHENTICATION CODE"
+          liblibrarian: "MÃ XÁC THỰC"
+          libopac: "MÃ XÁC THỰC"
           repeatable: 0
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "043"
-          liblibrarian: "GEOGRAPHIC AREA CODE"
-          libopac: "GEOGRAPHIC AREA CODE"
+          liblibrarian: "MÃ VÙNG ĐỊA LÝ"
+          libopac: "MÃ VÙNG ĐỊA LÝ"
           repeatable: 0
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "045"
-          liblibrarian: "TIME PERIOD OF HEADING"
-          libopac: "TIME PERIOD OF HEADING"
+          liblibrarian: "THỜI GIAN TIÊU ĐỀ"
+          libopac: "THỜI GIAN TIÊU ĐỀ"
           repeatable: 0
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "046"
-          liblibrarian: "SPECIAL CODED DATES"
-          libopac: "SPECIAL CODED DATES"
+          liblibrarian: "NGÀY MÃ ĐẶC BIỆT"
+          libopac: "NGÀY MÃ ĐẶC BIỆT"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "050"
-          liblibrarian: "LIBRARY OF CONGRESS CALL NUMBER"
-          libopac: "LIBRARY OF CONGRESS CALL NUMBER"
+          liblibrarian: "SỐ ĐIỆN THOẠI CỦA THƯ VIỆN QUỐC HỘI"
+          libopac: "SỐ ĐIỆN THOẠI CỦA THƯ VIỆN QUỐC HỘI"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "052"
-          liblibrarian: "GEOGRAPHIC CLASSIFICATION"
-          libopac: "GEOGRAPHIC CLASSIFICATION"
+          liblibrarian: "PHÂN LOẠI ĐỊA LÝ"
+          libopac: "PHÂN LOẠI ĐỊA LÝ"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "053"
-          liblibrarian: "LC CLASSIFICATION NUMBER"
-          libopac: "LC CLASSIFICATION NUMBER"
+          liblibrarian: "SỐ PHÂN LOẠI LC"
+          libopac: "SỐ PHÂN LOẠI LC"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -276,56 +276,56 @@ tables:
 
         - authtypecode: ""
           tagfield: "058"
-          liblibrarian: "LC CLASSIFICATION NUMBER ASSIGNED IN CANADA [OBSOLETE, CAN/MARC]"
-          libopac: "LC CLASSIFICATION NUMBER ASSIGNED IN CANADA [OBSOLETE, CAN/MARC]"
+          liblibrarian: "SỐ PHÂN LOẠI LC ĐƯỢC GIAO TẠI CANADA [LỖI THỜI, CAN/MARC]"
+          libopac: "SỐ PHÂN LOẠI LC ĐƯỢC GIAO TẠI CANADA [LỖI THỜI, CAN/MARC]"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "060"
-          liblibrarian: "NATIONAL LIBRARY OF MEDICINE CALL NUMBER"
-          libopac: "NATIONAL LIBRARY OF MEDICINE CALL NUMBER"
+          liblibrarian: "SỐ ĐIỆN THOẠI THƯ VIỆN Y HỌC QUỐC GIA"
+          libopac: "SỐ ĐIỆN THOẠI THƯ VIỆN Y HỌC QUỐC GIA"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "063"
-          liblibrarian: "NLM CLASSIFICATION NUMBER ASSIGNED BY NLM [OBSOLETE, CAN/MARC]"
-          libopac: "NLM CLASSIFICATION NUMBER ASSIGNED BY NLM [OBSOLETE, CAN/MARC]"
+          liblibrarian: "SỐ PHÂN LOẠI NLM ĐƯỢC GÁN BỞI NLM [LỖI THỜI, CAN/MARC]"
+          libopac: "SỐ PHÂN LOẠI NLM ĐƯỢC GÁN BỞI NLM [LỖI THỜI, CAN/MARC]"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "065"
-          liblibrarian: "OTHER CLASSIFICATION NUMBER"
-          libopac: "OTHER CLASSIFICATION NUMBER"
+          liblibrarian: "SỐ PHÂN LOẠI KHÁC"
+          libopac: "SỐ PHÂN LOẠI KHÁC"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "066"
-          liblibrarian: "CHARACTER SETS PRESENT"
-          libopac: "CHARACTER SETS PRESENT"
+          liblibrarian: "BỘ NHÂN VẬT HIỆN TẠI"
+          libopac: "BỘ NHÂN VẬT HIỆN TẠI"
           repeatable: 0
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "068"
-          liblibrarian: "NLM CLASSIFICATION NUMBER ASSIGNED IN CANADA [OBSOLETE, CAN/MARC]"
-          libopac: "NLM CLASSIFICATION NUMBER ASSIGNED IN CANADA [OBSOLETE, CAN/MARC]"
+          liblibrarian: "SỐ PHÂN LOẠI NLM ĐƯỢC GIAO TẠI CANADA [LỖI THỜI, CAN/MARC]"
+          libopac: "SỐ PHÂN LOẠI NLM ĐƯỢC GIAO TẠI CANADA [LỖI THỜI, CAN/MARC]"
           repeatable: 1
           mandatory: 0
           authorised_value:
 
         - authtypecode: ""
           tagfield: "070"
-          liblibrarian: "NATIONAL AGRICULTURAL LIBRARY CALL NUMBER"
-          libopac: "NATIONAL AGRICULTURAL LIBRARY CALL NUMBER"
+          liblibrarian: "SỐ GỌI THƯ VIỆN NÔNG NGHIỆP QUỐC GIA"
+          libopac: "SỐ GỌI THƯ VIỆN NÔNG NGHIỆP QUỐC GIA"
           repeatable: 1
           mandatory: 0
           authorised_value:
@@ -1818,8 +1818,8 @@ tables:
         - authtypecode: ""
           tagfield: "020"
           tagsubfield: "a"
-          liblibrarian: "International Standard Book Number"
-          libopac: "International Standard Book Number"
+          liblibrarian: "Số sách chuẩn quốc tế ISBN"
+          libopac: "Số sách chuẩn quốc tế ISBN"
           repeatable: 0
           mandatory: 0
           tab: 0
