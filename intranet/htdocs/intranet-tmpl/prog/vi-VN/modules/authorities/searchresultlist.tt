@@ -56,7 +56,7 @@
  <div id="authorities_searchresultlist_results">
  <table>
  <tr>
- <th>Tóm tắt</th>
+ <th>Tổng quan</th>
  <th>Heading type</th>
  [% UNLESS ( isEDITORS ) %]
  <th>Sử dụng trong</th>

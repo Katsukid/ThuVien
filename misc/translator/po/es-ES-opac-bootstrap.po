@@ -4148,7 +4148,7 @@ msgstr "Fecha de copyright (viejos a nuevos)"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:124
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:128
 #, c-format
-msgid "Copyright or publication year, for example: 2022"
+msgid "Bản quyền hoặc năm xuất bản, ví dụ: 2022"
 msgstr "Copyright o año de publicación, por ejemplo: 2022"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-addbybiblionumber.tt:102
@@ -9456,7 +9456,7 @@ msgstr "Lugar de publicación:"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:121
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:126
 #, c-format
-msgid "Publication year:"
+msgid "Năm phát hành:"
 msgstr "Año de publicación:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/resort_form.inc:40

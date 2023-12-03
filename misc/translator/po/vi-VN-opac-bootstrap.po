@@ -4142,7 +4142,7 @@ msgstr "Xuất bản/Phát hành: Cũ - Mới"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:124
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:128
 #, c-format
-msgid "Copyright or publication year, for example: 2022"
+msgid "Bản quyền hoặc năm xuất bản, ví dụ: 2022"
 msgstr ""
 
 #. For the first occurrence,
@@ -8418,7 +8418,7 @@ msgstr ""
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:258
 #, c-format
 msgid "Only items currently available for loan or reference"
-msgstr "Chỉ tìm kiếm các tài liệu sẵn sàng cho bạn đọc mượn"
+msgstr "Chỉ tìm kiếm các tài liệu khả dụng cho bạn đọc mượn"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:84
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:67
@@ -9497,7 +9497,7 @@ msgstr "Nơi xuất bản:"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:121
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:126
 #, fuzzy, c-format
-msgid "Publication year:"
+msgid "Năm phát hành:"
 msgstr "Xuất bản:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/resort_form.inc:40
@@ -11699,7 +11699,7 @@ msgstr "Để xuất mua"
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/usermenu.inc:10
 #, c-format
 msgid "Summary"
-msgstr "Tóm tắt"
+msgstr "Tổng quan"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:340
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:802

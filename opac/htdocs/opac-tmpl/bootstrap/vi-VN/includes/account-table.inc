@@ -6,9 +6,9 @@
  <thead>
  <tr>
  [% IF ENABLE_OPAC_PAYMENTS %]<th>&nbsp;</th>[% END %]
- <th>Created</th>
- <th>Updated</th>
- <th>Type</th>
+ <th>Ngày tạo</th>
+ <th>Ngày sửa</th>
+ <th>Kiểu</th>
  <th>Thông tin mô tả</th>
  <th>Số lượng</th>
  <th>Còn nợ</th>

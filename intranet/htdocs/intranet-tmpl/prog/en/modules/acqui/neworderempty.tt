@@ -393,10 +393,10 @@
             </li>
             <li>
                 [% IF ( biblionumber ) %]
-                <span class="label">Publication year: </span>
+                <span class="label">Năm phát hành: </span>
                     <input type="hidden" name="publicationyear" id="publicationyear" value="[% publicationyear | html %]" />[% publicationyear | html %]
                 [% ELSE %]
-                <label for="publicationyear">Publication year: </label>
+                <label for="publicationyear">Năm phát hành: </label>
                     <input type="text" size="10" name="publicationyear" id="publicationyear" value="[% publicationyear | html %]" />
                 [% END %]
             </li>
@@ -527,7 +527,7 @@
         <legend>Accounting details</legend>
         <ol>
             <li>
-                <label class="required" for="quantity">Quantity: </label>
+                <label class="required" for="quantity">Số lượng: </label>
                 [% IF subscriptionid %]
                     <input type="text" size="20" id="quantity" name="quantity" value="1" onchange="updateCosts();" />
                 [% ELSIF AcqCreateItemOrdering %]

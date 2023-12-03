@@ -117,7 +117,7 @@
  <th>Giỏ đặt hàng</th>
  <th>Nhóm giỏ đặt hàng</th>
  <th>Số đơn hàng</th>
- <th>Tóm tắt</th>
+ <th>Tổng quan</th>
  <th>Xem</th>
  <th>Giá thay thế</th>
  <th>Số lượng</th>
@@ -154,7 +154,7 @@
  <th>Nhóm giỏ đặt hàng</th>
  <th>Số đơn hàng</th>
  <th title="Item holds / Total holds">Sách đang giữ</th>
- <th>Tóm tắt</th>
+ <th>Tổng quan</th>
  <th>More</th>
  <th>Giá thay thế</th>
  <th>Số lượng</th>
@@ -258,7 +258,7 @@
  <td>
  <a href="/cgi-bin/koha/acqui/showorder.pl?ordernumber=[% order.ordernumber | uri %]" class="previewData">[% tp('noun', 'Order') | html %]</a><br>
  <a href="/cgi-bin/koha/catalogue/showmarc.pl?id=[% order.biblionumber | uri %]" class="previewData">Hiển thị MARC</a><br>
- <a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;id=[% order.biblionumber | uri %]" class="previewData">Tóm tắt</a>
+ <a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;id=[% order.biblionumber | uri %]" class="previewData">Thẻ</a>
  </td>
  <td>[% order.replacementprice | $Price %]</td>
  <td>[% order.quantityreceived | html %]</td>
@@ -526,7 +526,7 @@
                             result += '<ul class="dropdown-menu" aria-labelledby="view' + row.order_id + '">';
                                 result += '<li><a href="/cgi-bin/koha/acqui/showorder.pl?ordernumber=' + encodeURIComponent(row.order_id) + '" class="previewData">' + _("Đơn hàng") + '</a></li>';
                                 result += '<li><a href="/cgi-bin/koha/catalogue/showmarc.pl?id=' + encodeURIComponent(row.biblio_id) + '" class="previewData">' + _("Hiển thị MARC") + '</a></li>';
-                                result += '<li><a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;id=' + encodeURIComponent(row.biblio_id) + '" class="previewData">' + _("Tóm tắt") + '</a></li>';
+                                result += '<li><a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;id=' + encodeURIComponent(row.biblio_id) + '" class="previewData">' + _("Thẻ") + '</a></li>';
                             result += '</ul>';
                             result += '</div>';
                             return result;

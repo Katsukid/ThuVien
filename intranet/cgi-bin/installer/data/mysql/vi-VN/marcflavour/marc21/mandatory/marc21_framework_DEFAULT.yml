@@ -33214,8 +33214,8 @@ tables:
       hidden: 0
       isurl: ~
       kohafield: ''
-      liblibrarian: Geographic name
-      libopac: Geographic name
+      liblibrarian: Tên địa lý
+      libopac: Tên địa lý
       link: ''
       mandatory: 0
       repeatable: 0
@@ -35356,8 +35356,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Geographic name
-      libopac: Geographic name
+      liblibrarian: Tên địa lý
+      libopac: Tên địa lý
       link: ''
       mandatory: 0
       repeatable: 0
@@ -40116,8 +40116,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Geographic name
-      libopac: Geographic name
+      liblibrarian: Tên địa lý
+      libopac: Tên địa lý
       link: ''
       mandatory: 0
       repeatable: 0
@@ -70448,8 +70448,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Geographic name
-      libopac: Geographic name
+      liblibrarian: Tên địa lý
+      libopac: Tên địa lý
       link: ''
       mandatory: 0
       repeatable: 0

@@ -30,18 +30,7 @@
  </div>
  </div>
  [% END # / IF Koha.Preference('OPACReportProblem') && Koha.Preference('KohaAdminEmailAddress') %]
- [% IF OpacKohaUrl %]
- <div class="col">
- <div id="koha_url" class="clearfix noprint">
- <p>Powered by
- [% IF template.name.match('opac-main.tt') %]
- <a class="koha_url" href="http://koha-community.org">Koha</a>
- [% ELSE %]
- <a class="koha_url" rel="nofollow" href="http://koha-community.org">Koha</a>
- [% END %]</p>
- </div> <!-- /#koha_url -->
- </div> <!-- /.col -->
- [% END # /IF OpacKohaUrl %]
+ 
  </div> <!-- /.row.justify-content-between -->
  </div> <!-- /#report-koha-url -->
  </div> <!-- /.col -->

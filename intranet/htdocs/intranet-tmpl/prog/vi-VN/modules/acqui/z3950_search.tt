@@ -208,7 +208,7 @@ tr.selected td {
  <a class="btn btn-default btn-xs z3950actions" href="#">Hiển thị MARC</a><button data-toggle="dropdown" class="btn-xs dropdown-toggle"><span class="caret"></span></button>
  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="z3950preview[% breeding_loo.breedingid | html %]">
  <li><a class="previewData" data-action="show_marc" href="/cgi-bin/koha/catalogue/showmarc.pl?importid=[% breeding_loo.breedingid | uri %]" title="Hiển thị MARC"><i class="fa fa-eye"></i> Hiển thị MARC</a></li>
- <li><a class="previewData" data-action="show_card" href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&importid=[% breeding_loo.breedingid | uri %]" title="Tóm tắt"><i class="fa fa-eye"></i> Tóm tắt</a></li>
+ <li><a class="previewData" data-action="show_card" href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&importid=[% breeding_loo.breedingid | uri %]" title="Thẻ"><i class="fa fa-eye"></i> Thẻ</a></li>
  <li><a class="chosen" data-action="order" href="/cgi-bin/koha/acqui/neworderempty.pl?frameworkcode=[% frameworkcode | uri %]&breedingid=[% breeding_loo.breedingid | uri %]&booksellerid=[% booksellerid | uri %]&basketno=[% basketno | uri %]" title="Đơn hàng"><i class="fa fa-plus"></i> [% tp('verb', 'Order') | html %]</a></li>
  </ul>
  </div>

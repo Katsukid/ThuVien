@@ -27,14 +27,14 @@
 description:
   - "Default MARC21 Standard Authority types:"
   - ""
-  - "Personal Name"
+  - "Tên cá nhân"
   - "Corporate Name"
-  - "Meeting Name"
-  - "Uniform Title"
-  - "Chronological Term"
-  - "Topical Term"
-  - "Geographic Name"
-  - "Genre/Form Term"
+  - "Tên hội nghị"
+  - "Tiêu đề thống nhất
+  - "Thuật ngữ thời gian"
+  - "Thuật ngữ chuyên đề"
+  - "Tên địa lý"
+  - "Thể loại/Hình thức"
 
 tables:
   - auth_types:
@@ -47,9 +47,9 @@ tables:
           summary: ""
 
         - authtypecode: CHRON_TERM
-          authtypetext: "Chronological Term"
+          authtypetext: "Thuật ngữ thời gian"
           auth_tag_to_report: 148
-          summary: Chronological Term
+          summary: Thuật ngữ thời gian
 
         - authtypecode: CORPO_NAME
           authtypetext: "Corporate Name"
@@ -57,32 +57,32 @@ tables:
           summary: Corporate Names
 
         - authtypecode: GENRE/FORM
-          authtypetext: "Genre/Form Term"
+          authtypetext: "Thể loại/Hình thức"
           auth_tag_to_report: 155
-          summary: Genre/Form Term
+          summary: Thể loại/Hình thức
 
         - authtypecode: GEOGR_NAME
-          authtypetext: "Geographic Name"
+          authtypetext: "Tên địa lý"
           auth_tag_to_report: 151
           summary: Geographic Name
 
         - authtypecode: MEETI_NAME
-          authtypetext: "Meeting Name"
+          authtypetext: "Tên hội nghị"
           auth_tag_to_report: 111
-          summary: Meeting Name
+          summary: Tên hội nghị
 
         - authtypecode: PERSO_NAME
-          authtypetext: "Personal Name"
+          authtypetext: "Tên cá nhân"
           auth_tag_to_report: 100
-          summary: Personal Names
+          summary: Tên cá nhâns
 
         - authtypecode: TOPIC_TERM
-          authtypetext: "Topical Term"
+          authtypetext: "Thuật ngữ chuyên đề"
           auth_tag_to_report: 150
-          summary: Topical Term
+          summary: Thuật ngữ chuyên đề
 
         - authtypecode: UNIF_TITLE
-          authtypetext: "Uniform Title"
+          authtypetext: "Tiêu đề thống nhất
           auth_tag_to_report: 130
           summary: Uniform Title
 
@@ -9672,8 +9672,8 @@ tables:
         - authtypecode: ""
           tagfield: "151"
           tagsubfield: "a"
-          liblibrarian: "Geographic name"
-          libopac: "Geographic name"
+          liblibrarian: "Tên địa lý"
+          libopac: "Tên địa lý"
           repeatable: 0
           mandatory: 0
           tab: 1
@@ -16931,8 +16931,8 @@ tables:
         - authtypecode: ""
           tagfield: "451"
           tagsubfield: "a"
-          liblibrarian: "Geographic name"
-          libopac: "Geographic name"
+          liblibrarian: "Tên địa lý"
+          libopac: "Tên địa lý"
           repeatable: 0
           mandatory: 0
           tab: 4
@@ -21181,8 +21181,8 @@ tables:
         - authtypecode: ""
           tagfield: "551"
           tagsubfield: "a"
-          liblibrarian: "Geographic name"
-          libopac: "Geographic name"
+          liblibrarian: "Tên địa lý"
+          libopac: "Tên địa lý"
           repeatable: 0
           mandatory: 0
           tab: 5
@@ -28151,8 +28151,8 @@ tables:
         - authtypecode: ""
           tagfield: "751"
           tagsubfield: "a"
-          liblibrarian: "Geographic name"
-          libopac: "Geographic name"
+          liblibrarian: "Tên địa lý"
+          libopac: "Tên địa lý"
           repeatable: 0
           mandatory: 0
           tab: 7

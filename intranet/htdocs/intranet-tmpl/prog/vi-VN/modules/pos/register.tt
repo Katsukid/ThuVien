@@ -66,10 +66,10 @@
 
  <h1>Transaction history for [% register.name | html %]</h1>
 
- <h2>Tóm tắt</h2>
+ <h2>Tổng quan</h2>
  <ul>
  [% IF register.last_cashup %]
- <li>Last cashup: [% register.last_cashup.timestamp | $KohaDates with_hours => 1 %] (<a data-toggle="modal" data-cashup="[% register.last_cashup.id | html %]" data-register="[% register.description | html %]" href="#cashupSummaryModal" class="button">Tóm tắt</a>)</li>
+ <li>Last cashup: [% register.last_cashup.timestamp | $KohaDates with_hours => 1 %] (<a data-toggle="modal" data-cashup="[% register.last_cashup.id | html %]" data-register="[% register.description | html %]" href="#cashupSummaryModal" class="button">Tổng quan</a>)</li>
  [% END %]
  <li>Float: [% register.starting_float | $Price %]</li>
  <li>Total income (cash): [% accountlines.credits_total * -1 | $Price %] ([% accountlines.credits_total(payment_type => [ 'CASH', 'SIP00' ]) * -1 | $Price %])</li>

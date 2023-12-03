@@ -331,7 +331,7 @@ Item types &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  <div class="hint">Select 'All libraries' if all libraries use this item type. Otherwise, select the specific libraries that use this item type.</div>
  </li>
  <li>
- <label for="summary">Tóm tắt: </label>
+ <label for="summary">Tổng quan: </label>
  <textarea id="summary" name="summary" cols="55" rows="5">[% itemtype.summary | html %]</textarea>
  <div class="hint">Nhập thông tin tóm tắt cho kiểu tài liệu. Thông tin này sẽ được hiển thị thay thế cho giá trị mặc định trong kết quả tìm kiếm. Ví dụ nếu bạn nhập :</div>
  <div class="hint"><strong>&lt;a href="[856u]"&gt;trang web&lt;/a&gt;</strong> thì trang web sẽ hiển thị dưới nhan đề tài liệu.</div>

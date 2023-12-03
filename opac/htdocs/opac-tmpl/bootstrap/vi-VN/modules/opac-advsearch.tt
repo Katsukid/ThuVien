@@ -42,7 +42,7 @@
  [% IF ( expanded_options ) %]
  <select name="op" class="form-control">
  <option value="AND" selected="selected">và</option>
- <option value="OR">Hoặc</option>
+ <option value="OR">hoặc</option>
  <option value="NOT">không</option>
  </select>
  [% ELSE %]
@@ -50,7 +50,7 @@
  [% IF loop.index == 0 %]
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  [% ELSE %]
- and
+ và
  [% END %]
  </label>
  [% END # /IF ( expanded_options ) %]
@@ -83,7 +83,7 @@
  <option value="au,wrdl">Tác giả</option>
  [% IF ( expanded_options ) %]
  <option value="au,phr">&nbsp;&nbsp;&nbsp;&nbsp; Author phrase</option>
- <option value="cpn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Tên tổ chức</option>
+ <option value="cpn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Tên tập thể</option>
  <option value="cfn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Tên hội nghị</option>
  <option value="cfn,phr">&nbsp;&nbsp;&nbsp;&nbsp; Conference name phrase</option>
  <option value="pn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Cá nhân</option>
@@ -221,7 +221,7 @@
  <fieldset>
  <legend>Sẵn sàng: </legend>
  <div style="margin-top:.4em">
- <label for="available-items"><input type="checkbox" id="available-items" name="limit" value="available" /> Chỉ tìm kiếm các tài liệu sẵn sàng cho bạn đọc mượn</label>
+ <label for="available-items"><input type="checkbox" id="available-items" name="limit" value="available" /> Chỉ tìm kiếm các tài liệu khả dụng cho bạn đọc mượn</label>
  </div>
  </fieldset>
  </div> <!-- / #location -->
@@ -232,7 +232,7 @@
  <!-- AVAILABILITY LIMITS -->
  <div id="location" class="advsearch_limit">
  <fieldset>
- <label for="branchloop">Location and availability:</label>
+ <label for="branchloop">Vị trí và khả dụng:</label>
  <select name="limit" id="branchloop">
  <option value="">Tất cả thư viện</option>
  [% FOREACH BranchesLoo IN Branches.all( selected => opac_name ) %]
@@ -255,7 +255,7 @@
  </select>
  [% END %]
  <div style="margin-top:.4em">
- <label for="available-items"><input type="checkbox" id="available-items" name="limit" value="available" /> Chỉ tìm kiếm các tài liệu sẵn sàng cho bạn đọc mượn</label>
+ <label for="available-items"><input type="checkbox" id="available-items" name="limit" value="available" /> Chỉ tìm kiếm các tài liệu khả dụng cho bạn đọc mượn</label>
  </div>
  </fieldset>
  </div> <!-- / #location -->
@@ -286,7 +286,7 @@
  <div id="pubrange" class="advsearch_limit">
  <!-- PUB RANGE OPTION -->
  <fieldset>
- <label for="limit-yr">Publication date range</label>
+ <label for="limit-yr">Phạm vi ngày xuất bản</label>
  <input id="limit-yr" name="limit-yr" size="30" title="Nhập từ khóa tìm kiếm" type="text" value="" />
  <div class="hint">Ví dụ: 1999-2001. Bạn cũng có thể sử dụng "-1987" để tìm kiếm các tài liệu được xuất bản từ năm 1987 trở về trước hoặc "2008-" để tìm kiếm các tài liệu xuất bản từ năm 2008 trở về sau.</div>
  </fieldset>
@@ -444,13 +444,13 @@
 
  [% IF ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.size > 0 ) %]
  [% IF expanded_options %]
- <a href="/cgi-bin/koha/opac-search.pl?expanded_options=0" class="btn btn-default more-less-options">Fewer options</a>
+ <a href="/cgi-bin/koha/opac-search.pl?expanded_options=0" class="btn btn-default more-less-options">Ít lựa chọn hơn</a>
  [% ELSIF not expanded_options %]
- <a href="/cgi-bin/koha/opac-search.pl?expanded_options=1" class="btn btn-default more-less-options">More options</a>
+ <a href="/cgi-bin/koha/opac-search.pl?expanded_options=1" class="btn btn-default more-less-options">Lựa chọn khác</a>
  [% END %]
  [% END %]
 
- <a href="/cgi-bin/koha/opac-search.pl?do=Clear" class="btn btn-default new-search">New search</a>
+ <a href="/cgi-bin/koha/opac-search.pl?do=Clear" class="btn btn-default new-search">Tìm kiếm mới</a>
  </p>
 [% END %]
 

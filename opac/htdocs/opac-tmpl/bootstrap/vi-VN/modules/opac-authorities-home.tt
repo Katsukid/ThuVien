@@ -3,7 +3,7 @@
 [% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
 [% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Authority search &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
+<title>Tìm kiếm dữ liệu kiểm soát &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %][% END %]
 </head>
@@ -54,7 +54,7 @@
  </select>
  </li>
  <li>
- <label for="anywhere">Search options:</label>
+ <label for="anywhere">Tùy chọn tìm kiếm:</label>
  <select name="operator" id="anywhere">
  <option value="contains">có chứa</option>
  <option value="start">bắt đầu với</option>
@@ -62,13 +62,13 @@
  </select>
  </li>
  <li>
- <label for="value">Term(s):</label>
+ <label for="value">(Nhiều) Thuật ngữ:</label>
  <input type="text" name="value" id="value" value="[% value | html %]" />
  </li>
  <li>
- <label for="marclist">Where:</label>
+ <label for="marclist">Ở đâu:</label>
  <select name="marclist" id="marclist">
- <option value="all" selected="selected">in the complete record</option>
+ <option value="all" selected="selected">trong hồ sơ đầy đủ</option>
  <option value="match">trong tất cả đề mục</option>
  <option value="mainentry">trong nội dung</option>
  </select>

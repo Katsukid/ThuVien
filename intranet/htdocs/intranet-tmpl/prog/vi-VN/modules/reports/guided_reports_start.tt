@@ -503,7 +503,7 @@
  <label for="types">Chọn: </label>
  <select id="types" name="types">
  <option value="1">Kiểu bảng</option>
- <option value="2" disabled="disabled">Tóm tắt</option>
+ <option value="2" disabled="disabled">Tổng quan</option>
  <option value="3" disabled="disabled">Ma trận</option>
  </select>
  </li>

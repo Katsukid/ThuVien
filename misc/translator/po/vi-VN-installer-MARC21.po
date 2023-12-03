@@ -2884,7 +2884,7 @@ msgid "Genre detail"
 msgstr "Thông tin nhà cung cấp"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_types:1:row:4
-msgid "Genre/Form Term"
+msgid "Thể loại/Hình thức"
 msgstr ""
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:1791
@@ -2926,7 +2926,7 @@ msgstr "graphic score"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_subfield_structure:3:row:480
 #, fuzzy
-msgid "Geographic name"
+msgid "Tên địa lý"
 msgstr "d- Geographic"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:1753

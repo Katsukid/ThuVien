@@ -1084,7 +1084,7 @@
  <xsl:when test="@ind1=2"><xsl:text>Phạm vi và nội dung: </xsl:text></xsl:when>
  <xsl:when test="@ind1=3"><xsl:text>Abstract: </xsl:text></xsl:when>
  <xsl:when test="@ind1=4"><xsl:text>Nội dung cố vấn: </xsl:text></xsl:when>
- <xsl:otherwise><xsl:text>Tóm tắt: </xsl:text></xsl:otherwise>
+ <xsl:otherwise><xsl:text>Tổng quan: </xsl:text></xsl:otherwise>
  </xsl:choose>
  </span>
  <xsl:call-template name="subfieldSelect">

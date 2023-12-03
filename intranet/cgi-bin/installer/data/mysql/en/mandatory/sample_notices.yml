@@ -1970,7 +1970,7 @@ tables:
             - "    <li><b>Publisher:</b> <<suggestions.publishercode>></li>"
             - "    <li><b>Collection title:</b> <<suggestions.collectiontitle>></li>"
             - "    <li><b>Publication place:</b> <<suggestions.place>></li>"
-            - "    <li><b>Quantity:</b> <<suggestions.quantity>></li>"
+            - "    <li><b>Số lượng:</b> <<suggestions.quantity>></li>"
             - "    <li><b>Item type:</b>  <<suggestions.itemtype>></li>"
             - "    <li><b>Reason for suggestion:</b> <<suggestions.patronreason>></li>"
             - "    <li><b>Notes:</b> <<suggestions.note>></li>"

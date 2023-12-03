@@ -72,7 +72,7 @@
  [% ELSE %] Bạn không xác định tiêu chí tìm kiếm. [% END %] </p>
  [% IF ( ReturnPath ) %]
  <div class="returntosearch">
- <p><a href="[% ReturnPath | url %]">Return to the last advanced search</a></p>
+ <p><a href="[% ReturnPath | url %]">Quay lại tìm kiếm nâng cao cuối cùng</a></p>
  </div>
  [% END %]
  [% IF ( OPACNoResultsFound ) %]
@@ -131,7 +131,7 @@
  [% IF ( total ) %]
  [% IF ( ReturnPath ) %]
  <div class="returntosearch">
- <p><a href="[% ReturnPath | url %]">Return to the last advanced search</a></p>
+ <p><a href="[% ReturnPath | url %]">Quay lại tìm kiếm nâng cao cuối cùng</a></p>
  </div>
  [% END %]
  [% END %]
@@ -543,7 +543,7 @@
  [%# Display "Not finding what you're looking for" for suggestion or ILL %]
  [% IF suggestion || ( Koha.Preference( 'ILLModule' ) == 1 && loggedinusername ) %]
  <div class="suggestion">
- Not finding what you're looking for?
+ Không tìm thấy những gì bạn đang tìm kiếm?
  <ul>
  [% IF suggestion %]
  [% IF Koha.Preference( 'AnonSuggestions' ) == 1 %]

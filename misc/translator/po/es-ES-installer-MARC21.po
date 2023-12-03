@@ -2640,7 +2640,7 @@ msgid "Genre detail"
 msgstr "Detalles de género"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_types:1:row:4
-msgid "Genre/Form Term"
+msgid "Thể loại/Hình thức"
 msgstr "Términos de género/forma"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:1791
@@ -2676,7 +2676,7 @@ msgid "Geographic coverage note"
 msgstr "Nota de ámbito geográfico"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_subfield_structure:3:row:480
-msgid "Geographic name"
+msgid "Tên địa lý"
 msgstr "Nombre geográfico"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:1753

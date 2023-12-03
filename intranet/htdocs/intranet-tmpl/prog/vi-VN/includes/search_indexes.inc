@@ -25,9 +25,9 @@
  <option value="au,phr">&nbsp;&nbsp;&nbsp;&nbsp; Cụm từ tên tác giả</option>
  [% END %]
  [% IF ms_cpn %]
- <option selected="selected" value="cpn">&nbsp;&nbsp;&nbsp;&nbsp; Tên tổ chức</option>
+ <option selected="selected" value="cpn">&nbsp;&nbsp;&nbsp;&nbsp; Tên tập thể</option>
  [% ELSE %]
- <option value="cpn">&nbsp;&nbsp;&nbsp;&nbsp; Tên tổ chức</option>
+ <option value="cpn">&nbsp;&nbsp;&nbsp;&nbsp; Tên tập thể</option>
  [% END %]
  [% IF ms_cfn %]
  <option selected="selected" value="cfn">&nbsp;&nbsp;&nbsp;&nbsp; Tên hội nghị</option>

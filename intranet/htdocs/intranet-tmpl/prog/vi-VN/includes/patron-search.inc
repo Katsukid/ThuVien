@@ -148,7 +148,7 @@
  [% FOR column IN columns %]
  [% SWITCH column %]
  [% CASE 'checkbox' %]<th class="noExport"></th>
- [% CASE 'cardnumber' %]<th>Tóm tắt</th>
+ [% CASE 'cardnumber' %]<th>Thẻ</th>
  [% CASE 'dateofbirth' %]<th>Ngày sinh</th>
  [% CASE 'name' %]<th>Tên</th>
  [% CASE 'name-address' %]<th>Tên</th>

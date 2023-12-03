@@ -57,7 +57,7 @@
 
  <h1>Cash summary for [% library.branchname | html %]</h1>
 
- <h2>Tóm tắt</h2>
+ <h2>Tổng quan</h2>
  <ul>
  <li>Total income (cash): <span id="income"></span></li>
  <li>Total outgoing (cash): <span id="outgoing"></span></li>
@@ -88,7 +88,7 @@
  <td>[% register.description | html %]</td>
  <td>
  [%- IF register.last_cashup -%]
- [% register.last_cashup.timestamp | $KohaDates with_hours => 1 %] (<a data-toggle="modal" data-cashup="[% register.last_cashup.id | html %]" data-register="[% register.description | html %]" href="#cashupSummaryModal" class="button">Tóm tắt</a>)
+ [% register.last_cashup.timestamp | $KohaDates with_hours => 1 %] (<a data-toggle="modal" data-cashup="[% register.last_cashup.id | html %]" data-register="[% register.description | html %]" href="#cashupSummaryModal" class="button">Tổng quan</a>)
  [%- ELSE -%]
  No last cashup
  [%- END -%]

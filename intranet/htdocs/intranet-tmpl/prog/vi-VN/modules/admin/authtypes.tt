@@ -109,7 +109,7 @@ Authority types &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  <span class="required">Bắt buộc</span>
  </li>
  <li>
- <label for="summary">Tóm tắt: </label>
+ <label for="summary">Tổng quan: </label>
  <textarea id="summary" name="summary" cols="55" rows="7">[% authority_type.summary | html %]</textarea>
  </li>
  <li>
@@ -164,7 +164,7 @@ Authority types &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  <tr>
  <th>Mã</th>
  <th>Thông tin mô tả</th>
- <th>Tóm tắt</th>
+ <th>Tổng quan</th>
  <th>Trường kiểm soát</th>
  <th>&nbsp;</th>
  </tr>

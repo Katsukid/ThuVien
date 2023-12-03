@@ -26,7 +26,7 @@
 
  [% IF Koha.Preference( 'virtualshelves' ) == 1 %]
  [% IF ( ( Koha.Preference( 'opacuserlogin' ) == 1 ) && loggedinusername ) %]
- <li><a class="addtoshelf btn btn-link btn-lg" href="/cgi-bin/koha/opac-addbybiblionumber.pl?biblionumber=[% biblio.biblionumber | html %]"><i class="fa fa-fw fa-list" aria-hidden="true"></i> Save to your lists</a></li>
+ <li><a class="addtoshelf btn btn-link btn-lg" href="/cgi-bin/koha/opac-addbybiblionumber.pl?biblionumber=[% biblio.biblionumber | html %]"><i class="fa fa-fw fa-list" aria-hidden="true"></i> Lưu vào danh sách của bạn</a></li>
  [% END %]
  [% END %]
 
@@ -39,7 +39,7 @@
  [% END %]
 
  [% IF ( suggestion ) %]
- <li><a class="suggest_for_purchase btn btn-link btn-lg" href="/cgi-bin/koha/opac-suggestions.pl?op=add&biblionumber=[% biblio.biblionumber | url %]"><i class="fa fa-fw fa-gift" aria-hidden="true"></i> Suggest for purchase</a></li>
+ <li><a class="suggest_for_purchase btn btn-link btn-lg" href="/cgi-bin/koha/opac-suggestions.pl?op=add&biblionumber=[% biblio.biblionumber | url %]"><i class="fa fa-fw fa-gift" aria-hidden="true"></i> Đề nghị mua hàng</a></li>
  [% END %]
 
  [% IF Koha.Preference('OpacCatalogConcerns') %]
@@ -66,7 +66,7 @@
  <li>
  <div id="export">
  <div class="dropdown">
- <a id="format" class="btn btn-link btn-lg dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-fw fa-download" aria-hidden="true"></i> Save record <b class="caret"></b></a>
+ <a id="format" class="btn btn-link btn-lg dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-fw fa-download" aria-hidden="true"></i> Lưu bản ghi <b class="caret"></b></a>
  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="format">
  [% FOREACH option IN export_options %]
  [% IF option == 'dc' %]
@@ -98,7 +98,7 @@
  <div id="moresearches_menu">
  <div class="dropdown">
  <a id="furthersearches" class="btn btn-link btn-lg dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
- <i class="fa fa-fw fa-search" aria-hidden="true"></i> More searches
+ <i class="fa fa-fw fa-search" aria-hidden="true"></i> Nhiều tìm kiếm hơn
  </a>
  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="furthersearches">
  <div class="dropdown-header">Tìm kiếm nhan đề trong:</div>

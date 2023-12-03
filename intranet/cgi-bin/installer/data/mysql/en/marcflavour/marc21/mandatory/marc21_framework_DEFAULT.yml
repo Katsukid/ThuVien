@@ -35282,8 +35282,8 @@ tables:
 
         - tagfield: "651"
           tagsubfield: "a"
-          liblibrarian: "Geographic name"
-          libopac: "Geographic name"
+          liblibrarian: "Tên địa lý"
+          libopac: "Tên địa lý"
           repeatable: 0
           mandatory: 0
           kohafield: ""
@@ -37550,8 +37550,8 @@ tables:
 
         - tagfield: "691"
           tagsubfield: "a"
-          liblibrarian: "Geographic name"
-          libopac: "Geographic name"
+          liblibrarian: "Tên địa lý"
+          libopac: "Tên địa lý"
           repeatable: 0
           mandatory: 0
           kohafield: ""
@@ -42590,8 +42590,8 @@ tables:
 
         - tagfield: "751"
           tagsubfield: "a"
-          liblibrarian: "Geographic name"
-          libopac: "Geographic name"
+          liblibrarian: "Tên địa lý"
+          libopac: "Tên địa lý"
           repeatable: 0
           mandatory: 0
           kohafield: ""
@@ -74702,8 +74702,8 @@ tables:
 
         - tagfield: "951"
           tagsubfield: "a"
-          liblibrarian: "Geographic name"
-          libopac: "Geographic name"
+          liblibrarian: "Tên địa lý"
+          libopac: "Tên địa lý"
           repeatable: 0
           mandatory: 0
           kohafield: ""

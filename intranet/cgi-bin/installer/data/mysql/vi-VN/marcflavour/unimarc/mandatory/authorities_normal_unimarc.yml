@@ -2,7 +2,7 @@
 description:
 - 'Default UNIMARC Standard Authority types:'
 - ''
-- Personal Name
+- Tên cá nhân
 - Corporate Body Name
 - Territorial or Geographical Name
 - Trademark
@@ -321,7 +321,7 @@ tables:
       summary: ''
     - auth_tag_to_report: 200
       authtypecode: NP
-      authtypetext: Personal Name
+      authtypetext: Tên cá nhân
       summary: '[200a][, 200b][ 200d][ ; 200c][ (200f)]'
     - auth_tag_to_report: 210
       authtypecode: CO

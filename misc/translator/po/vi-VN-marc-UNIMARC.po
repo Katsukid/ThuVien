@@ -4635,7 +4635,7 @@ msgstr "Subject Category"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_4XX.tt:61
 #, c-format
 msgid "Summary"
-msgstr "Tóm tắt"
+msgstr "Tổng quan"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1571
 #, c-format

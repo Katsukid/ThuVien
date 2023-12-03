@@ -60,8 +60,8 @@
                             [% ELSE %]
                                 <h2>Enter a new purchase suggestion</h2>
 
-                                <p>Please fill out this form to make a purchase suggestion. You will receive an email when the library processes your suggestion.</p>
-                                <p>Only certain fields (marked in red) are required, but the more information you enter the easier it will be for the librarians to find the title you're requesting. The "Notes" field can be used to provide any additional information.</p>
+                                <p>Vui lòng điền vào mẫu này để đưa ra gợi ý mua hàng. Bạn sẽ nhận được email khi thư viện xử lý đề xuất của bạn.</p>
+                                <p>Chỉ một số trường nhất định (được đánh dấu màu đỏ) là bắt buộc, nhưng bạn càng nhập nhiều thông tin thì thủ thư sẽ dễ dàng tìm thấy tiêu đề bạn yêu cầu hơn. Trường "Ghi chú" có thể được sử dụng để cung cấp bất kỳ thông tin bổ sung nào.</p>
                             [% END %]
                             [% FOR m IN messages %]
                                 <div class="alert alert-[% m.type | html %]">
@@ -113,19 +113,19 @@
                                         [% END %]
                                         [% UNLESS ( copyrightdate_hidden )%]
                                             <li>
-                                                <div title="Copyright or publication year, for example: 2022">
+                                                <div title="Bản quyền hoặc năm xuất bản, ví dụ: 2022">
                                                     [% IF biblionumber %]
-                                                        <label>Publication year:</label>
+                                                        <label>Năm phát hành:</label>
                                                         <span id="copyrightdate">[% copyrightdate | html %]</span>
                                                     [% ELSIF ( copyrightdate_required ) %]
-                                                        <label for="copyrightdate" class="required">Publication year:</label>
+                                                        <label for="copyrightdate" class="required">Năm phát hành:</label>
                                                         <input type="text" id="copyrightdate" name="copyrightdate" pattern="[12]\d{3}" size="10" maxlength="4" value="[% copyrightdate | html %]" required="required" />
                                                         <div class="required_label required">Required</div>
-                                                        <span class="hint">Copyright or publication year, for example: 2022</span>
+                                                        <span class="hint">Bản quyền hoặc năm xuất bản, ví dụ: 2022</span>
                                                     [% ELSE %]
-                                                        <label for="copyrightdate">Publication year:</label>
+                                                        <label for="copyrightdate">Năm phát hành:</label>
                                                         <input type="text" id="copyrightdate" name="copyrightdate" pattern="[12]\d{3}" size="10" maxlength="4" value="[% copyrightdate | html %]" />
-                                                        <span class="hint">Copyright or publication year, for example: 2022</span>
+                                                        <span class="hint">Bản quyền hoặc năm xuất bản, ví dụ: 2022</span>
                                                     [% END %]
                                                 </div>
                                             </li>

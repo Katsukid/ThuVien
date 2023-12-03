@@ -62,7 +62,7 @@
                                         </select>
                                     </li>
                                     <li>
-                                        <label for="value">Term(s):</label>
+                                        <label for="value">(Nhiều) Thuật ngữ:</label>
                                         <input type="text" name="value" id="value" value="[% value | html %]" />
                                     </li>
                                     <li>

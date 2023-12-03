@@ -16607,7 +16607,7 @@ msgstr "Trích dẫn"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patron-search.inc:151
 #, c-format
 msgid "Card"
-msgstr "Tóm tắt"
+msgstr "Thẻ"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patroncards-toolbar.inc:6
 #, c-format
@@ -49749,7 +49749,7 @@ msgstr "Năm xuất bản"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:638
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:958
 #, c-format
-msgid "Publication year:"
+msgid "Năm phát hành:"
 msgstr "Năm xuất bản:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:395
@@ -49759,13 +49759,13 @@ msgstr "Năm xuất bản:"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/z3950_search.tt:59
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/z3950_search.tt:129
 #, c-format
-msgid "Publication year: "
+msgid "Năm phát hành: "
 msgstr "Năm xuất bản: "
 
 #. %1$s:  publicationyear | html 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/invoices.tt:287
 #, c-format
-msgid "Publication year: %s"
+msgid "Năm phát hành: %s"
 msgstr "Năm xuất bản: %s"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/results.tt:275
@@ -59225,7 +59225,7 @@ msgstr "Su"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batch_record_modification.tt:224
 #, c-format
 msgid "Summary"
-msgstr "Tóm tắt"
+msgstr "Tổng quan"
 
 #. %1$s:  patron.firstname | html 
 #. %2$s:  patron.surname | html 
@@ -59239,7 +59239,7 @@ msgstr "Bạn đọc %s %s (%s)"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:334
 #, c-format
 msgid "Summary: "
-msgstr "Tóm tắt: "
+msgstr "Tổng quan: "
 
 #. SCRIPT
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-detail.tt:451

@@ -50073,7 +50073,7 @@ msgstr "Año de publicación"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:638
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:958
 #, c-format
-msgid "Publication year:"
+msgid "Năm phát hành:"
 msgstr "Año de publicación:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:396
@@ -50083,13 +50083,13 @@ msgstr "Año de publicación:"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/z3950_search.tt:59
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/z3950_search.tt:129
 #, c-format
-msgid "Publication year: "
+msgid "Năm phát hành: "
 msgstr "Año de publicación: "
 
 #. %1$s:  publicationyear | html 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/invoices.tt:288
 #, c-format
-msgid "Publication year: %s"
+msgid "Năm phát hành: %s"
 msgstr "Año de publicación: %s"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/results.tt:278

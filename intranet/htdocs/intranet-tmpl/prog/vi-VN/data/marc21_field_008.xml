@@ -162,7 +162,7 @@
  <Value code="2"><description>Offprints</description></Value>
  <Value code="5"><description>Calendars</description></Value>
  <Value code="6"><description>Comics/graphic novels</description></Value>
- <Value code="a"><description>Tóm tắt / Tổng quát</description></Value>
+ <Value code="a"><description>Tóm tắt / Tổng quan</description></Value>
  <Value code="b"><description>Thư mục</description></Value>
  <Value code="c"><description>Catalogs</description></Value>
  <Value code="d"><description>Từ điển</description></Value>
@@ -193,7 +193,7 @@
  <Value code="2"><description>Offprints</description></Value>
  <Value code="5"><description>Calendars</description></Value>
  <Value code="6"><description>Comics/graphic novels</description></Value>
- <Value code="a"><description>Tóm tắt / Tổng quát</description></Value>
+ <Value code="a"><description>Tóm tắt / Tổng quan</description></Value>
  <Value code="b"><description>Thư mục</description></Value>
  <Value code="c"><description>Catalogs</description></Value>
  <Value code="d"><description>Từ điển</description></Value>
@@ -224,7 +224,7 @@
  <Value code="2"><description>Offprints</description></Value>
  <Value code="5"><description>Calendars</description></Value>
  <Value code="6"><description>Comics/graphic novels</description></Value>
- <Value code="a"><description>Tóm tắt / Tổng quát</description></Value>
+ <Value code="a"><description>Tóm tắt / Tổng quan</description></Value>
  <Value code="b"><description>Thư mục</description></Value>
  <Value code="c"><description>Catalogs</description></Value>
  <Value code="d"><description>Từ điển</description></Value>
@@ -255,7 +255,7 @@
  <Value code="2"><description>Offprints</description></Value>
  <Value code="5"><description>Calendars</description></Value>
  <Value code="6"><description>Comics/graphic novels</description></Value>
- <Value code="a"><description>Tóm tắt / Tổng quát</description></Value>
+ <Value code="a"><description>Tóm tắt / Tổng quan</description></Value>
  <Value code="b"><description>Thư mục</description></Value>
  <Value code="c"><description>Catalogs</description></Value>
  <Value code="d"><description>Từ điển</description></Value>
@@ -1075,7 +1075,7 @@
  <Value code="#"><description>Not specified</description></Value>
  <Value code="5"><description>Calendars</description></Value>
  <Value code="6"><description>Comics/graphic novels</description></Value>
- <Value code="a"><description>Tóm tắt / Tổng quát</description></Value>
+ <Value code="a"><description>Tóm tắt / Tổng quan</description></Value>
  <Value code="b"><description>Thư mục</description></Value>
  <Value code="c"><description>Catalogs</description></Value>
  <Value code="d"><description>Từ điển</description></Value>
@@ -1105,7 +1105,7 @@
  <Value code="#"><description>Not specified</description></Value>
  <Value code="5"><description>Calendars</description></Value>
  <Value code="6"><description>Comics/graphic novels</description></Value>
- <Value code="a"><description>Tóm tắt / Tổng quát</description></Value>
+ <Value code="a"><description>Tóm tắt / Tổng quan</description></Value>
  <Value code="b"><description>Thư mục</description></Value>
  <Value code="c"><description>Catalogs</description></Value>
  <Value code="d"><description>Từ điển</description></Value>

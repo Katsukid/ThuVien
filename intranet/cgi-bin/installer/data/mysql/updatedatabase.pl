@@ -1836,7 +1836,7 @@ if (C4::Context->preference("Version") < TransformToNum($DBversion)) {
 $DBversion = "3.00.00.095";
 if (C4::Context->preference("Version") < TransformToNum($DBversion)) {
     if (C4::Context->preference("marcflavour") eq 'MARC21') {
-        $dbh->do("UPDATE marc_subfield_structure SET authtypecode = 'MEETI_NAME' WHERE authtypecode = 'Meeting Name'");
+        $dbh->do("UPDATE marc_subfield_structure SET authtypecode = 'MEETI_NAME' WHERE authtypecode = 'Tên hội nghị'");
         $dbh->do("UPDATE marc_subfield_structure SET authtypecode = 'CORPO_NAME' WHERE authtypecode = 'CORP0_NAME'");
     }
 	print "Upgrade to $DBversion done (fix invalid authority types in MARC21 frameworks [bug 2254])\n";
@@ -18649,7 +18649,7 @@ if( CheckVersion( $DBversion ) ) {
                         <li><b>Publisher:</b> <<suggestions.publishercode>></li>
                         <li><b>Collection title:</b> <<suggestions.collectiontitle>></li>
                         <li><b>Publication place:</b> <<suggestions.place>></li>
-                        <li><b>Quantity:</b> <<suggestions.quantity>></li>
+                        <li><b>Số lượng:</b> <<suggestions.quantity>></li>
                         <li><b>Item type:</b> <<suggestions.itemtype>></li>
                         <li><b>Reason for suggestion:</b> <<suggestions.patronreason>></li>
                         <li><b>Notes:</b> <<suggestions.note>></li>

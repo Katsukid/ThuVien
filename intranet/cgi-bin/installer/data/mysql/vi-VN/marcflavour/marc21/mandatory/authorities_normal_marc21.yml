@@ -2,14 +2,14 @@
 description:
 - 'Default MARC21 Standard Authority types:'
 - ''
-- Personal Name
+- Tên cá nhân
 - Corporate Name
-- Meeting Name
+- Tên hội nghị
 - Uniform Title
-- Chronological Term
-- Topical Term
+- Thuật ngữ thời gian
+- Thuật ngữ chuyên đề
 - Geographic Name
-- Genre/Form Term
+- Thể loại/Hình thức
 sql_statements:
 - INSERT INTO auth_tag_structure (authtypecode, tagfield, liblibrarian, libopac, repeatable,
   mandatory, authorised_value) SELECT 'PERSO_NAME', tagfield, liblibrarian, libopac,
@@ -148,32 +148,32 @@ tables:
       summary: ''
     - auth_tag_to_report: 148
       authtypecode: CHRON_TERM
-      authtypetext: Chronological Term
-      summary: Chronological Term
+      authtypetext: Thuật ngữ thời gian
+      summary: Thuật ngữ thời gian
     - auth_tag_to_report: 110
       authtypecode: CORPO_NAME
       authtypetext: Corporate Name
       summary: Corporate Names
     - auth_tag_to_report: 155
       authtypecode: GENRE/FORM
-      authtypetext: Genre/Form Term
-      summary: Genre/Form Term
+      authtypetext: Thể loại/Hình thức
+      summary: Thể loại/Hình thức
     - auth_tag_to_report: 151
       authtypecode: GEOGR_NAME
       authtypetext: Geographic Name
       summary: Geographic Name
     - auth_tag_to_report: 111
       authtypecode: MEETI_NAME
-      authtypetext: Meeting Name
-      summary: Meeting Name
+      authtypetext: Tên hội nghị
+      summary: Tên hội nghị
     - auth_tag_to_report: 100
       authtypecode: PERSO_NAME
-      authtypetext: Personal Name
-      summary: Personal Names
+      authtypetext: Tên cá nhân
+      summary: Tên cá nhân
     - auth_tag_to_report: 150
       authtypecode: TOPIC_TERM
-      authtypetext: Topical Term
-      summary: Topical Term
+      authtypetext: Thuật ngữ chuyên đề
+      summary: Thuật ngữ chuyên đề
     - auth_tag_to_report: 130
       authtypecode: UNIF_TITLE
       authtypetext: Uniform Title
@@ -9136,8 +9136,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: ''
-      liblibrarian: Geographic name
-      libopac: Geographic name
+      liblibrarian: Tên địa lý
+      libopac: Tên địa lý
       linkid: 0
       mandatory: 0
       repeatable: 0
@@ -15972,8 +15972,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: ''
-      liblibrarian: Geographic name
-      libopac: Geographic name
+      liblibrarian: Tên địa lý
+      libopac: Tên địa lý
       linkid: 0
       mandatory: 0
       repeatable: 0
@@ -19972,8 +19972,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: ''
-      liblibrarian: Geographic name
-      libopac: Geographic name
+      liblibrarian: Tên địa lý
+      libopac: Tên địa lý
       linkid: 0
       mandatory: 0
       repeatable: 0
@@ -26532,8 +26532,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: ''
-      liblibrarian: Geographic name
-      libopac: Geographic name
+      liblibrarian: Tên địa lý
+      libopac: Tên địa lý
       linkid: 0
       mandatory: 0
       repeatable: 0

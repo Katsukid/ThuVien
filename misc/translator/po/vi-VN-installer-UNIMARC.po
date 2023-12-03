@@ -4357,7 +4357,7 @@ msgstr "Set Level"
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_tag_structure:11:row:93
 #, fuzzy
 msgid "Summary or Abstract"
-msgstr "Tóm tắt hoặc nhan đề phụ"
+msgstr "Tổng quan hoặc tóm tắt"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_tag_structure:11:row:122
 #, fuzzy

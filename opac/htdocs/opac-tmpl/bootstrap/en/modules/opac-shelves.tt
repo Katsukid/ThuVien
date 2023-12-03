@@ -38,28 +38,28 @@
 
 [% BLOCK list_permissions %]
     <li>
-        <label for="allow_changes_from">Allow changes to contents from: </label>
+        <label for="allow_changes_from">Cho phép thay đổi nội dung từ: </label>
         <select name="allow_changes_from" id="allow_changes_from" onchange="AdjustRemark()">
 
-            [% IF shelf.allow_change_from_owner %]<option value="0">Nobody</option>[% ELSE %]<option value="0" selected="selected">Nobody</option>[% END %]
+            [% IF shelf.allow_change_from_owner %]<option value="0">Không ai được sửa</option>[% ELSE %]<option value="0" selected="selected">Không ai được sửa</option>[% END %]
 
             [% IF shelf.allow_change_from_owner && (( !shelf.is_public && !shelf.is_shared ) || !shelf.allow_change_from_others ) %]
-                <option value="1" selected="selected">Owner only</option>
+                <option value="1" selected="selected">Chỉ chủ sở hữu</option>
             [% ELSE %]
-                <option value="1">Owner only</option>
+                <option value="1">Chỉ chủ sở hữu</option>
             [% END %]
 
-            [% IF permitteduser == 1 %][% IF shelf.allow_change_from_permitted_staff %]<option value="4" selected="selected">Permitted staff only</option>[% ELSE %]<option value="4">Permitted staff only</option>[% END %][% END %]
+            [% IF permitteduser == 1 %][% IF shelf.allow_change_from_permitted_staff %]<option value="4" selected="selected">Chỉ thủ thư được phép</option>[% ELSE %]<option value="4">Chỉ thủ thư được phép</option>[% END %][% END %]
 
-            [% IF staffuser == 1 %][% IF shelf.allow_change_from_staff %]<option value="3" selected="selected">Staff only</option>[% ELSE %]<option value="3">Staff only</option>[% END %][% END %]
+            [% IF staffuser == 1 %][% IF shelf.allow_change_from_staff %]<option value="3" selected="selected">Chỉ thủ thư</option>[% ELSE %]<option value="3">Chỉ thủ thư</option>[% END %][% END %]
 
-            [% IF shelf.allow_change_from_others %]<option value="2" selected="selected">Anyone seeing this list</option>[% ELSE %]<option value="2">Anyone seeing this list</option>[% END %]
+            [% IF shelf.allow_change_from_others %]<option value="2" selected="selected">Bất cứ ai nhìn thấy danh sách này</option>[% ELSE %]<option value="2">Bất cứ ai nhìn thấy danh sách này</option>[% END %]
 
 
         </select>
-        &emsp; <span id="permitted_staff_remark" style="display:none;color:red;">The "Permitted staff only" permission has no actual effect while this list is strictly private.</span>
-        &emsp; <span id="staff_remark" style="display:none;color:red;">The "Staff only" permission has no actual effect while this list is strictly private.</span>
-        &emsp; <span id="anyone_remark" style="display:none;color:red;">The "Anyone" permission has no actual effect while this list is strictly private.</span>
+        &emsp; <span id="permitted_staff_remark" style="display:none;color:red;">Quyền "Chỉ thủ thư được phép" không có hiệu quả đối với danh sách riêng tư.</span>
+        &emsp; <span id="staff_remark" style="display:none;color:red;">Quyền "Chỉ thủ thư" không có hiệu quả đối với danh sách riêng tư.</span>
+        &emsp; <span id="anyone_remark" style="display:none;color:red;">Quyền "Bất kỳ ai" không có hiệu quả đối với danh sách riêng tư.</span>
     </li>
 [% END %]
 

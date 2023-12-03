@@ -307,7 +307,7 @@
  <table id="orderst">
  <thead>
  <tr>
- <th class="anti-the">Tóm tắt</th>
+ <th class="anti-the">Tổng quan</th>
  <th>Thư viện</th>
  [% IF has_invoice_unitprice %]
  <th>Invoice price</th>

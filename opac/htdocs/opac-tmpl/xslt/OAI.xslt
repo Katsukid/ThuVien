@@ -121,10 +121,10 @@
                         </div>
                     </div>
 
-                    <div class="row-fluid text-center">
+                    <!-- <div class="row-fluid text-center">
                         <div class="vertical-space"></div>
                         <p><small>Powered by <a href="http://koha-community.org">Koha</a></small></p>
-                    </div>
+                    </div> -->
                 </div>
             </body>
         </html>

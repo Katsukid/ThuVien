@@ -6,7 +6,7 @@
 [% PROCESS 'i18n.inc' %]
 
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Courses &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
+<title>Khóa học &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %]
  [% Asset.css("css/datatables.css") | $raw %]
@@ -41,7 +41,7 @@
  <th>Tên</th>
  <th>Đơn vị</th>
  <th>Số khóa học</th>
- <th>section</th>
+ <th>Phần</th>
  <th>[% tp('Semester', 'Term') | html %]</th>
  <th>Người hướng dẫn</th>
  <th>Ghi chú</th>

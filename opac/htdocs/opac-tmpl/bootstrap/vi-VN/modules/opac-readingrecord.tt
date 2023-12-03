@@ -8,7 +8,7 @@
 [% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
 [% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Your checkout history &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
+<title>Lịch sử thanh toán của bạn &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %][% END %]
 </head>
@@ -31,7 +31,7 @@
  <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
  </li>
  <li class="breadcrumb-item active">
- <a href="#" aria-current="page">Your checkout history</a>
+ <a href="#" aria-current="page">Lịch sử thanh toán của bạn</a>
  </li>
  </ol>
  </nav> <!-- /#breadcrumbs -->
@@ -70,7 +70,7 @@
 
  [% IF limit %]
  <p>
- Showing last 50 items. <a href="/cgi-bin/koha/opac-readingrecord.pl?limit=full[% IF ( orderbytitle ) %]&amp;order=title[% END %]">Hiển thị toàn bộ tài liệu</a>
+ Hiển thị 50 mục cuối cùng. <a href="/cgi-bin/koha/opac-readingrecord.pl?limit=full[% IF ( orderbytitle ) %]&amp;order=title[% END %]">Hiển thị toàn bộ tài liệu</a>
  </p>
  [% ELSE %]
  <p>

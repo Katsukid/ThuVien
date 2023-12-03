@@ -2076,7 +2076,7 @@ msgstr "Abstract: "
 #: koha-tmpl/intranet-tmpl/prog/en/data/marc21_field_008.xml:1108
 #, c-format
 msgid "Abstracts/summaries"
-msgstr "Tóm tắt / Tổng quát"
+msgstr "Tóm tắt / Tổng quan"
 
 #: koha-tmpl/intranet-tmpl/prog/en/data/marc21_field_007.xml:173
 #, fuzzy, c-format
@@ -12383,13 +12383,13 @@ msgstr "ÂPĐK"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slimUtils.xsl:329
 #, fuzzy, c-format
 msgid "Summary language: "
-msgstr "Tóm tắt: "
+msgstr "Tổng quan: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slim2intranetDetail.xsl:1096
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slim2OPACDetail.xsl:1296
 #, c-format
 msgid "Summary: "
-msgstr "Tóm tắt: "
+msgstr "Tổng quan: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21Languages.xsl:417
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21Languages.xsl:417

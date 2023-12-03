@@ -285,7 +285,7 @@
                                     <li>Publisher: [% publisher | html %]</li>
                                 [% END %]
                                 [% IF ( publicationyear ) %]
-                                    <li>Publication year: [% publicationyear | html %]</li>
+                                    <li>Năm phát hành: [% publicationyear | html %]</li>
                                 [% END %]
                                 [% IF ( branch ) %]
                                     <li>Library: [% Branches.GetName( branch ) | html %]</li>
@@ -374,7 +374,7 @@
                                 <input type="text" id="publisher" name="publisher" value="[% publisher | html %]" />
                             </li>
                             <li>
-                                <label for="publicationyear">Publication year:</label>
+                                <label for="publicationyear">Năm phát hành:</label>
                                 <input type="text" id="publicationyear" name="publicationyear" value="[% publicationyear | html %]" />
                             </li>
                             <li>

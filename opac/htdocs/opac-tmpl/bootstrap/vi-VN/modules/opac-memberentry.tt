@@ -32,7 +32,7 @@
 [% END %]
 
 [% INCLUDE 'doc-head-open.inc' %]
- <title>[% IF action == 'edit' %]Update your personal details[% ELSE %]Register a new account[% END %] &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
+ <title>[% IF action == 'edit' %]Cập nhật thông tin cá nhân của bạn[% ELSE %]Register a new account[% END %] &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %][% END %]
 </head>
@@ -55,7 +55,7 @@
  <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
  </li>
  <li class="breadcrumb-item active">
- <a href="#">Your personal details</a>
+ <a href="#">Thông tin cá nhân của bạn</a>
  </li>
  [% ELSE %]
  <li class="breadcrumb-item active">
@@ -74,7 +74,7 @@
  </div>
  <div class="col-md-12 col-lg-10 order-1">
 
- <h1>Your personal details</h1>
+ <h1>Thông tin cá nhân của bạn</h1>
 
  [% IF action == 'edit' %]
  <div id="update-account" class="maincontent">
@@ -334,7 +334,7 @@
  <div class="row">
  <div class="col">
  <fieldset class="rows" id="memberentry_identity">
- <legend id="identity_legend">Identity</legend>
+ <legend id="identity_legend">Danh tính</legend>
 
  <ol>
  [% UNLESS hidden.defined('title') || !Koha.Preference('BorrowersTitles') %]
@@ -375,7 +375,7 @@
 
  [% UNLESS hidden.defined('middle_name') %]
  <li>
- <label for="borrower_middle_name" class="[% required.middle_name | html %]">Middle name:</label>
+ <label for="borrower_middle_name" class="[% required.middle_name | html %]">Tên đệm:</label>
 
  <input type="text" id="borrower_middle_name" name="borrower_middle_name" value="[% borrower.middle_name | html %]" class="[% required.middle_name | html %]" />
  <div class="required_label [% required.middle_name | html %]">Bắt buộc</div>
@@ -403,7 +403,7 @@
 
  [% UNLESS hidden.defined('pronouns') %]
  <li>
- <label for="borrower_pronouns" class="[% required.pronouns | html %]">Pronouns:</label>
+ <label for="borrower_pronouns" class="[% required.pronouns | html %]">Đại từ:</label>
 
  <input type="text" id="borrower_pronouns" name="borrower_pronouns" value="[% borrower.pronouns | html %]" class="[% required.prnouns | html %]" />
  <div class="required_label [% required.pronouns | html %]">Bắt buộc</div>
@@ -631,9 +631,9 @@
  [% UNLESS hidden.defined('primary_contact_method') %]
  <li>
  [% IF ( mandatory.defined('primary_contact_method') ) %]
- <label for="borrower_primary_contact_method" class="required">Main contact method:</label>
+ <label for="borrower_primary_contact_method" class="required">Phương thức liên lạc chính:</label>
  [% ELSE %]
- <label for="borrower_primary_contact_method">Main contact method:</label>
+ <label for="borrower_primary_contact_method">Phương thức liên lạc chính:</label>
  [% END %]
 
  <select id="borrower_primary_contact_method" name="borrower_primary_contact_method">

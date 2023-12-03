@@ -181,7 +181,7 @@
                                                                     </span>
                                                                 </li>
                                                                 <li class="quantity">
-                                                                    <label for="quantity_record_[% biblio.import_record_id | html %]" class="required">Quantity: </label>
+                                                                    <label for="quantity_record_[% biblio.import_record_id | html %]" class="required">Số lượng: </label>
                                                                     <input id="quantity_record_[% biblio.import_record_id | html %]" type="text" pattern="[0-9]+" value="[% biblio.quantity.length ? biblio.quantity : 1 | html %]" name="quantity" />
                                                                     <span class="required">Required</span>
                                                                 </li>

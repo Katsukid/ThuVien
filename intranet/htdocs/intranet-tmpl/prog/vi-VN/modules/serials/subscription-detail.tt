@@ -87,7 +87,7 @@
  [% WRAPPER tab_item tabname= "subscription_info" bt_active= 1 %] <span>Thông tin tài liệu</span> [% END %]
  [% WRAPPER tab_item tabname= "subscription_planning" %] <span>Lịch phát hành</span> [% END %]
  [% WRAPPER tab_item tabname= "subscription_issues" %] <span>Kỳ phát hành</span> [% END %]
- [% WRAPPER tab_item tabname= "subscription_summary" %] <span>Tóm tắt</span> [% END %]
+ [% WRAPPER tab_item tabname= "subscription_summary" %] <span>Tổng quan</span> [% END %]
  [% IF orders_grouped.size %]
  [% WRAPPER tab_item tabname= "acquisition_details" %] <span>Thông tin bổ sung</span> [% END %]
  [% END %]

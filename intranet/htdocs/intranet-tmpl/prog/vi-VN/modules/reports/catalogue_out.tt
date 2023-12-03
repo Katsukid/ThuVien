@@ -76,7 +76,7 @@
 
  [% IF ( mainloo.looptables ) %]
  <div class="page-section">
- <h3><a name="summary" id="summary"></a>Tóm tắt</h3>
+ <h3><a name="summary" id="summary"></a>Tổng quan</h3>
  <table id="summary_table">
  <tr>
  <th>Nhóm</th>

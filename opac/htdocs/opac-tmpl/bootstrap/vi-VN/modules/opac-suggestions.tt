@@ -10,7 +10,7 @@
 [% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
 [% INCLUDE 'doc-head-open.inc' %]
 <title>[% IF ( op_add ) %]Enter a new purchase suggestion[% END %]
-[% IF ( op_else ) %]Purchase suggestions[% END %] &rsaquo;
+[% IF ( op_else ) %]Đề xuất mua hàng[% END %] &rsaquo;
 [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %][% END %]
@@ -30,7 +30,7 @@
  </li>
  [% END %]
  <li class="breadcrumb-item active">
- <a href="#" aria-current="page">Purchase suggestions</a>
+ <a href="#" aria-current="page">Đề xuất mua hàng</a>
  </li>
  </ol>
  </nav> <!-- /#breadcrumbs -->
@@ -46,7 +46,7 @@
 
  <div id="usersuggestions" class="maincontent">
  [% IF ( op_add ) %]
- <h1>Your purchase suggestions</h1>
+ <h1>Đề xuất mua hàng của bạn</h1>
  [% IF ( Koha.Preference('MaxTotalSuggestions') != '' && patrons_total_suggestions_count >= Koha.Preference('MaxTotalSuggestions') ) %]
  <h2 class="TooManySuggestions">You cannot place any more suggestions</h2>
  <p class="TooManySuggestionsText">You may only add up to [% Koha.Preference('MaxTotalSuggestions') | html %] suggestions in [% Koha.Preference('NumberOfSuggestionDays') | html %] days.</p>
@@ -60,8 +60,8 @@
  [% ELSE %]
  <h2>Tạo đề xuất mua</h2>
 
- <p>Please fill out this form to make a purchase suggestion. You will receive an email when the library processes your suggestion.</p>
- <p>Only certain fields (marked in red) are required, but the more information you enter the easier it will be for the librarians to find the title you're requesting. The "Notes" field can be used to provide any additional information.</p>
+ <p>Vui lòng điền vào mẫu này để đưa ra gợi ý mua hàng. Bạn sẽ nhận được email khi thư viện xử lý đề xuất của bạn.</p>
+ <p>Chỉ một số trường nhất định (được đánh dấu màu đỏ) là bắt buộc, nhưng bạn càng nhập nhiều thông tin thì thủ thư sẽ dễ dàng tìm thấy tiêu đề bạn yêu cầu hơn. Trường "Ghi chú" có thể được sử dụng để cung cấp bất kỳ thông tin bổ sung nào.</p>
  [% END %]
  [% FOR m IN messages %]
  <div class="alert alert-[% m.type | html %]">
@@ -113,19 +113,19 @@
  [% END %]
  [% UNLESS ( copyrightdate_hidden )%]
  <li>
- <div title="Copyright or publication year, for example: 2022">
+ <div title="Bản quyền hoặc năm xuất bản, ví dụ: 2022">
  [% IF biblionumber %]
- <label>Publication year:</label>
+ <label>Năm phát hành:</label>
  <span id="copyrightdate">[% copyrightdate | html %]</span>
  [% ELSIF ( copyrightdate_required ) %]
- <label for="copyrightdate" class="required">Publication year:</label>
+ <label for="copyrightdate" class="required">Năm phát hành:</label>
  <input type="text" id="copyrightdate" name="copyrightdate" pattern="[12]\d{3}" size="10" maxlength="4" value="[% copyrightdate | html %]" required="required" />
  <div class="required_label required">Bắt buộc</div>
- <span class="hint">Copyright or publication year, for example: 2022</span>
+ <span class="hint">Bản quyền hoặc năm xuất bản, ví dụ: 2022</span>
  [% ELSE %]
- <label for="copyrightdate">Publication year:</label>
+ <label for="copyrightdate">Năm phát hành:</label>
  <input type="text" id="copyrightdate" name="copyrightdate" pattern="[12]\d{3}" size="10" maxlength="4" value="[% copyrightdate | html %]" />
- <span class="hint">Copyright or publication year, for example: 2022</span>
+ <span class="hint">Bản quyền hoặc năm xuất bản, ví dụ: 2022</span>
  [% END %]
  </div>
  </li>
@@ -401,7 +401,7 @@
  <thead>
  <tr>
  [% IF ( loggedinusername ) %]<th>&nbsp;</th>[% END %]
- <th class="all">Tóm tắt</th>
+ <th class="all">Tổng quan</th>
  <th>Suggested on</th>
  <th>Ghi chú</th>
  [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) == 1 %]<th>Đề xuất mua</th>[% END %]
@@ -492,21 +492,21 @@
  [% ELSE %]
  [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) %]
  [% IF title_filter %]
- <div class="alert alert-info" role="alert">There are no pending purchase suggestions matching your search.</div>
+ <div class="alert alert-info" role="alert">Không có đề xuất mua hàng nào đang chờ xử lý phù hợp với tìm kiếm của bạn.</div>
  [% ELSIF loggedinusername AND NOT suggested_by_anyone %]
- <div class="alert alert-info" role="alert">You have no pending purchase suggestions. <a href="/cgi-bin/koha/opac-suggestions.pl?suggested_by_anyone=1">View all suggestions</a></div>
+ <div class="alert alert-info" role="alert">Bạn không có đề xuất mua hàng nào đang chờ xử lý. <a href="/cgi-bin/koha/opac-suggestions.pl?suggested_by_anyone=1">View all suggestions</a></div>
  [% ELSE %]
- <div class="alert alert-info" role="alert">Không có đề xuất mua đang chờ duyệt.</div>
+ <div class="alert alert-info" role="alert">Không có đề xuất mua hàng nào đang chờ xử lý.</div>
  [% END %]
  [% ELSE %]
  [% IF ( loggedinusername ) %]
  [% IF title_filter %]
- <div class="alert alert-info" role="alert">There are no pending purchase suggestions matching your search.</div>
+ <div class="alert alert-info" role="alert">Không có đề xuất mua hàng nào đang chờ xử lý phù hợp với tìm kiếm của bạn.</div>
  [% ELSE %]
- <div class="alert alert-info" role="alert">You have no pending purchase suggestions.</div>
+ <div class="alert alert-info" role="alert">Bạn không có đề xuất mua hàng nào đang chờ xử lý.</div>
  [% END %]
  [% ELSE %]
- <div class="alert alert-warning" role="alert">You are not authorized to see pending purchase suggestions.</div>
+ <div class="alert alert-warning" role="alert">Bạn không được phép xem các đề xuất mua hàng đang chờ xử lý.</div>
  [% END %]
  [% END %]
  [% IF ( loggedinusername || ( Koha.Preference( 'AnonSuggestions' ) == 1 ) ) %]

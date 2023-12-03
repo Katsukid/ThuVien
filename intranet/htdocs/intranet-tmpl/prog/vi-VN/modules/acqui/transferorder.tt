@@ -68,7 +68,7 @@
  <thead>
  <tr>
  <th>[% tp('noun', 'Order') | html %]</th>
- <th>Tóm tắt</th>
+ <th>Tổng quan</th>
  <th>&nbsp;</th>
  </tr>
  </thead>

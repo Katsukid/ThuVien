@@ -354,7 +354,7 @@
                                                 </li>
                                                 [% IF ( biblioloo.publicationyear ) %]
                                                     <li>
-                                                        <span class="label">Publication year:</span> [% biblioloo.publicationyear | html %]
+                                                        <span class="label">Năm phát hành:</span> [% biblioloo.publicationyear | html %]
                                                     </li>
                                                 [% END %]
                                             </ul>
@@ -635,7 +635,7 @@
 
                                 [% IF ( biblio.biblioitem.publicationyear ) %]
                                     <li>
-                                        <span class="label">Publication year:</span>
+                                        <span class="label">Năm phát hành:</span>
                                         [% biblio.biblioitem.publicationyear | html %]
                                     </li>
                                 [% END %]
@@ -955,7 +955,7 @@
                                                 </li>
                                                 [% IF ( biblioloo.publicationyear ) %]
                                                     <li>
-                                                        <span class="label">Publication year:</span> [% biblioloo.publicationyear | html %]
+                                                        <span class="label">Năm phát hành:</span> [% biblioloo.publicationyear | html %]
                                                     </li>
                                                 [% END %]
                                             </ul>

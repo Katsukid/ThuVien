@@ -131,7 +131,7 @@
  [% CASE "Label number" -%]
  <th>Số nhãn gáy</th>
  [% CASE "Summary" -%]
- <th class="anti-the">Tóm tắt</th>
+ <th class="anti-the">Tổng quan</th>
  [% CASE "Item type" %]
  <th>Kiểu tài liệu</th>
  [% CASE "Call number" %]

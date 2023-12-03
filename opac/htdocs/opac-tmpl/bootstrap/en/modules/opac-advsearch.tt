@@ -50,7 +50,7 @@
                                                     [% IF loop.index == 0 %]
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     [% ELSE %]
-                                                        and
+                                                        và
                                                     [% END %]
                                                 </label>
                                             [% END # /IF ( expanded_options ) %]
@@ -83,7 +83,7 @@
                                                 <option value="au,wrdl">Author</option>
                                                 [% IF ( expanded_options ) %]
                                                     <option value="au,phr">&nbsp;&nbsp;&nbsp;&nbsp; Author phrase</option>
-                                                    <option value="cpn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Corporate name</option>
+                                                    <option value="cpn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Tên tập thể</option>
                                                     <option value="cfn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Conference name</option>
                                                     <option value="cfn,phr">&nbsp;&nbsp;&nbsp;&nbsp; Conference name phrase</option>
                                                     <option value="pn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Personal name</option>
@@ -232,7 +232,7 @@
                             <!-- AVAILABILITY LIMITS -->
                             <div id="location" class="advsearch_limit">
                                 <fieldset>
-                                    <label for="branchloop">Location and availability:</label>
+                                    <label for="branchloop">Vị trí và khả dụng:</label>
                                     <select name="limit" id="branchloop">
                                     <option value="">All libraries</option>
                                     [% FOREACH BranchesLoo IN Branches.all( selected => opac_name ) %]

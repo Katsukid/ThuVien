@@ -52,7 +52,7 @@
  [% IF ( result ) %]<div id="resultlist">
  <table>
  <tr>
- <th>Tóm tắt</th>
+ <th>Tổng quan</th>
  <th>Heading type</th>
  <th>Được sử dụng</th>
  [% IF Koha.Preference('ShowHeadingUse') %]
