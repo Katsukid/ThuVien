@@ -30,7 +30,7 @@
 [% END %]
 
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Details for: [% INCLUDE 'biblio-title-head.inc' %] &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
+<title>Chi tiết biểu ghi: [% INCLUDE 'biblio-title-head.inc' %] &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
     [% Asset.css("lib/emoji-picker/css/emoji.css") | $raw %]
     [% IF ( Koha.Preference('OPACShowMusicalInscripts') ) %]
@@ -851,14 +851,14 @@
                                             [% END %]
                                         [% END # / FOREACH reviews %]
                                     [% ELSE %]
-                                        <p>There are no comments on this title.</p>
+                                        <p>Không có bình luận về tiêu đề này.</p>
                                     [% END # / IF reviews %]
 
                                     [% IF ( loggedinusername ) %]
                                         [% UNLESS ( loggedincommenter ) %]
                                             <div id="addcomment">
                                                 <a href="#" onclick="Dopop('/cgi-bin/koha/opac-review.pl?biblionumber=[% biblio.biblionumber | uri %]'); return false;">
-                                                Post your comments on this title.
+                                                Gửi bình luận của bạn về tiêu đề này.
                                                 </a>
                                             </div>
                                         [% END %]

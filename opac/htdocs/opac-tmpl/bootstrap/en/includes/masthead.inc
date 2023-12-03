@@ -112,7 +112,7 @@
                             <div aria-labelledby="user-menu" role="menu" class="dropdown-menu dropdown-menu-right">
                                 <div id="loggedinuser-menu">
                                     <p>
-                                        <a class="login-link" href="/cgi-bin/koha/opac-user.pl"><span class="loggedinusername" data-borrowernumber="[% logged_in_user.borrowernumber | html %]" data-branchcode="[% logged_in_user.branchcode | html %]" data-categorycode="[% logged_in_user.categorycode | html %]">Your account</span></a>
+                                        <a class="login-link" href="/cgi-bin/koha/opac-user.pl"><span class="loggedinusername" data-borrowernumber="[% logged_in_user.borrowernumber | html %]" data-branchcode="[% logged_in_user.branchcode | html %]" data-categorycode="[% logged_in_user.categorycode | html %]">Tài khoản của bạn</span></a>
                                     </p>
                                     [% IF Koha.Preference( 'EnableOpacSearchHistory' ) %]
                                         <p>

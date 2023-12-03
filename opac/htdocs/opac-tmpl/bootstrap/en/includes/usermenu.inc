@@ -14,7 +14,7 @@
                 [% ELSE %]
                     <li>
                 [% END %]
-                <a href="/cgi-bin/koha/opac-account.pl">Charges</a></li>
+                <a href="/cgi-bin/koha/opac-account.pl">Phí</a></li>
             [% END %]
 
             [% IF ( userupdateview ) %]
@@ -22,7 +22,7 @@
             [% ELSE %]
                 <li>
             [% END %]
-                <a href="/cgi-bin/koha/opac-memberentry.pl">Personal details</a></li>
+                <a href="/cgi-bin/koha/opac-memberentry.pl">Thông tin cá nhân</a></li>
 
             [% IF Koha.Preference('PrivacyPolicyConsent') # remove when extending %]
                 [% IF consentview %]<li class="active">[% ELSE %]<li>[% END %]
@@ -98,7 +98,7 @@
                 [% ELSE %]
                     <li>
                 [% END %]
-                <a href="/cgi-bin/koha/opac-suggestions.pl">Purchase suggestions</a></li>
+                <a href="/cgi-bin/koha/opac-suggestions.pl">Đề xuất mua hàng</a></li>
             [% END %]
 
             [% IF ( EnhancedMessagingPreferences ) %]
@@ -108,7 +108,7 @@
                     [% ELSE %]
                         <li>
                     [% END %]
-                    <a href="/cgi-bin/koha/opac-messaging.pl">Messaging</a></li>
+                    <a href="/cgi-bin/koha/opac-messaging.pl">Nhắn tin</a></li>
                  [% END %]
             [% END %]
 

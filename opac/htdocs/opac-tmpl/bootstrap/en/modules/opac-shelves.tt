@@ -26,7 +26,7 @@
 [% END %]
 
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF op == 'view' %]Contents of [% shelf.shelfname | html %][% ELSE %]Your lists[% END %] &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
+<title>[% IF op == 'view' %]Contents of [% shelf.shelfname | html %][% ELSE %]Giá sách ảo của bạn[% END %] &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %][% END %]
 </head>
