@@ -81,11 +81,11 @@
  <input type="hidden" name="excluding" value="" />
 
  <div class="form-title">
- <label class="control-label">Tìm kiếm tiêu đề chính (chỉ $a)</label>
+ <label class="control-label">Tìm kiếm tiêu đề chính</label>
  </div>
 
  <div class="form-content">
- <input id="value_mainentry" class="form-control head-searchbox" type="text" name="value" value="[% value | html %]" placeholder="Tìm kiếm tiêu đề chính (chỉ $a)" />
+ <input id="value_mainentry" class="form-control head-searchbox" type="text" name="value" value="[% value | html %]" placeholder="Tìm kiếm tiêu đề chính" />
  <button type="button" class="form-extra-content-toggle"><i class="fa fa-sliders"></i></button>
  </div>
 
@@ -181,7 +181,7 @@
  </div><!-- /.tab-content -->
  <ul class="nav nav-tabs" role="tablist">
  <li role="presentation" class="active">
- <a title="Search main heading ($a only)" href="#mainmain_heading" aria-controls="mainmain_heading" role="tab"  aria-expanded="true" data-toggle="tab" class="keep_text"><i style="font-weight:bold">$a</i> <span class="tab-title">Nội dung tiêu đề (chỉ $a)</span></a>
+ <a title="Search main heading ($a only)" href="#mainmain_heading" aria-controls="mainmain_heading" role="tab"  aria-expanded="true" data-toggle="tab" class="keep_text"><i style="font-weight:bold">$a</i> <span class="tab-title">Nội dung tiêu đề ()</span></a>
  </li>
  <li role="presentation">
  <a aria-controls="main_heading" class="keep_text" data-toggle="tab" href="#main_heading" role="tab" title="Tìm đề mục chính"><i class="fa fa-header"></i> <span class="tab-title">Nội dung tiêu đề </span></a>

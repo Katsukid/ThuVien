@@ -39,7 +39,7 @@
 
  [% IF ( op == 'edit_form' ) %]
  <form method="post" id="rules_form" action="/cgi-bin/koha/tools/automatic_item_modification_by_age.pl">
- <h1>Quyền sửa đổi vật phẩm tự động theo đuôi</h1>
+ <h1>Quyền sửa đổi tài liệu tự động theo đuôi</h1>
  <div id="toolbar" class="btn-toolbar">
  <div class="btn-group">
  <button class="btn btn-default add_rule"><i class="fa fa-plus"></i> Add rule</button>

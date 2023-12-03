@@ -76,7 +76,7 @@
  </ol>
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" id="save-alert" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" id="save-alert" type="submit" value="Xác nhận" />
  <a href="#" id="cancel-edit" class="cancel cancel-edit">Hủy bỏ</a>
  </fieldset>
  </form>

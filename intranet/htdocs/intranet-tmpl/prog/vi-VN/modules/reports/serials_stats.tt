@@ -140,7 +140,7 @@
  </fieldset>
 
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <input type="hidden" name="report_name" value="[% report_name | html %]" />
  <input type="hidden" name="do_it" value="1" />
  </fieldset>

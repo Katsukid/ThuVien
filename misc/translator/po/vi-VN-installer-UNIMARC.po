@@ -194,7 +194,7 @@ msgstr ""
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_subfield_structure:3:row:1078
 #, fuzzy
 msgid "Affiliation/address"
-msgstr "Địa chỉ chính"
+msgstr "Đơn vị"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_subfield_structure:12:row:165
 #, fuzzy
@@ -701,7 +701,7 @@ msgstr "Trích dẫn"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_subfield_structure:3:row:1190
 msgid "City"
-msgstr "Thành phố"
+msgstr "Đơn vị cấp 3"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_subfield_structure:3:row:325
 #, fuzzy
@@ -1207,7 +1207,7 @@ msgstr "v - Cost, replacement price "
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_subfield_structure:3:row:1187
 msgid "Country"
-msgstr "Quốc gia"
+msgstr "Khác"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_subfield_structure:3:row:1133
 #, fuzzy
@@ -1226,7 +1226,7 @@ msgstr "Ngày tạo"
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_subfield_structure:12:row:44
 #, fuzzy
 msgid "Country Code"
-msgstr "Quốc gia: "
+msgstr "Khác: "
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_tag_structure:11:row:25
 msgid "Country of Publication or Production"
@@ -1235,7 +1235,7 @@ msgstr ""
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_subfield_structure:12:row:375
 #, fuzzy
 msgid "Country of award"
-msgstr "Quốc gia: "
+msgstr "Khác: "
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_subfield_structure:3:row:51
 #, fuzzy
@@ -1250,7 +1250,7 @@ msgstr "conference publication"
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_subfield_structure:3:row:1189
 #, fuzzy
 msgid "County"
-msgstr "Quốc gia"
+msgstr "Khác"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_tag_structure:11:row:150
 #, fuzzy

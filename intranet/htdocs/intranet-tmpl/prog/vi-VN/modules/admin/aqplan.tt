@@ -249,7 +249,7 @@
  </ol>
 </fieldset>
 <fieldset class="action">
- <input class="btn btn-primary" name="option_submit" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" name="option_submit" type="submit" value="Xác nhận" />
  <input type="hidden" name="budget_period_id" value="[% budget_period_id | html %]" />
 </fieldset>
 </form>
@@ -275,7 +275,7 @@
  <input type="hidden" name="budget_period_id" value="[% budget_period_id | html %]" />
  <input type="hidden" name="authcat" value="[% authcat | html %]" />
  </fieldset>
- <fieldset class="action"> <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <fieldset class="action"> <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <input type="hidden" name="budget_period_id" value="[% budget_period_id | html %]" />
  <input type="hidden" name="report_name" value="[% report_name | html %]" />
  <input type="hidden" name="output" value="file" /></fieldset>

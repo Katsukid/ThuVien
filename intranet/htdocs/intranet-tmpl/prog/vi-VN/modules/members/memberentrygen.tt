@@ -192,7 +192,7 @@ legend:hover {
  [% SWITCH field %]
  [% CASE 'identity' %] <span>Định danh bạn đọc</span> |
  [% CASE 'guarantor' %] <span>Bạn đọc bảo lãnh</span> |
- [% CASE 'primary_address' %] <span>Địa chỉ chính</span> |
+ [% CASE 'primary_address' %] <span>Đơn vị</span> |
  [% CASE 'primary_contact' %] <span>Thông tin liên hệ</span> |
  [% CASE 'alt_address' %] <span>Địa chỉ thay thế</span> |
  [% CASE 'alt_contact' %] <span>Thông tin liên hệ thay thế</span> |
@@ -259,32 +259,6 @@ legend:hover {
  <fieldset class="rows" id="memberentry_identity">
  <legend id="identity_lgd"><span> Thông tin [% IF ( patron_category.category_type == 'I' ) %]Tổ chức [% ELSE %]Bạn đọc [% END %]</span></legend>
  <ol>
- [% UNLESS ( patron_category.category_type == 'I' ) %]
- [% UNLESS notitle %]
- [% IF Koha.Preference('BorrowersTitles') %]
- <li>
- [% IF ( mandatorytitle ) %]
- <label for="btitle" class="required">
- [% ELSE %]
- <label for="btitle">
- [% END %] Danh xưng: </label>
- <select id="btitle" name="title">
- <option value=""></option>
- [% FOREACH t IN Koha.Preference('BorrowersTitles').split('\|') %]
- [% IF btitle == t %]
- <option value="[% t | html %]" selected="selected">[% t | html %]</option>
- [% ELSE %]
- <option value="[% t | html %]">[% t | html %]</option>
- [% END %]
- [% END %]
- </select>
- [% IF ( mandatorytitle ) %]
- <span class="required">Bắt buộc</span>
- [% END %]
- </li>
- [% END # /IF Koha.Preference('BorrowersTitles') %]
- [% END # /UNLESS notitle %]
- [% END # /UNLESS ( I ) %]
 
  [% UNLESS nosurname %]
  <li>

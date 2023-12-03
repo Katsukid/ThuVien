@@ -20,7 +20,7 @@
                     <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="#" aria-current="page">Updates to your record</a>
+                    <a href="#" aria-current="page">Cập nhật thông tin tài khoản</a>
                 </li>
             </ol>
         </nav> <!-- /#breadcrumbs -->
@@ -35,7 +35,7 @@
                 <div class="col-10 order-first order-lg-2">
                     <div id="update-submitted" class="maincontent">
                         <div class="alert alert-success">
-                            <p><strong>Thank you</strong></p>
+                            <p><strong>Thành công</strong></p>
                           [% IF ( Koha.Preference('AutoApprovePatronProfileSettings') ) %]
                             <p>Your updates have been submitted and your patron account has been modified.</p>
                           [% ELSE %]

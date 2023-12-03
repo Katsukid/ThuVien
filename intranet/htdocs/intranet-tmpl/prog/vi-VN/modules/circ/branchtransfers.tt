@@ -181,7 +181,7 @@
  </li>
  <li>
  <label for="barcode">Đăng ký cá biệt: </label>
- <input name="barcode" id="barcode" size="15" class="focus" type="text" /> <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input name="barcode" id="barcode" size="15" class="focus" type="text" /> <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </li>
  </ol>
  </fieldset>

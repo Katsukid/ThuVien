@@ -20523,8 +20523,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: ''
-      liblibrarian: Thành phố
-      libopac: Thành phố
+      liblibrarian: Đơn vị cấp 3
+      libopac: Đơn vị cấp 3
       linkid: 0
       mandatory: 0
       repeatable: 0

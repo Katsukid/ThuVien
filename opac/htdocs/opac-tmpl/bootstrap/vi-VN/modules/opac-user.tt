@@ -639,7 +639,7 @@
  <tbody>
  [% FOREACH r IN relatives_with_fines %]
  <tr>
- <td>[% r.firstname | html %] [% r.surname | html %] đang nợ tiền phạt và các khoản phí lên tới::</td>
+ <td>[% r.surname | html %] [% r.firstname | html %] đang nợ tiền phạt và các khoản phí lên tới::</td>
  <td><a href="/cgi-bin/koha/opac-account.pl#g[% r.id | uri %]">[% r.account.balance | $Price %]</a></td>
  </tr>
  [% END %]
@@ -687,7 +687,7 @@
  </td>
 
  <td>
- [% r.firstname | html %] [% r.surname | html %]
+ [% r.surname | html %] [% r.firstname | html %]
  </td>
  <td></td>
  </tr>

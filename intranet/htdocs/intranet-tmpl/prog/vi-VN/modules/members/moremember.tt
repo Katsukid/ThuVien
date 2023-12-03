@@ -551,13 +551,13 @@
  [% END %]
  [% IF ( patron.altcontactaddress1 ) %]
  <li id="patron-altcontactaddress1">
- <span class="label">Địa chỉ: </span>
+ <span class="label">Đơn vị cấp 1: </span>
  [% patron.altcontactaddress1 | html %]
  </li>
  [% END %]
  [% IF ( patron.altcontactaddress2 ) %]
  <li id="patron-altcontactaddress2">
- <span class="label">Địa chỉ 2: </span>
+ <span class="label">Đơn vị cấp 2: </span>
  [% patron.altcontactaddress2 | html %]
  </li>
  [% END %]
@@ -570,7 +570,7 @@
 
  [% IF ( patron.altcontactstate ) %]
  <li id="patron-altcontactstate">
- <span class="label">Tỉnh/Thành phố: </span>
+ <span class="label">Đơn vị cấp 3: </span>
  [% patron.altcontactstate | html %]
  </li>
  [% END %]
@@ -582,7 +582,7 @@
  [% END %]
  [% IF ( patron.altcontactcountry ) %]
  <li id="patron-altcontactcountry">
- <span class="label">Quốc gia: </span>
+ <span class="label">Khác: </span>
  [% patron.altcontactcountry | html %]
  </li>
  [% END %]

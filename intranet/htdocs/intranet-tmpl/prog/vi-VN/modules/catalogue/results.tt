@@ -405,7 +405,7 @@
  Scan index for: <input type="text" name="q" id="scan-index-term" size="35" value="" />
  [% END %]
  <input type="hidden" name="scan" value="1" />
- <input class="submit" type="submit" value="Tìm kiếm" />
+ <input class="submit" type="submit" value="Xác nhận" />
  </form>
 
  <form action="/cgi-bin/koha/catalogue/search.pl" method="get">

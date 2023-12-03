@@ -1122,7 +1122,7 @@ msgstr "Trích dẫn"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_subfield_structure:3:row:611
 msgid "City"
-msgstr "Thành phố"
+msgstr "Đơn vị cấp 3"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:1844
 #, fuzzy
@@ -1581,12 +1581,12 @@ msgstr "v - Cost, replacement price "
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_subfield_structure:3:row:613
 msgid "Country"
-msgstr "Quốc gia"
+msgstr "Khác"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:2406
 #, fuzzy
 msgid "Country code"
-msgstr "Quốc gia: "
+msgstr "Khác: "
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:924
 #, fuzzy
@@ -5397,7 +5397,7 @@ msgstr "Địa chỉ bưu điện: "
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/authorities_normal_marc21.yml:auth_subfield_structure:3:row:614
 #, fuzzy
 msgid "Postal code"
-msgstr "Mã bưu chính:"
+msgstr "Mã đơn vị:"
 
 #: installer/data/mysql/en/marcflavour/marc21/mandatory/marc21_framework_DEFAULT.yml:marc_subfield_structure:8:row:118
 #, fuzzy

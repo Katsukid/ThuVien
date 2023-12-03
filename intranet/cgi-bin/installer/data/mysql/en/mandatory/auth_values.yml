@@ -38,7 +38,7 @@ tables:
         - category: "PAYMENT_TYPE"
           authorised_value: "SIP00"
           lib: "Cash via SIP2"
-          lib_opac: "Cash"
+          lib_opac: "Tiền mặt"
 
         - category: "PAYMENT_TYPE"
           authorised_value: "SIP01"
@@ -52,8 +52,8 @@ tables:
 
         - category: "PAYMENT_TYPE"
           authorised_value: "CASH"
-          lib: "Cash"
-          lib_opac: "Cash"
+          lib: "Tiền mặt"
+          lib_opac: "Tiền mặt"
 
   - authorised_values:
       translatable: [ lib ]

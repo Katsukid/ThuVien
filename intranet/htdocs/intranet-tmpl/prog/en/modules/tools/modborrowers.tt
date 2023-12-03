@@ -316,7 +316,7 @@
                                                 [% CASE 'address' %]<span>Address:</span>
                                                 [% CASE 'address2' %]<span>Address 2:</span>
                                                 [% CASE 'city' %]<span>Quận/Huyện:</span>
-                                                [% CASE 'state' %]<span>Tỉnh/Thành phố:</span>
+                                                [% CASE 'state' %]<span>Đơn vị cấp 3:</span>
                                                 [% CASE 'zipcode' %]<span>Mã ZIP/Bưu điện:</span>
                                                 [% CASE 'country' %]<span>Country:</span>
                                                 [% CASE 'email' %]<span>Primary email:</span>

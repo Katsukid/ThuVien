@@ -83,7 +83,7 @@
  <label for="altcontactaddress1" class="required">
  [% ELSE %]
  <label for="altcontactaddress1">
- [% END %] Địa chỉ: </label>
+ [% END %] Đơn vị cấp 1: </label>
  <input type="text" name="altcontactaddress1" id="altcontactaddress1" value="[% patron.altcontactaddress1 | html %]" size="40" />
  [% IF ( mandatoryaltcontactaddress1 ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -97,7 +97,7 @@
  <label for="altcontactaddress2" class="required">
  [% ELSE %]
  <label for="altcontactaddress2">
- [% END %] Địa chỉ 2: </label>
+ [% END %] Đơn vị cấp 2: </label>
  <input type="text" name="altcontactaddress2" id="altcontactaddress2" value="[% patron.altcontactaddress2 | html %]" size="40" />
  [% IF ( mandatoryaltcontactaddress2 ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -157,7 +157,7 @@
  [% ELSE %]
  <label for="altcontactstate">
  [% END %]
- Tỉnh/Thành phố: </label>
+ Đơn vị cấp 3: </label>
  <input type="text" name="altcontactstate" id="altcontactstate" value="[% patron.altcontactstate | html %]" size="20" />
  [% IF ( mandatoryaltcontactstate ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>

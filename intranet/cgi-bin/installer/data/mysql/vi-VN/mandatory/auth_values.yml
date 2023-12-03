@@ -16,7 +16,7 @@ tables:
     - authorised_value: SIP00
       category: PAYMENT_TYPE
       lib: Cash via SIP2
-      lib_opac: Cash
+      lib_opac: Tiền mặt
     - authorised_value: SIP01
       category: PAYMENT_TYPE
       lib: Visa via SIP2
@@ -27,8 +27,8 @@ tables:
       lib_opac: Creditcard
     - authorised_value: CASH
       category: PAYMENT_TYPE
-      lib: Cash
-      lib_opac: Cash
+      lib: Tiền mặt
+      lib_opac: Tiền mặt
     translatable:
     - lib
     - lib_opac

@@ -110,7 +110,7 @@
  <input type="hidden" name="op" value="add" />
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a href="#" class="cancel hide_form">Hủy bỏ</a>
  </fieldset>
  </form>

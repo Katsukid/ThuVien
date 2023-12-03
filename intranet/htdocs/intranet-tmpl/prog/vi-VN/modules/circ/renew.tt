@@ -203,7 +203,7 @@
  <input name="barcode" size="14" class="barcode focus" type="text" placeholder="Nhập mã vạch tài liệu" />
 
  [% END %]
- <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+ <button type="submit" class="btn btn-primary">Xác nhận</button>
 
  <div class="circ-settings show">
  <div class="date-select" id="renew_date_override_fields">

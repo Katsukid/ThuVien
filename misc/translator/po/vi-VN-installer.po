@@ -870,7 +870,7 @@ msgstr ""
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:3:row:26
 #, fuzzy
 msgid "Address notes"
-msgstr "Địa chỉ 2"
+msgstr "Đơn vị cấp 2"
 
 #: installer/data/mysql/en/optional/patron_categories.yml:description:3
 #, fuzzy
@@ -1813,7 +1813,7 @@ msgstr "Cartographic material"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:1:row:3
 msgid "Cash"
-msgstr ""
+msgstr "Tiền mặt"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:1:row:3
 msgid "Cash via SIP2"

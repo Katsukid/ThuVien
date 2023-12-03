@@ -193,11 +193,11 @@
  [% UNLESS ( quantity_hidden ) %]
  <li id="opac-suggestion-quantity">
  [% IF ( quantity_required ) %]
- <label for="quantity" class="required">Quantity:</label>
+ <label for="quantity" class="required">Số lương:</label>
  <input type="text" id="quantity" name="quantity" required="required" maxlength="4" size="4" value="[% quantity | html %]" />
  <div class="required_label required">Bắt buộc</div>
  [% ELSE %]
- <label for="quantity">Quantity:</label>
+ <label for="quantity">Số lương:</label>
  <input type="text" id="quantity" name="quantity"  maxlength="4" size="4" value="[% quantity | html %]" />
  [% END %]
  </li>
@@ -308,7 +308,7 @@
  <span>Purchase suggestions</span>
  [% ELSE %]
  [% IF ( loggedinusername ) %]
- <span>Your purchase suggestions</span>
+ <span>Đề xuất mua của bạn</span>
  [% ELSE %]
  <span>Purchase suggestions</span>
  [% END %]
@@ -397,7 +397,7 @@
 
  [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) == 1 || loggedinusername %]
  <table id="suggestt" class="table table-bordered tabled">
- <caption class="sr-only">Your purchase suggestions<caption>
+ <caption class="sr-only">Đề xuất mua của bạn<caption>
  <thead>
  <tr>
  [% IF ( loggedinusername ) %]<th>&nbsp;</th>[% END %]

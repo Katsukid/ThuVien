@@ -28,27 +28,27 @@
 [% CASE 'streetnumber'        %]<span>Số nhà</span>
 [% CASE 'streettype'          %]<span>Số nhà</span>
 [% CASE 'address'             %]<span>Địa chỉ</span>
-[% CASE 'address2'            %]<span>Địa chỉ 2</span>
-[% CASE 'city'                %]<span>Thành phố</span>
+[% CASE 'address2'            %]<span>Đơn vị cấp 2</span>
+[% CASE 'city'                %]<span>Đơn vị cấp 3</span>
 [% CASE 'state'               %]<span>Bang</span>
 [% CASE 'zipcode'             %]<span>ZIP/Postal code</span>
-[% CASE 'country'             %]<span>Quốc gia</span>
+[% CASE 'country'             %]<span>Khác</span>
 [% CASE 'email'               %]<span>Thư điện tử</span>
 [% CASE 'phone'               %]<span>Điện thoại chính</span>
 [% CASE 'mobile'              %]<span>Other phone</span>
 [% CASE 'fax'                 %]<span>Số Fax</span>
 [% CASE 'emailpro'            %]<span>Thư điện tử phụ</span>
 [% CASE 'phonepro'            %]<span>Điện thoại phụ</span>
-[% CASE 'B_streetnumber'      %]<span>Alternate address: Số nhà</span>
-[% CASE 'B_streettype'        %]<span>Alternate address: Số nhà</span>
-[% CASE 'B_address'           %]<span>Alternate address: Địa chỉ</span>
-[% CASE 'B_address2'          %]<span>Alternate address: Địa chỉ 2</span>
-[% CASE 'B_city'              %]<span>Alternate address: Thành phố</span>
-[% CASE 'B_state'             %]<span>Alternate address: Bang</span>
-[% CASE 'B_zipcode'           %]<span>Alternate address: ZIP/Postal code</span>
-[% CASE 'B_email'             %]<span>Alternate address: Thư điện tử</span>
-[% CASE 'B_phone'             %]<span>Alternate address: Điện thoại</span>
-[% CASE 'contactnote'         %]<span>Alternate address: Contact note</span>
+[% CASE 'B_streetnumber'      %]<span>Địa chỉ thay thế: Số nhà</span>
+[% CASE 'B_streettype'        %]<span>Địa chỉ thay thế: Số nhà</span>
+[% CASE 'B_address'           %]<span>Địa chỉ thay thế: Địa chỉ</span>
+[% CASE 'B_address2'          %]<span>Địa chỉ thay thế: Đơn vị cấp 2</span>
+[% CASE 'B_city'              %]<span>Địa chỉ thay thế: Đơn vị cấp 3</span>
+[% CASE 'B_state'             %]<span>Địa chỉ thay thế: Bang</span>
+[% CASE 'B_zipcode'           %]<span>Địa chỉ thay thế: ZIP/Postal code</span>
+[% CASE 'B_email'             %]<span>Địa chỉ thay thế: Thư điện tử</span>
+[% CASE 'B_phone'             %]<span>Địa chỉ thay thế: Điện thoại</span>
+[% CASE 'contactnote'         %]<span>Địa chỉ thay thế: Contact note</span>
 [% CASE 'dateofbirth'         %]<span>Ngày sinh</span>
 [% CASE 'contactname'         %]<span>Contact: Last name</span>
 [% CASE 'contactfirstname'    %]<span>Contact: First name</span>
@@ -59,11 +59,11 @@
 [% CASE 'altcontactfirstname' %]<span>Alternate contact: Tên</span>
 [% CASE 'altcontactsurname'   %]<span>Alternate contact: Họ</span>
 [% CASE 'altcontactaddress1'  %]<span>Alternate contact: Địa chỉ</span>
-[% CASE 'altcontactaddress2'  %]<span>Alternate contact: Địa chỉ 2</span>
-[% CASE 'altcontactaddress3'  %]<span>Alternate contact: Thành phố</span>
+[% CASE 'altcontactaddress2'  %]<span>Alternate contact: Đơn vị cấp 2</span>
+[% CASE 'altcontactaddress3'  %]<span>Alternate contact: Đơn vị cấp 3</span>
 [% CASE 'altcontactstate'     %]<span>Alternate contact: Bang</span>
 [% CASE 'altcontactzipcode'   %]<span>Alternate contact: ZIP/Postal code</span>
-[% CASE 'altcontactcountry'   %]<span>Alternate contact: Quốc gia</span>
+[% CASE 'altcontactcountry'   %]<span>Alternate contact: Khác</span>
 [% CASE 'altcontactphone'     %]<span>Alternate contact: Điện thoại</span>
 [% CASE 'smsalertnumber'      %]<span>SMS alert number</span>
 [% CASE 'extended_attributes' %]<span>Thuộc tính mở rộng</span>
@@ -129,7 +129,7 @@
 
 
  <label for="ignore_modify_[% pm.borrowernumber | html %]"><input type="radio" id="ignore_modify_[% pm.borrowernumber | html %]" name="modify_[% pm.borrowernumber | html %]" value="ignore" checked="checked"/> Bỏ qua</label>
- &nbsp;|&nbsp; <a target="_blank" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% pm.borrowernumber | html %]" >Patron details</a>
+ &nbsp;|&nbsp; <a target="_blank" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% pm.borrowernumber | html %]" >Thông tin bạn đọc</a>
  </div>
 
  [% IF borrowers.$borrowernumber.gonenoaddress > 0 %]
@@ -147,8 +147,8 @@
  <table>
  <tr>
  <th>Trường</th>
- <th>Old value</th>
- <th>New value</th>
+ <th>Giá trị cũ</th>
+ <th>Giá trị mới</th>
  </tr>
 
 
@@ -180,8 +180,8 @@
  <table>
  <tr>
  <th>Trường</th>
- <th>Old value</th>
- <th>New value</th>
+ <th>Giá trị cũ</th>
+ <th>Giá trị mới</th>
  </tr>
  [% FOREACH attribute_group IN borrowers.$borrowernumber.modified_attributes %]
  <tr>
@@ -198,7 +198,7 @@
  </div> <!-- /panel.panel-default -->
  [% END # /FOREACH pm %]
  </div> <!-- /#pending-updates -->
- <fieldset class="action"><input class="btn btn-primary" type="submit" value="Tìm kiếm" /></fieldset>
+ <fieldset class="action"><input class="btn btn-primary" type="submit" value="Xác nhận" /></fieldset>
  </form>
  [% ELSE %]
  <div class="dialog message">

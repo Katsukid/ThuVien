@@ -119,7 +119,7 @@ MARC frameworks &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  </ol>
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </fieldset>
  </form>
 [% END %]

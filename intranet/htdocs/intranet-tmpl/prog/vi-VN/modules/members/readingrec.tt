@@ -137,7 +137,7 @@
  [% WRAPPER tabs id= "tabs" %]
  [% WRAPPER tabs_nav %]
  [% WRAPPER tab_item tabname= "tab_all" bt_active= 1 %] <span>Tất cả</span> [% END %]
- [% WRAPPER tab_item tabname= "tab_checkout" %] <span>Trả sách</span> [% END %]
+ [% WRAPPER tab_item tabname= "tab_checkout" %] <span>Ghi mượn</span> [% END %]
  [% WRAPPER tab_item tabname= "tab_onsite_checkout" %] <span>On-site checkouts</span> [% END %]
  [% END # /WRAPPER tabs_nav %]
  [% WRAPPER tab_panels %]

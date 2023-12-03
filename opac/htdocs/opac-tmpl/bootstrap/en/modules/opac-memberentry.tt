@@ -337,23 +337,6 @@
                                     <legend id="identity_legend">Danh tính</legend>
 
                                     <ol>
-                                        [% UNLESS hidden.defined('title') || !Koha.Preference('BorrowersTitles') %]
-                                            <li>
-                                                <label for="borrower_title" class="[% required.title | html %]">Salutation:</label>
-
-                                                <select id="borrower_title" name="borrower_title" class="[% required.title | html %]">
-                                                    <option value=""></option>
-                                                    [% FOREACH mt IN Koha.Preference('BorrowersTitles').split('\|') %]
-                                                        [% IF mt == borrower.title %]
-                                                            <option value="[% mt | html %]" selected="selected">[% mt | html %]</option>
-                                                        [% ELSE %]
-                                                            <option value="[% mt | html %]">[% mt | html %]</option>
-                                                        [% END %]
-                                                    [% END %]
-                                                </select>
-                                                <div class="required_label [% required.title | html %]">Required</div>
-                                            </li>
-                                        [% END %]
 
                                         [% UNLESS hidden.defined('surname') %]
                                             <li>
@@ -436,14 +419,14 @@
                                                     <input type="radio" name="borrower_sex" id="sex-male" value="M" />
                                                 [% END %]
 
-                                                <label for="sex-other" class="radio inline"><span class="patronsex-other">Other:</span></label>
+                                                <label for="sex-other" class="radio inline"><span class="patronsex-other"></span></label>
                                                 [% IF borrower.sex == 'O' %]
                                                     <input type="radio" name="borrower_sex" id="sex-other" value="O" checked="checked" />
                                                 [% ELSE %]
                                                     <input type="radio" name="borrower_sex" id="sex-other" value="O" />
                                                 [% END %]
 
-                                                <label for="sex-none" class="radio inline"><span class="patronsex-none">None specified:</span></label>
+                                                <label for="sex-none" class="radio inline"><span class="patronsex-none">Không xác định:</span></label>
                                                 [% IF borrower.sex == '' %]
                                                     <input type="radio" name="borrower_sex" id="sex-none" value="" checked="checked" />
                                                 [% ELSE %]
@@ -535,7 +518,7 @@
 
                                         [% UNLESS hidden.defined('zipcode') %]
                                             <li>
-                                                <label for="borrower_zipcode" class="[% required.zipcode | html %]">ZIP/Postal code:</label>
+                                                <label for="borrower_zipcode" class="[% required.zipcode | html %]">Mã đơn vị:</label>
 
                                                 <input type="text" id="borrower_zipcode" name="borrower_zipcode" value="[% borrower.zipcode | html %]" class="[% required.zipcode | html %]" />
                                                 <div class="required_label [% required.zipcode | html %]">Required</div>
@@ -760,7 +743,7 @@
 
                                         [% UNLESS hidden.defined('B_zipcode') %]
                                             <li>
-                                                <label for="borrower_B_zipcode" class="[% required.B_zipcode | html %]">ZIP/Postal code:</label>
+                                                <label for="borrower_B_zipcode" class="[% required.B_zipcode | html %]">Mã đơn vị:</label>
 
                                                 <input type="text" id="borrower_B_zipcode" name="borrower_B_zipcode" value="[% borrower.B_zipcode | html %]" class="[% required.B_zipcode | html %]" />
                                                 <div class="required_label [% required.B_zipcode | html %]">Required</div>
@@ -873,7 +856,7 @@
 
                                         [% UNLESS hidden.defined('altcontactzipcode') %]
                                             <li>
-                                                <label for="borrower_altcontactzipcode" class="[% required.altcontactzipcode | html %]">ZIP/Postal code:</label>
+                                                <label for="borrower_altcontactzipcode" class="[% required.altcontactzipcode | html %]">Mã đơn vị:</label>
 
                                                 <input type="text" id="borrower_altcontactzipcode" name="borrower_altcontactzipcode" value="[% borrower.altcontactzipcode | html %]" class="[% required.altcontactzipcode | html %]" />
                                                 <div class="required_label [% required.altcontactzipcode | html %]">Required</div>

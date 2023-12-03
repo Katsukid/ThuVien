@@ -3927,7 +3927,7 @@ msgstr "Columnas"
 
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/columns_settings.inc:3
-msgid "Columns settings"
+msgid "Thiết lập cột"
 msgstr "Configuración de columnas"
 
 #. For the first occurrence,

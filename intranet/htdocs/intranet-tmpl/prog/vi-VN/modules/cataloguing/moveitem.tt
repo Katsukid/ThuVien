@@ -103,7 +103,7 @@
  <input type="text" name="biblionumber" id="biblionumber" class="focus" size="14" />
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </fieldset>
  [% ELSE %]
  <input type="hidden" name="biblionumber" id="biblionumber" value="[% biblionumber | html %]" />
@@ -116,7 +116,7 @@
  <input type="text" name="barcode" id="barcode" class="barcode focus" size="14" />
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </fieldset>
  [% ELSE %]
  <input type="hidden" name="barcode" id="barcode" value="[% barcode | html %]" />

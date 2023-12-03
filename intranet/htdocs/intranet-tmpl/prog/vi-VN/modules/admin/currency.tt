@@ -144,7 +144,7 @@
  </fieldset>
 
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a href="/cgi-bin/koha/admin/currency.pl" class="cancel">Hủy bỏ</a>
  </fieldset>
  </form>

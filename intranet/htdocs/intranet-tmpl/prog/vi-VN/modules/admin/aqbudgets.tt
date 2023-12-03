@@ -387,7 +387,7 @@
  </fieldset>
 
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" /> <a class="cancel" href="/cgi-bin/koha/admin/aqbudgets.pl">Hủy bỏ</a>
+ <input class="btn btn-primary" type="submit" value="Xác nhận" /> <a class="cancel" href="/cgi-bin/koha/admin/aqbudgets.pl">Hủy bỏ</a>
  <input type="hidden" name="budget_period_id" value="[% budget_period_id | html %]" />
  </fieldset>
 </form>

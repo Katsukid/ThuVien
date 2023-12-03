@@ -261,7 +261,7 @@
                                                 [% AuthorisedValues.GetByCode( 'NOT_LOAN', errmsgloo.NotForLoanStatusUpdated.from ) | html %]
                                             [% ELSE %]
                                                 Not for loan status updated.
-                                                <br />Old value:
+                                                <br />Giá trị cũ:
                                                 [% IF errmsgloo.NotForLoanStatusUpdated.from %]
                                                     <span class="ret_updatedfrom">
                                                         [% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => errmsgloo.NotForLoanStatusUpdated.from ) | html %].
@@ -269,7 +269,7 @@
                                                 [% ELSE %]
                                                     Available for loan.
                                                 [% END %]
-                                                <br />New value:
+                                                <br />Giá trị mới:
                                                 [% IF errmsgloo.NotForLoanStatusUpdated.to %]
                                                     <span class="ret_updatedto">
                                                         [% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => errmsgloo.NotForLoanStatusUpdated.to ) | html %].
@@ -283,7 +283,7 @@
                                         [% IF ( errmsgloo.ItemLocationUpdated ) %]
                                              <p class="problem ret_location_update">
                                                  Item shelving location updated.
-                                                <br /><span>Old value:</span>
+                                                <br /><span>Giá trị cũ:</span>
                                                 [% IF errmsgloo.ItemLocationUpdated.from %]
                                                     [% SET av_description = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => errmsgloo.ItemLocationUpdated.from ) %]
                                                     [% IF errmsgloo.ItemLocationUpdated.from == '' %]
@@ -296,7 +296,7 @@
                                                 [% ELSE %]
                                                     <span>"Blank"</span>
                                                 [% END %]
-                                                <br />New value:
+                                                <br />Giá trị mới:
                                                 [% IF errmsgloo.ItemLocationUpdated.to %]
                                                     [% SET av_description = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => errmsgloo.ItemLocationUpdated.to ) %]
                                                     [% IF errmsgloo.ItemLocationUpdated.to == '' %]

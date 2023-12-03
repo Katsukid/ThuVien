@@ -151,7 +151,7 @@
  </ol>
  </fieldset>
  <fieldset class="action">
- <input type="submit" value="Tìm kiếm" />
+ <input type="submit" value="Xác nhận" />
  <a class="cancel" href="/cgi-bin/koha/admin/identity_providers.pl?domain_ops=1&amp;identity_provider_id=[%- identity_provider_id | html -%]">Hủy bỏ</a>
  </fieldset>
  </form>
@@ -257,7 +257,7 @@
  </ol>
  </fieldset>
  <fieldset class="action">
- <input type="submit" value="Tìm kiếm" />
+ <input type="submit" value="Xác nhận" />
  <a class="cancel" href="/cgi-bin/koha/admin/identity_providers.pl?domain_ops=1&amp;identity_provider_id=[%- identity_provider_id | html -%]">Hủy bỏ</a>
  </fieldset>
  </form>

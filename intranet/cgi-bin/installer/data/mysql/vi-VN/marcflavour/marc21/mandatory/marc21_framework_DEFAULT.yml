@@ -1623,16 +1623,16 @@ tables:
     - authorised_value: ~
       frameworkcode: ''
       liblibrarian: Tuyên bố in ấn dành cho phim (Bản sửa đổi trước AACR 1) [Lỗi thời,
-        CAN/MARC], [LOCAL, USA]
+        CAN/MARC], [Nội bộ, USA]
       libopac: Tuyên bố in ấn dành cho phim (Bản sửa đổi trước AACR 1) [Lỗi thời,
-        CAN/MARC], [LOCAL, USA]
+        CAN/MARC], [Nội bộ, USA]
       mandatory: 0
       repeatable: 0
       tagfield: '261'
     - authorised_value: ~
       frameworkcode: ''
-      liblibrarian: TUYÊN BỐ IN DÀNH CHO BẢN GHI ÂM THANH (Pre-AACR 2) [LOCAL, USA]
-      libopac: TUYÊN BỐ IN DÀNH CHO BẢN GHI ÂM THANH (Pre-AACR 2) [LOCAL, USA]
+      liblibrarian: TUYÊN BỐ IN DÀNH CHO BẢN GHI ÂM THANH (Pre-AACR 2) [Nội bộ, USA]
+      libopac: TUYÊN BỐ IN DÀNH CHO BẢN GHI ÂM THANH (Pre-AACR 2) [Nội bộ, USA]
       mandatory: 0
       repeatable: 0
       tagfield: '262'
@@ -1977,27 +1977,27 @@ tables:
     - authorised_value: ~
       frameworkcode: ''
       liblibrarian: Tuyên bố SERIES/Mục bổ sung--TÊN CÁ NHÂN [Lỗi thời, CAN/MARC],
-        [LOCAL, USA]
+        [Nội bộ, USA]
       libopac: Tuyên bố SERIES/Mục nhập bổ sung--TÊN CÁ NHÂN [Lỗi thời, CAN/MARC],
-        [LOCAL, USA]
+        [Nội bộ, USA]
       mandatory: 0
       repeatable: 1
       tagfield: '400'
     - authorised_value: ~
       frameworkcode: ''
       liblibrarian: Tuyên bố SERIES/Mục nhập bổ sung--TÊN DOANH NGHIỆP [Lỗi thời,
-        CAN/MARC], [LOCAL, USA]
+        CAN/MARC], [Nội bộ, USA]
       libopac: Tuyên bố SERIES/Mục nhập bổ sung--TÊN DOANH NGHIỆP [Lỗi thời, CAN/MARC],
-        [LOCAL, USA]
+        [Nội bộ, USA]
       mandatory: 0
       repeatable: 1
       tagfield: '410'
     - authorised_value: ~
       frameworkcode: ''
       liblibrarian: Tuyên bố SERIES/Mục bổ sung--TÊN CUỘC HỌP [Lỗi thời, CAN/MARC],
-        [LOCAL, USA]
-      libopac: Tuyên bố SERIES/Mục bổ sung--TÊN CUỘC HỌP [Lỗi thời, CAN/MARC], [LOCAL,
-        USA]
+        [Nội bộ, USA]
+      libopac: Tuyên bố SERIES/Mục bổ sung--TÊN CUỘC HỌP [Lỗi thời, CAN/MARC], [Nội
+        bộ, USA]
       mandatory: 0
       repeatable: 1
       tagfield: '411'
@@ -3145,8 +3145,8 @@ tables:
       tagfield: '899'
     - authorised_value: ''
       frameworkcode: ''
-      liblibrarian: TÊN TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO-TÊN CÁ NHÂN [LOCAL, CANADA]
-      libopac: TÊN TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO-TÊN CÁ NHÂN [LOCAL, CANADA]
+      liblibrarian: TÊN TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO-TÊN CÁ NHÂN [Nội bộ, CANADA]
+      libopac: TÊN TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO-TÊN CÁ NHÂN [Nội bộ, CANADA]
       mandatory: 0
       repeatable: 1
       tagfield: '900'
@@ -3215,9 +3215,9 @@ tables:
       tagfield: '910'
     - authorised_value: ''
       frameworkcode: ''
-      liblibrarian: TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO-HỘI NGHỊ HOẶC TÊN CUỘC HỌP [LOCAL,
-        CANADA]
-      libopac: TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO-HỘI NGHỊ HOẶC TÊN CUỘC HỌP [LOCAL,
+      liblibrarian: TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO-HỘI NGHỊ HOẶC TÊN CUỘC HỌP [Nội
+        bộ, CANADA]
+      libopac: TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO-HỘI NGHỊ HOẶC TÊN CUỘC HỌP [Nội bộ,
         CANADA]
       mandatory: 0
       repeatable: 1
@@ -3225,9 +3225,9 @@ tables:
     - authorised_value: ''
       frameworkcode: ''
       liblibrarian: TIÊU ĐỀ TIÊU ĐỀ THỐNG NHẤT HOẶC TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO
-        [LOCAL, CANADA]
-      libopac: TIÊU ĐỀ TIÊU ĐỀ THỐNG NHẤT HOẶC TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO [LOCAL,
-        CANADA]
+        [Nội bộ, CANADA]
+      libopac: TIÊU ĐỀ TIÊU ĐỀ THỐNG NHẤT HOẶC TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO [Nội
+        bộ, CANADA]
       mandatory: 0
       repeatable: 1
       tagfield: '930'
@@ -3346,36 +3346,36 @@ tables:
     - authorised_value: ''
       frameworkcode: ''
       liblibrarian: TUYÊN BỐ TƯƠNG ĐƯƠNG HOẶC TUYÊN BỐ THAM KHẢO CHÉO--TÊN CÁ NHÂN/CHỨC
-        DANH [LOCAL, CANADA]
+        DANH [Nội bộ, CANADA]
       libopac: TUYÊN BỐ TƯƠNG ĐƯƠNG HOẶC TUYÊN BỐ THAM KHẢO CHÉO--TÊN CÁ NHÂN/CHỨC
-        DANH [LOCAL, CANADA]
+        DANH [Nội bộ, CANADA]
       mandatory: 0
       repeatable: 1
       tagfield: '980'
     - authorised_value: ''
       frameworkcode: ''
       liblibrarian: TUYÊN BỐ TƯƠNG ĐƯƠNG HOẶC TUYÊN BỐ THAM KHẢO CHÉO--TÊN/TÊN CÔNG
-        TY [LOCAL, CANADA]
+        TY [Nội bộ, CANADA]
       libopac: TUYÊN BỐ TƯƠNG ĐƯƠNG HOẶC TUYÊN BỐ THAM KHẢO CHÉO--TÊN/TÊN CÔNG TY
-        [LOCAL, CANADA]
+        [Nội bộ, CANADA]
       mandatory: 0
       repeatable: 1
       tagfield: '981'
     - authorised_value: ''
       frameworkcode: ''
       liblibrarian: TUYÊN BỐ TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO--TÊN/TÊN CUỘC HỘI NGHỊ
-        HOẶC CUỘC HỌP [LOCAL, CANADA]
+        HOẶC CUỘC HỌP [Nội bộ, CANADA]
       libopac: TUYÊN BỐ TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO--TÊN/TÊN CUỘC HỘI NGHỊ HOẶC
-        CUỘC HỌP [LOCAL, CANADA]
+        CUỘC HỌP [Nội bộ, CANADA]
       mandatory: 0
       repeatable: 1
       tagfield: '982'
     - authorised_value: ''
       frameworkcode: ''
       liblibrarian: Tuyên bố về TÊN TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO--TITLE/Tiêu đề
-        thống nhất [LOCAL, CANADA]
+        thống nhất [Nội bộ, CANADA]
       libopac: Tuyên bố về TÊN TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO--TITLE/Tiêu đề thống
-        nhất [LOCAL, CANADA]
+        nhất [Nội bộ, CANADA]
       mandatory: 0
       repeatable: 1
       tagfield: '983'
@@ -3395,15 +3395,15 @@ tables:
       tagfield: '987'
     - authorised_value: ''
       frameworkcode: ''
-      liblibrarian: TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO [LOCAL, CANADA]
-      libopac: TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO [LOCAL, CANADA]
+      liblibrarian: TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO [Nội bộ, CANADA]
+      libopac: TƯƠNG ĐƯƠNG HOẶC THAM KHẢO CHÉO [Nội bộ, CANADA]
       mandatory: 0
       repeatable: 1
       tagfield: '990'
     - authorised_value: ''
       frameworkcode: ''
-      liblibrarian: ĐỀ XUẤT 995 [LOCAL, UNIMARC PHÁP]
-      libopac: ĐỀ XUẤT 995 [LOCAL, UNIMARC PHÁP]
+      liblibrarian: ĐỀ XUẤT 995 [Nội bộ, UNIMARC PHÁP]
+      libopac: ĐỀ XUẤT 995 [Nội bộ, UNIMARC PHÁP]
       mandatory: 0
       repeatable: 1
       tagfield: '995'
@@ -3699,8 +3699,8 @@ tables:
       hidden: -6
       isurl: 0
       kohafield: ''
-      liblibrarian: Quốc gia
-      libopac: Quốc gia
+      liblibrarian: Khác
+      libopac: Khác
       link: ''
       mandatory: 0
       repeatable: 0
@@ -4175,8 +4175,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: biblioitems.isbn
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 0
@@ -7258,8 +7258,10 @@ tables:
       hidden: -1
       isurl: 0
       kohafield: ''
-      liblibrarian: Được định dạng từ 9999 B.C. đến khoảng thời gian C.E.
-      libopac: Được định dạng từ 9999 B.C. đến khoảng thời gian C.E.
+      liblibrarian: Được định dạng từ 9999 trước công nguyên. đến khoảng thời gian
+        sau công nguyên.
+      libopac: Được định dạng từ 9999 trước công nguyên. đến khoảng thời gian sau
+        công nguyên.
       link: ''
       mandatory: 0
       repeatable: 1
@@ -14319,9 +14321,9 @@ tables:
       isurl: ~
       kohafield: ''
       liblibrarian: Số đĩa hoặc số của nhà xuất bản dành cho âm nhạc (Pre-AACR 2)
-        [Lỗi thời, CAN/MARC], [LOCAL, USA]
+        [Lỗi thời, CAN/MARC], [Nội bộ, USA]
       libopac: Số đĩa hoặc số của nhà xuất bản dành cho âm nhạc (Pre-AACR 2) [Lỗi
-        thời, CAN/MARC], [LOCAL, USA]
+        thời, CAN/MARC], [Nội bộ, USA]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -14933,8 +14935,8 @@ tables:
       hidden: -1
       isurl: ~
       kohafield: ~
-      liblibrarian: Thành phố
-      libopac: Thành phố
+      liblibrarian: Đơn vị cấp 3
+      libopac: Đơn vị cấp 3
       link: ''
       mandatory: 0
       repeatable: 0
@@ -14967,8 +14969,8 @@ tables:
       hidden: -1
       isurl: ~
       kohafield: ~
-      liblibrarian: Quốc gia
-      libopac: Quốc gia
+      liblibrarian: Khác
+      libopac: Khác
       link: ''
       mandatory: 0
       repeatable: 0
@@ -26378,8 +26380,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -26480,8 +26482,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: Quốc gia
-      libopac: Quốc gia
+      liblibrarian: Khác
+      libopac: Khác
       link: ''
       mandatory: 0
       repeatable: 1
@@ -27806,8 +27808,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Quốc gia
-      libopac: Quốc gia
+      liblibrarian: Khác
+      libopac: Khác
       link: ''
       mandatory: 0
       repeatable: 1
@@ -28724,8 +28726,8 @@ tables:
       hidden: -1
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -29557,8 +29559,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -34742,8 +34744,8 @@ tables:
       hidden: 0
       isurl: ~
       kohafield: ''
-      liblibrarian: Thành phố
-      libopac: Thành phố
+      liblibrarian: Đơn vị cấp 3
+      libopac: Đơn vị cấp 3
       link: ''
       mandatory: 0
       repeatable: 0
@@ -40318,8 +40320,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: Thành phố
-      libopac: Thành phố
+      liblibrarian: Đơn vị cấp 3
+      libopac: Đơn vị cấp 3
       link: ''
       mandatory: 0
       repeatable: 0
@@ -42086,8 +42088,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -42494,8 +42496,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -42902,8 +42904,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -43310,8 +43312,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -43769,8 +43771,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -44160,8 +44162,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -44602,8 +44604,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -45010,8 +45012,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -45418,8 +45420,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -45826,8 +45828,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -46234,8 +46236,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -46676,8 +46678,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: ISBN International International Number
-      libopac: ISBN International International Number
+      liblibrarian: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
+      libopac: SỐ SÁCH THEO TIÊU CHUẨN QUỐC TẾ ISBN
       link: ''
       mandatory: 0
       repeatable: 1
@@ -52133,8 +52135,8 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ~
-      liblibrarian: Quốc gia
-      libopac: Quốc gia
+      liblibrarian: Khác
+      libopac: Khác
       link: ''
       mandatory: 0
       repeatable: 0
@@ -72945,8 +72947,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Trạng thái rút tiền [LOCAL, KOHA]
-      libopac: Trạng thái rút tiền [LOCAL, KOHA]
+      liblibrarian: Trạng thái thay toán [Nội bộ, CĐKTQS1]
+      libopac: Trạng thái thay toán [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -72962,8 +72964,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Tình trạng bị mất [LOCAL, KOHA]
-      libopac: Tình trạng bị mất [LOCAL, KOHA]
+      liblibrarian: Tình trạng bị mất [Nội bộ, CĐKTQS1]
+      libopac: Tình trạng bị mất [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -72979,9 +72981,9 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ''
-      liblibrarian: Mã hệ thống (phân loại cụ thể hoặc sơ đồ và ấn bản khác) [LOCAL,
-        KOHA]
-      libopac: Mã hệ thống (phân loại cụ thể hoặc sơ đồ và ấn bản khác) [LOCAL, KOHA]
+      liblibrarian: Mã hệ thống (phân loại cụ thể hoặc sơ đồ và ấn bản khác) [Nội
+        bộ, CĐKTQS1]
+      libopac: Mã hệ thống (phân loại cụ thể hoặc sơ đồ và ấn bản khác) [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -72997,8 +72999,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Chế độ sử dụng [LOCAL, KOHA]
-      libopac: Chế độ sử dụng [LOCAL, KOHA]
+      liblibrarian: Chế độ sử dụng [Nội bộ, CĐKTQS1]
+      libopac: Chế độ sử dụng [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -73014,8 +73016,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: CĐKTQS1 phân loại chuẩn hóa để sắp xếp [LOCAL, KOHA]
-      libopac: CĐKTQS1 phân loại chuẩn hóa để sắp xếp [LOCAL, KOHA]
+      liblibrarian: CĐKTQS1 phân loại chuẩn hóa để sắp xếp [Nội bộ, CĐKTQS1]
+      libopac: CĐKTQS1 phân loại chuẩn hóa để sắp xếp [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -73031,8 +73033,8 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ''
-      liblibrarian: Vòng loại vị trí được mã hóa [LOCAL, KOHA]
-      libopac: Vòng loại vị trí được mã hóa [LOCAL, KOHA]
+      liblibrarian: Vòng loại vị trí được mã hóa [Nội bộ, CĐKTQS1]
+      libopac: Vòng loại vị trí được mã hóa [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 1
@@ -73048,8 +73050,8 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ''
-      liblibrarian: Số bản sao [LOCAL, KOHA]
-      libopac: Số bản sao [LOCAL, KOHA]
+      liblibrarian: Số bản sao [Nội bộ, CĐKTQS1]
+      libopac: Số bản sao [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -73065,8 +73067,8 @@ tables:
       hidden: 5
       isurl: 1
       kohafield: ''
-      liblibrarian: Mã định danh tài nguyên thống nhất [LOCAL, KOHA]
-      libopac: Mã định danh tài nguyên thống nhất [LOCAL, KOHA]
+      liblibrarian: Mã định danh tài nguyên thống nhất [Nội bộ, CĐKTQS1]
+      libopac: Mã định danh tài nguyên thống nhất [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 1
@@ -73082,8 +73084,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Bộ sưu tập CĐKTQS1 [LOCAL, KOHA]
-      libopac: Bộ sưu tập CĐKTQS1 [LOCAL, KOHA]
+      liblibrarian: Bộ sưu tập CĐKTQS1 [Nội bộ, CĐKTQS1]
+      libopac: Bộ sưu tập CĐKTQS1 [Nội bộ, CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -73099,10 +73101,10 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Mã tài liệu nội bộ (mã tài liệu CĐKTQS1, được tạo tự động) [LOCAL,
-        KOHA]
-      libopac: Mã tài liệu nội bộ (mã tài liệu CĐKTQS1, được tạo tự động) [LOCAL,
-        KOHA]
+      liblibrarian: Mã tài liệu nội bộ (mã tài liệu CĐKTQS1, được tạo tự động) [Nội
+        bộ, CĐKTQS1]
+      libopac: Mã tài liệu nội bộ (mã tài liệu CĐKTQS1, được tạo tự động) [Nội bộ,
+        CĐKTQS1]
       link: ''
       mandatory: 0
       repeatable: 0

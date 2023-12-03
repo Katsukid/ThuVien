@@ -644,7 +644,7 @@ msgstr "%s %s %s %s %s %s %s : %s %s %s %s ISBN: %s %s "
 msgid "%s %s %s Something went wrong during the indexation process: %s %s "
 msgstr ""
 "Phát hiện lỗi khi hệ thống xử lý địa chỉ sau đây. Bạn vui lòng kiểm tra lại. "
-"Địa chỉ: %s"
+"Đơn vị cấp 1: %s"
 
 #. %1$s:  END 
 #. %2$s:  WRAPPER breadcrumb_item bc_active= 1 
@@ -2139,7 +2139,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/includes/member-main-address-style.inc:112
 #, c-format
 msgid "%s Address 2: "
-msgstr "%s Địa chỉ 2: "
+msgstr "%s Đơn vị cấp 2: "
 
 #. For the first occurrence,
 #. %1$s:  END 
@@ -2148,7 +2148,7 @@ msgstr "%s Địa chỉ 2: "
 #: koha-tmpl/intranet-tmpl/prog/en/includes/member-main-address-style.inc:82
 #, c-format
 msgid "%s Address: "
-msgstr "%s Địa chỉ: "
+msgstr "%s Đơn vị cấp 1: "
 
 #. %1$s:  IF ( c.branchcode == "" ) -
 #. %2$s:  ELSE 
@@ -2334,7 +2334,7 @@ msgstr "Koha &rsaquo; Phân hệ lưu thông &rsaquo; Tỷ lệ đặt mượn"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/member-main-address-style.inc:142
 #, c-format
 msgid "%s City: "
-msgstr "%s Thành phố: "
+msgstr "%s Đơn vị cấp 3: "
 
 #. %1$s:  IF ( supplierid ) -
 #. %2$s:  suppliername | html 
@@ -3441,7 +3441,7 @@ msgstr "Đơn hàng chờ duyệt"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/member-main-address-style.inc:172
 #, c-format
 msgid "%s State: "
-msgstr "%s Bang: "
+msgstr "%s Đơn vị cấp 4: "
 
 #. %1$s:  UNLESS blocking_error 
 #. %2$s:  INCLUDE 'patron-title.inc' no_html = 1 
@@ -3858,7 +3858,7 @@ msgstr "%s Bạn đã tìm kiếm bản ghi %s %s Bạn đã tìm kiếm %s %s "
 #: koha-tmpl/intranet-tmpl/prog/en/includes/member-main-address-style.inc:127
 #, c-format
 msgid "%s ZIP/Postal code: "
-msgstr "Mã bưu chính:"
+msgstr "Mã đơn vị:"
 
 #. %1$s:  UNLESS Koha.Preference('CurbsidePickup') 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/curbside_pickup.tt:57
@@ -9681,17 +9681,17 @@ msgstr "Địa chỉ"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:19
 #, c-format
 msgid "Address 2"
-msgstr "Địa chỉ 2"
+msgstr "Đơn vị cấp 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:317
 #, c-format
 msgid "Address 2:"
-msgstr "Địa chỉ 2:"
+msgstr "Đơn vị cấp 2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:573
 #, c-format
 msgid "Address 2: "
-msgstr "Địa chỉ 2: "
+msgstr "Đơn vị cấp 2: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/overdue.tt:195
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/overdue.tt:196
@@ -9713,13 +9713,13 @@ msgstr "Địa chỉ 1: "
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/merge-patrons.tt:223
 #, c-format
 msgid "Address line 2:"
-msgstr "Địa chỉ 2: "
+msgstr "Đơn vị cấp 2: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:164
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:350
 #, c-format
 msgid "Address line 2: "
-msgstr "Địa chỉ 2: "
+msgstr "Đơn vị cấp 2: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:165
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:354
@@ -9731,13 +9731,13 @@ msgstr "Địa chỉ 3: "
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patron_messages.inc:49
 #, c-format
 msgid "Address:"
-msgstr "Địa chỉ:"
+msgstr "Đơn vị cấp 1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/uncertainprice.tt:51
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:567
 #, c-format
 msgid "Address: "
-msgstr "Địa chỉ: "
+msgstr "Đơn vị cấp 1: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/ordered.tt:94
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/spent.tt:118
@@ -10602,57 +10602,57 @@ msgstr "Địa chỉ thay thế"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:33
 #, c-format
 msgid "Alternate address line 2"
-msgstr "Alternate address: Điện thoại"
+msgstr "Địa chỉ thay thế: Điện thoại"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:44
 #, c-format
-msgid "Alternate address: Address"
-msgstr "Alternate address: Địa chỉ"
+msgid "Địa chỉ thay thế: Address"
+msgstr "Địa chỉ thay thế: Địa chỉ"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:45
 #, c-format
-msgid "Alternate address: Address 2"
-msgstr "Alternate address: Địa chỉ 2"
+msgid "Địa chỉ thay thế: Address 2"
+msgstr "Địa chỉ thay thế: Đơn vị cấp 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:46
 #, c-format
-msgid "Alternate address: City"
-msgstr "Alternate address: Thành phố"
+msgid "Địa chỉ thay thế: City"
+msgstr "Địa chỉ thay thế: Đơn vị cấp 3"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:51
 #, c-format
-msgid "Alternate address: Contact note"
-msgstr "Alternate address: Bang"
+msgid "Địa chỉ thay thế: Contact note"
+msgstr "Địa chỉ thay thế: Bang"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:49
 #, c-format
-msgid "Alternate address: Email"
-msgstr "Alternate address: Thư điện tử"
+msgid "Địa chỉ thay thế: Email"
+msgstr "Địa chỉ thay thế: Thư điện tử"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:50
 #, c-format
-msgid "Alternate address: Phone"
-msgstr "Alternate address: Điện thoại"
+msgid "Địa chỉ thay thế: Phone"
+msgstr "Địa chỉ thay thế: Điện thoại"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:47
 #, c-format
-msgid "Alternate address: State"
-msgstr "Alternate address: Bang"
+msgid "Địa chỉ thay thế: State"
+msgstr "Địa chỉ thay thế: Bang"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:42
 #, c-format
-msgid "Alternate address: Street number"
-msgstr "Alternate address: Số nhà"
+msgid "Địa chỉ thay thế: Street number"
+msgstr "Địa chỉ thay thế: Số nhà"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:43
 #, c-format
-msgid "Alternate address: Street type"
-msgstr "Alternate address: Số nhà"
+msgid "Địa chỉ thay thế: Street type"
+msgstr "Địa chỉ thay thế: Số nhà"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:48
 #, c-format
-msgid "Alternate address: ZIP/Postal code"
-msgstr "Alternate address: Điện thoại"
+msgid "Địa chỉ thay thế: ZIP/Postal code"
+msgstr "Địa chỉ thay thế: Điện thoại"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:34
 #, c-format
@@ -10678,17 +10678,17 @@ msgstr "Alternate contact: Địa chỉ"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:65
 #, c-format
 msgid "Alternate contact address 2"
-msgstr "Alternate contact: Địa chỉ 2"
+msgstr "Alternate contact: Đơn vị cấp 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:66
 #, c-format
 msgid "Alternate contact city"
-msgstr "Alternate contact: Thành phố"
+msgstr "Alternate contact: Đơn vị cấp 3"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:69
 #, c-format
 msgid "Alternate contact country"
-msgstr "Alternate contact: Quốc gia"
+msgstr "Alternate contact: Khác"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:62
 #, c-format
@@ -10718,17 +10718,17 @@ msgstr "Alternate contact: Địa chỉ"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:62
 #, c-format
 msgid "Alternate contact: Address 2"
-msgstr "Alternate contact: Địa chỉ 2"
+msgstr "Alternate contact: Đơn vị cấp 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:63
 #, c-format
 msgid "Alternate contact: City"
-msgstr "Alternate contact: Thành phố"
+msgstr "Alternate contact: Đơn vị cấp 3"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:66
 #, c-format
 msgid "Alternate contact: Country"
-msgstr "Alternate contact: Quốc gia"
+msgstr "Alternate contact: Khác"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:59
 #, c-format
@@ -10763,7 +10763,7 @@ msgstr "Thông tin liên hệ thay thế"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:38
 #, c-format
 msgid "Alternate email"
-msgstr "Alternate address: Thư điện tử"
+msgstr "Địa chỉ thay thế: Thư điện tử"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:39
 #, c-format
@@ -10778,12 +10778,12 @@ msgstr "Thông tin liên hệ thay thế"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:30
 #, c-format
 msgid "Alternate street number"
-msgstr "Alternate address: Số nhà"
+msgstr "Địa chỉ thay thế: Số nhà"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:31
 #, c-format
 msgid "Alternate street type"
-msgstr "Alternate address: Số nhà"
+msgstr "Địa chỉ thay thế: Số nhà"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:36
 #, c-format
@@ -18684,13 +18684,13 @@ msgstr "Trích dẫn"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:175
 #, c-format
 msgid "Cities"
-msgstr "Thành phố"
+msgstr "Đơn vị cấp 3"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/admin-home.tt:117
 #: koha-tmpl/intranet-tmpl/prog/en/includes/admin-menu.inc:52
 #, c-format
 msgid "Cities and towns"
-msgstr "Thành phố"
+msgstr "Đơn vị cấp 3"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:145
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:187
@@ -18699,7 +18699,7 @@ msgstr "Thành phố"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:20
 #, c-format
 msgid "City"
-msgstr "Thành phố"
+msgstr "Đơn vị cấp 3"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:186
 #, c-format
@@ -18741,7 +18741,7 @@ msgstr "(Các) Ánh xạ đã cập nhật thành công."
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:318
 #, c-format
 msgid "City:"
-msgstr "Thành phố: "
+msgstr "Đơn vị cấp 3: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:166
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:358
@@ -18749,7 +18749,7 @@ msgstr "Thành phố: "
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:579
 #, c-format
 msgid "City: "
-msgstr "Thành phố: "
+msgstr "Đơn vị cấp 3: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patron-return-claims.inc:13
 #, c-format
@@ -19888,7 +19888,7 @@ msgstr ""
 #. SCRIPT
 #: koha-tmpl/intranet-tmpl/prog/en/includes/columns_settings.inc:6
 #, fuzzy
-msgid "Columns settings"
+msgid "Thiết lập cột"
 msgstr "Thiết lập mẫu in"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbooks.tt:210
@@ -20169,7 +20169,7 @@ msgstr "Cấu hình"
 #. SCRIPT
 #: koha-tmpl/intranet-tmpl/prog/en/includes/columns_settings.inc:6
 #, fuzzy
-msgid "Configure table"
+msgid "Cấu hình bảng"
 msgstr "Cấu hình"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/admin-home.tt:67
@@ -21169,13 +21169,13 @@ msgstr "Số lượng biểu ghi"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:23
 #, c-format
 msgid "Country"
-msgstr "Quốc gia"
+msgstr "Khác"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/merge-patrons.tt:227
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:321
 #, c-format
 msgid "Country:"
-msgstr "Quốc gia:"
+msgstr "Khác:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:169
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:370
@@ -21183,13 +21183,13 @@ msgstr "Quốc gia:"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:598
 #, c-format
 msgid "Country: "
-msgstr "Quốc gia: "
+msgstr "Khác: "
 
 #. %1$s:  l.branchcountry | html 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/usage_statistics.tt:209
 #, c-format
 msgid "Country: %s"
-msgstr "Quốc gia: "
+msgstr "Khác: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/editor.tt:85
 #, c-format
@@ -27852,7 +27852,7 @@ msgstr "Execute overdue items report"
 #. SCRIPT
 #: koha-tmpl/intranet-tmpl/prog/en/includes/columns_settings.inc:6
 #, fuzzy
-msgid "Export or print"
+msgid "Kết xuất hoặc in"
 msgstr "Tranh in"
 
 #. For the first occurrence,
@@ -35734,7 +35734,7 @@ msgstr "Ngôn ngữ"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/advsearch.tt:284
 #, c-format
-msgid "Language of original: "
+msgid "Ngôn ngữ gốc:  "
 msgstr "Language material"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/localization.tt:26
@@ -37827,7 +37827,7 @@ msgstr "Magyar (Hungarian)Agnes Imecs"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/member-main-address-style.inc:5
 #, c-format
 msgid "Main address"
-msgstr "Địa chỉ chính"
+msgstr "Đơn vị"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:238
 #, c-format
@@ -38238,7 +38238,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/includes/permissions.inc:190
 #, c-format
 msgid "Manage cities and towns "
-msgstr "Thành phố"
+msgstr "Đơn vị cấp 3"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/permissions.inc:200
 #, c-format
@@ -44292,18 +44292,18 @@ msgstr "Koha &rsaquo; Phân hệ lưu thông &rsaquo; Tỷ lệ đặt mượn"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:150
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:183
 #, c-format
-msgid "Old value"
+msgid "Giá trị cũ"
 msgstr "Giá trị"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/returns.tt:286
 #, c-format
-msgid "Old value:"
+msgid "Giá trị cũ:"
 msgstr "Giá trị"
 
 #. %1$s:  IF errmsgloo.NotForLoanStatusUpdated.from 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/returns.tt:264
 #, c-format
-msgid "Old value: %s "
+msgid "Giá trị cũ: %s "
 msgstr "Giá trị các ô "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/pos/register.tt:171
@@ -47073,7 +47073,7 @@ msgstr "Bạn đọc và lưu thông"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patron-search.inc:133
 #, c-format
-msgid "Patrons found for: "
+msgid "Bạn đọc tìm kiếm theo:  "
 msgstr "Bạn đọc không tồn tại:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/smart-rules.tt:1255
@@ -47273,7 +47273,7 @@ msgstr "Koha &rsaquo; Giới thiệu về Koha"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/boraccount.tt:163
 #, c-format
-msgid "Payout amount"
+msgid "Thanh toán"
 msgstr "Thanh toán tất cả"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/permissions.inc:380
@@ -47538,7 +47538,7 @@ msgstr "b- Photocopy"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/supplier.tt:301
 #, c-format
 msgid "Physical address: "
-msgstr "Địa chỉ: "
+msgstr "Đơn vị cấp 1: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/moredetail.tt:72
 #, c-format
@@ -57286,14 +57286,14 @@ msgstr "Quy tắc kiểm soát biểu ghi"
 msgid "Something went wrong when creating the patron. Check the logs."
 msgstr ""
 "Phát hiện lỗi khi hệ thống xử lý địa chỉ sau đây. Bạn vui lòng kiểm tra lại. "
-"Địa chỉ: %s"
+"Đơn vị cấp 1: %s"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:75
 #, c-format
 msgid "Something went wrong when updating the patron. Check the logs."
 msgstr ""
 "Phát hiện lỗi khi hệ thống xử lý địa chỉ sau đây. Bạn vui lòng kiểm tra lại. "
-"Địa chỉ: %s"
+"Đơn vị cấp 1: %s"
 
 #. SCRIPT
 #: koha-tmpl/intranet-tmpl/prog/en/includes/cateditor-ui.inc:42
@@ -58132,7 +58132,7 @@ msgstr "Bang"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:319
 #, c-format
 msgid "State:"
-msgstr "Bang:"
+msgstr "Đơn vị cấp 4:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:167
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:362
@@ -58140,7 +58140,7 @@ msgstr "Bang:"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:586
 #, c-format
 msgid "State: "
-msgstr "Bang: "
+msgstr "Đơn vị cấp 4: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqbudgets.tt:377
 #, c-format
@@ -58771,7 +58771,7 @@ msgstr "Chủ đề:"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/mana/mana-subscription-search-result.inc:84
 #, c-format
 msgid "Submit"
-msgstr "Tìm kiếm"
+msgstr "Xác nhận"
 
 #. INPUT type=submit
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:649
@@ -69120,7 +69120,7 @@ msgstr "Báo cáo của bản đã được lưu"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/usage_statistics.tt:86
 #, c-format
 msgid "Your country: "
-msgstr "Quốc gia: "
+msgstr "Khác: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/usage_statistics.tt:180
 #, c-format
@@ -69395,13 +69395,13 @@ msgstr "Tệp tin nén"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:22
 #, c-format
 msgid "ZIP/Postal code"
-msgstr "Mã bưu chính:"
+msgstr "Mã đơn vị:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/merge-patrons.tt:226
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:320
 #, c-format
 msgid "ZIP/Postal code:"
-msgstr "Mã bưu chính:"
+msgstr "Mã đơn vị:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:168
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:366
@@ -69409,7 +69409,7 @@ msgstr "Mã bưu chính:"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:592
 #, c-format
 msgid "ZIP/Postal code: "
-msgstr "Mã bưu chính:"
+msgstr "Mã đơn vị:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/about.tt:172
 #, c-format
@@ -69522,7 +69522,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/auth.tt:206
 #, c-format
 msgid "[Main page]"
-msgstr "Địa chỉ chính"
+msgstr "Đơn vị"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/preferences.tt:96
 #, c-format
@@ -73404,7 +73404,7 @@ msgstr "phiên bản"
 
 #, fuzzy
 #~ msgid "%s See "
-#~ msgstr "%s Bang: "
+#~ msgstr "%s Đơn vị cấp 4: "
 
 #, fuzzy
 #~ msgid "%s Servers: %s "
@@ -73943,7 +73943,7 @@ msgstr "phiên bản"
 
 #, fuzzy
 #~ msgid "Cities "
-#~ msgstr "Thành phố"
+#~ msgstr "Đơn vị cấp 3"
 
 #, fuzzy
 #~ msgid "Claim(s) "

@@ -4,7 +4,7 @@
 [% WRAPPER tabs id= "finesholdsissues" %]
     [% WRAPPER tabs_nav %]
         [% WRAPPER tab_item tabname= "checkouts" bt_active= 1 %]
-            <span>Trả sách ([% issuecount || 0 | html %])</span>
+            <span>Ghi mượn ([% issuecount || 0 | html %])</span>
         [% END %]
 
         [% IF relatives_issues_count %]

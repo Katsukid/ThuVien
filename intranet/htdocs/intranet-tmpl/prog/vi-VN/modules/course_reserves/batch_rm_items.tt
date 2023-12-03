@@ -40,7 +40,7 @@
  </fieldset>
  <fieldset class="action">
  <p>All course reserve items will be deleted from all courses to which they are attached.</p>
- <input class="btn btn-primary" id="batch_rm_btn" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" id="batch_rm_btn" type="submit" value="Xác nhận" />
  <a href="/cgi-bin/koha/course_reserves/course-reserves.pl" class="cancel">Hủy bỏ</a>
  </fieldset>
  </form>

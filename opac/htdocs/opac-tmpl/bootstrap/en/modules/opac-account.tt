@@ -84,9 +84,9 @@
 <script>
 $( document ).ready(function() {
 
-    var MSG_MIN_THRESHOLD = _("Minimum amount needed by this service is %s");
-    var txtActivefilter = _("Filter paid transactions");
-    var txtInactivefilter = _("Show all transactions");
+    var MSG_MIN_THRESHOLD = _("Số tiền tối thiểu cần thiết cho dịch vụ này là %s");
+    var txtActivefilter = _("Lọc hóa đơn đã thanh toán");
+    var txtInactivefilter = _("Hiện toàn bộ hóa đơn");
 
     var fines_table = $("#finestable").dataTable($.extend(true, {}, dataTablesDefaults, {
          [% IF ENABLE_OPAC_PAYMENTS %]

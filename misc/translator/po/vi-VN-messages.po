@@ -71,7 +71,7 @@ msgstr "Địa chỉ"
 
 #: Koha/Database/Columns.pm:117
 msgid "Address 2"
-msgstr "Địa chỉ 2"
+msgstr "Đơn vị cấp 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:19
 msgid "Administration"
@@ -87,45 +87,45 @@ msgid "Allow auto-renewals"
 msgstr "Cho phép tự động gia hạn: "
 
 #: Koha/Database/Columns.pm:130
-msgid "Alternate address: Address"
-msgstr "Alternate address: Địa chỉ"
+msgid "Địa chỉ thay thế: Address"
+msgstr "Địa chỉ thay thế: Địa chỉ"
 
 #: Koha/Database/Columns.pm:131
-msgid "Alternate address: Address 2"
-msgstr "Alternate address: Địa chỉ 2"
+msgid "Địa chỉ thay thế: Address 2"
+msgstr "Địa chỉ thay thế: Đơn vị cấp 2"
 
 #: Koha/Database/Columns.pm:132
-msgid "Alternate address: City"
-msgstr "Alternate address: Thành phố"
+msgid "Địa chỉ thay thế: City"
+msgstr "Địa chỉ thay thế: Đơn vị cấp 3"
 
 #: Koha/Database/Columns.pm:133
-msgid "Alternate address: Country"
-msgstr "Alternate address: Quốc gia"
+msgid "Địa chỉ thay thế: Country"
+msgstr "Địa chỉ thay thế: Khác"
 
 #: Koha/Database/Columns.pm:134
-msgid "Alternate address: Email"
-msgstr "Alternate address: Thư điện tử"
+msgid "Địa chỉ thay thế: Email"
+msgstr "Địa chỉ thay thế: Thư điện tử"
 
 #: Koha/Database/Columns.pm:135
-msgid "Alternate address: Phone"
-msgstr "Alternate address: Điện thoại"
+msgid "Địa chỉ thay thế: Phone"
+msgstr "Địa chỉ thay thế: Điện thoại"
 
 #: Koha/Database/Columns.pm:136
-msgid "Alternate address: State"
-msgstr "Alternate address: Bang"
+msgid "Địa chỉ thay thế: State"
+msgstr "Địa chỉ thay thế: Bang"
 
 #: Koha/Database/Columns.pm:137
-msgid "Alternate address: Street number"
-msgstr "Alternate address: Số nhà"
+msgid "Địa chỉ thay thế: Street number"
+msgstr "Địa chỉ thay thế: Số nhà"
 
 #: Koha/Database/Columns.pm:138
-msgid "Alternate address: Street type"
-msgstr "Alternate address: Số nhà"
+msgid "Địa chỉ thay thế: Street type"
+msgstr "Địa chỉ thay thế: Số nhà"
 
 #: Koha/Database/Columns.pm:139
 #, fuzzy
-msgid "Alternate address: ZIP/Postal code"
-msgstr "Alternate address: Điện thoại"
+msgid "Địa chỉ thay thế: ZIP/Postal code"
+msgstr "Địa chỉ thay thế: Điện thoại"
 
 #: Koha/Database/Columns.pm:118
 msgid "Alternate contact: Address"
@@ -133,15 +133,15 @@ msgstr "Alternate contact: Địa chỉ"
 
 #: Koha/Database/Columns.pm:119
 msgid "Alternate contact: Address 2"
-msgstr "Alternate contact: Địa chỉ 2"
+msgstr "Alternate contact: Đơn vị cấp 2"
 
 #: Koha/Database/Columns.pm:120
 msgid "Alternate contact: City"
-msgstr "Alternate contact: Thành phố"
+msgstr "Alternate contact: Đơn vị cấp 3"
 
 #: Koha/Database/Columns.pm:121
 msgid "Alternate contact: Country"
-msgstr "Alternate contact: Quốc gia"
+msgstr "Alternate contact: Khác"
 
 #: Koha/Database/Columns.pm:122 Koha/Database/Columns.pm:147
 msgid "Alternate contact: First name"
@@ -351,7 +351,7 @@ msgstr ""
 
 #: Koha/Database/Columns.pm:146
 msgid "City"
-msgstr "Thành phố"
+msgstr "Đơn vị cấp 3"
 
 #: Koha/Database/Columns.pm:269
 msgid "Classification"
@@ -397,7 +397,7 @@ msgstr "Ngày suất bản"
 
 #: Koha/Database/Columns.pm:151
 msgid "Country"
-msgstr "Quốc gia"
+msgstr "Khác"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1405
 #, fuzzy
@@ -1538,7 +1538,7 @@ msgstr ""
 #: Koha/Database/Columns.pm:197
 #, fuzzy
 msgid "ZIP/Postal code"
-msgstr "Mã bưu chính:"
+msgstr "Mã đơn vị:"
 
 #: Koha/CodeList/Unimarc/MediumOfPerformance.pm:212
 msgid "accordion"

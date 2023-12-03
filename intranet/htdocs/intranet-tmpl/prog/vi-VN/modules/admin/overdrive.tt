@@ -58,7 +58,7 @@
  </table>
  </fieldset>
  <div class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </div>
  </form>
  </main>

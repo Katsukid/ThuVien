@@ -746,7 +746,7 @@ sub payout {
     my $amount =
       $params->{amount} ? $params->{amount} : $outstanding;
     Koha::Exceptions::Account::AmountNotPositive->throw(
-        error => 'Payout amount passed is not positive' )
+        error => 'Thanh toán passed is not positive' )
       unless ( $amount > 0 );
     Koha::Exceptions::ParameterTooHigh->throw(
         error => "Amount to payout ($amount) is higher than amountoutstanding ($outstanding)" )

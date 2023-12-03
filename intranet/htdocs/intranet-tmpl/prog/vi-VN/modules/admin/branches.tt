@@ -161,12 +161,12 @@ Libraries &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  <fieldset class="rows">
  <ol>
  <li><label for="branchaddress1">Địa chỉ 1: </label><input type="text" name="branchaddress1" id="branchaddress1" size="60" value="[% library.branchaddress1 | html %]" /></li>
- <li><label for="branchaddress2">Địa chỉ 2: </label><input type="text" name="branchaddress2" id="branchaddress2" size="60" value="[% library.branchaddress2 | html %]" /></li>
+ <li><label for="branchaddress2">Đơn vị cấp 2: </label><input type="text" name="branchaddress2" id="branchaddress2" size="60" value="[% library.branchaddress2 | html %]" /></li>
  <li><label for="branchaddress3">Địa chỉ 3: </label><input type="text" name="branchaddress3" id="branchaddress3" size="60" value="[% library.branchaddress3 | html %]" /></li>
  <li><label for="branchcity">Quận/Huyện: </label><input type="text" name="branchcity" id="branchcity" size="60" value="[% library.branchcity | html %]" /></li>
- <li><label for="branchstate">Tỉnh/Thành phố: </label><input type="text" name="branchstate" id="branchstate" size="60" value="[% library.branchstate | html %]" /></li>
+ <li><label for="branchstate">Đơn vị cấp 3: </label><input type="text" name="branchstate" id="branchstate" size="60" value="[% library.branchstate | html %]" /></li>
  <li><label for="branchzip">Mã ZIP/Bưu điện: </label><input type="text" name="branchzip" id="branchzip"  size="25" maxlength="25" value="[% library.branchzip | html %]" /></li>
- <li><label for="branchcountry">Quốc gia: </label><input type="text" name="branchcountry" id="branchcountry" size="60" value="[% library.branchcountry | html %]" /></li>
+ <li><label for="branchcountry">Khác: </label><input type="text" name="branchcountry" id="branchcountry" size="60" value="[% library.branchcountry | html %]" /></li>
  <li><label for="branchphone">Điện thoại: </label><input type="text" name="branchphone" id="branchphone" size="60" value="[% library.branchphone | html %]" /></li>
  <li><label for="branchfax">Số Fax: </label><input type="text" name="branchfax" id="branchfax" size="60" value="[% library.branchfax | html %]" /></li>
  <li><label for="branchemail">Thư điện tử: </label><input type="text" name="branchemail" id="branchemail" class="email"  size="80" value="[% library.branchemail | html %]" /></li>
@@ -278,7 +278,7 @@ Libraries &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  </ol>
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a class="cancel" href="/cgi-bin/koha/admin/branches.pl">Hủy bỏ</a>
  </fieldset>
  </form>
@@ -347,7 +347,7 @@ Libraries &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  [% library.branchaddress1 | html %]
  </li>
  <li>
- <span class="label">Địa chỉ 2: </span>
+ <span class="label">Đơn vị cấp 2: </span>
  [% library.branchaddress2 | html %]
  </li>
  <li>
@@ -359,7 +359,7 @@ Libraries &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  [% library.branchcity | html %]
  </li>
  <li>
- <span class="label">Tỉnh/Thành phố: </span>
+ <span class="label">Đơn vị cấp 3: </span>
  [% library.branchstate | html %]
  </li>
  <li>
@@ -367,7 +367,7 @@ Libraries &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  [% library.branchzip | html %]
  </li>
  <li>
- <span class="label">Quốc gia: </span>
+ <span class="label">Khác: </span>
  [% library.branchcountry | html %]
  </li>
  <li>

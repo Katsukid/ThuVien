@@ -87,7 +87,7 @@
  </select></li>
  <li>
  <input type="hidden" name="do_it" value="1" />
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </li>
  </ul>
  </form>

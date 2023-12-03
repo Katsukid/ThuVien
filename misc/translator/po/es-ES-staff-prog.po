@@ -10907,52 +10907,52 @@ msgstr "Dirección alternativa línea 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:44
 #, c-format
-msgid "Alternate address: Address"
+msgid "Địa chỉ thay thế: Address"
 msgstr "Dirección alternativa: Dirección"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:45
 #, c-format
-msgid "Alternate address: Address 2"
+msgid "Địa chỉ thay thế: Address 2"
 msgstr "Dirección alternativa: Dirección 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:46
 #, c-format
-msgid "Alternate address: City"
+msgid "Địa chỉ thay thế: City"
 msgstr "Dirección alternativa: Ciudad"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:51
 #, c-format
-msgid "Alternate address: Contact note"
+msgid "Địa chỉ thay thế: Contact note"
 msgstr "Dirección alternativa: Nota de contacto"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:49
 #, c-format
-msgid "Alternate address: Email"
+msgid "Địa chỉ thay thế: Email"
 msgstr "Dirección alternativa: Correo electrónico"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:50
 #, c-format
-msgid "Alternate address: Phone"
+msgid "Địa chỉ thay thế: Phone"
 msgstr "Dirección alternativa: Teléfono"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:47
 #, c-format
-msgid "Alternate address: State"
+msgid "Địa chỉ thay thế: State"
 msgstr "Dirección alternativa: Estado"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:42
 #, c-format
-msgid "Alternate address: Street number"
+msgid "Địa chỉ thay thế: Street number"
 msgstr "Dirección alternativa: Calle número"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:43
 #, c-format
-msgid "Alternate address: Street type"
+msgid "Địa chỉ thay thế: Street type"
 msgstr "Dirección alternativa: Tipo de calle"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:48
 #, c-format
-msgid "Alternate address: ZIP/Postal code"
+msgid "Địa chỉ thay thế: ZIP/Postal code"
 msgstr "Dirección alternativa: ZIP/Código postal"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:34
@@ -20148,7 +20148,7 @@ msgstr ""
 
 #. SCRIPT
 #: koha-tmpl/intranet-tmpl/prog/en/includes/columns_settings.inc:6
-msgid "Columns settings"
+msgid "Thiết lập cột"
 msgstr "Configuración de columnas"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbooks.tt:210
@@ -20441,7 +20441,7 @@ msgstr "Configurar complementos "
 
 #. SCRIPT
 #: koha-tmpl/intranet-tmpl/prog/en/includes/columns_settings.inc:6
-msgid "Configure table"
+msgid "Cấu hình bảng"
 msgstr "Configurar tabla"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/admin-home.tt:67
@@ -28165,7 +28165,7 @@ msgstr "Exportar ítems perdidos en reporte"
 
 #. SCRIPT
 #: koha-tmpl/intranet-tmpl/prog/en/includes/columns_settings.inc:6
-msgid "Export or print"
+msgid "Kết xuất hoặc in"
 msgstr "Exportar o imprimir"
 
 #. For the first occurrence,
@@ -35997,7 +35997,7 @@ msgstr "Idioma"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/advsearch.tt:290
 #, c-format
-msgid "Language of original: "
+msgid "Ngôn ngữ gốc:  "
 msgstr "Idioma del original: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/localization.tt:26
@@ -44604,18 +44604,18 @@ msgstr "Reclamos antiguos &rsaquo; Circulación &rsaquo; Koha"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:150
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:183
 #, c-format
-msgid "Old value"
+msgid "Giá trị cũ"
 msgstr "Valor antiguo"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/returns.tt:286
 #, c-format
-msgid "Old value:"
+msgid "Giá trị cũ:"
 msgstr "Valor antiguo:"
 
 #. %1$s:  IF errmsgloo.NotForLoanStatusUpdated.from 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/returns.tt:264
 #, c-format
-msgid "Old value: %s "
+msgid "Giá trị cũ: %s "
 msgstr "Valor anterior: %s "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/pos/register.tt:171
@@ -47410,7 +47410,7 @@ msgstr "Usuarios y circulación"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patron-search.inc:133
 #, c-format
-msgid "Patrons found for: "
+msgid "Bạn đọc tìm kiếm theo:  "
 msgstr "Usuario encontrado para: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/smart-rules.tt:1255
@@ -47599,7 +47599,7 @@ msgstr "Pagos &rsaquo; Koha"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/boraccount.tt:186
 #, c-format
-msgid "Payout amount"
+msgid "Thanh toán"
 msgstr "Monto a pagar"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/permissions.inc:388
@@ -53389,7 +53389,7 @@ msgstr "Ruta-de-retorno: "
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/boraccount.tt:293
 #: koha-tmpl/intranet-tmpl/prog/en/modules/pos/register.tt:327
 #, c-format
-msgid "Returned to patron: "
+msgid "1to patron: "
 msgstr "Regresar al usuario: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:204
@@ -59120,7 +59120,7 @@ msgstr "Temas:"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/mana/mana-subscription-search-result.inc:84
 #, c-format
 msgid "Submit"
-msgstr "Enviar"
+msgstr "Xác nhận"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/modals/add_catalog_concern.inc:47
 #, c-format
@@ -75372,7 +75372,7 @@ msgstr ""
 #~ "estará disponible."
 
 #~ msgid ""
-#~ "Old value: %s %s %s empty %s %s (No description available) %s %s %s %s "
+#~ "Giá trị cũ: %s %s %s empty %s %s (No description available) %s %s %s %s "
 #~ "\"Blank\" %s "
 #~ msgstr ""
 #~ "Valor anterior: %s %s %s vacío %s %s (No hay descripción disponible) %s "

@@ -90,8 +90,8 @@
  </ol>
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" id="submit_save" type="submit" value="Tìm kiếm" />
- <input class="btn btn-primary" id="submit_update" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" id="submit_save" type="submit" value="Xác nhận" />
+ <input class="btn btn-primary" id="submit_update" type="submit" value="Xác nhận" />
  <a class="cancel cancel_edit" id="cancel" href="sms_providers.pl">Hủy bỏ</a>
  </fieldset>
  </form>

@@ -293,7 +293,7 @@ $.fn.dataTable.ext.buttons.clearFilter = {
                     fade: 100,
                     columns: included_ids,
                     className: "columns_controls",
-                    titleAttr: __("Columns settings"),
+                    titleAttr: __("Thiết lập cột"),
                     text: '<i class="fa fa-lg fa-gear"></i> <span class="dt-button-text">' + __("Columns") + '</span>',
                     exportOptions: {
                         columns: exportColumns
@@ -308,7 +308,7 @@ $.fn.dataTable.ext.buttons.clearFilter = {
                 autoClose: true,
                 fade: 100,
                 className: "export_controls",
-                titleAttr: __("Export or print"),
+                titleAttr: __("Kết xuất hoặc in"),
                 text: '<i class="fa fa-lg fa-download"></i> <span class="dt-button-text">' + __("Export") + '</span>',
                 buttons: export_buttons
             }

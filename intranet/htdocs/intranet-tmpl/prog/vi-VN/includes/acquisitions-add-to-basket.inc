@@ -6,7 +6,7 @@
  <form action="/cgi-bin/koha/catalogue/search.pl" method="get">
  <label>Từ biểu ghi hiện tại: <input type="text" name="q" size="25" />
  </label>
- <input class="submit" data-basketno="[% basketno | html %]" data-booksellerid="[% booksellerid | html %]" id="searchtoorder" type="submit" value="Tìm kiếm" />
+ <input class="submit" data-basketno="[% basketno | html %]" data-booksellerid="[% booksellerid | html %]" id="searchtoorder" type="submit" value="Xác nhận" />
  </form>
  </li>
  <li><a href="/cgi-bin/koha/acqui/newordersuggestion.pl?booksellerid=[% booksellerid | uri %]&amp;basketno=[% basketno | uri %]">Từ đề xuất mua</a></li>

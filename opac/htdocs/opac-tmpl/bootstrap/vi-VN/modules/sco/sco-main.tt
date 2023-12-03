@@ -257,7 +257,7 @@
  <input id="barcode" name="barcode" size="20" type="text" class="focus form-control" autocomplete="off" />
  </div>
  <div class="col-auto">
- <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+ <button type="submit" class="btn btn-primary">Xác nhận</button>
  </div>
  <div class="col ml-auto">
  <button type="button" id="logout_form" class="btn btn-info"><i class="fa fa-check" aria-hidden="true"></i> Hoàn thành</button>
@@ -422,7 +422,7 @@
  <input type="text" id="patronid" class="form-control focus" size="20" name="patronid" autocomplete="off" />
  </div>
  <div class="col-auto">
- <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+ <button type="submit" class="btn btn-primary">Xác nhận</button>
  </div>
  </div> <!-- /.form-row -->
  [% END %]

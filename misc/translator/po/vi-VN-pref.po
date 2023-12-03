@@ -13008,7 +13008,7 @@ msgstr ""
 
 #, fuzzy
 msgid "patrons.pref#PrefillGuaranteeField# Alternate address - Street number"
-msgstr "Alternate address: Số nhà"
+msgstr "Địa chỉ thay thế: Số nhà"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 msgid "patrons.pref#PrefillGuaranteeField# Alternate address - Street type"

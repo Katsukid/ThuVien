@@ -607,7 +607,7 @@ sub payout_amount {
     my $amount = $params->{amount};
     unless ( $amount > 0 ) {
         Koha::Exceptions::Account::AmountNotPositive->throw(
-            error => 'Payout amount passed is not positive' );
+            error => 'Thanh toán passed is not positive' );
     }
 
     # Amount should always be less than or equal to outstanding credit

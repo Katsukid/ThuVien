@@ -122,7 +122,7 @@
  Duyệt theo họ:
  [% SET alphabet = Koha.Preference('alphabet').split(' ') %]
  [% UNLESS alphabet.size %]
- [% alphabet = ['A' .. 'Z'] %]
+ [% alphabet = ['A' 'B' 'C' 'D' 'E' 'Ê' 'G' 'H' 'I' 'K' 'L' 'M' 'N' 'O' 'Ô' 'Ơ' 'P' 'Q' 'R' 'S' 'T' 'U' 'Ư' 'V' 'X' 'Y' 'Ă' 'Â'] %]
  [% END %]
  [% FOREACH letter IN alphabet %]
  <a href="#" class="filterByLetter">[% letter | html %]</a>
@@ -130,7 +130,7 @@
  </div>
 
 
- <h3 style="display: none;">Patrons found for: <span id="searchpattern"></span></h3>
+ <h3 style="display: none;">Bạn đọc tìm kiếm theo: <span id="searchpattern"></span></h3>
 
  <div id="[% table_id | html %]_search_results" style="display:none;">
 
@@ -159,7 +159,7 @@
  [% CASE 'dateexpiry' %]<th>Ngày hết hạn</td>
  [% CASE 'borrowernotes' %]<th>Ghi chú</th>
  [% CASE 'phone' %]<th>Điện thoại</th>
- [% CASE 'checkouts' %]<th>Trả sách</th>
+ [% CASE 'checkouts' %]<th>Ghi mượn</th>
  [% CASE 'account_balance' %]<th>Tiền phạt</th>
  [% CASE 'action' %]<th>&nbsp;</th>
  [% END %]
@@ -735,7 +735,7 @@
                 searched += "'" + $("#search_patron_filter").val() + "'";
             }
             if ( $("#firstletter_filter").val() ) {
-                searched += _(" begins with ") + "'" + $("#firstletter_filter").val() +"'";
+                searched += _(" bắt đầu với ") + "'" + $("#firstletter_filter").val() +"'";
             }
             if ( $("#categorycode_filter").val() ) {
                 searched += _(" with category ") + "'" + $("#categorycode_filter").find("option:selected").text() + "'";

@@ -49,7 +49,7 @@
  <li><a href="/cgi-bin/koha/admin/desks.pl">Desks</a></li>
  [% END %]
  [% IF ( CAN_user_parameters_manage_cities ) %]
- <li><a href="/cgi-bin/koha/admin/cities.pl">Thành phố</a></li>
+ <li><a href="/cgi-bin/koha/admin/cities.pl">Đơn vị cấp 3</a></li>
  [% END %]
  [% IF ( CAN_user_parameters_manage_curbside_pickups ) %]
  <li><a href="/cgi-bin/koha/admin/curbside_pickup.pl">Curbside pickup</a></li>

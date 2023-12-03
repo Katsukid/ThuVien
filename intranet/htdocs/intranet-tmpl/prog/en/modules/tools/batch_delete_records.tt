@@ -139,7 +139,7 @@
                 <th>Title</th>
                 <th>Items</th>
                 <th>Sách đang giữ</th>
-                <th>Trả sách</th>
+                <th>Ghi mượn</th>
                 <th>Subscriptions</th>
               </tr>
             </thead>

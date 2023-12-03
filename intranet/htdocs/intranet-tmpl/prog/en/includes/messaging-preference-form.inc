@@ -19,16 +19,16 @@
     [% NEXT IF !Koha.Preference( 'ILLModule' ) && messaging_preference.message_name.match('^Ill_') %]
     [% NEXT IF messaging_preference.Auto_Renewals && Koha.Preference('AutoRenewalNotices') != 'preferences' %]
     <tr id="[% messaging_preference.message_name _ "_message" | lower | html %]">
-      <td>[% IF ( messaging_preference.Item_Due ) %]<span>Item due</span>
-          [% ELSIF ( messaging_preference.Advance_Notice ) %]<span>Advance notice</span>
-          [% ELSIF ( messaging_preference.Hold_Filled ) %]<span>Hold filled</span>
-          [% ELSIF ( messaging_preference.Hold_Reminder ) %]<span>Hold reminder</span>
-          [% ELSIF ( messaging_preference.Item_Check_in ) %]<span>Item check-in</span>
+      <td>[% IF ( messaging_preference.Item_Due ) %]<span>Tài liệu đến hạn</span>
+          [% ELSIF ( messaging_preference.Advance_Notice ) %]<span>Thông báo trước</span>
+          [% ELSIF ( messaging_preference.Hold_Filled ) %]<span>Tài liệu đặt mượn</span>
+          [% ELSIF ( messaging_preference.Hold_Reminder ) %]<span>Tài liệu mượn quá hạn</span>
+          [% ELSIF ( messaging_preference.Item_Check_in ) %]<span>Tài liệu trả</span>
           [% ELSIF ( messaging_preference.Item_Checkout ) %]
             [% IF Koha.Preference( 'RenewalSendNotice' ) %]
                 <span>Item checkout and renewal</span>
             [% ELSE %]
-                <span>Item checkout</span>
+                <span>Tài liệu mượn</span>
             [% END %]
           [% ELSIF ( messaging_preference.Ill_ready ) %]<span>Interlibrary loan ready</span>
           [% ELSIF ( messaging_preference.Ill_unavailable ) %]<span>Interlibrary loan unavailable</span>

@@ -774,7 +774,7 @@ function _dt_buttons(params){
                 fade: 100,
                 columns: included_ids,
                 className: "columns_controls",
-                titleAttr: __("Columns settings"),
+                titleAttr: __("Thiết lập cột"),
                 text: '<i class="fa fa-lg fa-gear"></i> <span class="dt-button-text">' + __("Columns") + '</span>',
                 exportOptions: {
                     columns: exportColumns
@@ -789,7 +789,7 @@ function _dt_buttons(params){
             autoClose: true,
             fade: 100,
             className: "export_controls",
-            titleAttr: __("Export or print"),
+            titleAttr: __("Kết xuất hoặc in"),
             text: '<i class="fa fa-lg fa-download"></i> <span class="dt-button-text">' + __("Export") + '</span>',
             buttons: export_buttons
         }
@@ -800,7 +800,7 @@ function _dt_buttons(params){
             {
                 className: "dt_button_configure_table",
                 fade: 100,
-                titleAttr: __("Configure table"),
+                titleAttr: __("Cấu hình bảng"),
                 text: '<i class="fa fa-lg fa-wrench"></i> <span class="dt-button-text">' + __("Configure") + '</span>',
                 action: function() {
                     window.location = '/cgi-bin/koha/admin/columns_settings.pl?module=' + table_settings['module'] + '&page=' + table_settings['page'] + '&table=' + table_settings['table'];

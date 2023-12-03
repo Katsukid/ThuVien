@@ -81,7 +81,7 @@
  <input type="text" maxlength="35" size="35" id="mana-comment" required="required" />
  <input type="hidden" id="selected_id" value="" />
  <div class="action">
- <button id="mana-send-comment">Tìm kiếm</button>
+ <button id="mana-send-comment">Xác nhận</button>
  <a href="#" class="cancel" id="mana-comment-close">Hủy bỏ</a>
  </div>
  </form>

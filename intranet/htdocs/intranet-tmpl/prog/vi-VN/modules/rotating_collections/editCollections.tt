@@ -146,7 +146,7 @@
  </ol>
  </fieldset>
  <fieldset class="action">
- <p><input class="btn btn-primary" type="submit" value="Tìm kiếm" /> <a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl" class="cancel">Hủy bỏ</a></p>
+ <p><input class="btn btn-primary" type="submit" value="Xác nhận" /> <a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl" class="cancel">Hủy bỏ</a></p>
  </fieldset>
  </form>
  [% END %]

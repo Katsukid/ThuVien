@@ -750,7 +750,7 @@ msgstr "Columnas"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:777
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:296
-msgid "Columns settings"
+msgid "Thiết lập cột"
 msgstr "Configuración de columnas"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:86
@@ -764,7 +764,7 @@ msgid "Configure"
 msgstr "Configurar"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:803
-msgid "Configure table"
+msgid "Cấu hình bảng"
 msgstr "Configurar tabla"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:142
@@ -1015,7 +1015,7 @@ msgstr "Exportar"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:792
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:311
-msgid "Export or print"
+msgid "Kết xuất hoặc in"
 msgstr "Exportar o imprimir"
 
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:114

@@ -928,7 +928,7 @@
  <input type="hidden" name="filter_archived" value="[% filter_archived | html %]" />
  </fieldset>
  <fieldset class="action">
- <button type="submit" class="btn btn-primary" value="update_status">Tìm kiếm</button>
+ <button type="submit" class="btn btn-primary" value="update_status">Xác nhận</button>
  </fieldset>
  </div> <!-- /.col-sm-4 -->
 
@@ -942,7 +942,7 @@
  <input type="hidden" name="filter_archived" value="[% filter_archived | html %]" />
  </fieldset>
  <fieldset class="action">
- <button type="submit" class="btn btn-primary" value="update_itemtype">Tìm kiếm</button>
+ <button type="submit" class="btn btn-primary" value="update_itemtype">Xác nhận</button>
  </fieldset>
  </div> <!-- /.col-sm-4 -->
 
@@ -956,7 +956,7 @@
  <input type="hidden" name="filter_archived" value="[% filter_archived | html %]" />
  </fieldset>
  <fieldset class="action">
- <button type="submit" class="btn btn-primary" value="update_manager">Tìm kiếm</button>
+ <button type="submit" class="btn btn-primary" value="update_manager">Xác nhận</button>
  </fieldset>
  </div> <!-- /.col-sm-2 -->
 

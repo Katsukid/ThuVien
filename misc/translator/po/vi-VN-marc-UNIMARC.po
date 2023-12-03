@@ -2095,7 +2095,7 @@ msgstr "Counter tenor"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:167
 #, c-format
 msgid "Country: "
-msgstr "Quốc gia: "
+msgstr "Khác: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:203
 #, c-format

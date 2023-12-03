@@ -258,7 +258,7 @@
  <input name="item_type" type="hidden" value="[% items.0.itype | html %]">
  [% END %]
  <input type="hidden" value="[% request.illrequest_id | html %]" name="illrequest_id">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a class="cancel" href="/cgi-bin/koha/ill/ill-requests.pl?method=illview&amp;illrequest_id=[% request.id | html %]">Hủy bỏ</a>
  </fieldset>
  </form>
@@ -461,7 +461,7 @@
  <input type="hidden" value="edit_action" name="method">
  <input type="hidden" value="form" name="stage">
  <input type="hidden" value="[% request.illrequest_id | html %]" name="illrequest_id">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a class="cancel" href="/cgi-bin/koha/ill/ill-requests.pl?method=illview&amp;illrequest_id=[% request.id | html %]">Hủy bỏ</a>
  </fieldset>
  </form>
@@ -760,7 +760,7 @@
  </ol>
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </fieldset>
  </form>
  </div>

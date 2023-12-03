@@ -9196,8 +9196,8 @@ tables:
       hidden: -1
       isurl: 0
       kohafield: ''
-      liblibrarian: Quốc gia
-      libopac: Quốc gia
+      liblibrarian: Khác
+      libopac: Khác
       link: ''
       mandatory: 0
       repeatable: 1
@@ -37593,8 +37593,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: ''
-      liblibrarian: Quốc gia
-      libopac: Quốc gia
+      liblibrarian: Khác
+      libopac: Khác
       link: ''
       mandatory: 0
       repeatable: 0
@@ -37933,8 +37933,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: ''
-      liblibrarian: Quốc gia
-      libopac: Quốc gia
+      liblibrarian: Khác
+      libopac: Khác
       link: ''
       mandatory: 0
       repeatable: 0

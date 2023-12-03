@@ -161,7 +161,7 @@
             [% ELSE %]
                 <label for="altcontactstate">
             [% END %]
-            Tỉnh/Thành phố: </label>
+            Đơn vị cấp 3: </label>
             <input type="text" name="altcontactstate" id="altcontactstate" value="[% patron.altcontactstate | html %]" size="20" />
             [% IF ( mandatoryaltcontactstate ) %]<span class="required">Required</span>[% END %]
         </li>

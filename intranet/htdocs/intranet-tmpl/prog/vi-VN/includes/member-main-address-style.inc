@@ -2,7 +2,7 @@
 [% USE AuthorisedValues %]
 [% BLOCK 'main-address-style' %]
  <fieldset class="rows" id="memberentry_mainaddress">
- <legend id="main_address_lgd">Địa chỉ chính</legend>
+ <legend id="main_address_lgd">Đơn vị</legend>
  <ol>
  [% IF Koha.Preference( 'AddressFormat' ) %]
  [% PROCESS "member-main-address-style-${ Koha.Preference( 'AddressFormat' ) }" %]
@@ -79,7 +79,7 @@
  <label for="address" class="required">
  [% ELSE %]
  <label for="address">
- [% END %] Địa chỉ: </label>
+ [% END %] Đơn vị cấp 1: </label>
  <input type="text" id="address" name="address" size="40" value="[% patron.address | html %]" />
  [% IF ( mandatoryaddress ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -107,7 +107,7 @@
  <label for="address2" class="required">
  [% ELSE %]
  <label for="address2">
- [% END %] Địa chỉ 2: </label>
+ [% END %] Đơn vị cấp 2: </label>
  <input type="text" id="address2" name="address2" size="40" value="[% patron.address2 | html %]" />
  [% IF ( mandatoryaddress2 ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -167,7 +167,7 @@
  [% ELSE %]
  <label for="state">
  [% END %]
- Tỉnh/Thành phố: </label>
+ Đơn vị cấp 3: </label>
  <input type="text" id="state" name="state" size="20" value="[% patron.state | html %]" />
  [% IF ( mandatorystate ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>

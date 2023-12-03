@@ -55,7 +55,7 @@
  [% IF ( TalkingTechItivaPhone ) %]<th>Điện thoại</th>[% END %]
  [% IF Koha.Preference('PhoneNotification') %]<th>Điện thoại</th>[% END %]
  <th>Thư điện tử</th>
- <th>Digests only <i id="info_digests" data-toggle="tooltip" title="You can ask for a digest to reduce the number of messages. Messages will be saved and sent as a single message." data-placement="right" class="fa fa-info-circle"></i></th>
+ <th>Chỉ thông báo<i id="info_digests" data-toggle="tooltip" title="You can ask for a digest to reduce the number of messages. Messages will be saved and sent as a single message." data-placement="right" class="fa fa-info-circle"></i></th>
  <th></th>
  </tr>
  </thead>

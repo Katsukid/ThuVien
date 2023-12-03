@@ -9,9 +9,9 @@
     <ul>
         [% IF ( has_modifications ) %]
             <li class="has_modifications">
-                <span class="circ-hlt">Pending modifications:</span>
+                <span class="circ-hlt">Chờ cập nhật thông tin tài khoản:</span>
                 [% IF CAN_user_borrowers_edit_borrowers && ( !Koha.Preference('IndependentBranchesPatronModifications') || borrower.branch == branch ) %]
-                    <a href="/cgi-bin/koha/members/members-update.pl?active=[% patron.borrowernumber | uri %]">Review pending modifications</a>
+                    <a href="/cgi-bin/koha/members/members-update.pl?active=[% patron.borrowernumber | uri %]">Kiểm duyệt cập nhật thông tin tài khoản</a>
                 [% ELSE %]
                     <span>Patron has pending modifications</span>
                 [% END %]

@@ -34,7 +34,7 @@
 
  [% IF op == 'add_form' %]
  [% WRAPPER breadcrumb_item %]
- <a href="/cgi-bin/koha/admin/cities.pl">Thành phố</a>
+ <a href="/cgi-bin/koha/admin/cities.pl">Đơn vị cấp 3</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active = 1 %]
  [% IF city.cityid %]
@@ -46,7 +46,7 @@
 
  [% ELSIF op == 'delete_confirm' %]
  [% WRAPPER breadcrumb_item %]
- <a href="/cgi-bin/koha/admin/cities.pl">Thành phố</a>
+ <a href="/cgi-bin/koha/admin/cities.pl">Đơn vị cấp 3</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active = 1 %]
  [% tx("Confirm deletion of city '{city}'", { city = city.city_name }) | html %]
@@ -54,7 +54,7 @@
 
  [% ELSE %]
  [% WRAPPER breadcrumb_item bc_active = 1 %]
- <span>Thành phố</span>
+ <span>Đơn vị cấp 3</span>
  [% END %]
  [% END #/IF op = add_form %]
 
@@ -112,7 +112,7 @@
  <input type="text" name="city_name" id="city_name" size="80" maxlength="100" value="[% city.city_name | html %]" required="required" class="required focus" /> <span class="required">Bắt buộc</span>
  </li>
  <li>
- <label for="city_state">Tỉnh/Thành phố: </label>
+ <label for="city_state">Đơn vị cấp 3: </label>
  <input type="text" name="city_state" id="city_state" size="80" maxlength="100" value="[% city.city_state | html %]" />
  </li>
  <li>
@@ -120,14 +120,14 @@
  <input type="text" name="city_zipcode" id="city_zipcode" size="20" maxlength="20" value="[% city.city_zipcode | html %]" required="required" class="required" /> <span class="required">Bắt buộc</span>
  </li>
  <li>
- <label for="city_country">Quốc gia: </label>
+ <label for="city_country">Khác: </label>
  <input type="text" name="city_country" id="city_country" size="80" maxlength="100" value="[% city.city_country | html %]" />
  </li>
  </ol>
  </fieldset>
 
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a class="cancel" href="/cgi-bin/koha/admin/cities.pl">Hủy bỏ</a>
  </fieldset>
  </form>
@@ -142,7 +142,7 @@
  <tr><th>ID</th>
  <td>[% city.cityid | html %]</td>
  </tr>
- <tr><th>Thành phố</th>
+ <tr><th>Đơn vị cấp 3</th>
  <td>[% city.city_name | html %]</td>
  </tr>
  <tr><th>Bang</th>
@@ -151,7 +151,7 @@
  <tr><th>ZIP/Postal code</th>
  <td>[% city.city_zipcode | html %]</td>
  </tr>
- <tr><th>Quốc gia</th>
+ <tr><th>Khác</th>
  <td>[% city.city_country | html %]</td>
  </tr>
  </table>
@@ -172,7 +172,7 @@
  <a class="btn btn-default" id="newcity" href="/cgi-bin/koha/admin/cities.pl?op=add_form"><i class="fa fa-plus"></i> Tạo thành phố</a>
  </div>
 
- <h1>Thành phố</h1>
+ <h1>Đơn vị cấp 3</h1>
  [% IF city_name_filter %]
  <span>Searching: [% city_name_filter | html %]</span>
  [% END %]
@@ -184,10 +184,10 @@
  <thead>
  <tr>
  <th>ID</th>
- <th>Thành phố</th>
+ <th>Đơn vị cấp 3</th>
  <th>Bang</th>
  <th>ZIP/Postal code</th>
- <th>Quốc gia</th>
+ <th>Khác</th>
  <th data-class-name="actions noExport">Thao tác</th>
  </tr>
  </thead>

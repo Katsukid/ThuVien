@@ -360,7 +360,7 @@
  [% END %]
  <th id="[% tab | html %]_status" data-colname="[% tab | html %]_status">Trạng thái</th>
  <th id="[% tab | html %]_lastseen" data-colname="[% tab | html %]_lastseen">Cập nhật lần cuối</th>
- <th id="[% tab | html %]_issues" data-colname="[% tab | html %]_issues">Trả sách</th>
+ <th id="[% tab | html %]_issues" data-colname="[% tab | html %]_issues">Ghi mượn</th>
  <th id="[% tab | html %]_renewals" data-colname="[% tab | html %]_renewals">Renewals</th>
  <th id="[% tab | html %]_dateaccessioned" data-colname="[% tab | html %]_dateaccessioned">Date accessioned</th>
  <th id="[% tab | html %]_datelastborrowed" data-colname="[% tab | html %]_datelastborrowed">Date last borrowed</th>
@@ -1167,7 +1167,7 @@
  </fieldset>
  </div>
  <div class="modal-footer">
- <button id="modal-item-group-create-submit" class="btn btn-default"><i class="fa fa-plus"></i> Tìm kiếm</button>
+ <button id="modal-item-group-create-submit" class="btn btn-default"><i class="fa fa-plus"></i> Xác nhận</button>
  <button class="btn btn-link" data-dismiss="modal" aria-hidden="true">Hủy bỏ</button>
  </div>
  </form>
@@ -1198,7 +1198,7 @@
  </fieldset>
  </div>
  <div class="modal-footer">
- <button id="modal-item-group-edit-submit" class="btn btn-default"><i class='fa fa-edit'></i> Tìm kiếm</button>
+ <button id="modal-item-group-edit-submit" class="btn btn-default"><i class='fa fa-edit'></i> Xác nhận</button>
  <button class="btn btn-link" data-dismiss="modal" aria-hidden="true">Hủy bỏ</button>
  </div>
  </form>
@@ -1294,7 +1294,7 @@
  </fieldset>
  </div>
  <div class="modal-footer">
- <button type="submit" class="btn btn-default">Tìm kiếm</button>
+ <button type="submit" class="btn btn-default">Xác nhận</button>
  <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Thoát</button>
  </div>
  </div>
@@ -1323,7 +1323,7 @@
  </fieldset>
  </div>
  <div class="modal-footer">
- <button type="submit" class="btn btn-default">Tìm kiếm</button>
+ <button type="submit" class="btn btn-default">Xác nhận</button>
  <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Thoát</button>
  </div>
  </div>

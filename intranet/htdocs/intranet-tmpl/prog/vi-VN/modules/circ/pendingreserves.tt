@@ -302,7 +302,7 @@
 </fieldset>
 
  <fieldset class="action">
- <input class="btn btn-primary" name="run_report" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" name="run_report" type="submit" value="Xác nhận" />
  </fieldset>
 </form>
 

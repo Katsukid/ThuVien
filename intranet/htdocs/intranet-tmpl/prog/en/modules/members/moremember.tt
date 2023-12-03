@@ -590,7 +590,7 @@
 
                                             [% IF ( patron.altcontactstate ) %]
                                                 <li id="patron-altcontactstate">
-                                                    <span class="label">Tỉnh/Thành phố: </span>
+                                                    <span class="label">Đơn vị cấp 3: </span>
                                                     [% patron.altcontactstate | html %]
                                                 </li>
                                             [% END %]

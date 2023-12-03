@@ -173,7 +173,7 @@ Authority MARC framework &rsaquo; Administration &rsaquo; Trường CĐKTQS1
  </ol>
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=[% authtypecode | uri %]" class="cancel">Hủy bỏ</a>
  </fieldset>
  </form>

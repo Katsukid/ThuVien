@@ -2278,14 +2278,14 @@ msgstr "Thông tin bổ sung"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:829
 #, c-format
 msgid "Address 2:"
-msgstr "Địa chỉ 2:"
+msgstr "Đơn vị cấp 2:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:480
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:705
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:820
 #, c-format
 msgid "Address:"
-msgstr "Địa chỉ:"
+msgstr "Đơn vị cấp 1:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:336
 #, c-format
@@ -2413,7 +2413,7 @@ msgstr "Địa chỉ thay thế"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:104
 #, fuzzy, c-format
 msgid "Alternate address information: "
-msgstr "Alternate address: Thư điện tử"
+msgstr "Địa chỉ thay thế: Thư điện tử"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:797
 #, c-format
@@ -3691,7 +3691,7 @@ msgstr "Trích dẫn"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:838
 #, c-format
 msgid "City:"
-msgstr "Thành phố: "
+msgstr "Đơn vị cấp 3: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:776
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:178
@@ -3919,7 +3919,7 @@ msgstr "Cột"
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/columns_settings.inc:3
 #, fuzzy
-msgid "Columns settings"
+msgid "Thiết lập cột"
 msgstr "Thiết lập mẫu in"
 
 #. For the first occurrence,
@@ -4165,7 +4165,7 @@ msgstr ""
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:865
 #, c-format
 msgid "Country:"
-msgstr "Quốc gia:"
+msgstr "Khác:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-reserves.tt:43
 #, c-format
@@ -7353,7 +7353,7 @@ msgstr "MODS (XML)"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:452
 #, c-format
 msgid "Main address"
-msgstr "Địa chỉ chính"
+msgstr "Đơn vị"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:614
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:616
@@ -11157,7 +11157,7 @@ msgid ""
 "them. These are: %s"
 msgstr ""
 "Phát hiện lỗi khi hệ thống xử lý địa chỉ sau đây. Bạn vui lòng kiểm tra lại. "
-"Địa chỉ: %s"
+"Đơn vị cấp 1: %s"
 
 #. For the first occurrence,
 #. SCRIPT
@@ -11389,7 +11389,7 @@ msgstr "Thiếu ngày bắt đầu của ngân sách"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:847
 #, c-format
 msgid "State:"
-msgstr "Bang:"
+msgstr "Đơn vị cấp 4:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:406
 #, c-format
@@ -11510,7 +11510,7 @@ msgstr "Chủ đề: %s "
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-topissues.inc:90
 #, c-format
 msgid "Submit"
-msgstr "Tìm kiếm"
+msgstr "Xác nhận"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sci/sci-main.tt:127
 #, fuzzy, c-format
@@ -14371,7 +14371,7 @@ msgstr ""
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:856
 #, c-format
 msgid "ZIP/Postal code:"
-msgstr "Mã bưu chính:"
+msgstr "Mã đơn vị:"
 
 #. %1$s:  #             ...                                                                                     
 #. %2$s:  #         [ END ]                                                                                     

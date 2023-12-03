@@ -164,7 +164,7 @@
           </form>
         [% END %]
         [% IF CAN_user_updatecharges_payout && account.is_credit && ( account.amountoutstanding < 0 ) %]
-          <button type="button" data-toggle="modal" data-target="#issuePayoutModal" data-account="[%- PROCESS account_type_description account=account -%]" data-accountline="[% account.accountlines_id | html %]" data-amount="[% account.amountoutstanding | $Price on_editing => 1 %]" class="btn btn-default btn-xs payout-action"><i class="fa fa-money"></i> Issue payout</button>
+          <button type="button" data-toggle="modal" data-target="#issuePayoutModal" data-account="[%- PROCESS account_type_description account=account -%]" data-accountline="[% account.accountlines_id | html %]" data-amount="[% account.amountoutstanding | $Price on_editing => 1 %]" class="btn btn-default btn-xs payout-action"><i class="fa fa-money"></i> Phát hành thanh toán</button>
         [% END %]
         [% IF CAN_user_updatecharges_refund && account.is_debit && ( account.amountoutstanding != account.amount ) && !(account.status == 'REFUNDED') && !(account.debit_type_code == 'PAYOUT') %]
           <button type="button"  class="btn btn-default btn-xs refund-action" data-toggle="modal" data-target="#issueRefundModal" data-item="[%- PROCESS account_type_description account=account -%]" data-accountline="[% account.accountlines_id | html %]" data-amount="[% account.amount | $Price on_editing => 1 %]" data-amountoutstanding="[% account.amountoutstanding | $Price on_editing => 1 %]" data-member="[% account.borrowernumber | html %]"><i class="fa fa-money"></i> Issue refund</button>
@@ -183,7 +183,7 @@
         <td class="credit" style="text-align: right;">[% total | $Price %]</td>
         <td>
           [% IF CAN_user_updatecharges_payout %]
-          <button type="button" data-toggle="modal" data-target="#issuePayoutModal" data-amount="[% total | $Price on_editing => 1 %]" class="btn btn-default btn-xs payout-amount-action"><i class="fa fa-money"></i> Payout amount</button>
+          <button type="button" data-toggle="modal" data-target="#issuePayoutModal" data-amount="[% total | $Price on_editing => 1 %]" class="btn btn-default btn-xs payout-amount-action"><i class="fa fa-money"></i> Thanh toán</button>
         [% END %]
         </td>
     [% ELSE %]
@@ -207,7 +207,7 @@
         </div> <!-- /.col-sm-2.col-sm-pull-10 -->
      </div> <!-- /.row -->
 
-    <!-- Issue payout modal -->
+    <!-- Phát hành thanh toán modal -->
     <div class="modal" id="issuePayoutModal" tabindex="-1" role="dialog" aria-labelledby="issuePayoutLabel">
         <form  id="payout_form" action="/cgi-bin/koha/members/boraccount.pl" method="get" enctype="multipart/form-data" class="validated">
             [% INCLUDE 'csrf-token.inc' %]
@@ -218,7 +218,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="closebtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="issuePayoutLabel">Issue payout</h4>
+                        <h4 class="modal-title" id="issuePayoutLabel">Phát hành thanh toán</h4>
                     </div>
                     <div class="modal-body">
                         [% IF Koha.Preference('UseCashRegisters') && ( registers.size == 0 ) %]
@@ -229,10 +229,10 @@
                         <fieldset class="rows">
                             <ol>
                                 <li>
-                                    <span id="paid" class="label">Outstanding credit: </span><span>[% payout.amount | $Price %]</span>
+                                    <span id="paid" class="label">Dư nợ: </span><span>[% payout.amount | $Price %]</span>
                                 </li>
                                 <li>
-                                    <label class="required" for="amount">Returned to patron: </label>
+                                    <label class="required" for="amount">Hoàn lại: </label>
                                     <input type="text" inputmode="numeric" pattern="[0-9]*" id="amount" name="amount" required="required">
                                     <span class="required">Required</span>
                                 </li>
@@ -290,7 +290,7 @@
                                     <span id="paid" class="label">Amount paid: </span><span></span>
                                 </li>
                                 <li>
-                                    <label class="required" for="amount">Returned to patron: </label>
+                                    <label class="required" for="amount">Hoàn lại: </label>
                                     <input type="text" inputmode="numeric" pattern="[0-9]*" id="returned" name="amount" required="required">
                                     <span class="required">Required</span>
                                 </li>

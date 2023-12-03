@@ -69,7 +69,7 @@
  [% IF ( frombranch ) %]<input type="hidden" name="frombranch" value="[% frombranch | html %]" />[% END %]
  </fieldset>
  [% END %]
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </form>
 
  [% END %]

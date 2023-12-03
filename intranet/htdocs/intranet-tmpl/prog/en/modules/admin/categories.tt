@@ -614,16 +614,16 @@
                                         [% NEXT IF !Koha.Preference( 'ILLModule' ) && prefs.message_name.match('^Ill_') %]
                                         [% FOREACH transport IN prefs.transports %]
                                             [% IF ( transport.transport ) %]
-                                                [% IF ( prefs.Item_Due ) %]<span>Item due</span>
-                                                [% ELSIF ( prefs.Advance_Notice ) %]<span>Advance notice</span>
-                                                [% ELSIF ( prefs.Hold_Filled ) %]<span>Hold filled</span>
-                                                [% ELSIF ( prefs.Item_Check_in ) %]<span>Item check-in</span>
-                                                [% ELSIF ( prefs.Item_Checkout ) %]<span>Item checkout</span>
+                                                [% IF ( prefs.Item_Due ) %]<span>Tài liệu đến hạn</span>
+                                                [% ELSIF ( prefs.Advance_Notice ) %]<span>Thông báo trước</span>
+                                                [% ELSIF ( prefs.Hold_Filled ) %]<span>Tài liệu đặt mượn</span>
+                                                [% ELSIF ( prefs.Item_Check_in ) %]<span>Tài liệu trả</span>
+                                                [% ELSIF ( prefs.Item_Checkout ) %]<span>Tài liệu mượn</span>
                                                 [% ELSIF ( prefs.Ill_ready ) %]<span>Interlibrary loan ready</span>
                                                 [% ELSIF ( prefs.Ill_unavailable ) %]<span>Interlibrary loan unavailable</span>
                                                 [% ELSIF ( prefs.Ill_update ) %]<span>Interlibrary loan updated</span>
                                                 [% ELSIF ( prefs.Auto_Renewals ) %]<span>Auto renewal</span>
-                                                [% ELSIF ( prefs.Hold_Reminder ) %]<span>Hold reminder</span>
+                                                [% ELSIF ( prefs.Hold_Reminder ) %]<span>Tài liệu mượn quá hạn</span>
                                                 [% ELSE %]<span>Unknown</span>
                                                 [% END %]:
                                                 <strong>[% transport.transport | html %]</strong><br />

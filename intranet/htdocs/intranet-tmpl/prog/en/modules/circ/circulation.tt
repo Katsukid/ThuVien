@@ -36,14 +36,14 @@
             [% END %]
             [% IF patron %]
                 [% WRAPPER breadcrumb_item %]
-                    <a href="/cgi-bin/koha/circ/circulation.pl">Trả sách</a>
+                    <a href="/cgi-bin/koha/circ/circulation.pl">Ghi mượn</a>
                 [% END %]
                 [% WRAPPER breadcrumb_item bc_active= 1 %]
                     [% INCLUDE 'patron-title.inc' %]
                 [% END %]
             [% ELSE %]
                 [% WRAPPER breadcrumb_item bc_active= 1 %]
-                    <span>Trả sách</span>
+                    <span>Ghi mượn</span>
                 [% END %]
             [% END %]
         [% END #/ WRAPPER breadcrumbs %]
@@ -58,7 +58,7 @@
                         [% INCLUDE 'members-toolbar.inc' %]
                     [% END %]
 
-                    <h1>Trả sách</h1>
+                    <h1>Ghi mượn</h1>
 
                     <!--  INITIAL BLOC : PARAMETERS & BORROWER INFO -->
                     [% IF ( was_renewed ) %]

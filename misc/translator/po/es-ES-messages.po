@@ -89,43 +89,43 @@ msgid "Allow auto-renewals"
 msgstr "Permitir auto-renovaciones"
 
 #: Koha/Database/Columns.pm:130
-msgid "Alternate address: Address"
+msgid "Địa chỉ thay thế: Address"
 msgstr "Dirección alternativa: Dirección"
 
 #: Koha/Database/Columns.pm:131
-msgid "Alternate address: Address 2"
+msgid "Địa chỉ thay thế: Address 2"
 msgstr "Dirección alternativa: Dirección 2"
 
 #: Koha/Database/Columns.pm:132
-msgid "Alternate address: City"
+msgid "Địa chỉ thay thế: City"
 msgstr "Dirección alternativa: Ciudad"
 
 #: Koha/Database/Columns.pm:133
-msgid "Alternate address: Country"
+msgid "Địa chỉ thay thế: Country"
 msgstr "Dirección alternativa: País"
 
 #: Koha/Database/Columns.pm:134
-msgid "Alternate address: Email"
+msgid "Địa chỉ thay thế: Email"
 msgstr "Dirección alternativa: Correo electrónico"
 
 #: Koha/Database/Columns.pm:135
-msgid "Alternate address: Phone"
+msgid "Địa chỉ thay thế: Phone"
 msgstr "Dirección alternativa: Teléfono"
 
 #: Koha/Database/Columns.pm:136
-msgid "Alternate address: State"
+msgid "Địa chỉ thay thế: State"
 msgstr "Dirección alternativa: Estado"
 
 #: Koha/Database/Columns.pm:137
-msgid "Alternate address: Street number"
+msgid "Địa chỉ thay thế: Street number"
 msgstr "Dirección alternativa: Calle número"
 
 #: Koha/Database/Columns.pm:138
-msgid "Alternate address: Street type"
+msgid "Địa chỉ thay thế: Street type"
 msgstr "Dirección alternativa: Tipo de calle"
 
 #: Koha/Database/Columns.pm:139
-msgid "Alternate address: ZIP/Postal code"
+msgid "Địa chỉ thay thế: ZIP/Postal code"
 msgstr "Dirección alternativa: ZIP/Código postal"
 
 #: Koha/Database/Columns.pm:118

@@ -217,11 +217,11 @@
  <th>Kiểu bạn đọc</th>
  <th>Số nhà</th>
  <th>Địa chỉ</th>
- <th>Địa chỉ 2</th>
- <th>Thành phố</th>
+ <th>Đơn vị cấp 2</th>
+ <th>Đơn vị cấp 3</th>
  <th>Bang</th>
  <th>ZIP/Postal code</th>
- <th>Quốc gia</th>
+ <th>Khác</th>
  <th>Thư điện tử chỉnh</th>
  <th>Điện thoại chính</th>
  <th>Other phone</th>
@@ -313,12 +313,12 @@
  [% CASE 'branchcode' %]<span>Thư viện:</span>
  [% CASE 'categorycode' %]<span>Kiểu bạn đọc:</span>
  [% CASE 'streetnumber' %]<span>Số nhà:</span>
- [% CASE 'address' %]<span>Địa chỉ:</span>
- [% CASE 'address2' %]<span>Địa chỉ 2:</span>
+ [% CASE 'address' %]<span>Đơn vị cấp 1:</span>
+ [% CASE 'address2' %]<span>Đơn vị cấp 2:</span>
  [% CASE 'city' %]<span>Quận/Huyện:</span>
- [% CASE 'state' %]<span>Tỉnh/Thành phố:</span>
+ [% CASE 'state' %]<span>Đơn vị cấp 3:</span>
  [% CASE 'zipcode' %]<span>Mã ZIP/Bưu điện:</span>
- [% CASE 'country' %]<span>Quốc gia:</span>
+ [% CASE 'country' %]<span>Khác:</span>
  [% CASE 'email' %]<span>Thư điện tử:</span>
  [% CASE 'phone' %]<span>Điện thoại chính:</span>
  [% CASE 'mobile' %]<span>Số điện thoại khác:</span>

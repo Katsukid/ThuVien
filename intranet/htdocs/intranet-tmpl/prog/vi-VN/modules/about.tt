@@ -332,7 +332,7 @@
  </p>
  [% END %]
  [% IF ai_checkouts %]
- <h4>Trả sách</h4>
+ <h4>Ghi mượn</h4>
  <p>The following IDs exist in both tables [% "issues" | $HtmlTags tag="strong" %] and [% "old_issues" | $HtmlTags tag="strong" %]:</p>
  <p>
  [% FOR c IN ai_checkouts %]

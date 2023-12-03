@@ -123,7 +123,7 @@
 [% END %]
 
 <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a class="cancel" id="cancel_set_library" href="[% referer or '/cgi-bin/koha/circ/circulation.pl' %]">Hủy bỏ</a>
 </fieldset>
 <div class="noshow">

@@ -280,7 +280,7 @@
  <input name="add_duplicate_submit" onclick="return Check(this.form)" type="submit" value="Tạo & Sao chép" />
  </span>
  <span id="addmultiple">
- <input type="button" name="add_multiple_copies" id="add_multiple_copies" value="Add multiple copies of this item" />
+ <input type="button" name="add_multiple_copies" id="add_multiple_copies" value="Thêm nhiều bản ghi cho tài liệu này" />
  </span>
  <fieldset id="add_multiple_copies_span">
  <label for="number_of_copies">Number of copies of this item to add: </label>
@@ -290,7 +290,7 @@
  </fieldset>
 
  <span id="savetemplate">
- <input type="button" name="save_as_template" id="save_as_template" value="Save as template" />
+ <input type="button" name="save_as_template" id="save_as_template" value="Lưu làm mẫu nhập" />
  </span>
  <fieldset id="save_as_template_span">
  <legend>Save template</legend>

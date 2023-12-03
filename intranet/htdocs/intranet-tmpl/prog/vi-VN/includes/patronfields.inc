@@ -16,11 +16,11 @@
  [%- CASE 'streetnumber' -%]<span>Số nhà</span>
  [%- CASE 'streettype' -%]<span>Số nhà</span>
  [%- CASE 'address' -%]<span>Địa chỉ</span>
- [%- CASE 'address2' -%]<span>Địa chỉ 2</span>
- [%- CASE 'city' -%]<span>Thành phố</span>
+ [%- CASE 'address2' -%]<span>Đơn vị cấp 2</span>
+ [%- CASE 'city' -%]<span>Đơn vị cấp 3</span>
  [%- CASE 'state' -%]<span>Bang</span>
  [%- CASE 'zipcode' -%]<span>ZIP/Postal code</span>
- [%- CASE 'country' -%]<span>Quốc gia</span>
+ [%- CASE 'country' -%]<span>Khác</span>
  [%- CASE 'email' -%]<span>Thư điện tử chỉnh</span>
  [%- CASE 'phone' -%]<span>Điện thoại chính</span>
  [%- CASE 'mobile' -%]<span>Mobile phone</span>
@@ -80,10 +80,10 @@
 [%- END -%]
 [%- BLOCK patron_fields_dropdown -%]
  [% IF search_box %]
- <label for="searchfieldstype" class="control-label">Search field:</label>
+ <label for="searchfieldstype" class="control-label">Trường tìm kiếm</label>
  <select name="searchfieldstype" id="searchfieldstype" class="form-control">
  [% ELSE %]
- <label for="searchfieldstype_filter">Search field:</label>
+ <label for="searchfieldstype_filter">Trường tìm kiếm</label>
  <select name="searchfieldstype" id="searchfieldstype_filter">
  [% END %]
  [% SET standard = Koha.Preference('DefaultPatronSearchFields') || 'firstname,middle_name,surname,othernames,cardnumber,userid' %]

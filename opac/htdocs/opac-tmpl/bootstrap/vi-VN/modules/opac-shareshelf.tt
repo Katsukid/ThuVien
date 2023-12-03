@@ -106,7 +106,7 @@
  <p>Lời mời chia sẻ giá sách ảo <em>[% shelfname | html %]</em> will be sent shortly to [% approvedaddress | html %].</p>
  [% END %]
  [% IF failaddress %]
- <p>Phát hiện lỗi khi hệ thống xử lý địa chỉ sau đây. Bạn vui lòng kiểm tra lại. Địa chỉ: [% failaddress | html %]</p>
+ <p>Phát hiện lỗi khi hệ thống xử lý địa chỉ sau đây. Bạn vui lòng kiểm tra lại. Đơn vị cấp 1: [% failaddress | html %]</p>
  [% END %]
  [% IF approvedaddress %]
  <p>You will receive an email notification if someone accepts your share before it expires.</p>

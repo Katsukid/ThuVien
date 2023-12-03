@@ -139,7 +139,7 @@ function KohaTable(id_selector, dt_parameters, table_settings, add_filters) {
                 fade: 100,
                 columns: included_ids,
                 className: "columns_controls",
-                titleAttr: _("Columns settings"),
+                titleAttr: _("Thiết lập cột"),
                 text: '<i class="fa fa-lg fa-gear"></i> <span class="dt-button-text">' + _("Columns") + '</span>',
                 exportOptions: {
                     columns: exportColumns,
@@ -155,7 +155,7 @@ function KohaTable(id_selector, dt_parameters, table_settings, add_filters) {
             autoClose: true,
             fade: 100,
             className: "export_controls",
-            titleAttr: _("Export or print"),
+            titleAttr: _("Kết xuất hoặc in"),
             text: '<i class="fa fa-lg fa-download"></i> <span class="dt-button-text">' + _("Export") + '</span>',
             buttons: export_buttons
         }
@@ -166,7 +166,7 @@ function KohaTable(id_selector, dt_parameters, table_settings, add_filters) {
             {
                 className: "dt_button_configure_table",
                 fade: 100,
-                titleAttr: _("Configure table"),
+                titleAttr: _("Cấu hình bảng"),
                 text: '<i class="fa fa-lg fa-wrench"></i> <span class="dt-button-text">' + _("Configure") + '</span>',
                 action: function() {
                     window.location = '/cgi-bin/koha/admin/columns_settings.pl?module=' + table_settings['module'] + '&page=' + table_settings['page'] + '&table=' + table_settings['table'];

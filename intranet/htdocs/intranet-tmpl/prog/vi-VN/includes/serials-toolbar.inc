@@ -112,7 +112,7 @@
  <input type="hidden" id="mana-resource" value="subscription" />
  <input type="hidden" id="mana-resource-id" value="[% mana_id | html %]" />
  <input type="text" maxlength="35" size="35" id="mana-comment" required="required" />
- <button id="mana-send-comment">Tìm kiếm</button>
+ <button id="mana-send-comment">Xác nhận</button>
  <a href="#" class="cancel" id="mana-comment-close">Hủy bỏ</a>
  </div>
  <div class="modal-footer">

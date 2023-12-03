@@ -49,7 +49,7 @@
 
  <div class="page-section">
  <h2>Thông tin liên hệ</h2>
- <p><strong>Địa chỉ: </strong>
+ <p><strong>Đơn vị cấp 1: </strong>
  [% booksellerpostal | html %]
  [% bookselleraddress1 | html %]
  [% bookselleraddress2 | html %]

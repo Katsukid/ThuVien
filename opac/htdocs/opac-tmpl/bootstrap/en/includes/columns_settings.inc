@@ -86,7 +86,7 @@ function KohaTable(selector, dt_parameters, columns_settings) {
                 fade: 100,
                 columns: included_ids,
                 className: "columns_controls",
-                titleAttr: _("Columns settings"),
+                titleAttr: _("Thiết lập cột"),
                 text: '<i class="fa fa-lg fa-gear" aria-hidden="true"></i> <span class="dt-button-text">' + _("Columns") + '</span>',
                 exportOptions: {
                     columns: exportColumns

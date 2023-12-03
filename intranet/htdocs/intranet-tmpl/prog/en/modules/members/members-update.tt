@@ -39,16 +39,16 @@
 [% CASE 'fax'                 %]<span>Fax</span>
 [% CASE 'emailpro'            %]<span>Secondary email</span>
 [% CASE 'phonepro'            %]<span>Secondary phone</span>
-[% CASE 'B_streetnumber'      %]<span>Alternate address: Street number</span>
-[% CASE 'B_streettype'        %]<span>Alternate address: Street type</span>
-[% CASE 'B_address'           %]<span>Alternate address: Address</span>
-[% CASE 'B_address2'          %]<span>Alternate address: Address 2</span>
-[% CASE 'B_city'              %]<span>Alternate address: City</span>
-[% CASE 'B_state'             %]<span>Alternate address: State</span>
-[% CASE 'B_zipcode'           %]<span>Alternate address: ZIP/Postal code</span>
-[% CASE 'B_email'             %]<span>Alternate address: Email</span>
-[% CASE 'B_phone'             %]<span>Alternate address: Phone</span>
-[% CASE 'contactnote'         %]<span>Alternate address: Contact note</span>
+[% CASE 'B_streetnumber'      %]<span>Địa chỉ thay thế: Street number</span>
+[% CASE 'B_streettype'        %]<span>Địa chỉ thay thế: Street type</span>
+[% CASE 'B_address'           %]<span>Địa chỉ thay thế: Address</span>
+[% CASE 'B_address2'          %]<span>Địa chỉ thay thế: Address 2</span>
+[% CASE 'B_city'              %]<span>Địa chỉ thay thế: City</span>
+[% CASE 'B_state'             %]<span>Địa chỉ thay thế: State</span>
+[% CASE 'B_zipcode'           %]<span>Địa chỉ thay thế: ZIP/Postal code</span>
+[% CASE 'B_email'             %]<span>Địa chỉ thay thế: Email</span>
+[% CASE 'B_phone'             %]<span>Địa chỉ thay thế: Phone</span>
+[% CASE 'contactnote'         %]<span>Địa chỉ thay thế: Contact note</span>
 [% CASE 'dateofbirth'         %]<span>Date of birth</span>
 [% CASE 'contactname'         %]<span>Contact: Last name</span>
 [% CASE 'contactfirstname'    %]<span>Contact: First name</span>
@@ -129,7 +129,7 @@
 
 
                                             <label for="ignore_modify_[% pm.borrowernumber | html %]"><input type="radio" id="ignore_modify_[% pm.borrowernumber | html %]" name="modify_[% pm.borrowernumber | html %]" value="ignore" checked="checked"/> Ignore</label>
-                                            &nbsp;|&nbsp; <a target="_blank" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% pm.borrowernumber | html %]" >Patron details</a>
+                                            &nbsp;|&nbsp; <a target="_blank" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% pm.borrowernumber | html %]" >Thông tin bạn đọc</a>
                                         </div>
 
                                         [% IF borrowers.$borrowernumber.gonenoaddress > 0 %]
@@ -147,8 +147,8 @@
                                                 <table>
                                                     <tr>
                                                         <th>Field</th>
-                                                        <th>Old value</th>
-                                                        <th>New value</th>
+                                                        <th>Giá trị cũ</th>
+                                                        <th>Giá trị mới</th>
                                                     </tr>
 
 
@@ -180,8 +180,8 @@
                                                 <table>
                                                     <tr>
                                                         <th>Field</th>
-                                                        <th>Old value</th>
-                                                        <th>New value</th>
+                                                        <th>Giá trị cũ</th>
+                                                        <th>Giá trị mới</th>
                                                     </tr>
                                                     [% FOREACH attribute_group IN borrowers.$borrowernumber.modified_attributes %]
                                                         <tr>

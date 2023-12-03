@@ -176,7 +176,7 @@
  <a href="JavaScript:add_field();" id="ButtonPlus" title="Thêm trường tìm kiếm">[+]</a>
  [% END %]
  [% IF ( loop.first ) %]
- <label for="scan">Scan indexes:</label> <input type="checkbox" name="scan" id="scan" value="1" />
+ <label for="scan">Quét chỉ mục:</label> <input type="checkbox" name="scan" id="scan" value="1" />
  [% END %]
  [% END %]
  </div>
@@ -273,7 +273,7 @@
  <p>
  <label for="limit-yr">Năm xuất bản: </label>
  [% SET year_limit_key = 'yr,st-numeric' %]
- <input type="text" size="15" name="limit-yr" id="limit-yr" value="[% limits.$year_limit_key.0 | html %]"/>&nbsp;&nbsp;(format: yyyy-yyyy)
+ <input type="text" size="15" name="limit-yr" id="limit-yr" value="[% limits.$year_limit_key.0 | html %]"/>&nbsp;&nbsp;(định dạng: yyyy-yyyy)
  [% IF limits.$year_limit_key.defined %]
  [% limits.delete(year_limit_key) %]
  [% END %]
@@ -287,7 +287,7 @@
  <label for="language-limit">Ngôn ngữ: </label>
  [% PROCESS language_limit_select ln_loop=search_languages_loop ln_id='language-limit' ln_index='ln' selected = limits.${'ln,rtrn'}.0 %]
  [% limits.delete( 'ln,rtrn' ) %]
- <label for="language-original-limit">Language of original: </label>
+ <label for="language-original-limit">Ngôn ngữ gốc: </label>
  [% PROCESS language_limit_select ln_loop=search_languages_loop ln_id='language-original-limit' ln_index='language-original' selected = limits.${'language-original,rtrn'}.0 %]
  [% limits.delete( 'language-original,rtrn' ) %]
  </p>

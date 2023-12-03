@@ -131,7 +131,7 @@
  </ol>
  </fieldset>
  <fieldset id="patron_ids_submit" class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </fieldset>
 
  <div class="clearfix"></div>

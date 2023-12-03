@@ -198,7 +198,7 @@
 </fieldset>
 </form>
 [% ELSE %]
-    <p>[% INCLUDE 'patron-title.inc' %] has no outstanding charges.</p>
+    <p>[% INCLUDE 'patron-title.inc' %] không có khoản phí nào tồn đọng.</p>
 [% END %]
         </div> <!-- /.tab-pane -->
     </div> <!-- /.tab-content -->

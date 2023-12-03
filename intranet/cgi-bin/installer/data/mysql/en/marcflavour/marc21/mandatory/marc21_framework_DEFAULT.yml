@@ -4052,8 +4052,8 @@ tables:
 
         - tagfield: "013"
           tagsubfield: "b"
-          liblibrarian: "Quốc gia"
-          libopac: "Quốc gia"
+          liblibrarian: "Khác"
+          libopac: "Khác"
           repeatable: 0
           mandatory: 0
           kohafield: ""
@@ -15932,8 +15932,8 @@ tables:
 
         - tagfield: "270"
           tagsubfield: "b"
-          liblibrarian: "Thành phố"
-          libopac: "Thành phố"
+          liblibrarian: "Đơn vị cấp 3"
+          libopac: "Đơn vị cấp 3"
           repeatable: 0
           mandatory: 0
           kohafield:
@@ -15968,8 +15968,8 @@ tables:
 
         - tagfield: "270"
           tagsubfield: "d"
-          liblibrarian: "Quốc gia"
-          libopac: "Quốc gia"
+          liblibrarian: "Khác"
+          libopac: "Khác"
           repeatable: 0
           mandatory: 0
           kohafield:
@@ -28154,8 +28154,8 @@ tables:
 
         - tagfield: "535"
           tagsubfield: "c"
-          liblibrarian: "Quốc gia"
-          libopac: "Quốc gia"
+          liblibrarian: "Khác"
+          libopac: "Khác"
           repeatable: 1
           mandatory: 0
           kohafield:
@@ -29558,8 +29558,8 @@ tables:
 
         - tagfield: "544"
           tagsubfield: "c"
-          liblibrarian: "Quốc gia"
-          libopac: "Quốc gia"
+          liblibrarian: "Khác"
+          libopac: "Khác"
           repeatable: 1
           mandatory: 0
           kohafield: ""
@@ -36902,8 +36902,8 @@ tables:
 
         - tagfield: "662"
           tagsubfield: "d"
-          liblibrarian: "Thành phố"
-          libopac: "Thành phố"
+          liblibrarian: "Đơn vị cấp 3"
+          libopac: "Đơn vị cấp 3"
           repeatable: 0
           mandatory: 0
           kohafield: ""
@@ -42806,8 +42806,8 @@ tables:
 
         - tagfield: "752"
           tagsubfield: "d"
-          liblibrarian: "Thành phố"
-          libopac: "Thành phố"
+          liblibrarian: "Đơn vị cấp 3"
+          libopac: "Đơn vị cấp 3"
           repeatable: 0
           mandatory: 0
           kohafield:
@@ -55316,8 +55316,8 @@ tables:
 
         - tagfield: "851"
           tagsubfield: "d"
-          liblibrarian: "Quốc gia"
-          libopac: "Quốc gia"
+          liblibrarian: "Khác"
+          libopac: "Khác"
           repeatable: 0
           mandatory: 0
           kohafield:

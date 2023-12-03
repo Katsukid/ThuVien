@@ -80,10 +80,10 @@
 [%- END -%]
 [%- BLOCK patron_fields_dropdown -%]
     [% IF search_box %]
-        <label for="searchfieldstype" class="control-label">Search field:</label>
+        <label for="searchfieldstype" class="control-label">Trường tìm kiếm</label>
         <select name="searchfieldstype" id="searchfieldstype" class="form-control">
     [% ELSE %]
-        <label for="searchfieldstype_filter">Search field:</label>
+        <label for="searchfieldstype_filter">Trường tìm kiếm</label>
         <select name="searchfieldstype" id="searchfieldstype_filter">
     [% END %]
         [% SET standard = Koha.Preference('DefaultPatronSearchFields') || 'firstname,middle_name,surname,othernames,cardnumber,userid' %]

@@ -11899,8 +11899,8 @@ tables:
         - authtypecode: ""
           tagfield: "371"
           tagsubfield: "b"
-          liblibrarian: "Thành phố"
-          libopac: "Thành phố"
+          liblibrarian: "Đơn vị cấp 3"
+          libopac: "Đơn vị cấp 3"
           repeatable: 0
           mandatory: 0
           tab: 3
@@ -11933,8 +11933,8 @@ tables:
         - authtypecode: ""
           tagfield: "371"
           tagsubfield: "d"
-          liblibrarian: "Quốc gia"
-          libopac: "Quốc gia"
+          liblibrarian: "Khác"
+          libopac: "Khác"
           repeatable: 0
           mandatory: 0
           tab: 3

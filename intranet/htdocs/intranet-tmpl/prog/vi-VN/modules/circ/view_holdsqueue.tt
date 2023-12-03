@@ -278,7 +278,7 @@
  </li>
  </ol>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <input type="hidden" name="run_report" value="1" />
  </fieldset>
  </fieldset>

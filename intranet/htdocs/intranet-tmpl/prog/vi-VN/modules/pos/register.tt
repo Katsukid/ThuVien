@@ -324,7 +324,7 @@
  <span id="paid" class="label">Amount paid: </span><span></span>
  </li>
  <li>
- <label class="required" for="amount">Returned to patron: </label>
+ <label class="required" for="amount">Hoàn lại: </label>
  <input type="text" inputmode="decimal" pattern="^\d+(\.\d{2})?$" id="returned" name="amount" required="required">
  <span class="required">Bắt buộc</span>
  </li>

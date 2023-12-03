@@ -88,7 +88,7 @@
  <label for="B_address" class="required">
  [% ELSE %]
  <label for="B_address">
- [% END %] Địa chỉ: </label>
+ [% END %] Đơn vị cấp 1: </label>
  <input type="text" id="B_address" name="B_address" size="40" value="[% patron.B_address | html %]" />
  [% IF ( mandatoryB_address ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -116,7 +116,7 @@
  <label for="B_address2" class="required">
  [% ELSE %]
  <label for="B_address2">
- [% END %] Địa chỉ 2: </label>
+ [% END %] Đơn vị cấp 2: </label>
  <input type="text" id="B_address2" name="B_address2" size="40" value="[% patron.B_address2 | html %]" />
  [% IF ( mandatoryB_address2 ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -176,7 +176,7 @@
  [% ELSE %]
  <label for="B_state">
  [% END %]
- Tỉnh/Thành phố: </label>
+ Đơn vị cấp 3: </label>
  <input type="text" id="B_state" name="B_state" size="20" value="[% patron.B_state | html %]" />
  [% IF ( mandatoryB_state ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>

@@ -50,7 +50,7 @@
  </div>
  </fieldset>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  <a class="cancel" href="/cgi-bin/koha/admin/items_search_fields.pl">Hủy bỏ</a>
  </fieldset>
  </form>

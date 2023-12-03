@@ -285,7 +285,7 @@ my $DBversion = "3.00.00.000";
             {
                 uniquefieldrequired => 'variable',
                 variable            => 'BorrowersTitles',
-                value               => 'Mr|Mrs|Miss|Ms',
+                value               => 'Ông|Bà|Anh|Chị',
                 forceupdate         => { 'explanation' => 1,
                                         'type' => 1},
                 explanation         => 'List all Titles for borrowers',

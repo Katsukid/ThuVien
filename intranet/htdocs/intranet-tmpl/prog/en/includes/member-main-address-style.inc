@@ -171,7 +171,7 @@
             [% ELSE %]
                 <label for="state">
             [% END %]
-            Tỉnh/Thành phố: </label>
+            Đơn vị cấp 3: </label>
             <input type="text" id="state" name="state" size="20" value="[% patron.state | html %]" />
             [% IF ( mandatorystate ) %]<span class="required">Required</span>[% END %]
         </li>

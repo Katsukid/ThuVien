@@ -161,7 +161,7 @@ div.rows { padding: 1rem; }
  <input type="text" size="40" id="company" name="company" value="[% name | html %]" required="required" class="required focus" /><span class="required">Bắt buộc</span></li>
  <li><label for="company_postal">Địa chỉ bưu điện: </label>
  <textarea id="company_postal" name="company_postal" cols="40" rows="3">[% postal | html %]</textarea></li>
- <li><label for="physical">Địa chỉ: </label>
+ <li><label for="physical">Đơn vị cấp 1: </label>
  <textarea id="physical" name="physical" cols="40" rows="3">[% address1 | html %][% address2 | html %][% address3 | html %][% address4 | html %]</textarea></li>
  <li><label for="company_phone">Điện thoại: </label>
  <input type="text" size="20" id="company_phone" name="company_phone" value="[% phone | html %]" /></li>
@@ -315,7 +315,7 @@ div.rows { padding: 1rem; }
  </p>
  <p><span class="label">Tên nhà cung cấp: </span>[% name | html %]</p>
  <p><span class="label">Địa chỉ bưu điện: </span>[% postal | html %]</p>
- <p><span class="label">Địa chỉ: </span>[% address1 | html %][% address2 | html %][% address3 | html %][% address4 | html %]</p>
+ <p><span class="label">Đơn vị cấp 1: </span>[% address1 | html %][% address2 | html %][% address3 | html %][% address4 | html %]</p>
  <p><span class="label">Điện thoại: </span>[% phone | html %]</p>
  <p><span class="label">Số Fax: </span>[% fax | html %]</p>
  [% IF ( url ) %]

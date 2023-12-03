@@ -165,7 +165,7 @@
 
  </fieldset>
 
- <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
+ <input class="btn btn-primary" type="submit" value="Xác nhận" />
  </form>
  [% END %]
  </div> <!-- / #onboarding-step5 -->
