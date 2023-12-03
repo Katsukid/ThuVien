@@ -29,7 +29,7 @@
 [% END %]
 
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Check in [% title | html %] &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Ghi trả [% title | html %] &rsaquo; Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

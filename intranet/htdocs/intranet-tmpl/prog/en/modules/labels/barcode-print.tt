@@ -1,7 +1,7 @@
 [% USE raw %]
 [% USE Asset %]
 [% SET footerjs = 1 %]
-[% INCLUDE 'doc-head-open.inc' %]<title>Barcode image generator &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+[% INCLUDE 'doc-head-open.inc' %]<title>Trình tạo hình ảnh mã vạch &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.css("css/humanmsg.css") | $raw %]
 [% FILTER collapse %]
@@ -50,7 +50,7 @@
             <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Cataloging</a>
         [% END %]
         [% WRAPPER breadcrumb_item bc_active= 1 %]
-            <span>Barcode image generator</span>
+            <span>Trình tạo hình ảnh mã vạch</span>
         [% END %]
     [% END #/ WRAPPER breadcrumbs %]
 [% END #/ WRAPPER sub-header.inc %]
@@ -59,7 +59,7 @@
     <div class="row">
         <div class="col-sm-10 col-sm-push-2">
             <main>
-                <h2>Barcode image generator</h2>
+                <h2>Trình tạo hình ảnh mã vạch</h2>
 
                 <form action="/cgi-bin/koha/svc/barcode" method="post" id="barcodegen">
                     <fieldset class="brief">
@@ -67,7 +67,7 @@
                             <div class="col-sm-6">
                                 <ol>
                                     <li>
-                                        <label for="type">Barcode type:</label>
+                                        <label for="type">Loại mã vạch:</label>
                                         <select name="type" id="type">
                                             <option value="Code39">Code39</option>
                                             <option value="COOP2of5">COOP2of5</option>
@@ -90,10 +90,10 @@
                                         <div class="hint">Module size refers to the pixel dimensions of each black or white square in the generated QR code.</div>
                                     </li>
                                     <li class="bcode">
-                                        <label for="notext">Hide text <input type="checkbox" id="notext" name="notext" value="1" /></label>
+                                        <label for="notext">Ẩn văn bản <input type="checkbox" id="notext" name="notext" value="1" /></label>
                                     </li>
                                     <li class="bcode">
-                                        <label for="height">Barcode height:</label>
+                                        <label for="height">Chiều cao mã vạch:</label>
                                         <input type="text" id="height" name="height" value="50" />
                                     </li>
                                     <li>
@@ -101,7 +101,7 @@
                                         <label class="qrcode" for="barcode">Text, URL, or barcode, etc: </label>
                                         <input type="text" name="barcode" id="barcode" size="50" />
                                         <div class="hint qrcode">Actual dimensions of the QR code depend on the amount of characters being encoded.</div>
-                                        <div class="hint bcode">Barcode text must be numeric (0-9)</div>
+                                        <div class="hint bcode">Văn bản mã vạch phải là số (0-9)</div>
                                     </li>
                                 </ol>
                                 <fieldset class="action">

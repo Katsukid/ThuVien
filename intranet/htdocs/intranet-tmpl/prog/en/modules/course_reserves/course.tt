@@ -3,7 +3,7 @@
 [% PROCESS 'i18n.inc' %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF course_name %] Edit [% course_name | html %] [% ELSE %] New course [% END %] &rsaquo; Course reserves &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF course_name %] Edit [% course_name | html %] [% ELSE %] Tạo khóa học [% END %] &rsaquo; CSDL khóa học &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
     #course_instructors {

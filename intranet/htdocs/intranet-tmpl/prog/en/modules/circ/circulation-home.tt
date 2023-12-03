@@ -2,7 +2,7 @@
 [% USE Koha %]
 [% USE Branches %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body id="circ_circulation-home" class="circ">
@@ -128,7 +128,7 @@
                         </li>
                     [% END %]
                     <li>
-                        <a class="circ-button" href="/cgi-bin/koha/circ/transfers_to_send.pl"><i class="fa fa-sign-out"></i> Transfers to send</a>
+                        <a class="circ-button" href="/cgi-bin/koha/circ/transfers_to_send.pl"><i class="fa fa-sign-out"></i> Thư viện nhận tài liệu</a>
                     </li>
                     <li>
                         <a class="circ-button" href="/cgi-bin/koha/circ/transferstoreceive.pl"><i class="fa fa-sign-in"></i> Transfers to receive</a>

@@ -8,7 +8,7 @@
 [% PROCESS 'i18n.inc' %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Holds awaiting pickup &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Đặt mượn chờ bạn đọc nhận tài liệu  &rsaquo; Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -40,7 +40,7 @@
                         <div class="col-sm-12">
                     [% END %]
 
-                        <h1>Holds awaiting pickup for your library on: [% show_date | $KohaDates %]</h1>
+                        <h1>Đặt mượn chờ bạn đọc nhận tài liệu trong thư viện của bạn vào ngày: [% show_date | $KohaDates %]</h1>
                         <h2>
                             [% IF ( all_branches_link ) %]
                                 <span><a href="[% all_branches_link | url %]">

@@ -8,7 +8,7 @@
 [%- USE ItemTypes -%]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Holds to pull &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Đặt mượn chờ đáp ứng &rsaquo;  Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -52,7 +52,7 @@
             </div>
         [% END %]
 
-<h1>Holds to pull placed between [% from | $KohaDates %] and [% to | $KohaDates %]</h1>
+<h1>Đặt mượn chờ đáp ứng trong khoảng [% from | $KohaDates %] đến [% to | $KohaDates %]</h1>
 <h3>Reported on [% todaysdate | $KohaDates %]</h3>
 <p>The following holds have not been filled. Please retrieve them and check them in.</p>
 <div id="searchresults">
