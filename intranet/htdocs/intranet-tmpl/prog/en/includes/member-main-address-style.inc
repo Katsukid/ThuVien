@@ -126,7 +126,7 @@
             [% ELSE %]
                 <label for="zipcode">
             [% END %]
-            Mã ZIP/Bưu điện: </label>
+            Mã đơn vị: </label>
             <input type="text" id="zipcode" name="zipcode" maxlength="10" size="10" value="[% patron.zipcode | html %]" />
               [% IF ( mandatoryzipcode ) %]<span class="required">Required</span>[% END %]
         </li>
@@ -141,7 +141,7 @@
             [% ELSE %]
                 <label for="city">
             [% END %]
-            Quận/Huyện: </label>
+            Đơn vị cấp 3: </label>
             [% IF cities.count %]
                 <select class="select_city" data-addressfield="" name="select_city">
                     <option value="|||"></option>
@@ -171,7 +171,7 @@
             [% ELSE %]
                 <label for="state">
             [% END %]
-            Đơn vị cấp 3: </label>
+            Đơn vị cấp 4: </label>
             <input type="text" id="state" name="state" size="20" value="[% patron.state | html %]" />
             [% IF ( mandatorystate ) %]<span class="required">Required</span>[% END %]
         </li>
@@ -186,7 +186,7 @@
             [% ELSE %]
                 <label for="country">
             [% END %]
-            Country: </label>
+            Khác: </label>
             <input type="text" id="country" name="country" size="20" value="[% patron.country | html %]" />
             [% IF ( mandatorycountry ) %]<span class="required">Required</span>[% END %]
         </li>

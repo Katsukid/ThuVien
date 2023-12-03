@@ -166,7 +166,7 @@ sub columns {
             "lastseen"                    => __("Last activity date"),
             "login_attempts"              => __("Number of failed login attempts"),
             "lost"                        => __("Lost card flag"),
-            "middle_name"                 => __("Middle name"),
+            "middle_name"                 => __("Tên đệm"),
             "mobile"                      => __("Other phone"),
             "opacnote"                    => __("OPAC note"),
             "othernames"                  => __("Other name"),

@@ -122,7 +122,7 @@
  Duyệt theo họ:
  [% SET alphabet = Koha.Preference('alphabet').split(' ') %]
  [% UNLESS alphabet.size %]
- [% alphabet = ['A' 'B' 'C' 'D' 'E' 'Ê' 'G' 'H' 'I' 'K' 'L' 'M' 'N' 'O' 'Ô' 'Ơ' 'P' 'Q' 'R' 'S' 'T' 'U' 'Ư' 'V' 'X' 'Y' 'Ă' 'Â'] %]
+ [% alphabet = ['A' .. 'Z'] %]
  [% END %]
  [% FOREACH letter IN alphabet %]
  <a href="#" class="filterByLetter">[% letter | html %]</a>
@@ -728,7 +728,7 @@
             var searched = $("#searchfieldstype_filter").find("option:selected").text();
             if ( $("#search_patron_filter").val() ) {
                 if ( $("#searchtype_filter").val() == 'starts_with' ) {
-                    searched += _(" starting with ");
+                    searched += _(" bắt đầu với ");
                 } else {
                     searched += _(" containing ");
                 }

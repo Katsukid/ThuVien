@@ -583,26 +583,26 @@
                                             [% END %]
                                             [% IF ( patron.altcontactaddress3 ) %]
                                                 <li id="patron-altcontactaddress3">
-                                                    <span class="label">Quận/Huyện: </span>
+                                                    <span class="label">Đơn vị cấp 3: </span>
                                                     [% patron.altcontactaddress3 | html %]
                                                 </li>
                                             [% END %]
 
                                             [% IF ( patron.altcontactstate ) %]
                                                 <li id="patron-altcontactstate">
-                                                    <span class="label">Đơn vị cấp 3: </span>
+                                                    <span class="label">Đơn vị cấp 4: </span>
                                                     [% patron.altcontactstate | html %]
                                                 </li>
                                             [% END %]
                                             [% IF ( patron.altcontactzipcode ) %]
                                                 <li id="patron-altcontactzipcode">
-                                                    <span class="label">Mã ZIP/Bưu điện: </span>
+                                                    <span class="label">Mã đơn vị: </span>
                                                     [% patron.altcontactzipcode | html %]
                                                 </li>
                                             [% END %]
                                             [% IF ( patron.altcontactcountry ) %]
                                                 <li id="patron-altcontactcountry">
-                                                    <span class="label">Country: </span>
+                                                    <span class="label">Khác: </span>
                                                     [% patron.altcontactcountry | html %]
                                                 </li>
                                             [% END %]

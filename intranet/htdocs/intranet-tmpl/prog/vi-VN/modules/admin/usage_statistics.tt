@@ -206,7 +206,7 @@
  <li>
  <label for="[% l.branchcode | html %]">[% l.branchname | html %]: </label>
  <div style="float:left;">
- <div>Country: [% l.branchcountry | html %]</div>
+ <div>Khác: [% l.branchcountry | html %]</div>
  <div>Url: [% l.branchurl | html %]</div>
  <div>
  Geolocation: <input type="text" id="geolocation_[% l.branchcode | html %]" name="geolocation_[% l.branchcode | html %]" value="[% l.geolocation | html %]" size="35" readonly="readonly" />

@@ -13,7 +13,7 @@
 [% BLOCK streetnumber %]
  [% UNLESS hidden.defined('streetnumber') %]
  <li>
- <label for="borrower_streetnumber" class="[% required.streetnumber | html %]">Số nhà:</label>
+ <label for="borrower_streetnumber" class="[% required.streetnumber | html %]">Số phòng:</label>
 
  <input type="text" id="borrower_streetnumber" name="borrower_streetnumber" value="[% borrower.streetnumber | html %]" class="[% required.streetnumber | html %]" size="5" maxlength="10" />
  <div class="required_label [% required.streetnumber | html %]">Bắt buộc</div>
@@ -23,7 +23,7 @@
 [% BLOCK B_streetnumber %]
  [% UNLESS hidden.defined('B_streetnumber') %]
  <li>
- <label for="borrower_B_streetnumber" class="[% required.B_streetnumber | html %]">Số nhà:</label>
+ <label for="borrower_B_streetnumber" class="[% required.B_streetnumber | html %]">Số phòng:</label>
 
  <input type="text" id="borrower_B_streetnumber" name="borrower_B_streetnumber" value="[% borrower.B_streetnumber | html %]" class="[% required.B_streetnumber | html %]" size="5" maxlength="10" />
  <div class="required_label [% required.B_streetnumber | html %]">Bắt buộc</div>

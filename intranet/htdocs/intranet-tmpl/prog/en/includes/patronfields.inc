@@ -1,14 +1,14 @@
 [%- BLOCK patron_fields -%]
      [%- SWITCH name -%]
      [%- CASE standard -%]<span>Standard</span>
-     [%- CASE full_address -%]<span>Full address</span>
-     [%- CASE all_emails -%]<span>All emails</span>
-     [%- CASE all_phones -%]<span>All phones</span>
-     [%- CASE 'borrowernumber' -%]<span>Borrowernumber</span>
+     [%- CASE full_address -%]<span>Địa chỉ</span>
+     [%- CASE all_emails -%]<span>Thư điện tử</span>
+     [%- CASE all_phones -%]<span>Theo số điện thoại</span>
+     [%- CASE 'borrowernumber' -%]<span>Lượt mượn</span>
      [%- CASE 'cardnumber' -%]<span>Card number</span>
      [%- CASE 'surname' -%]<span>Surname</span>
      [%- CASE 'firstname' -%]<span>First name</span>
-     [%- CASE 'middle_name' -%]<span>Middle name</span>
+     [%- CASE 'middle_name' -%]<span>Tên đệm</span>
      [%- CASE 'title' -%]<span>Salutation</span>
      [%- CASE 'othernames' -%]<span>Other name</span>
      [%- CASE 'initials' -%]<span>Initials</span>

@@ -55,7 +55,7 @@
  <label for="streettype" class="required">
  [% ELSE %]
  <label for="streettype">
- [% END %] Số nhà: </label>
+ [% END %] Số phòng: </label>
  <select name="streettype">
  <option value=""></option>
  [% FOR roadtype IN roadtypes %]
@@ -93,7 +93,7 @@
  <label for="streetnumber" class="required">
  [% ELSE %]
  <label for="streetnumber">
- [% END %] Số nhà: </label>
+ [% END %] Số phòng: </label>
  <input type="text" id="streetnumber" name="streetnumber" size="5" maxlength="10" value="[% patron.streetnumber | html %]" />
  [% IF ( mandatorystreetnumber ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -122,7 +122,7 @@
  [% ELSE %]
  <label for="zipcode">
  [% END %]
- Mã ZIP/Bưu điện: </label>
+ Mã đơn vị: </label>
  <input type="text" id="zipcode" name="zipcode" maxlength="10" size="10" value="[% patron.zipcode | html %]" />
  [% IF ( mandatoryzipcode ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -137,7 +137,7 @@
  [% ELSE %]
  <label for="city">
  [% END %]
- Quận/Huyện: </label>
+ Đơn vị cấp 3: </label>
  [% IF cities.count %]
  <select class="select_city" data-addressfield="" name="select_city">
  <option value="|||"></option>
@@ -167,7 +167,7 @@
  [% ELSE %]
  <label for="state">
  [% END %]
- Đơn vị cấp 3: </label>
+ Đơn vị cấp 4: </label>
  <input type="text" id="state" name="state" size="20" value="[% patron.state | html %]" />
  [% IF ( mandatorystate ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -181,7 +181,8 @@
  <label for="country" class="required">
  [% ELSE %]
  <label for="country">
- [% END %] Quốc gia </label>
+ [% END %]
+ Khác: </label>
  <input type="text" id="country" name="country" size="20" value="[% patron.country | html %]" />
  [% IF ( mandatorycountry ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>

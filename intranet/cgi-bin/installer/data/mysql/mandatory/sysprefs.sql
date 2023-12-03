@@ -47,7 +47,7 @@ INSERT INTO systempreferences ( `variable`, `value`, `options`, `explanation`, `
 ('AllowStaffToSetCheckoutsVisibilityForGuarantor','0',NULL,'If enabled, library staff can set a patron''s checkouts to be visible to linked patrons from the opac.',  'YesNo'),
 ('AllowStaffToSetFinesVisibilityForGuarantor','0',NULL,'If enabled, library staff can set a patron''s fines to be visible to linked patrons from the opac.',  'YesNo'),
 ('AllowTooManyOverride','1','','If on, allow staff to override and check out items when the patron has reached the maximum number of allowed checkouts','YesNo'),
-('alphabet','A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',NULL,'Alphabet than can be expanded into browse links, e.g. on Home > Patrons','free'),
+('alphabet','A B C D E F G H I K L M N O P Q R S T U V X Y',NULL,'Alphabet than can be expanded into browse links, e.g. on Home > Patrons','free'),
 ('AlternateHoldingsField','',NULL,'The MARC field/subfield that contains alternate holdings information for bibs taht do not have items attached (e.g. 852abchi for libraries converting from MARC Magician).','free'),
 ('AlternateHoldingsSeparator','',NULL,'The string to use to separate subfields in alternate holdings displays.','free'),
 ('AmazonAssocTag','','','See:  http://aws.amazon.com','free'),

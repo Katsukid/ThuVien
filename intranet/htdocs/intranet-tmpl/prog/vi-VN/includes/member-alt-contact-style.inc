@@ -112,7 +112,7 @@
  [% ELSE %]
  <label for="altcontactzipcode">
  [% END %]
- Mã ZIP/Bưu điện: </label>
+ Mã đơn vị: </label>
 <input type="text" name="altcontactzipcode" id="altcontactzipcode" value="[% patron.altcontactzipcode | html %]" size="5" />
  [% IF ( mandatoryaltcontactzipcode ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -127,7 +127,7 @@
  [% ELSE %]
  <label for="altcontactaddress3">
  [% END %]
- Quận/Huyện: </label>
+ Đơn vị cấp 3: </label>
  [% IF cities.count %]
  <select class="select_city" data-addressfield="altcontact" name="select_city">
  <option value="|||"></option>
@@ -157,7 +157,7 @@
  [% ELSE %]
  <label for="altcontactstate">
  [% END %]
- Đơn vị cấp 3: </label>
+ Đơn vị cấp 4: </label>
  <input type="text" name="altcontactstate" id="altcontactstate" value="[% patron.altcontactstate | html %]" size="20" />
  [% IF ( mandatoryaltcontactstate ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>
@@ -171,7 +171,8 @@
  <label for="altcontactcountry" class="required">
  [% ELSE %]
  <label for="altcontactcountry">
- [% END %] Quốc gia </label>
+ [% END %]
+ Khác: </label>
  <input type="text" name="altcontactcountry" id="altcontactcountry" value="[% patron.altcontactcountry | html %]" size="20" />
  [% IF ( mandatoryaltcontactcountry ) %]<span class="required">Bắt buộc</span>[% END %]
  </li>

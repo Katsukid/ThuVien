@@ -527,7 +527,7 @@
 
                                         [% UNLESS hidden.defined('country') %]
                                             <li>
-                                                <label for="borrower_country" class="[% required.country | html %]">Country:</label>
+                                                <label for="borrower_country" class="[% required.country | html %]">Khác:</label>
 
                                                 <input type="text" id="borrower_country" name="borrower_country" value="[% borrower.country | html %]" class="[% required.country | html %]" />
                                                 <div class="required_label [% required.country | html %]">Required</div>
@@ -752,7 +752,7 @@
 
                                         [% UNLESS hidden.defined('B_country') %]
                                             <li>
-                                                <label for="borrower_B_country" class="[% required.B_country | html %]">Country:</label>
+                                                <label for="borrower_B_country" class="[% required.B_country | html %]">Khác:</label>
 
                                                 <input type="text" id="borrower_B_country" name="borrower_B_country" value="[% borrower.B_country | html %]" class="[% required.B_country | html %]" />
                                                 <div class="required_label [% required.B_country | html %]">Required</div>
@@ -865,7 +865,7 @@
 
                                         [% UNLESS hidden.defined('altcontactcountry') %]
                                             <li>
-                                                <label for="borrower_altcontactcountry" class="[% required.altcontactcountry | html %]">Country:</label>
+                                                <label for="borrower_altcontactcountry" class="[% required.altcontactcountry | html %]">Khác:</label>
 
                                                 <input type="text" id="borrower_altcontactcountry" name="borrower_altcontactcountry" value="[% borrower.altcontactcountry | html %]" class="[% required.altcontactcountry | html %]" />
                                                 <div class="required_label [% required.altcontactcountry | html %]">Required</div>

@@ -20,7 +20,7 @@
 [% CASE 'branchcode'          %]<span>Home library (branchcode)</span>
 [% CASE 'surname'             %]<span>Họ</span>
 [% CASE 'firstname'           %]<span>Tên</span>
-[% CASE 'middle_name'         %]<span>Middle name</span>
+[% CASE 'middle_name'         %]<span>Tên đệm</span>
 [% CASE 'title'               %]<span>Nhan đề</span>
 [% CASE 'othernames'          %]<span>Other names</span>
 [% CASE 'initials'            %]<span>Tên biết tắt</span>

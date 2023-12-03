@@ -11449,7 +11449,7 @@ msgstr "Dừng phát hành"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:26
 #, c-format
 msgid "Street number:"
-msgstr "Số nhà:"
+msgstr "Số phòng:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:461
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:687

@@ -164,7 +164,7 @@
 
   <xsl:if test="marc:datafield[@tag=102]">
     <span class="results_summary country">
-      <span class="label">Country: </span>
+      <span class="label">Khác: </span>
       <xsl:for-each select="marc:datafield[@tag=102]">
         <xsl:for-each select="marc:subfield">
           <xsl:value-of select="text()"/>

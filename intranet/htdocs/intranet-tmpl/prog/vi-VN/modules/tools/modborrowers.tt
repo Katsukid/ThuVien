@@ -312,12 +312,12 @@
  [% CASE 'firstname' %]<span>Tên: </span>
  [% CASE 'branchcode' %]<span>Thư viện:</span>
  [% CASE 'categorycode' %]<span>Kiểu bạn đọc:</span>
- [% CASE 'streetnumber' %]<span>Số nhà:</span>
+ [% CASE 'streetnumber' %]<span>Số phòng:</span>
  [% CASE 'address' %]<span>Đơn vị cấp 1:</span>
  [% CASE 'address2' %]<span>Đơn vị cấp 2:</span>
- [% CASE 'city' %]<span>Quận/Huyện:</span>
- [% CASE 'state' %]<span>Đơn vị cấp 3:</span>
- [% CASE 'zipcode' %]<span>Mã ZIP/Bưu điện:</span>
+ [% CASE 'city' %]<span>Đơn vị cấp 3:</span>
+ [% CASE 'state' %]<span>Đơn vị cấp 4:</span>
+ [% CASE 'zipcode' %]<span>Mã đơn vị:</span>
  [% CASE 'country' %]<span>Khác:</span>
  [% CASE 'email' %]<span>Thư điện tử:</span>
  [% CASE 'phone' %]<span>Điện thoại chính:</span>

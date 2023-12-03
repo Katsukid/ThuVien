@@ -3457,7 +3457,7 @@ msgstr "Koha &rsaquo; Bạn đọc &rsaquo; Thông tin tiền phạt của %s"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/member-main-address-style.inc:97
 #, c-format
 msgid "%s Street number: "
-msgstr "%s Số nhà: "
+msgstr "%s Số phòng: "
 
 #. For the first occurrence,
 #. %1$s:  END 
@@ -3465,7 +3465,7 @@ msgstr "%s Số nhà: "
 #: koha-tmpl/intranet-tmpl/prog/en/includes/member-main-address-style.inc:57
 #, c-format
 msgid "%s Street type: "
-msgstr "%s Số nhà: "
+msgstr "%s Số phòng: "
 
 #. For the first occurrence,
 #. %1$s:  END 
@@ -5067,7 +5067,7 @@ msgstr "%s %s Tài liệu đang được vận chuyển tới  "
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/upload-images.tt:133
 #, c-format
 msgid "%s, Item number: %s%s "
-msgstr "%s Số nhà: "
+msgstr "%s Số phòng: "
 
 #. %1$s:  IF ( item.biblio.author ) 
 #. %2$s:  item.biblio.author | html 
@@ -24584,7 +24584,7 @@ msgstr "Dewey"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/editor.tt:191
 #, c-format
 msgid "Dewey number:"
-msgstr "Số nhà:"
+msgstr "Số phòng:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/z3950_search.tt:100
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/z3950_search.tt:165
@@ -52155,7 +52155,7 @@ msgstr "Requiems"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/ill/ill-requests.tt:659
 #, c-format
 msgid "Request number:"
-msgstr "Số nhà:"
+msgstr "Số phòng:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:559
 #, c-format
@@ -58499,7 +58499,7 @@ msgstr "Số nhà"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:315
 #, c-format
 msgid "Street number:"
-msgstr "Số nhà:"
+msgstr "Số phòng:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:29
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:17
