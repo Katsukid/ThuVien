@@ -4,12 +4,12 @@
 [% INCLUDE 'doc-head-open.inc' %]
 <title>
     [% IF ( biblio ) %]
-        Upload local cover image for [% INCLUDE 'biblio-title-head.inc' %] &rsaquo;
+        Tải lên ảnh bìa for [% INCLUDE 'biblio-title-head.inc' %] &rsaquo;
     [% ELSE %]
-        Upload local cover image &rsaquo;
+        Tải lên ảnh bìa &rsaquo;
     [% END %]
-    Cataloging &rsaquo;
-    Koha
+    Phân hệ biên mục &rsaquo;
+    Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
@@ -190,7 +190,7 @@
                                 </div>
 
                                 <div id="filedrag">
-                                    <a id="click_to_select" href="#">Drop files here or click to select a file</a>
+                                    <a id="click_to_select" href="#">Thả file vào đây hoặc nhấn chọn file</a>
                                     <div id="messages"></div>
                                 </div>
 

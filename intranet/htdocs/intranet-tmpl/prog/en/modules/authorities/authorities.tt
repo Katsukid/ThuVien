@@ -2,7 +2,7 @@
 [% USE To %]
 [% USE Asset %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF ( authid ) %]Modify authority #[% authid | html %] ([% authtypetext | html %])[% ELSE %]Adding authority ([% authtypetext | html %])[% END %] &rsaquo; Authorities &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF ( authid ) %]Modify authority #[% authid | html %] ([% authtypetext | html %])[% ELSE %]Thêm quyền ([% authtypetext | html %])[% END %] &rsaquo; Dữ liệu kiểm soát &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.js("lib/hc-sticky.js") | $raw %]
 <script>
@@ -370,7 +370,7 @@
 
         [% ELSE %]
             [% WRAPPER breadcrumb_item bc_active= 1 %]
-                <span>Adding authority [% authtypetext | html %]</span>
+                <span>Thêm quyền [% authtypetext | html %]</span>
             [% END %]
 
         [% END %]
@@ -384,7 +384,7 @@
                 [% IF ( authid ) %]
                     <h1>Modify authority #[% authid | html %] [% authtypetext | html %]</h1>
                 [% ELSE %]
-                    <h1>Adding authority [% authtypetext | html %]</h1>
+                    <h1>Thêm quyền [% authtypetext | html %]</h1>
                 [% END %]
 
                 <div id="check_errors"></div>
@@ -420,7 +420,7 @@
                             [% IF ( authid ) %]
                                 <a class="btn btn-default" id="z3950submit" href="#"><i class="fa fa-search"></i> Replace record via Z39.50/SRU search</a>
                             [% ELSE %]
-                                <a class="btn btn-default" id="z3950submit" href="#"><i class="fa fa-search"></i> Z39.50/SRU search</a>
+                                <a class="btn btn-default" id="z3950submit" href="#"><i class="fa fa-search"></i> Tìm kiếm Z39.50/SRU</a>
                             [% END %]
                         </div>
                         <div class="btn-group">
@@ -492,7 +492,7 @@
                         [% IF count %]
                                 Used in <a href="/cgi-bin/koha/catalogue/search.pl?type=intranet&amp;op=do_search&amp;q=an:[% authid | uri %]">[% count | html %] record(s)</a>
                         [% ELSE %]
-                                This authority is not used in any records.
+                                Quyền này không được sử dụng trong bất kỳ hồ sơ nào.
                         [% END %]
                     </div>
 
@@ -506,7 +506,7 @@
                                 [% END %]
                                 [% WRAPPER tab_panel tabname="tab${BIG_LOO.number}XX" bt_active= bt_active %]
                                     [% IF ( BIG_LOOP.size > 1 ) %]
-                                        <h2>Section [% BIG_LOO.number | html %]</h2>
+                                        <h2>Phần [% BIG_LOO.number | html %]</h2>
                                     [% END %]
                                     [% previous = "" %]
                                     [% FOREACH innerloo IN BIG_LOO.innerloop %]

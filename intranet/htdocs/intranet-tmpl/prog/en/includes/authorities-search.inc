@@ -81,11 +81,11 @@
                 <input type="hidden" name="excluding" value="" />
 
                 <div class="form-title">
-                    <label class="control-label">Search main heading ($a only)</label>
+                    <label class="control-label">Tìm kiếm tiêu đề chính (chỉ $a)</label>
                 </div>
 
                 <div class="form-content">
-                    <input id="value_mainentry" class="form-control head-searchbox" type="text" name="value" value="[% value | html %]" placeholder="Search main heading ($a only)" />
+                    <input id="value_mainentry" class="form-control head-searchbox" type="text" name="value" value="[% value | html %]" placeholder="Tìm kiếm tiêu đề chính (chỉ $a)" />
                     <button type="button" class="form-extra-content-toggle"><i class="fa fa-sliders"></i></button>
                 </div>
 
@@ -181,16 +181,16 @@
     </div><!-- /.tab-content -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
-            <a title="Search main heading ($a only)" href="#mainmain_heading" aria-controls="mainmain_heading" role="tab"  aria-expanded="true" data-toggle="tab" class="keep_text"><i style="font-weight:bold">$a</i> <span class="tab-title">Main heading ($a only)</span></a>
+            <a title="Search main heading ($a only)" href="#mainmain_heading" aria-controls="mainmain_heading" role="tab"  aria-expanded="true" data-toggle="tab" class="keep_text"><i style="font-weight:bold">$a</i> <span class="tab-title">Nội dung tiêu đề (chỉ $a)</span></a>
         </li>
         <li role="presentation">
-            <a title="Search main heading" href="#main_heading" aria-controls="main_heading" role="tab" data-toggle="tab" class="keep_text"><i class="fa fa-header"></i> <span class="tab-title">Main heading</span></a>
+            <a title="Search main heading" href="#main_heading" aria-controls="main_heading" role="tab" data-toggle="tab" class="keep_text"><i class="fa fa-header"></i> <span class="tab-title">Nội dung tiêu đề </span></a>
         </li>
         <li role="presentation">
-            <a title="Search all headings" href="#matchheading_search" aria-controls="matchheading_search" role="tab" data-toggle="tab" class="keep_text"><i class="fa fa-align-center"></i> <span class="tab-title">All headings</span></a>
+            <a title="Search all headings" href="#matchheading_search" aria-controls="matchheading_search" role="tab" data-toggle="tab" class="keep_text"><i class="fa fa-align-center"></i> <span class="tab-title">Tất cả các tiêu đề</span></a>
         </li>
         <li role="presentation">
-            <a title="Search entire record" href="#entire_record" aria-controls="entire_record" role="tab" data-toggle="tab" class="keep_text"><i class="fa fa-folder-open-o"></i> <span class="tab-title">Entire record</span></a>
+            <a title="Search entire record" href="#entire_record" aria-controls="entire_record" role="tab" data-toggle="tab" class="keep_text"><i class="fa fa-folder-open-o"></i> <span class="tab-title">Toàn bộ bản ghi</span></a>
         </li>
         <li role="presentation">
     </ul>

@@ -3,7 +3,7 @@
 [% SET footerjs = 1 %]
 [% PROCESS 'authorities-search-results.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Batch record modification &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+<title>Sửa đổi bản ghi hàng loạt &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.css("css/humanmsg.css") | $raw %]
 </head>
@@ -20,11 +20,11 @@
             [% END %]
             [% IF view == 'form' %]
                 [% WRAPPER breadcrumb_item bc_active= 1 %]
-                    <span>Batch record modification</span>
+                    <span>Sửa đổi bản ghi hàng loạt</span>
                 [% END %]
             [% ELSE %]
                 [% WRAPPER breadcrumb_item %]
-                    <a href="/cgi-bin/koha/tools/batch_record_modification.pl">Batch record modification</a>
+                    <a href="/cgi-bin/koha/tools/batch_record_modification.pl">Sửa đổi bản ghi hàng loạt</a>
                 [% END %]
                 [% WRAPPER breadcrumb_item bc_active= 1 %]
                     <span>Results</span>
@@ -38,7 +38,7 @@
             <div class="col-sm-10 col-sm-push-2">
                 <main>
 
-                    <h1>Batch record modification</h1>
+                    <h1>Sửa đổi bản ghi hàng loạt</h1>
 
                     [% IF ( messages ) %]
                         <div class="dialog message">
@@ -254,9 +254,9 @@
                         [% FOR error IN errors %]
                             [% IF error == 'no_template_defined' %]
                                 <div class="dialog message">
-                                    <p>No MARC modification template is defined. You have to create at least one template in order to use this tool.</p>
+                                    <p>Không có mẫu sửa đổi MARC nào được xác định. Bạn phải tạo ít nhất một mẫu để sử dụng công cụ này.</p>
                                     [% IF ( CAN_user_tools_marc_modification_templates ) %]
-                                        <a class="btn btn-default" href="/cgi-bin/koha/tools/marc_modification_templates.pl"><i class="fa fa-plus"></i> Create a new MARC modification template</a>
+                                        <a class="btn btn-default" href="/cgi-bin/koha/tools/marc_modification_templates.pl"><i class="fa fa-plus"></i> Tạo mẫu sửa đổi MARC mới</a>
                                     [% END %]
                                 </div>
                             [% END %]

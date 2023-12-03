@@ -5,7 +5,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Inventory &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+<title>Kiểm kê kho &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -81,14 +81,14 @@
             <ol>
                 <li><label for="setdate">Set inventory date to:</label> <input type="text" id="setdate" name="setdate" value="[% today | html %]" class="flatpickr" /></li>
                 <li><label for="compareinv2barcd">Compare barcodes list to results: </label><input type="checkbox" name="compareinv2barcd" id="compareinv2barcd" disabled /></li>
-                <li><label for="dont_checkin">Do not check in items scanned during inventory: </label><input type="checkbox" name="dont_checkin" id="dont_checkin" disabled /></li>
-                <li><label for="out_of_order">Check barcodes list for items shelved out of order: </label><input type="checkbox" name="out_of_order" id="out_of_order" disabled /></li>
+                <li><label for="dont_checkin">Không kiểm tra các mặt hàng được quét trong kho: </label><input type="checkbox" name="dont_checkin" id="dont_checkin" disabled /></li>
+                <li><label for="out_of_order">Kiểm tra danh sách mã vạch cho các mặt hàng được sắp xếp không theo thứ tự: </label><input type="checkbox" name="out_of_order" id="out_of_order" disabled /></li>
             </ol>
         </fieldset>
         <fieldset class="rows">
-        <legend>Item location filters</legend>
+        <legend>Bộ lọc vị trí mục</legend>
         <ol><li>
-        <label for="branch">Location: </label>
+        <label for="branch">Vị trí: </label>
             <input type="radio" name="branch" value="homebranch"> Home library</input>
             <input type="radio" name="branch" value="holdingbranch"> Current library</input>
         </li><li>
@@ -114,7 +114,7 @@
         [% SET ccodes = AuthorisedValues.GetAuthValueDropbox('CCODE') %]
         [% IF ( ccodes.count > 0 ) %]
         <li>
-            <label for="ccode">Collection code: </label>
+            <label for="ccode">Mã bộ sưu tập: </label>
             <select id="ccodeloop" name="ccode">
                         <option value="">Filter collection</option>
                 [% FOREACH cc IN ccodes %]
@@ -128,12 +128,12 @@
         </li>
         [% END %]
         <li>
-            <label for="minlocation">Item call number between: </label>
+            <label for="minlocation">Mục gọi số giữa: </label>
                 <input type="text" name="minlocation" id="minlocation" value="[% minlocation | html %]" /> (items.itemcallnumber)  </li>
            <li><label for="maxlocation">...and: </label>
                 <input type="text" name="maxlocation" id="maxlocation" value="[% maxlocation | html %]" />
            <li>
-            <label for="class_source">Call number classification scheme</label>
+            <label for="class_source">Sơ đồ phân loại số cuộc gọi</label>
             <select name="class_source">
             [% FOREACH class_source IN class_sources %]
                 [% IF class_source.cn_source == pref_class %]
@@ -148,7 +148,7 @@
     </fieldset>
 
     <fieldset class="rows" id="optionalfilters">
-            <legend>Optional filters for inventory list or comparing barcodes</legend>
+            <legend>Bộ lọc tùy chọn cho danh sách hàng tồn kho hoặc so sánh mã vạch</legend>
             <br/>
             <div id="statuses" style="display: block;">
                   [% FOREACH status IN statuses %]
@@ -178,7 +178,7 @@
         <ol>
         <li>
             <br/>
-            <label for="datelastseen">Last inventory date:</label>
+            <label for="datelastseen">Ngày tồn kho cuối cùng:</label>
             <input type="text" id="datelastseen" name="datelastseen" value="[% datelastseen | html %]" class="flatpickr" />
             (Skip records marked as seen on or after this date.)
         </li>
@@ -191,11 +191,11 @@
             [% END %]
         </li>
         <li>
-            <label for="ignore_waiting_holds">Skip items on hold awaiting pickup: </label>
+            <label for="ignore_waiting_holds">Bỏ qua các mục đang chờ lấy: </label>
             <input type="checkbox" id="ignore_waiting_holds" name="ignore_waiting_holds" />
         </li>
         <li>
-            <label>Item types: </label>
+            <label>Các loại mặt hàng: </label>
             <div class="branchselector">
                 <p><a href="#" id="checkallitemtypes"> <i class="fa fa-check"></i> Chọn tất cả</a> | <a href="#" id="checknoneitemtypes"> <i class="fa fa-remove"></i> Bỏ chọn tất cả</a></p>
                 <div class="branchgridrow">
@@ -218,7 +218,7 @@
     </fieldset>
 
         <fieldset class="rows">
-          <legend>Additional options</legend>
+          <legend>Tùy chọn bổ sung</legend>
           <ol>
 
         <li>

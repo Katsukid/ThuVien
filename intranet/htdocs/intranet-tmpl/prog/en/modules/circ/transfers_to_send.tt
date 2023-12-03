@@ -7,7 +7,7 @@
 [% SET footerjs = 1 %]
 [% PROCESS 'transfer_reasons.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Transfers to send &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Thư viện nhận tài liệu &rsaquo; Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -22,7 +22,7 @@
             <a href="/cgi-bin/koha/circ/circulation-home.pl">Circulation</a>
         [% END %]
         [% WRAPPER breadcrumb_item bc_active= 1 %]
-            <span>Transfers to send</span>
+            <span>Thư viện nhận tài liệu</span>
         [% END %]
     [% END #/ WRAPPER breadcrumbs %]
 [% END #/ WRAPPER sub-header.inc %]
@@ -39,7 +39,7 @@
                     <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                     [% END %]
 
-                        <h1>Transfers requested of your library as of [% show_date | $KohaDates %]</h1>
+                        <h1>Yêu cầu chuyển thư viện của bạn kể từ [% show_date | $KohaDates %]</h1>
 
                         [% IF libraries.count %]
                         <p>Your library is the origin for the following transfer(s)</p>
@@ -91,7 +91,7 @@
                             [% END %]
                         </div>
                         [% ELSE %]
-                        <p>No transfers to send</p>
+                        <p>Không có thư viện nhận tài liệu nào</p>
                         [% END %]
 
                     </div> <!-- /.col-sm-10.col-sm-push-2 OR /.col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2-->
