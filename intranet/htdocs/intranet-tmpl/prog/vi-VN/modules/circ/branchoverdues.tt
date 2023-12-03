@@ -4,7 +4,7 @@
 [% USE KohaDates %]
 [% PROCESS 'i18n.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Overdues at [% Branches.GetLoggedInBranchname | html %] &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Quá hạn tại [% Branches.GetLoggedInBranchname | html %] &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body id="circ_branchoverdues" class="circ">

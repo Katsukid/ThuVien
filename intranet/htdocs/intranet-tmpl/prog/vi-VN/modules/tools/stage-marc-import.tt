@@ -2,7 +2,7 @@
 [% USE Asset %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Stage MARC records for import &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+<title>Kiểm duyệt các bản ghi nhập theo lô &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
     #fileuploadstatus,#fileuploadfailed,#fileuploadcancel { display : none; }
@@ -80,7 +80,7 @@
 </ul>
 <form method="post" id="uploadfile" enctype="multipart/form-data">
 <fieldset class="rows" id="uploadform">
-<legend>Upload a file to stage</legend>
+<legend>Tải tập tin lên</legend>
 <ol>
  <li>
  <div id="fileuploadform">

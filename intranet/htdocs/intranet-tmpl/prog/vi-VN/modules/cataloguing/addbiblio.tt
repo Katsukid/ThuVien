@@ -3,7 +3,7 @@
 [% USE Koha %]
 [% USE HtmlTags %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF ( biblionumber ) %]Editing [% title | html %] (Record number [% biblionumber | html %])[% ELSE %]Thêm bản ghi MARC[% END %] &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF ( biblionumber ) %]Editing [% title | html %] (Record number [% biblionumber | html %])[% ELSE %]Thêm bản ghi MARC[% END %] &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% INCLUDE 'calendar.inc' %]
 [% Asset.js("lib/hc-sticky.js") | $raw %]
@@ -911,15 +911,15 @@ $(document).ready(function(){
  [% IF biblionumber %]
  <div class="btn-group"><a class="btn btn-default" href="#" id="z3950search"><i class="fa fa-search"></i> Replace record via Z39.50/SRU search</a></div>
  [% ELSE %]
- <div class="btn-group"><a class="btn btn-default" href="#" id="z3950search"><i class="fa fa-search"></i> Z39.50/SRU search</a></div>
+ <div class="btn-group"><a class="btn btn-default" href="#" id="z3950search"><i class="fa fa-search"></i> Tìm kiếm Z39.50/SRU</a></div>
  [% END %]
  [% IF ( CAN_user_editauthorities ) %]
- <div class="btn-group"><a class="btn btn-default" href="#" id="linkerbutton"><i class="fa fa-refresh"></i> Link authorities automatically</a></div>
+ <div class="btn-group"><a class="btn btn-default" href="#" id="linkerbutton"><i class="fa fa-refresh"></i> Liên kết chính quyền tự động</a></div>
  [% END %]
  [% END %]
 
  <div class="btn-group">
- <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> Settings <span class="caret"></span></button>
+ <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> Cài đặt <span class="caret"></span></button>
  <ul id="settings-menu" class="dropdown-menu">
  [% IF Koha.Preference( 'EnableAdvancedCatalogingEditor' ) == 1 && CAN_user_editcatalogue_advanced_editor %]
  <li><a href="#" id="switcheditor">Switch to advanced editor</a></li>

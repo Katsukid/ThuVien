@@ -2351,11 +2351,11 @@ msgid "Level"
 msgstr "Nivel"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_tag_structure:11:row:190
-msgid "Library of Congress Classification"
+msgid "Khung phân loại Thư viện Quốc hội"
 msgstr "Clasificación de Library of Congress"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_tag_structure:2:row:116
-msgid "Library of Congress Classification (LCC)"
+msgid "Khung phân loại Thư viện Quốc hội (LCC)"
 msgstr "Clasificación de Library of Congress (LCC)"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_subfield_structure:12:row:2074

@@ -3,7 +3,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Export data &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+<title>Xuất dữ liệu &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
     fieldset.rows fieldset.rows {
@@ -67,11 +67,11 @@
  <legend> Chọn biểu ghi kết xuất </legend>
  <ol>
  <li>
- <label for="start">From biblionumber: </label>
+ <label for="start">Từ biblionumber: </label>
  <input id="start" type="text" name="StartingBiblionumber" size="5" />
  </li>
  <li>
- <label for="end">To biblionumber: </label>
+ <label for="end">Gửi tới biblionumber: </label>
  <input id="end" type="text" name="EndingBiblionumber" size="5" />
  </li>
 
@@ -86,7 +86,7 @@
  </li>
 
  <li>
- <label>With items owned by the following libraries: </label>
+ <label>Với các mục thuộc sở hữu của các thư viện sau: </label>
  [% INCLUDE 'branch-selector.inc' branches = libraries %]
  </li>
  </ol>
@@ -106,7 +106,7 @@
  </fieldset>
 
  <fieldset class="rows">
- <legend>Accession date (inclusive)</legend>
+ <legend>Ngày gia nhập (bao gồm)</legend>
  <ol>
  <li>
  <label for="from">Ngày bắt đầu:</label>
@@ -122,11 +122,11 @@
 
  <fieldset class="rows">
  <legend>
- Use a file
+ Sử dụng một tập tin
  </legend>
  <ol>
  <li>
- File containing a list of biblionumbers with one biblionumber per line. This list works as a filter: it is compatible with other parameters. (File types accepted: .csv and .txt)
+ Tệp chứa danh sách số thư mục với một số thư mục trên mỗi dòng. Danh sách này hoạt động như một bộ lọc: nó tương thích với các tham số khác. (Các loại tệp được chấp nhận: .csv và .txt)
  </li>
  <li>
  <label for="id_list_file">Tệp tin: </label> <input type="file" id="id_list_file" name="id_list_file" />
@@ -138,11 +138,11 @@
  <legend> Tùy chọn</legend>
  <ol>
  <li>
- <label for="dont_export_item">Don't export items:</label>
+ <label for="dont_export_item">Không xuất các mặt hàng:</label>
  <input id="dont_export_item" type="checkbox" name="dont_export_item" />
  </li>
  <li>
- <label for="strip_items_not_from_libraries">Remove items not owned by selected libraries:</label>
+ <label for="strip_items_not_from_libraries">Xóa các mục không thuộc sở hữu của các thư viện đã chọn:</label>
  <input id="strip_items_not_from_libraries" type="checkbox" name="strip_items_not_from_libraries" />
  </li>
  <li>
@@ -216,7 +216,7 @@
 
  <fieldset class="rows">
  <legend>
- Use a file
+ Sử dụng một tập tin
  </legend>
  <ol>
  <li>

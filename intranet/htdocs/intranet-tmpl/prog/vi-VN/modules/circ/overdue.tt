@@ -11,7 +11,7 @@
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
 [% PROCESS 'modal-claims.inc' %]
-<title>Items overdue as of [% todaysdate | $KohaDates %] &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Các tài liệu quá hạn kể từ [% todaysdate | $KohaDates %] &rsaquo; Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
  <style>
@@ -41,7 +41,7 @@
  <a href="/cgi-bin/koha/circ/circulation-home.pl">Phân hệ lưu thông</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Overdues as of [% todaysdate | $KohaDates %]</span>
+ <span>Quá hạn kể từ [% todaysdate | $KohaDates %]</span>
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
 [% END #/ WRAPPER sub-header.inc %]
@@ -143,7 +143,7 @@
  [% IF ( isfiltered ) %]
  <p>There are no overdues matching your search. <a href="/cgi-bin/koha/circ/overdue.pl">thiết lập lại</a></p>
  [% ELSE %]
- <p>There are no overdues.</p>
+ <p>Không tài liệu có quá hạn.</p>
  [% END %]
 
 [% END %] <!-- overdueloop -->

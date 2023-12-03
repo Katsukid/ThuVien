@@ -1226,15 +1226,15 @@ tables:
       tagfield: '675'
     - authorised_value: ~
       authtypecode: ''
-      liblibrarian: Dewey Decimal Classification (DDC)
-      libopac: Dewey Decimal Classification (DDC)
+      liblibrarian: Khung phân loại thập phân Dewey (DDC)
+      libopac: Khung phân loại thập phân Dewey (DDC)
       mandatory: 0
       repeatable: 1
       tagfield: '676'
     - authorised_value: ~
       authtypecode: ''
-      liblibrarian: Library of Congress Classification (LCC)
-      libopac: Library of Congress Classification (LCC)
+      liblibrarian: Khung phân loại Thư viện Quốc hội (LCC)
+      libopac: Khung phân loại Thư viện Quốc hội (LCC)
       mandatory: 0
       repeatable: 1
       tagfield: '680'

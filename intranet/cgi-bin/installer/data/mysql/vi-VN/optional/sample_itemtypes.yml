@@ -17,7 +17,7 @@ tables:
       notforloan: 0
       rentalcharge: 5
       summary: ''
-    - description: File máy tính
+    - description: Tập tin máy tính
       imageurl: bridge/computer_file.png
       itemtype: CF
       notforloan: 0
@@ -29,7 +29,7 @@ tables:
       notforloan: 0
       rentalcharge: 5
       summary: ''
-    - description: Visual Materials
+    - description: Tài liệu trực quan
       imageurl: bridge/dvd.png
       itemtype: VM
       notforloan: 1
@@ -41,13 +41,13 @@ tables:
       notforloan: 0
       rentalcharge: 5
       summary: ''
-    - description: Continuing Resources
+    - description: Tài nguyên liên tục
       imageurl: bridge/periodical.png
       itemtype: CR
       notforloan: 0
       rentalcharge: 5
       summary: ''
-    - description: Reference
+    - description: Tài liệu tham khảo
       imageurl: bridge/reference.png
       itemtype: REF
       notforloan: 1

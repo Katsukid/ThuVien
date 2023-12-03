@@ -689,7 +689,7 @@ msgstr "Langue utilisée par l'entité"
 msgid "Level"
 msgstr "niveau"
 
-msgid "Library of Congress Classification (LCC)"
+msgid "Khung phân loại Thư viện Quốc hội (LCC)"
 msgstr "Classification de la Bibliothèque du Congrès (LCC)"
 
 msgid "Linked data"

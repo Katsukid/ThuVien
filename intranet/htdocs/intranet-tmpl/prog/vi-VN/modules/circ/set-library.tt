@@ -9,7 +9,7 @@
 [% IF Koha.Preference('UseCirculationDesks') %]
 <title>Set library and desk &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
 [% ELSE %]
-<title>Set library &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Chọn thư viện &rsaquo; Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% END %]
 [% INCLUDE 'doc-head-close.inc' %]
 <style>

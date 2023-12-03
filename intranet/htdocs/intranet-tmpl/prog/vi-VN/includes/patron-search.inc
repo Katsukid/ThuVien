@@ -119,7 +119,7 @@
  [% END %]
 
  <div class="browse">
- Browse by last name:
+ Duyệt theo họ:
  [% SET alphabet = Koha.Preference('alphabet').split(' ') %]
  [% UNLESS alphabet.size %]
  [% alphabet = ['A' .. 'Z'] %]

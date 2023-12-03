@@ -367,8 +367,8 @@ if (C4::Context->preference("Version") < TransformToNum($DBversion)) {
                                ('lcc', 'Default filing rules for LCC', 'LCC'),
                                ('generic', 'Generic call number filing rules', 'Generic')");
     $dbh->do("INSERT INTO `class_sources` (`cn_source`, `description`, `used`, `class_sort_rule`) VALUES
-                            ('ddc', 'Dewey Decimal Classification', 1, 'dewey'),
-                            ('lcc', 'Library of Congress Classification', 1, 'lcc'),
+                            ('ddc', 'Khung phân loại thập phân Dewey', 1, 'dewey'),
+                            ('lcc', 'Khung phân loại Thư viện Quốc hội', 1, 'lcc'),
                             ('udc', 'Universal Decimal Classification', 0, 'generic'),
                             ('sudocs', 'SuDoc Classification (U.S. GPO)', 0, 'generic'),
                             ('z', 'Other/Generic Classification Scheme', 0, 'generic')");
@@ -17206,8 +17206,8 @@ if( CheckVersion( $DBversion ) ) {
     my( $source_cnt ) = $dbh->selectrow_array( q|SELECT COUNT(*) FROM class_sources|);
     if( !$source_cnt ) {
         $dbh->do(q|INSERT INTO `class_sources` (`cn_source`, `description`, `used`, `class_sort_rule`, `class_split_rule`) VALUES
-                            ('ddc', 'Dewey Decimal Classification', 1, 'dewey', 'dewey'),
-                            ('lcc', 'Library of Congress Classification', 1, 'lcc', 'lcc'),
+                            ('ddc', 'Khung phân loại thập phân Dewey', 1, 'dewey', 'dewey'),
+                            ('lcc', 'Khung phân loại Thư viện Quốc hội', 1, 'lcc', 'lcc'),
                             ('udc', 'Universal Decimal Classification', 0, 'generic', 'generic'),
                             ('sudocs', 'SuDoc Classification (U.S. GPO)', 0, 'generic', 'generic'),
                             ('anscr', 'ANSCR (Sound Recordings)', 0, 'generic', 'generic'),

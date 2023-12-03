@@ -3,7 +3,7 @@
 [% SET footerjs = 1 %]
 [% PROCESS 'authorities-search-results.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Batch record deletion &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+<title>Xóa bản ghi hàng loạt &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -18,7 +18,7 @@
  <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Phân hệ biên mục</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Batch record deletion</span>
+ <span>Xóa bản ghi hàng loạt</span>
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
 [% END #/ WRAPPER sub-header.inc %]
@@ -28,7 +28,7 @@
  <div class="col-sm-10 col-sm-push-2">
  <main>
 
- <h1>Batch record deletion</h1>
+ <h1>Xóa bản ghi hàng loạt</h1>
  [% FOREACH message IN messages %]
  [% IF message.type == 'success' %]
  <div class="dialog message">
@@ -59,18 +59,18 @@
  <fieldset class="rows">
  <legend>Kiểu biểu ghi</legend>
  <ol>
- <li><label for="biblio_type">Bibliographic: </label><input type="radio" name="recordtype" value="biblio" id="biblio_type" checked="checked" /></li>
- <li><label for="authority_type">Authorities: </label><input type="radio" name="recordtype" value="authority" id="authority_type" /></li>
+ <li><label for="biblio_type">Thư mục: </label><input type="radio" name="recordtype" value="biblio" id="biblio_type" checked="checked" /></li>
+ <li><label for="authority_type">Quyền: </label><input type="radio" name="recordtype" value="authority" id="authority_type" /></li>
  </ol>
  </fieldset>
 
  [% WRAPPER tabs id= "batch_del_form" %]
  [% WRAPPER tabs_nav %]
- [% WRAPPER tab_item tabname= "uploadfile_tab" bt_active= 1 %] <span>Upload a file</span> [% END %]
+ [% WRAPPER tab_item tabname= "uploadfile_tab" bt_active= 1 %] <span>Tải lên</span> [% END %]
  [% IF lists.count %]
- [% WRAPPER tab_item tabname= "shelves_tab" %] <span>Select a list of records</span> [% END %]
+ [% WRAPPER tab_item tabname= "shelves_tab" %] <span>Chọn danh sách các bản ghi</span> [% END %]
  [% END %]
- [% WRAPPER tab_item tabname= "enterlist_tab" %] <span>Enter a list of record numbers</span> [% END %]
+ [% WRAPPER tab_item tabname= "enterlist_tab" %] <span>Nhập danh sách số bản ghi</span> [% END %]
  [% END # /WRAPPER tabs_nav %]
 
  [% WRAPPER tab_panels %]
@@ -106,7 +106,7 @@
  <li>
  <label for="recordnumber_list">IDs: </label>
  <textarea rows="10" cols="30" id="recordnumber_list" name="recordnumber_list"></textarea>
- <div class="hint">Enter a list of biblionumbers or authority IDs, one per line.</div>
+ <div class="hint">Nhập danh sách số thư mục hoặc ID tác giả, mỗi mã một dòng.</div>
  </li>
  </ol>
  </fieldset>

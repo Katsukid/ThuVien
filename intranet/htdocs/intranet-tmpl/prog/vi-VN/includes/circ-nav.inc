@@ -102,7 +102,7 @@
  </li>
  [% END %]
  <li>
- <a href="/cgi-bin/koha/circ/transfers_to_send.pl">Transfers to send</a>
+ <a href="/cgi-bin/koha/circ/transfers_to_send.pl">Tỉ lệ đặt mượn</a>
  </li>
  <li>
  <a href="/cgi-bin/koha/circ/transferstoreceive.pl">Nhận tài liệu chuyển về thư viện</a>

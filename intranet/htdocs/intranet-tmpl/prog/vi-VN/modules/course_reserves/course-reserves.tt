@@ -5,7 +5,7 @@
 [% SET footerjs = 1 %]
 [% PROCESS 'i18n.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Course reserves &rsaquo; Trường CĐKTQS1</title>
+<title>CSDL khóa học &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 
 </head>
@@ -34,7 +34,7 @@
  <a class="btn btn-default" id="new_course" href="/cgi-bin/koha/course_reserves/course.pl"><i class="fa fa-plus"></i> Tạo khóa học</a>
  [% END %]
  [% IF ( CAN_user_coursereserves_delete_reserves ) %]
- <a class="btn btn-default" id="batch_rm" href="/cgi-bin/koha/course_reserves/batch_rm_items.pl"><i class="fa fa-minus"></i> Batch remove reserves</a>
+ <a class="btn btn-default" id="batch_rm" href="/cgi-bin/koha/course_reserves/batch_rm_items.pl"><i class="fa fa-minus"></i> Loại bỏ dự trữ hàng loạt</a>
  [% END %]
  </div><!-- /toolbar -->
  [% END %]

@@ -26,56 +26,56 @@ tables:
       multiline: []
       rows:
         - itemtype: BK
-          description: "Books"
+          description: "Sách"
           rentalcharge: 0
           notforloan: 0
           imageurl: "bridge/book.png"
           summary: ""
 
         - itemtype: MX
-          description: "Mixed Materials"
+          description: "Vật liệu hỗn hợp"
           rentalcharge: 5
           notforloan: 0
           imageurl: "bridge/kit.png"
           summary: ""
 
         - itemtype: CF
-          description: "Computer Files"
+          description: "Tập tin máy tính"
           rentalcharge: 5
           notforloan: 0
           imageurl: "bridge/computer_file.png"
           summary: ""
 
         - itemtype: MP
-          description: "Maps"
+          description: "Bản đồ"
           rentalcharge: 5
           notforloan: 0
           imageurl: "bridge/map.png"
           summary: ""
 
         - itemtype: VM
-          description: "Visual Materials"
+          description: "Tài liệu trực quan"
           rentalcharge: 5
           notforloan: 1
           imageurl: "bridge/dvd.png"
           summary: ""
 
         - itemtype: MU
-          description: "Music"
+          description: "Âm nhạc"
           rentalcharge: 5
           notforloan: 0
           imageurl: "bridge/sound.png"
           summary: ""
 
         - itemtype: CR
-          description: "Continuing Resources"
+          description: "Tài nguyên liên tục"
           rentalcharge: 5
           notforloan: 0
           imageurl: "bridge/periodical.png"
           summary: ""
 
         - itemtype: REF
-          description: "Reference"
+          description: "Tài liệu tham khảo"
           rentalcharge: 0
           notforloan: 1
           imageurl: "bridge/reference.png"

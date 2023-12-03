@@ -4269,10 +4269,10 @@ authtags:
     liblibrarian: Universal Decimal Classification (UDC)
     tagfield: 675
   - authtypecode: PUB
-    liblibrarian: Dewey Decimal Classification (DDC)
+    liblibrarian: Khung phân loại thập phân Dewey (DDC)
     tagfield: 676
   - authtypecode: PUB
-    liblibrarian: Library of Congress Classification (LCC)
+    liblibrarian: Khung phân loại Thư viện Quốc hội (LCC)
     tagfield: 680
   - authtypecode: PUB
     liblibrarian: Other classification numbers

@@ -7,7 +7,7 @@
 [% USE TablesSettings %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Hold ratios &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Tỷ lệ đặt mượn &rsaquo; Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
     .sql { display: none; }
@@ -135,7 +135,7 @@
 <h4>Bộ lọc dữ liệu:</h4>
 <ol>
  <li>
- <label for="ratio">Hold ratio (greater than or equal to):</label>
+ <label for="ratio">Tỷ lệ đặt mượn (lớn hơn hoặc bằng):</label>
  <input type="text" size="5" id="ratio" name="ratio" value="[% ratio | html %]" />
  </li>
 
@@ -145,7 +145,7 @@
  [% ELSE %]
  <input id="include_ordered" name="include_ordered" type="checkbox"/>
  [% END %]
- <label for="include_ordered">Include ordered</label>
+ <label for="include_ordered">Bao gồm đặt hàng</label>
  </li>
 
  <li class="checkbox">
@@ -154,7 +154,7 @@
  [% ELSE %]
  <input id="include_suspended" name="include_suspended" type="checkbox"/>
  [% END %]
- <label for="include_suspended">Include suspended</label>
+ <label for="include_suspended">Bao gồm bị đình chỉ</label>
  </li>
 
  <li>

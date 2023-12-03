@@ -669,7 +669,7 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-msgid "Library of Congress Classification (LCC)"
+msgid "Khung phân loại Thư viện Quốc hội (LCC)"
 msgstr ""
 
 msgid "Linked data"

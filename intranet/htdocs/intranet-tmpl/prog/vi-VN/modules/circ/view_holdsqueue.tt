@@ -9,7 +9,7 @@
 [% USE Koha %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Holds queue &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Danh sách bạn đọc đặt mượn đầu tiên trên tài liệu &rsaquo; Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style> p { margin-top: 0; }</style>
 </head>
@@ -270,7 +270,7 @@
  </select>
  </li>
  <li>
- <label for="locationsslimit">Shelving location: </label>
+ <label for="locationsslimit">Vị trí kệ: </label>
  <select name="locationslimit" id="locationslimit">
  <option value="">Tất cả</option>
  [% PROCESS options_for_authorised_values authorised_values => AuthorisedValues.GetAuthValueDropbox( 'LOC' ), selected_av => locationslimit %]

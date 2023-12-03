@@ -5,7 +5,7 @@
 [% USE KohaDates %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Koha staff interface</title>
+<title>Giao diện nhân viên</title>
 [% Asset.css("css/mainpage.css") | $raw %]
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

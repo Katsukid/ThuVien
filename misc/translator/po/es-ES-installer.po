@@ -4300,7 +4300,7 @@ msgid "Library copy lost"
 msgstr "Copia de la biblioteca perdida"
 
 #: installer/data/mysql/en/mandatory/class_sources.yml:class_sources:3:row:2
-msgid "Library of Congress Classification"
+msgid "Khung phân loại Thư viện Quốc hội"
 msgstr "Clasificación de Library of Congress"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:80

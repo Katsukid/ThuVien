@@ -34,7 +34,7 @@ tables:
       email: ~
       emailpro: ~
       fax: ~
-      firstname: Koha
+      firstname: Thủ
       flags: ~
       gonenoaddress: ~
       initials: ''
@@ -51,7 +51,7 @@ tables:
       sort2: ~
       streetnumber: ~
       streettype: ~
-      surname: Admin
+      surname: Thư
       title: ~
       userid: ~
       zipcode: ~

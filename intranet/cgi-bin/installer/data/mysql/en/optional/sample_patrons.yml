@@ -27,8 +27,8 @@ tables:
       rows:
         - borrowernumber: 1
           cardnumber: 1
-          surname: Admin
-          firstname: Koha
+          surname: Thư
+          firstname: Thủ
           title: ~
           othernames: ~
           initials: ""

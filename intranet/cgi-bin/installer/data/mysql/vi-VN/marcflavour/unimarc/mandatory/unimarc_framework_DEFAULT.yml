@@ -2528,15 +2528,15 @@ tables:
       tagfield: '675'
     - authorised_value: ~
       frameworkcode: ''
-      liblibrarian: Dewey Decimal Classification
-      libopac: Dewey Decimal Classification
+      liblibrarian: Khung phân loại thập phân Dewey
+      libopac: Khung phân loại thập phân Dewey
       mandatory: 0
       repeatable: 1
       tagfield: '676'
     - authorised_value: ~
       frameworkcode: ''
-      liblibrarian: Library of Congress Classification
-      libopac: Library of Congress Classification
+      liblibrarian: Khung phân loại Thư viện Quốc hội
+      libopac: Khung phân loại Thư viện Quốc hội
       mandatory: 0
       repeatable: 1
       tagfield: '680'

@@ -12,7 +12,7 @@
 # Koha is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
+# GNU General Public License ạnfor more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with Koha; if not, see <http://www.gnu.org/licenses>.
@@ -21,24 +21,18 @@ description:
   - "Sample patron types and categories. Types are currently hardcoded but you can manage categories after installation from the administration module."
   - ""
   - "Adult patron - default patron type"
-  - "                PT  - Patron"
-  - "                ST  - Student"
-  - "                BH  - Homebound"
-  - ""
-  - "Child - patron with a guarantor"
-  - "                K   - Kid"
-  - "                J   - Juvenile"
-  - "                YA  - Young Adult"
+  - "                BĐ  - Bạn đọc"
+  - "                HV  - Học viên"
+  - "                K   - Đối tượng khác"
   - ""
   - "Organization - patron is an institution, not a person"
-  - "                ILL - Inter-library Loan"
-  - "                SC  - School"
-  - "                L   - Library"
+  - "                TR  - Trường"
+  - "                TV  - Thư viện"
   - ""
   - "Professional - a member of an organization (organization is guarantor)"
-  - "                T   - Teacher"
-  - "                S   - Staff"
-  - "                B   - Board"
+  - "                GV   - Giáo viên"
+  - "                NS   - Nhân viên"
+  - "                CB   - Cán bộ"
 
 
 tables:
@@ -46,9 +40,9 @@ tables:
       translatable: [ description ]
       multiline: []
       rows:
-        #  Adult Patrons
-        - categorycode: 'PT'
-          description: 'Patron'
+        #  Adult Bạn đọcs
+        - categorycode: 'BĐ'
+          description: 'Bạn đọc'
           enrolmentperiod: 99
           upperagelimit: 999
           dateofbirthrequired: 18
@@ -61,8 +55,8 @@ tables:
           category_type: 'A'
           can_be_guarantee: 0
 
-        - categorycode: 'ST'
-          description: 'Student'
+        - categorycode: 'HV'
+          description: 'Học viên'
           enrolmentperiod: 99
           upperagelimit: 999
           dateofbirthrequired: 18
@@ -75,66 +69,23 @@ tables:
           category_type: 'A'
           can_be_guarantee: 0
 
-        - categorycode: 'HB'
-          description: 'Home Bound'
-          enrolmentperiod: 99
-          upperagelimit: 999
-          dateofbirthrequired: 18
-          finetype: ~
-          bulk: ~
-          enrolmentfee: '0.000000'
-          overduenoticerequired: 1
-          issuelimit: ~
-          reservefee: '0.000000'
-          category_type: 'A'
-          can_be_guarantee: 0
-
-        #  Children
         - categorycode: 'K'
-          description: 'Kid'
+          description: 'Đối tượng khác'
           enrolmentperiod: 99
-          upperagelimit: 17
-          dateofbirthrequired: 5
+          upperagelimit: 999
+          dateofbirthrequired: 18
           finetype: ~
           bulk: ~
           enrolmentfee: '0.000000'
           overduenoticerequired: 1
           issuelimit: ~
           reservefee: '0.000000'
-          category_type: 'C'
-          can_be_guarantee: 1
-
-        - categorycode: 'J'
-          description: 'Juvenile'
-          enrolmentperiod: 99
-          upperagelimit: 17
-          dateofbirthrequired: 5
-          finetype: ~
-          bulk: ~
-          enrolmentfee: '0.000000'
-          overduenoticerequired: 1
-          issuelimit: ~
-          reservefee: '0.000000'
-          category_type: 'C'
-          can_be_guarantee: 1
-
-        - categorycode: 'YA'
-          description: 'Young Adult'
-          enrolmentperiod: 99
-          upperagelimit: 17
-          dateofbirthrequired: 5
-          finetype: ~
-          bulk: ~
-          enrolmentfee: '0.000000'
-          overduenoticerequired: 1
-          issuelimit: ~
-          reservefee: '0.000000'
-          category_type: 'C'
-          can_be_guarantee: 1
+          category_type: 'A'
+          can_be_guarantee: 0
 
         #  Professionals
-        - categorycode: 'T'
-          description: 'Teacher'
+        - categorycode: 'GV'
+          description: 'Giáo viên'
           enrolmentperiod: 99
           upperagelimit: 999
           dateofbirthrequired: 18
@@ -147,11 +98,11 @@ tables:
           category_type: 'P'
           can_be_guarantee: 1
 
-        - categorycode: 'B'
-          description: 'Board'
+        - categorycode: 'CB'
+          description: 'Cán bộ'
           enrolmentperiod: 99
-          upperagelimit: 17
-          dateofbirthrequired: 5
+          upperagelimit: 999
+          dateofbirthrequired: 18
           finetype: ~
           bulk: ~
           enrolmentfee: '0.000000'
@@ -162,8 +113,9 @@ tables:
           can_be_guarantee: 1
 
         #  Institutional
-        - categorycode: 'IL'
-          description: 'Inter-Library Loan'
+
+        - categorycode: 'TR'
+          description: 'Trường'
           enrolmentperiod: 99
           upperagelimit: 999
           dateofbirthrequired: 18
@@ -176,8 +128,8 @@ tables:
           category_type: 'I'
           can_be_guarantee: 0
 
-        - categorycode: 'SC'
-          description: 'School'
+        - categorycode: 'TV'
+          description: 'Thư viện'
           enrolmentperiod: 99
           upperagelimit: 999
           dateofbirthrequired: 18
@@ -190,23 +142,9 @@ tables:
           category_type: 'I'
           can_be_guarantee: 0
 
-        - categorycode: 'L'
-          description: 'Library'
-          enrolmentperiod: 99
-          upperagelimit: 999
-          dateofbirthrequired: 18
-          finetype: ~
-          bulk: ~
-          enrolmentfee: '0.000000'
-          overduenoticerequired: 1
-          issuelimit: ~
-          reservefee: '0.000000'
-          category_type: 'I'
-          can_be_guarantee: 0
-
-        #  Staff
-        - categorycode: 'S'
-          description: 'Staff'
+        #  Nhân viên
+        - categorycode: 'NV'
+          description: 'Nhân viên'
           enrolmentperiod: 99
           upperagelimit: 999
           dateofbirthrequired: 18
@@ -216,5 +154,5 @@ tables:
           overduenoticerequired: 0
           issuelimit: ~
           reservefee: '0.000000'
-          category_type: 'S'
+          category_type: 'P'
           can_be_guarantee: 0

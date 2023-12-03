@@ -16,7 +16,7 @@
  [% IF servers.count > 0 %]
  <div class="btn-group">
  <button id="z3950_new" class="btn btn-default">
- <i class="fa fa-search"></i> New from Z39.50/SRU
+ <i class="fa fa-search"></i> Mới từ Z39.50/SRU
  </button>
  </div>
  [% END %]

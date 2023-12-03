@@ -4457,7 +4457,7 @@ msgstr "Thông tin thư viện"
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43
 #, fuzzy
 msgid "Library account password change notification"
-msgstr "lcc - Library of Congress Classification"
+msgstr "lcc - Khung phân loại Thư viện Quốc hội"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:1:row:3
 #, fuzzy
@@ -4466,8 +4466,8 @@ msgstr "Library Property Groups"
 
 #: installer/data/mysql/en/mandatory/class_sources.yml:class_sources:3:row:2
 #, fuzzy
-msgid "Library of Congress Classification"
-msgstr "lcc - Library of Congress Classification"
+msgid "Khung phân loại Thư viện Quốc hội"
+msgstr "lcc - Khung phân loại Thư viện Quốc hội"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:80
 #, fuzzy

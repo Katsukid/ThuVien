@@ -2630,13 +2630,13 @@ msgstr "Mức độ"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_tag_structure:11:row:190
 #, fuzzy
-msgid "Library of Congress Classification"
-msgstr "lcc - Library of Congress Classification"
+msgid "Khung phân loại Thư viện Quốc hội"
+msgstr "lcc - Khung phân loại Thư viện Quốc hội"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/authorities_normal_unimarc.yml:auth_tag_structure:2:row:116
 #, fuzzy
-msgid "Library of Congress Classification (LCC)"
-msgstr "lcc - Library of Congress Classification"
+msgid "Khung phân loại Thư viện Quốc hội (LCC)"
+msgstr "lcc - Khung phân loại Thư viện Quốc hội"
 
 #: installer/data/mysql/en/marcflavour/unimarc/mandatory/unimarc_framework_DEFAULT.yml:marc_subfield_structure:12:row:2074
 #, fuzzy

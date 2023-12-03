@@ -4473,10 +4473,10 @@ authtags:
     liblibrarian: Universal Decimal Classification (UDC)
     tagfield: 675
   - authtypecode: WORK
-    liblibrarian: Dewey Decimal Classification (DDC)
+    liblibrarian: Khung phân loại thập phân Dewey (DDC)
     tagfield: 676
   - authtypecode: WORK
-    liblibrarian: Library of Congress Classification (LCC)
+    liblibrarian: Khung phân loại Thư viện Quốc hội (LCC)
     tagfield: 680
   - authtypecode: WORK
     liblibrarian: Other classification numbers

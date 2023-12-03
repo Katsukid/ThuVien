@@ -4,7 +4,7 @@
 [% USE ItemTypes %]
 [% USE AuthorisedValues %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Transfers &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
+<title>Chuyển tài liệu &rsaquo; Phân hệ lưu thông &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body id="circ_branchtransfers" class="circ">
@@ -33,7 +33,7 @@
  [% END %]
  <main>
 
- <h1>Transfer items</h1>
+ <h1>Chuyển tài liệu</h1>
 
 [% IF ( found ) %]
  <h3>Tài liệu đang bận</h3>

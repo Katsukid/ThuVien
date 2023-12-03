@@ -4,24 +4,18 @@ description:
   categories after installation from the administration module.
 - ''
 - Adult patron - default patron type
-- '                PT  - Patron'
-- '                ST  - Student'
-- '                BH  - Homebound'
-- ''
-- Child - patron with a guarantor
-- '                K   - Kid'
-- '                J   - Juvenile'
-- '                YA  - Young Adult'
+- '                BĐ  - Bạn đọc'
+- '                HV  - Học viên'
+- '                K   - Đối tượng khác'
 - ''
 - Organization - patron is an institution, not a person
-- '                ILL - Inter-library Loan'
-- '                SC  - School'
-- '                L   - Library'
+- '                TR  - Trường'
+- '                TV  - Thư viện'
 - ''
 - Professional - a member of an organization (organization is guarantor)
-- '                T   - Teacher'
-- '                S   - Staff'
-- '                B   - Board'
+- '                GV   - Giáo viên'
+- '                NS   - Nhân viên'
+- '                CB   - Cán bộ'
 tables:
 - categories:
     multiline: []
@@ -29,7 +23,7 @@ tables:
     - bulk: ~
       can_be_guarantee: 0
       category_type: A
-      categorycode: PT
+      categorycode: BĐ
       dateofbirthrequired: 18
       description: Bạn đọc
       enrolmentfee: '0.000000'
@@ -42,9 +36,9 @@ tables:
     - bulk: ~
       can_be_guarantee: 0
       category_type: A
-      categorycode: ST
+      categorycode: HV
       dateofbirthrequired: 18
-      description: Student
+      description: Học viên
       enrolmentfee: '0.000000'
       enrolmentperiod: 99
       finetype: ~
@@ -55,9 +49,9 @@ tables:
     - bulk: ~
       can_be_guarantee: 0
       category_type: A
-      categorycode: HB
+      categorycode: K
       dateofbirthrequired: 18
-      description: Home Bound
+      description: Đối tượng khác
       enrolmentfee: '0.000000'
       enrolmentperiod: 99
       finetype: ~
@@ -67,49 +61,10 @@ tables:
       upperagelimit: 999
     - bulk: ~
       can_be_guarantee: 1
-      category_type: C
-      categorycode: K
-      dateofbirthrequired: 5
-      description: Kid
-      enrolmentfee: '0.000000'
-      enrolmentperiod: 99
-      finetype: ~
-      issuelimit: ~
-      overduenoticerequired: 1
-      reservefee: '0.000000'
-      upperagelimit: 17
-    - bulk: ~
-      can_be_guarantee: 1
-      category_type: C
-      categorycode: J
-      dateofbirthrequired: 5
-      description: Vị thành niên
-      enrolmentfee: '0.000000'
-      enrolmentperiod: 99
-      finetype: ~
-      issuelimit: ~
-      overduenoticerequired: 1
-      reservefee: '0.000000'
-      upperagelimit: 17
-    - bulk: ~
-      can_be_guarantee: 1
-      category_type: C
-      categorycode: YA
-      dateofbirthrequired: 5
-      description: Young Adult
-      enrolmentfee: '0.000000'
-      enrolmentperiod: 99
-      finetype: ~
-      issuelimit: ~
-      overduenoticerequired: 1
-      reservefee: '0.000000'
-      upperagelimit: 17
-    - bulk: ~
-      can_be_guarantee: 1
       category_type: P
-      categorycode: T
+      categorycode: GV
       dateofbirthrequired: 18
-      description: Teacher
+      description: Giáo viên
       enrolmentfee: '0.000000'
       enrolmentperiod: 99
       finetype: ~
@@ -120,22 +75,9 @@ tables:
     - bulk: ~
       can_be_guarantee: 1
       category_type: P
-      categorycode: B
-      dateofbirthrequired: 5
-      description: Board
-      enrolmentfee: '0.000000'
-      enrolmentperiod: 99
-      finetype: ~
-      issuelimit: ~
-      overduenoticerequired: 1
-      reservefee: '0.000000'
-      upperagelimit: 17
-    - bulk: ~
-      can_be_guarantee: 0
-      category_type: I
-      categorycode: IL
+      categorycode: CB
       dateofbirthrequired: 18
-      description: Inter-Library Loan
+      description: Cán bộ
       enrolmentfee: '0.000000'
       enrolmentperiod: 99
       finetype: ~
@@ -146,9 +88,9 @@ tables:
     - bulk: ~
       can_be_guarantee: 0
       category_type: I
-      categorycode: SC
+      categorycode: TR
       dateofbirthrequired: 18
-      description: School
+      description: Trường
       enrolmentfee: '0.000000'
       enrolmentperiod: 99
       finetype: ~
@@ -159,7 +101,7 @@ tables:
     - bulk: ~
       can_be_guarantee: 0
       category_type: I
-      categorycode: L
+      categorycode: TV
       dateofbirthrequired: 18
       description: Thư viện
       enrolmentfee: '0.000000'
@@ -171,10 +113,10 @@ tables:
       upperagelimit: 999
     - bulk: ~
       can_be_guarantee: 0
-      category_type: S
-      categorycode: S
+      category_type: P
+      categorycode: NV
       dateofbirthrequired: 18
-      description: Cán bộ thư viện
+      description: Nhân viên
       enrolmentfee: '0.000000'
       enrolmentperiod: 99
       finetype: ~

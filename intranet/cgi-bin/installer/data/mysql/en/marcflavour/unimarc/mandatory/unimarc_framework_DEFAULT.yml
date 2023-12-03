@@ -2785,16 +2785,16 @@ tables:
           frameworkcode: ""
 
         - tagfield: "676"
-          liblibrarian: "Dewey Decimal Classification"
-          libopac: "Dewey Decimal Classification"
+          liblibrarian: "Khung phân loại thập phân Dewey"
+          libopac: "Khung phân loại thập phân Dewey"
           repeatable: 1
           mandatory: 0
           authorised_value:
           frameworkcode: ""
 
         - tagfield: "680"
-          liblibrarian: "Library of Congress Classification"
-          libopac: "Library of Congress Classification"
+          liblibrarian: "Khung phân loại Thư viện Quốc hội"
+          libopac: "Khung phân loại Thư viện Quốc hội"
           repeatable: 1
           mandatory: 0
           authorised_value:

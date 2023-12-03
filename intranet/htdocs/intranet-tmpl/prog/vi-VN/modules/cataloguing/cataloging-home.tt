@@ -3,7 +3,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Cataloging &rsaquo; Trường CĐKTQS1</title>
+<title>Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -40,7 +40,7 @@
  </div>
  [% IF servers.count > 0 %]
  <div class="btn-group">
- <button class="btn btn-default" id="z3950search"><i class="fa fa-search"></i> New from Z39.50/SRU</button>
+ <button class="btn btn-default" id="z3950search"><i class="fa fa-search"></i> Mới từ Z39.50/SRU</button>
  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
  <ul class="dropdown-menu">
  <li id="Default" class="z3950searchFw"><a href="#">Khung mẫu mặc định</a></li>
@@ -133,12 +133,12 @@
  [% END %]
  [% IF CAN_user_tools_records_batchmod %]
  <li>
- <a class="circ-button" href="/cgi-bin/koha/tools/batch_record_modification.pl"><i class="fa fa-pencil"></i> Batch record modification</a>
+ <a class="circ-button" href="/cgi-bin/koha/tools/batch_record_modification.pl"><i class="fa fa-pencil"></i> Sửa đổi bản ghi hàng loạt</a>
  </li>
  [% END %]
  [% IF CAN_user_tools_records_batchdel %]
  <li>
- <a class="circ-button" href="/cgi-bin/koha/tools/batch_delete_records.pl"><i class="fa fa-trash"></i> Batch record deletion</a>
+ <a class="circ-button" href="/cgi-bin/koha/tools/batch_delete_records.pl"><i class="fa fa-trash"></i> Xóa bản ghi hàng loạt</a>
  </li>
  [% END %]
 
@@ -179,7 +179,7 @@
  </li>
 
  <li>
- <a class="circ-button" href="/cgi-bin/koha/labels/barcode-print.pl"><i class="fa fa-barcode"></i> Barcode image generator</a>
+ <a class="circ-button" href="/cgi-bin/koha/labels/barcode-print.pl"><i class="fa fa-barcode"></i> Trình tạo hình ảnh mã vạch</a>
  </li>
 
  <li>

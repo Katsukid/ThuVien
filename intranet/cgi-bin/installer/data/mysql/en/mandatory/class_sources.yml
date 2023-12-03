@@ -61,13 +61,13 @@ tables:
       multiline: []
       rows:
         - cn_source: "ddc"
-          description: "Dewey Decimal Classification"
+          description: "Khung phân loại thập phân Dewey"
           used: 1
           class_sort_rule: "dewey"
           class_split_rule: "dewey"
 
         - cn_source: "lcc"
-          description: "Library of Congress Classification"
+          description: "Khung phân loại Thư viện Quốc hội"
           used: 1
           class_sort_rule: "lcc"
           class_split_rule: "lcc"
