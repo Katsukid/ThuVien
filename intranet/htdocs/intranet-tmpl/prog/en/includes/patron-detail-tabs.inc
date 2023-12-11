@@ -27,7 +27,7 @@
 
         [% IF ( CAN_user_circulate_circulate_remaining_permissions ) %]
             [% WRAPPER tab_item tabname= "holds" %]
-                <span>Đang mượn ([% holds_count || 0 | html %])</span>
+                <span>Đặt mượn ([% holds_count || 0 | html %])</span>
             [% END %]
         [% END %]
 

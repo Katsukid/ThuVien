@@ -61,7 +61,7 @@
  <main>
  [% IF item_doesnt_exist %]
  <div class="dialog alert">
- <a href="/cgi-bin/koha/cataloguing/additem.pl?biblionumber=[% biblio.biblionumber | uri %]">Add a new item</a> hoặc <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblio.biblionumber | uri %]#holdings">go to the records holdings</a>.
+ <a href="/cgi-bin/koha/cataloguing/additem.pl?biblionumber=[% biblio.biblionumber | uri %]">Thêm tài liệu</a> hoặc <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblio.biblionumber | uri %]#holdings">go to the records holdings</a>.
  </div>
  [% END %]
  [% INCLUDE 'blocking_errors.inc' %]
@@ -338,7 +338,7 @@
  <input type="hidden" name="itemnumber" value="[% itemnumber | html %]" />
  [% END %]
  <input onclick="return Check(this.form)" type="submit" value="Lưu">
- <input type="button" id="addnewitem" value="Add a new item">
+ <input type="button" id="addnewitem" value="Thêm tài liệu">
  <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblio.biblionumber | uri %]">Hủy bỏ</a>
  [% END %]</fieldset>
 

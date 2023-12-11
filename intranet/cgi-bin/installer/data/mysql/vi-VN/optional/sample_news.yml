@@ -9,69 +9,58 @@ tables:
     - category: news
       code: News_1
       content:
-      - Welcome to Koha. Koha is a full-featured open-source ILS. Developed initially
-        in New Zealand by Katipo Communications Ltd and first deployed in January
-        of 2000 for Horowhenua Library Trust, Koha is currently maintained by a team
-        of software providers and library technology staff from around the globe.
+      - 'Ngày 28-6, tại Vĩnh Phúc, Trường Cao đẳng Kỹ thuật quân sự 1 (Tổng cục Kỹ
+        thuật) tổ chức bế mạc Hội thi giảng viên, giáo viên dạy giỏi năm học 2022-2023.Dự
+        bế mạc có các đồng chí lãnh đạo, chỉ huy nhà trường: Đại tá Nguyễn Thế Dũng,
+        Hiệu trưởng; Đại tá Nguyễn Phú Anh, Chính ủy.Trong thời gian hơn 10 ngày,
+        37 thí sinh là các giảng viên, giáo viên của nhà trường đã thực hiện các nội
+        dung thi: Giảng dạy chuyên môn, điều lệnh, hiểu biết, tin học, ngoại ngữ,
+        bắn súng, kỹ thuật súng bộ binh...Theo đánh giá, các thí sinh đã xác định
+        tốt nhiệm vụ tham gia hội thi với tinh thần trách nhiệm cao, chủ động nghiên
+        cứu giáo trình, tài liệu; tích cực ôn luyện, trao đổi, học tập kinh nghiệm,
+        kiến thức; ứng dụng màn hình tương tác, phần mềm mô phỏng, trình chiếu hình
+        ảnh minh họa, làm phong phú bài giảng...'
       expirationdate: 2099-01-10
       lang: default
       location: staff_only
       number: 1
-      published_on: 2007-10-29 05:25:58
-      title: Welcome to Koha
+      published_on: 2023-10-29 05:25:58
+      title: Trường Cao đẳng Kỹ thuật quân sự 1 chú trọng bồi dưỡng đội ngũ giảng
+        viên giỏi
     - category: news
       code: News_2
       content:
-      - 'Now that you''ve installed Koha, what''s next? Here are some suggestions:'
-      - <ul>
-      - <li><a href="http://koha-community.org/documentation/">Read Koha Documentation</a></li>
-      - <li><a href="http://wiki.koha-community.org">Read/Write to the Koha Wiki</a></li>
-      - <li><a href="http://koha-community.org/support/">Read and Contribute to Discussions</a></li>
-      - <li><a href="http://bugs.koha-community.org">Report Koha Bugs</a></li>
-      - <li><a href="http://wiki.koha-community.org/wiki/Version_Control_Using_Git">Submit
-        Patches to Koha using Git (Version Control System)</a></li>
-      - <li><a href="http://koha-community.org/support/">Chat with Koha users and
-        developers</a></li>
-      - </ul>
+      - <p>Đến dự, chỉ đạo và chúc mừng Nhà trường có đồng chí Đại tá Vũ Văn Cường
+        - Phó Chính ủy Tổng cục Kỹ thuật cùng các đồng chí đại biểu cơ quan chức năng
+        của Tổng cục Kỹ thuật.Về phía Nhà trường có đồng chí Đại tá Nguyễn Thế Dũng
+        - Phó bí thư Đảng ủy, Hiệu trưởng Nhà trường, Đại tá Nguyễn Phú Anh - Bí thư
+        Đảng ủy, Chính ủy Nhà trường, các đồng chí trong Thường vụ, Ban Giám hiệu
+        Nhà trường; lãnh đạo chỉ huy các phòng, khoa, ban, tiểu đoàn cùng toàn thể
+        cán bộ, giảng viên, giáo viên, nhân viên Nhà trường tại cơ sở Hà Nội.</p>
+      - '<p>Trong buổi Gặp mặt, đồng chí Đại tá Nguyễn Phú Anh, Chính ủy Nhà trường
+        nhấn mạnh: Gặp mặt kỷ niệm 41 năm ngày Nhà giáo Việt Nam nhằm mục đích tôn
+        vinh công lao, cống hiến, khơi dạy niềm tự hào đối với nghề nghiệp cao quý
+        của đội ngũ nhà giáo, cán bộ quản lý giáo dục; tạo khí thế vui tươi, phấn
+        khởi, nâng cao tinh thần trách nhiệm hoàn thành xuất sắc nhiệm vụ đối với
+        sự nghiệp “Trồng người cao cả”. Đồng chí Chính ủy Nhà trường cũng yêu cầu
+        mỗi thầy cô giáo và cán bộ quản lý giáo dục cần quán triệt sâu sắc và đầy
+        đủ về vai trò, trách nhiệm của mình để luôn “Tận tâm, gương mẫu, sáng tạo,
+        xứng danh người thầy”, thực hiện tốt cuộc vận động “Mỗi thầy giáo, cô giáo
+        là một tấm gương đạo đức, tự học và sáng tạo”, “Nói không với tiêu cực trong
+        thi cử và bệnh thành tích trong giáo dục”,  phát huy tinh thần nhiệt huyết,
+        khát vọng cống hiến, khám phá và chinh phục tri thức mới vì sự nghiệp giáo
+        dục, đào tạo của Nhà trường. Hãy luôn là người giảng viên, giáo viên, người
+        chỉ huy, quản lý có đủ đức, đủ tài yêu ngành, yêu nghề, yên tâm công tác,
+        gắn bó với sự nghiệp “trồng người”. Thực hiện dạy người và dạy nghề, trang
+        bị tri thức với giáo dục hoàn thiện nhân cách cho học viên nhằm giáo dục con
+        người toàn diện “Vừa hồng”, vừa chuyên”.</p>'
       - ''
       expirationdate: 2099-01-10
       lang: default
       location: staff_only
       number: 2
-      published_on: 2007-10-29 05:34:45
-      title: What's Next?
-    - category: html_customizations
-      code: CatalogConcernHelp_1
-      content:
-      - Please describe your concern clearly and the library will try to deal with
-        it as quickly as possible
-      expirationdate: 2099-01-10
-      lang: default
-      location: CatalogConcernHelp
-      number: 1
-      published_on: 2007-10-29 05:25:58
-      title: Catalog concern help text
-    - category: html_customizations
-      code: CatalogConcernTemplate_1
-      content:
-      - '**Describe the concern**'
-      - A clear and concise description of what the concern is.
-      - ''
-      - '**To reproduce**'
-      - 'Steps to reproduce the behavior:'
-      - 1. Go to '...'
-      - 2. Click on '....'
-      - 3. Scroll down to '....'
-      - 4. See error
-      - ''
-      - '**Expected behavior**'
-      - A clear and concise description of what you expected to happen.
-      expirationdate: 2099-01-10
-      lang: default
-      location: CatalogConcernTemplate
-      number: 1
-      published_on: 2007-10-29 05:25:58
-      title: Catalog concern template text
+      published_on: 2023-11-20 08:34:45
+      title: KỶ NIỆM 41 NGÀY NHÀ GIÁO VIỆT NAM
     translatable:
     - title
     - content

@@ -43,9 +43,9 @@
         [% WRAPPER breadcrumb_item %]
             <a href="/cgi-bin/koha/cataloguing/addbiblio.pl?biblionumber=[% biblio.biblionumber | uri %]">
                 [% IF ( biblio.author ) %]
-                    [% tx('Edit {title} by {author}', { title = biblio.title, author = biblio.author }) | html %] ([% tp('Bibliographic record number', 'Record #') | html %] [% biblio.biblionumber | html %])
+                    [% tx('Sửa {title} bởi {author}', { title = biblio.title, author = biblio.author }) | html %] ([% tp('Bibliographic record number', 'Bản ghi #') | html %] [% biblio.biblionumber | html %])
                 [% ELSE %]
-                    [% tx('Edit {title}', title = biblio.title) | html %] ([% tp('Bibliographic record number', 'Record #') | html %] [% biblio.biblionumber | html %])
+                    [% tx('Sửa {title}', title = biblio.title) | html %] ([% tp('Bibliographic record number', 'Record #') | html %] [% biblio.biblionumber | html %])
                 [% END %]
             </a>
         [% END %]
@@ -61,7 +61,7 @@
             <main>
                 [% IF item_doesnt_exist %]
                     <div class="dialog alert">
-                        <a href="/cgi-bin/koha/cataloguing/additem.pl?biblionumber=[% biblio.biblionumber | uri %]">Add a new item</a> or <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblio.biblionumber | uri %]#holdings">go to the records holdings</a>.
+                        <a href="/cgi-bin/koha/cataloguing/additem.pl?biblionumber=[% biblio.biblionumber | uri %]">Thêm tài liệu</a> or <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblio.biblionumber | uri %]#holdings">go to the records holdings</a>.
                     </div>
                 [% END %]
                 [% INCLUDE 'blocking_errors.inc' %]
@@ -338,7 +338,7 @@
         <input type="hidden" name="itemnumber" value="[% itemnumber | html %]" />
     [% END %]
     <input type="submit" value="Save changes" onclick="return Check(this.form)">
-    <input type="button" id="addnewitem" value="Add a new item">
+    <input type="button" id="addnewitem" value="Thêm tài liệu">
     <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblio.biblionumber | uri %]">Cancel</a>
     [% END %]</fieldset>
 

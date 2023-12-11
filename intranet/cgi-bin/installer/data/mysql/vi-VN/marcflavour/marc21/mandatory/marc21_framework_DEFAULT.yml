@@ -543,8 +543,8 @@ tables:
       hidden: 0
       isurl: 0
       kohafield: items.homebranch
-      liblibrarian: Local Library
-      libopac: Local Library
+      liblibrarian: Thư viện lưu trữ
+      libopac: Thư viện lưu trữ
       link: ''
       mandatory: 1
       repeatable: 0

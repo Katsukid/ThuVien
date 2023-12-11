@@ -56,7 +56,7 @@
         [%- ELSE -%]
         <li>
         [%- END -%]
-            <a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% biblio_object_id | url  %]">Đang mượn ([% Biblio.HoldsCount( biblio_object_id ) | html %])</a>
+            <a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% biblio_object_id | url  %]">Đặt mượn ([% Biblio.HoldsCount( biblio_object_id ) | html %])</a>
         </li>
         [%- END -%]
 

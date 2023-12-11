@@ -546,8 +546,8 @@ tables:
 
         - tagfield: "952"
           tagsubfield: "a"
-          liblibrarian: "Local Library"
-          libopac: "Local Library"
+          liblibrarian: "Thư viện lưu trữ"
+          libopac: "Thư viện lưu trữ"
           repeatable: 0
           mandatory: 1
           kohafield: items.homebranch
