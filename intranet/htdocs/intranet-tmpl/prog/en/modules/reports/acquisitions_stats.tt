@@ -1,7 +1,7 @@
 [% USE raw %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF ( do_it ) %]Acquisitions statistics &rsaquo; Results[% ELSE %]Acquisitions statistics[% END %] &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF ( do_it ) %]Acquisitions statistics &rsaquo; Results[% ELSE %]Báo cáo phân hệ bổ sung[% END %] &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -271,19 +271,19 @@
     <legend> Cell value </legend>
     <ol>
         <li>
-            <label for="cellvalue1">Count items:</label><input type="radio" name="Cellvalue" id="cellvalue1" value="1" checked="checked" />
+            <label for="cellvalue1">Đếm mặt hàng:</label><input type="radio" name="Cellvalue" id="cellvalue1" value="1" checked="checked" />
         </li>
         <li>
-            <label for="cellvalue2">Count unique bibliographic records:</label><input type="radio" name="Cellvalue" id="cellvalue2" value="2" />
+            <label for="cellvalue2">Đếm các bản ghi thư mục độc đáo:</label><input type="radio" name="Cellvalue" id="cellvalue2" value="2" />
         </li>
         <li>
-            <label for="cellvalue3">Amount:</label><input type="radio" name="Cellvalue" id="cellvalue3" value="3" />
+            <label for="cellvalue3">Số lượng:</label><input type="radio" name="Cellvalue" id="cellvalue3" value="3" />
         </li>
         <li>
-            <label for="cellvalue4">Ordered amount:</label><input type="radio" name="Cellvalue" id="cellvalue4" value="4" />
+            <label for="cellvalue4">Số tiền đặt hàng:</label><input type="radio" name="Cellvalue" id="cellvalue4" value="4" />
         </li>
         <li>
-            <label for="cellvalue5">Spent amount:</label><input type="radio" name="Cellvalue" id="cellvalue5" value="5" />
+            <label for="cellvalue5">Số tiền chi tiêu:</label><input type="radio" name="Cellvalue" id="cellvalue5" value="5" />
         </li>
     </ol>
 </fieldset>
@@ -297,7 +297,7 @@
         <li>
             <label for="outputfile">To a file:</label> <input type="radio" name="output" value="file" id="outputfile" />
             <label class="inline" for="basename">Named: </label> <input type="text" name="basename" id="basename" value="Export" />
-            <label class="inline" for="MIME">Into an application:</label>
+            <label class="inline" for="MIME">Vào một ứng dụng:</label>
             <select name="MIME" id="MIME">
                 <option value="CSV">CSV</option>
             </select>

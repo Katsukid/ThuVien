@@ -3,7 +3,7 @@
     <div id="navmenulist">
         <h5>Acquisitions</h5>
         <ul>
-            <li><a href="/cgi-bin/koha/acqui/acqui-home.pl">Acquisitions home</a></li>
+            <li><a href="/cgi-bin/koha/acqui/acqui-home.pl">Trang chính phân hệ bổ sung</a></li>
             [% IF ( CAN_user_acquisition_order_receive ) %]<li><a href="/cgi-bin/koha/acqui/lateorders.pl">Late orders</a></li>[% END %]
             [% IF ( CAN_user_suggestions_suggestions_manage ) %]<li><a href="/cgi-bin/koha/suggestion/suggestion.pl">Suggestions</a></li>[% END %]
             <li><a href="/cgi-bin/koha/acqui/invoices.pl">Invoices</a></li>
@@ -15,8 +15,8 @@
             <h5>Reports</h5>
             <ul>
                 [% IF ( CAN_user_reports ) %]
-                    <li><a href="/cgi-bin/koha/reports/acquisitions_stats.pl">Acquisitions statistics wizard</a></li>
-                    <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Orders by fund</a></li>
+                    <li><a href="/cgi-bin/koha/reports/acquisitions_stats.pl">Trình hướng dẫn thống kê chuyển đổi</a></li>
+                    <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Đặt hàng theo quỹ</a></li>
                 [% END %]
                 [% IF ( CAN_user_circulate_circulate_remaining_permissions ) %]
                     <li><a href="/cgi-bin/koha/circ/reserveratios.pl">Hold ratios</a></li>
@@ -41,15 +41,15 @@
                 [% END %]
                 [% IF CAN_user_acquisition_edit_invoices && CAN_user_parameters_manage_additional_fields %]
                     <li>
-                        <a href="/cgi-bin/koha/admin/additional-fields.pl?tablename=aqinvoices">Manage invoice fields</a>
+                        <a href="/cgi-bin/koha/admin/additional-fields.pl?tablename=aqinvoices">Quản lý các trường hóa đơn</a>
                     </li>
                 [% END %]
                 [% IF CAN_user_acquisition_order_manage && CAN_user_parameters_manage_additional_fields %]
                     <li>
-                        <a href="/cgi-bin/koha/admin/additional-fields.pl?tablename=aqbasket">Manage order basket fields</a>
+                        <a href="/cgi-bin/koha/admin/additional-fields.pl?tablename=aqbasket">Quản lý trường giỏ hàng</a>
                     </li>
                     <li>
-                        <a href="/cgi-bin/koha/admin/additional-fields.pl?tablename=aqorders">Manage order line fields</a>
+                        <a href="/cgi-bin/koha/admin/additional-fields.pl?tablename=aqorders">Quản lý các trường dòng đơn hàng</a>
                     </li>
                 [% END %]
             </ul>

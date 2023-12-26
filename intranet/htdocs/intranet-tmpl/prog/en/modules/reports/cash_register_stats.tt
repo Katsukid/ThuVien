@@ -9,7 +9,7 @@
 [% SET footerjs = 1 %]
 [% PROCESS 'accounts.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF ( do_it ) %]Cash register statistics &rsaquo; Results[% ELSE %]Cash register statistics[% END %] &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF ( do_it ) %]Cash register statistics &rsaquo; Results[% ELSE %]Báo cáo đăng ký tiền mặt[% END %] &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -40,7 +40,7 @@
         [% ELSE %]
             <li>
                 <a href="#" aria-current="page">
-                    Cash register statistics
+                    Báo cáo đăng ký tiền mặt
                 </a>
             </li>
         [% END %]
@@ -53,10 +53,10 @@
         <div class="col-sm-10 col-sm-push-2">
             <main>
 
-    <h1>Cash register statistics</h1>
+    <h1>Báo cáo đăng ký tiền mặt</h1>
     <form method="post" action="/cgi-bin/koha/reports/cash_register_stats.pl" id="frmCashRegister">
         <fieldset class="rows">
-            <legend>Cash register statistics [% beginDate | $KohaDates %] to [% endDate | $KohaDates %]</legend>
+            <legend>Báo cáo đăng ký tiền mặt [% beginDate | $KohaDates %] đến [% endDate | $KohaDates %]</legend>
             <ol>
                 <br>
                 <li>
@@ -109,7 +109,7 @@
                     </select>
                 </li>
                 <li>
-                    <label>Transaction library</label>
+                    <label>Thư viện giao dịch</label>
                     <select name="branch" id="branch">
                         <option value="ALL">All</option>
                         [% FOREACH branchloo IN branchloop %]

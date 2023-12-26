@@ -8,7 +8,7 @@
 [% USE Price %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Lost items &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Tài liệu bị mất &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

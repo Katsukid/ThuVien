@@ -1,7 +1,7 @@
 [% USE Koha %]
 [% USE raw %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body id="rep_reports-home" class="rep">
@@ -32,7 +32,7 @@
                                 <input name="filter_set" value="1" type="hidden">
                                 [% IF ( CAN_user_reports_create_reports ) %]
                                     <p>
-                                        <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new"><i class="fa fa-code-fork"></i> Create guided report</a>
+                                        <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new"><i class="fa fa-code-fork"></i> Tạo báo cáo có hướng dẫn</a>
                                     </p>
                                     <p>
                                         <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Create%20report%20from%20SQL"><i class="fa fa-plus"></i> Create from SQL</a>
@@ -41,7 +41,7 @@
                                 <p>
                                     <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Use%20saved"><i class="fa fa-list"></i> Use saved</a>
                                 </p>
-                                <label for="filter_keyword">Search by keyword:</label> <input id="filter_keyword" name="filter_keyword" value="" size="16" type="text" /> <input type="submit" class="btn btn-primary" value="Search" />
+                                <label for="filter_keyword">Tìm kiếm bằng từ khóa:</label> <input id="filter_keyword" name="filter_keyword" value="" size="16" type="text" /> <input type="submit" class="btn btn-primary" value="Search" />
                             </fieldset>
                         </form>
                     [% END %]
@@ -58,7 +58,7 @@
             <li><a href="/cgi-bin/koha/reports/catalogue_stats.pl">Catalog</a></li>
             <li><a href="/cgi-bin/koha/reports/issues_stats.pl">Circulation</a></li>
             <li><a href="/cgi-bin/koha/reports/serials_stats.pl">Serials</a></li>
-            <li><a href="/cgi-bin/koha/reports/cash_register_stats.pl">Cash register</a></li>
+            <li><a href="/cgi-bin/koha/reports/cash_register_stats.pl">Máy tính tiền</a></li>
             <li><a href="/cgi-bin/koha/reports/reserves_stats.pl">Sách đang giữ</a></li>
       </ul>
 
@@ -86,7 +86,7 @@
         <h2>Other</h2>
         <ul>
             <li><a href="/cgi-bin/koha/reports/itemslost.pl">Items lost</a></li>
-            <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Orders by fund</a></li>
+            <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Đặt hàng theo quỹ</a></li>
             <li><a href="/cgi-bin/koha/reports/manager.pl?report_name=itemtypes">Catalog by item type</a></li>
             <li><a href="/cgi-bin/koha/reports/issues_avg_stats.pl">Average loan time</a></li>
             [% SET koha_version = Koha.Version %]
@@ -100,8 +100,8 @@
         </ul>
         [% IF ( Koha.Preference('Mana') == 2 ) %]
         <div class="dialog message" style="margin:15px 0 0 0";>
-            <strong>Knowledgebase</strong>
-            <p> You haven't decided if you want to activate Mana Knowledge Base. <a href=/cgi-bin/koha/admin/share_content.pl>Change your Mana KB settings</a>.</p>
+            <strong>Kiến thức cơ bản</strong>
+            <p> Bạn chưa quyết định xem bạn có muốn kích hoạt Mana Knowledge Base. <a href=/cgi-bin/koha/admin/share_content.pl>Thay đổi cài đặt Mana KB của bạn</a>.</p>
         </div>
         [% END %]
     </div>

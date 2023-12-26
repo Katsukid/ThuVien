@@ -36,7 +36,7 @@
             [% END %]
             [% IF CAN_user_serials_edit_subscription && CAN_user_parameters_manage_additional_fields %]
                 <li>
-                    <a href="/cgi-bin/koha/admin/additional-fields.pl?tablename=subscription">Manage subscription fields</a>
+                    <a href="/cgi-bin/koha/admin/additional-fields.pl?tablename=subscription">Quản lý các trường đăng ký</a>
                 </li>
             [% END %]
         </ul>
@@ -44,7 +44,7 @@
         [% IF ( CAN_user_reports ) %]
             <h5>Reports</h5>
             <ul>
-                <li><a href="/cgi-bin/koha/reports/serials_stats.pl">Serials statistics wizard</a></li>
+                <li><a href="/cgi-bin/koha/reports/serials_stats.pl">Trình hướng dẫn thống kê số sê-ri</a></li>
             </ul>
         [% END %]
 

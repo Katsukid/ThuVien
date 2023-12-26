@@ -2,7 +2,7 @@
 [% USE Asset %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Numbering patterns &rsaquo; Serials &rsaquo; Trường CĐKTQS1</title>
+<title>Mẫu đánh số ÂPĐK &rsaquo; Ấn phẩm định kỳ &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -181,7 +181,7 @@
               <legend>Test prediction pattern</legend>
               <ol>
                 <li>
-                  <label for="frequency">Frequency: </label>
+                  <label for="frequency">Tần suất: </label>
                   <select id="frequency">
                     [% FOREACH frequency IN frequencies_loop %]
                       <option value="[% frequency.id | html %]">[% frequency.description | html %]</option>
@@ -189,7 +189,7 @@
                   </select>
                 </li>
                 <li>
-                  <label for="firstacquidate">First issue publication date: </label>
+                  <label for="firstacquidate">Ngày xuất bản số đầu tiên: </label>
                   <input type="text" id="firstacquidate" class="flatpickr" size="10" />
                 </li>
                 <li>
@@ -202,7 +202,7 @@
                   <input type="text" id="sublength" size="3" />
                 </li>
                 <li>
-                  <label for="locale">Locale: </label>
+                  <label for="locale">Ngôn ngữ: </label>
                   <select id="locale" name="locale">
                       <option value=""></option>
                       [% FOREACH locale IN locales %]

@@ -5,7 +5,7 @@
 [% USE TablesSettings %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Orders by fund &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Đặt hàng theo quỹ &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body id="rep_orders_by_budget" class="rep">
@@ -27,7 +27,7 @@
             [% END %]
         [% ELSE %]
             [% WRAPPER breadcrumb_item bc_active= 1 %]
-                <span>Orders by fund</span>
+                <span>Đặt hàng theo quỹ</span>
             [% END %]
         [% END %]
     [% END #/ WRAPPER breadcrumbs %]
@@ -40,7 +40,7 @@
 
 
 [% IF ( current_budget_name ) %]<h1>Orders for fund '[% current_budget_name | html %]'</h1>
-[% ELSE %]<h1>Orders by fund</h1>
+[% ELSE %]<h1>Đặt hàng theo quỹ</h1>
 [% END %]
 
 [% IF ( get_orders ) %]
@@ -112,7 +112,7 @@
             </option>
         [% END %]
         </select>
-        <label for="showallbudgets" style="float:none;">&nbsp;Show inactive:</label>
+        <label for="showallbudgets" style="float:none;">&nbsp;Hiển thị không hoạt động:</label>
         <input type="checkbox" id="showbudgets" />
         </li></ol>
         </fieldset>
@@ -124,7 +124,7 @@
                 <input type="radio" name="output" value="file" id="outputfile" />
                 <label class="inline" for="basename">Named: </label>
                 <input type="text" name="basename" id="basename" value="Export" />
-                <label class="inline" for="MIME">Into an application </label>
+                <label class="inline" for="MIME">Định dạng </label>
                 <select id='MIME' name='MIME'>
                 [% FOREACH outputFormatloo IN outputFormatloop %]
                     <option value="[% outputFormatloo | html %]">[% outputFormatloo | html %]</option>

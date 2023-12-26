@@ -4,7 +4,7 @@
 [% USE Asset %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF ( do_it ) %]Patrons statistics &rsaquo; Results[% ELSE %]Patrons statistics[% END %] &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF ( do_it ) %]Patrons statistics &rsaquo; Results[% ELSE %]Báo cáo phân hệ bạn đọc[% END %] &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
@@ -286,7 +286,7 @@
         <li>
             <label for="outputfile">To a file:</label> <input type="radio" name="output" value="file" id="outputfile" />
             <label class="inline" for="basename">Named: </label><input type="text" name="basename" id="basename" value="Export" />
-            <label class="inline" for="MIME">Into an application:</label>
+            <label class="inline" for="MIME">Vào một ứng dụng:</label>
             <select name="MIME" id="MIME">
             [% FOREACH value IN CGIextChoice %]
                 <option value="[% value | html %]">[% value | html %]</option>

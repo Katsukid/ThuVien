@@ -3,7 +3,7 @@
 [% USE KohaDates %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Check expiration &rsaquo; Serials &rsaquo; Trường CĐKTQS1</title>
+<title>Kiểm tra hết hạn &rsaquo; Ấn phẩm định kỳ &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -57,7 +57,7 @@
 			</ol>
 
         <li>
-            <label for="showhistoricexpired">Include expirations before today:</label>
+            <label for="showhistoricexpired">Bao gồm thời gian hết hạn trước ngày hôm nay:</label>
             [% IF showhistoricexpired %]
                 <input id="showhistoricexpired" type="checkbox" name="showhistoricexpired" checked="checked" />
             [% ELSE %]

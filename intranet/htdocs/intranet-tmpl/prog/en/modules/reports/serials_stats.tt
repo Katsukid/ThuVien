@@ -4,7 +4,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Serials subscriptions stats &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Báo cáo phân hệ ÂPĐK &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
 	.sql {display: none;}
@@ -30,7 +30,7 @@
             [% END %]
         [% ELSE %]
             [% WRAPPER breadcrumb_item bc_active= 1 %]
-                <span>Serials subscriptions stats</span>
+                <span>Báo cáo phân hệ ÂPĐK</span>
             [% END %]
         [% END %]
     [% END #/ WRAPPER breadcrumbs %]
@@ -122,7 +122,7 @@
         <li>
             <label for="outputfile">To a file:</label> <input type="radio" name="output" value="file" id="outputfile" />
             <label class="inline" for="basename">Named: </label><input type="text" name="basename" id="basename" value="Export" />
-            <label class="inline" for="MIME">Into an application:</label>
+            <label class="inline" for="MIME">Định dạng:</label>
             <select name="MIME" id="MIME">
             [% FOREACH value IN CGIextChoice %]
                 <option value="[% value | html %]">[% value | html %]</option>

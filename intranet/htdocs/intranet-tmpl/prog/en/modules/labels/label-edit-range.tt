@@ -1,7 +1,7 @@
 [% USE raw %]
 [% SET footerjs = 1 %]
     [% INCLUDE 'doc-head-open.inc' %]
-    <title>Print barcode range &rsaquo; Label creator &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+    <title>Phạm vi in ​​mã vạch &rsaquo; Tạo nhãn gáy &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
     [% INCLUDE 'doc-head-close.inc' %]
     [% INCLUDE 'greybox.inc' %]
 </head>
@@ -19,7 +19,7 @@
             <a href="/cgi-bin/koha/labels/label-home.pl">Label creator</a>
         [% END %]
         [% WRAPPER breadcrumb_item bc_active= 1 %]
-            <span>Print barcode range</span>
+            <span>Phạm vi in ​​mã vạch</span>
         [% END %]
     [% END #/ WRAPPER breadcrumbs %]
 [% END #/ WRAPPER sub-header.inc %]

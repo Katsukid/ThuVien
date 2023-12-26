@@ -20,35 +20,35 @@
             <input type="text" size="40" id="contact_email[% contact.id | html %]" name="contact_email" value="[% contact.email | html %]" class="email" /></li>
         <li><label for="contact_notes[% contact.id | html %]">Notes: </label>
             <textarea id="contact_notes[% contact.id | html %]" name="contact_notes" cols="40" rows="4">[% contact.notes | html %]</textarea></li>
-        <li><label for="contact_acqprimary[% contact.id | html %]">Primary acquisitions contact:</label>
+        <li><label for="contact_acqprimary[% contact.id | html %]">Liên hệ bổ sung chính:</label>
             [% IF contact.acqprimary %]
                 <input type="checkbox" id="contact_acqprimary[% contact.id | html %]" class="contact_acqprimary" checked="checked"></input>
             [% ELSE %]
                 <input type="checkbox" id="contact_acqprimary[% contact.id | html %]" class="contact_acqprimary"></input>
             [% END %]
             <input type="hidden" class="contact_acqprimary_hidden" name="contact_acqprimary" value="[% contact.acqprimary | html %]"></input>
-        <li><label for="contact_serialsprimary[% contact.id | html %]">Primary serials contact:</label>
+        <li><label for="contact_serialsprimary[% contact.id | html %]">Liên hệ số seri chính:</label>
             [% IF contact.serialsprimary %]
                 <input type="checkbox" id="contact_serialsprimary[% contact.id | html %]" class="contact_serialsprimary" checked="checked"></input>
             [% ELSE %]
                 <input type="checkbox" id="contact_serialsprimary[% contact.id | html %]" class="contact_serialsprimary"></input>
             [% END %]
             <input type="hidden" class="contact_serialsprimary_hidden" name="contact_serialsprimary" value="[% contact.serialsprimary | html %]"></input>
-        <li><label for="contact_orderacquisition[% contact.id | html %]">Contact when ordering?</label>
+        <li><label for="contact_orderacquisition[% contact.id | html %]">liên lạc khi đặt hàng?</label>
             [% IF contact.orderacquisition %]
                 <input type="checkbox" id="contact_orderacquisition[% contact.id | html %]" class="contact_orderacquisition" checked="checked"></input>
             [% ELSE %]
                 <input type="checkbox" id="contact_orderacquisition[% contact.id | html %]" class="contact_orderacquisition"></input>
             [% END %]
             <input type="hidden" class="contact_orderacquisition_hidden" name="contact_orderacquisition" value="[% contact.orderacquisition | html %]"></input>
-        <li><label for="contact_claimacquisition[% contact.id | html %]">Contact about late orders?</label>
+        <li><label for="contact_claimacquisition[% contact.id | html %]">Liên hệ về đơn hàng trễ?</label>
             [% IF contact.claimacquisition %]
                 <input type="checkbox" id="contact_claimacquisition[% contact.id | html %]" class="contact_claimacquisition" checked="checked"></input>
             [% ELSE %]
                 <input type="checkbox" id="contact_claimacquisition[% contact.id | html %]" class="contact_claimacquisition"></input>
             [% END %]
             <input type="hidden" class="contact_claimacquisition_hidden" name="contact_claimacquisition" value="[% contact.claimacquisition | html %]"></input>
-        <li><label for="contact_claimissues[% contact.id | html %]">Contact about late issues?</label>
+        <li><label for="contact_claimissues[% contact.id | html %]">Liên hệ về các vấn đề muộn?</label>
             [% IF contact.claimissues %]
                 <input type="checkbox" id="contact_claimissues[% contact.id | html %]" class="contact_claimissues" checked="checked"></input>
             [% ELSE %]
@@ -91,7 +91,7 @@
 
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Vendor [% name | html %] &rsaquo; Trường CĐKTQS1</title>
+<title>Nhà cung cấp [% name | html %] &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
 div.rows p{ margin-left: 1rem; }
@@ -172,17 +172,17 @@ div.rows { padding: 1rem; }
             <li><label for="accountnumber">Account number: </label>
                 <input type="text" size="40" id="accountnumber" name="accountnumber" value="[% accountnumber | html %]" /></li>
                 <li>
-                    <label for="vendor_type">Vendor type: </label>
+                    <label for="vendor_type">Loại nhà cung cấp: </label>
                     [% PROCESS 'av-build-dropbox.inc' name="vendor_type", category="VENDOR_TYPE", default=type, empty=1, size = 20 %]
                 </li>
                 <li>
-                    <label for="aliases">Aliases: </label>
+                    <label for="aliases">Bí danh: </label>
                     <div id="aliases" style="padding-left: 11rem;"></div>
                 </li>
             </ol>
         </fieldset>
         <fieldset class="rows">
-            <legend>Contacts</legend>
+            <legend>Liên lạc</legend>
             <fieldset id="contact-template" class="supplier-contact">
                 <legend>Contact details</legend>
                 [% INCLUDE edit_contact %]
@@ -193,11 +193,11 @@ div.rows { padding: 1rem; }
                     [% INCLUDE edit_contact %]
                 </fieldset>
             [% END %]
-            <button id="add-contact" class="btn btn-default"><i class="fa fa-plus"></i> Add another contact</button>
+            <button id="add-contact" class="btn btn-default"><i class="fa fa-plus"></i> Thêm liên hệ khác</button>
         </fieldset>
 
         <fieldset class="rows">
-            <legend>Interfaces</legend>
+            <legend>Giao diện</legend>
             <div id="interfaces"></div>
         </fieldset>
 

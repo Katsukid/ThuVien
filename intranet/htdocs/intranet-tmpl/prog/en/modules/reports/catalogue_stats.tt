@@ -2,7 +2,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF ( do_it ) %]Catalog statistics &rsaquo; Results[% ELSE %]Catalog statistics[% END %] &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF ( do_it ) %]Catalog statistics &rsaquo; Results[% ELSE %]Báo cáo phân hệ biên mục[% END %] &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -269,18 +269,18 @@
 	</table><br /></fieldset>
 
     <fieldset class="rows">
-        <legend>Cell value</legend>
+        <legend>Giá trị ô</legend>
         <ol>
             <li>
                 <label for="cellvalue_items">Count total items</label>
                 <input type="radio" name="Cellvalue" value="items" id="cellvalue_items" checked="checked" />
             </li>
             <li>
-                <label for="cellvalue_biblios">Count unique bibliographic records</label>
+                <label for="cellvalue_biblios">Đếm các bản ghi thư mục độc đáo</label>
                 <input type="radio" name="Cellvalue" value="biblios" id="cellvalue_biblios" />
             </li>
             <li>
-                <label for="cellvalue_deleteditems">Count deleted items</label>
+                <label for="cellvalue_deleteditems">Đếm các mục đã xóa</label>
                 <input type="radio" name="Cellvalue" value="deleteditems" id="cellvalue_deleteditems" />
             </li>
         </ol>
