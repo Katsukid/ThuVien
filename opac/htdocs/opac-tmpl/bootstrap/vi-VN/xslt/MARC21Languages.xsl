@@ -465,7 +465,7 @@
  <xsl:when test="$code='uzb'"><xsl:text>Uzbek</xsl:text></xsl:when>
  <xsl:when test="$code='vai'"><xsl:text>Vai</xsl:text></xsl:when>
  <xsl:when test="$code='ven'"><xsl:text>Venda</xsl:text></xsl:when>
- <xsl:when test="$code='vie'"><xsl:text>Vietnamese</xsl:text></xsl:when>
+ <xsl:when test="$code='vie'"><xsl:text>Tiếng Việt</xsl:text></xsl:when>
  <xsl:when test="$code='vol'"><xsl:text>Volapük</xsl:text></xsl:when>
  <xsl:when test="$code='vot'"><xsl:text>Votic</xsl:text></xsl:when>
  <xsl:when test="$code='wak'"><xsl:text>Wakashan languages</xsl:text></xsl:when>

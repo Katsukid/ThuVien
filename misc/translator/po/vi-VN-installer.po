@@ -7723,7 +7723,7 @@ msgstr "tên"
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:460
 #, fuzzy
 msgid "Vietnamese"
-msgstr "tên"
+msgstr "Tiếng Việt"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:1:row:4
 msgid "Visa"

@@ -570,7 +570,7 @@ $(document).ready(function(){
                     [% END %]
                 [% END %]
             [% END %]
-            StrAlert += "<h4>" + _("The following mandatory subfields aren't filled:") + "</h4>";
+            StrAlert += "<h4>" + _("Các trường con bắt buộc sau đây chưa được điền:") + "</h4>";
         } else {
             [% FOREACH BIG_LOO IN BIG_LOOP %]
                 [% FOREACH innerloo IN BIG_LOO.innerloop %]
@@ -619,7 +619,7 @@ $(document).ready(function(){
             if (tabflag[tagsubfieldid][0]==0){
                 var tag=tagsubfieldid.substr(0,3);
                 var subfield=tagsubfieldid.substr(3,1);
-                StrAlert += "<li>"+_("Tag %s subfield %s %s in tab %s").format(tag, subfield, formatFieldName( tabflag[tagsubfieldid][1] ), tabflag[tagsubfieldid][2]) + ' <a class="linkfield btn btn-link" href="#" data-tab="' + tabflag[tagsubfieldid][2] + '" data-field="' + tabflag[tagsubfieldid][3] + '"><i class="fa fa-arrow-right" aria-hidden="true"></i> ' + _("Go to field") + '</a></li>';
+                StrAlert += "<li>"+_("Thẻ %s trường con %s %s trong tab%s").format(tag, subfield, formatFieldName( tabflag[tagsubfieldid][1] ), tabflag[tagsubfieldid][2]) + ' <a class="linkfield btn btn-link" href="#" data-tab="' + tabflag[tagsubfieldid][2] + '" data-field="' + tabflag[tagsubfieldid][3] + '"><i class="fa fa-arrow-right" aria-hidden="true"></i> ' + _("Đi đến trường này") + '</a></li>';
                 flag = true;
             }
         }
@@ -693,13 +693,13 @@ $(document).ready(function(){
         }
 
         if( Object.entries(mandatoryFields).length > 0 ){
-            StrAlert += "<h4>" + _("The following fields aren't filled:") + "</h4>";
+            StrAlert += "<h4>" + _("Các trường sau không được điền:") + "</h4>";
             StrAlert += "<ul>";
             for( var prop in mandatoryFields ){
                 if( mandatoryFields[prop]["importance"] == "mandatory" ){
-                    StrAlert += "<li>" + _("Field %s is mandatory, at least one of its subfields must be filled.").format( prop ) + ' <a class="linkfield btn btn-link" href="#" data-tab="' + mandatoryFields[prop]["tab"] + '" data-field="' + mandatoryFields[prop]["elemid"] + '"><i class="fa fa-arrow-right" aria-hidden="true"></i> ' + _("Go to field") + '</a></li>';
+                    StrAlert += "<li>" + _("Field %s is mandatory, at least one of its subfields must be filled.").format( prop ) + ' <a class="linkfield btn btn-link" href="#" data-tab="' + mandatoryFields[prop]["tab"] + '" data-field="' + mandatoryFields[prop]["elemid"] + '"><i class="fa fa-arrow-right" aria-hidden="true"></i> ' + _("Đi đến trường này") + '</a></li>';
                 } else {
-                    StrAlert += "<li>" + _("Field %s is important, at least one of its subfields must be filled.").format(prop) + ' <a class="linkfield btn btn-link" href="#" data-tab="' + mandatoryFields[prop]["tab"] + '" data-field="' + mandatoryFields[prop]["elemid"] + '"><i class="fa fa-arrow-right" aria-hidden="true"></i> ' + _("Go to field") + '</a></li>';
+                    StrAlert += "<li>" + _("Field %s is important, at least one of its subfields must be filled.").format(prop) + ' <a class="linkfield btn btn-link" href="#" data-tab="' + mandatoryFields[prop]["tab"] + '" data-field="' + mandatoryFields[prop]["elemid"] + '"><i class="fa fa-arrow-right" aria-hidden="true"></i> ' + _("Đi đến trường này") + '</a></li>';
                 }
             }
             StrAlert += "</ul>";

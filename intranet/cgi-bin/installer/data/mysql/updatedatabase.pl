@@ -9252,10 +9252,10 @@ if ( CheckVersion($DBversion) ) {
     $dbh->do("UPDATE language_descriptions SET description = 'Українська' WHERE subtag = 'uk' AND type = 'language' AND lang = 'uk'");
     $dbh->do("UPDATE language_descriptions SET description = 'اردو' WHERE subtag = 'ur' AND type = 'language' AND lang = 'ur'");
 
-    $dbh->do("INSERT IGNORE INTO language_subtag_registry( subtag, type, description, added) VALUES ( 'vi', 'language', 'Vietnamese','2014-10-30')");
+    $dbh->do("INSERT IGNORE INTO language_subtag_registry( subtag, type, description, added) VALUES ( 'vi', 'language', 'Tiếng Việt','2023-10-30')");
     $dbh->do("INSERT IGNORE INTO language_rfc4646_to_iso639(rfc4646_subtag,iso639_2_code) VALUES ( 'vi','vie')");
     $dbh->do("INSERT IGNORE INTO language_descriptions(subtag, type, lang, description) VALUES ( 'vi', 'language', 'vi', '㗂越')");
-    $dbh->do("INSERT IGNORE INTO language_descriptions(subtag, type, lang, description) VALUES ( 'vi', 'language', 'en', 'Vietnamese')");
+    $dbh->do("INSERT IGNORE INTO language_descriptions(subtag, type, lang, description) VALUES ( 'vi', 'language', 'en', 'Tiếng Việt')");
 
     $dbh->do("UPDATE language_descriptions SET description = '中文' WHERE subtag = 'zh' AND type = 'language' AND lang = 'zh'");
     $dbh->do("UPDATE language_descriptions SET description = '' WHERE subtag = 'Arab,script' AND type = 'Arab' AND lang = 'العربية'");

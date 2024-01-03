@@ -3044,8 +3044,8 @@ tables:
       lib_opac: Venda
     - authorised_value: vie
       category: LANG
-      lib: Vietnamese
-      lib_opac: Vietnamese
+      lib: Tiếng Việt
+      lib_opac: Tiếng Việt
     - authorised_value: vol
       category: LANG
       lib: Volapük

@@ -3827,8 +3827,8 @@ tables:
 
         - category: "LANG"
           authorised_value: "vie"
-          lib: "Vietnamese"
-          lib_opac: "Vietnamese"
+          lib: "Tiếng Việt"
+          lib_opac: "Tiếng Việt"
 
         - category: "LANG"
           authorised_value: "vol"

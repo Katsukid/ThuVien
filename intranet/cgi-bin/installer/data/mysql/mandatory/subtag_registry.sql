@@ -1382,7 +1382,7 @@ VALUES ( 'ur', 'language', 'pl', 'Urdu');
 
 -- Vietnamese
 INSERT INTO language_subtag_registry( subtag, type, description, added)
-VALUES ( 'vi', 'language', 'Vietnamese','2014-10-30');
+VALUES ( 'vi', 'language', 'Tiếng Việt','2014-10-30');
 
 INSERT INTO language_rfc4646_to_iso639(rfc4646_subtag,iso639_2_code)
 VALUES ( 'vi','vie');
@@ -1391,7 +1391,7 @@ INSERT INTO language_descriptions(subtag, type, lang, description)
 VALUES ( 'vi', 'language', 'vi', 'Tiếng Việt');
 
 INSERT INTO language_descriptions(subtag, type, lang, description)
-VALUES ( 'vi', 'language', 'en', 'Vietnamese');
+VALUES ( 'vi', 'language', 'en', 'Tiếng Anh');
 
 INSERT INTO language_descriptions(subtag, type, lang, description)
 VALUES ( 'vi', 'language', 'de', 'Vietnamesisch');
