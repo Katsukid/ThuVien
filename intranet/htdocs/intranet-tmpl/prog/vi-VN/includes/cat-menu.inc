@@ -60,12 +60,12 @@
  [% END %]
  [% IF CAN_user_tools_records_batchmod %]
  <li>
- <a href="/cgi-bin/koha/tools/batch_record_modification.pl">Batch record modification</a>
+ <a href="/cgi-bin/koha/tools/batch_record_modification.pl"> Sửa đổi bản ghi hàng loạt</a>
  </li>
  [% END %]
  [% IF CAN_user_tools_records_batchdel %]
  <li>
- <a href="/cgi-bin/koha/tools/batch_delete_records.pl">Batch record deletion</a>
+ <a href="/cgi-bin/koha/tools/batch_delete_records.pl"> Xóa bản ghi hàng loạt</a>
  </li>
  [% END %]
  [% IF ( CAN_user_tools_marc_modification_templates ) %]
@@ -100,7 +100,7 @@
  <a href="/cgi-bin/koha/labels/label-home.pl">Tạo nhãn gáy</a>
  </li>
  <li>
- <a href="/cgi-bin/koha/labels/barcode-print.pl">Barcode image generator</a>
+ <a href="/cgi-bin/koha/labels/barcode-print.pl"> Trình tạo hình ảnh mã vạch</a>
  </li>
  <li>
  <a href="/cgi-bin/koha/labels/spinelabel-home.pl">Tạo nhanh nhãn gáy</a>

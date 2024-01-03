@@ -8,7 +8,7 @@
  </div>
 
  <div class="form-content">
- <input type="text" name="supplier" id="supplier" class="head-searchbox form-control" placeholder="Search vendors" />
+ <input type="text" name="supplier" id="supplier" class="head-searchbox form-control" placeholder="Tìm kiếm nhà cung cấp" />
  </div>
  <button type="submit"><i class="fa fa-arrow-right"></i></button>
  </form>

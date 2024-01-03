@@ -6,7 +6,7 @@
 [% USE Koha %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>[% IF ( modify ) %][% bibliotitle | html %] &rsaquo; Modify subscription[% ELSE %]New subscription[% END %] &rsaquo; Serials &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF ( modify ) %][% bibliotitle | html %] &rsaquo; Modify subscription[% ELSE %]Đăng ký mới[% END %] &rsaquo; Ấn phẩm định kỳ &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
 fieldset.rows li.radio { width: 100%; } /* override staff-global.css */
@@ -76,33 +76,33 @@ fieldset.rows table { clear: none; margin: 0; }
  <input type="text" name="aqbooksellerid" id="aqbooksellerid" value="[% aqbooksellerid | html %]" size="8" /><input type="text" name="aqbooksellername" id="aqbooksellername" value="[% aqbooksellername | html %]" disabled="disabled" readonly="readonly" /><a href="#" id="vendor_search"><i class="fa fa-search"></i> Tìm kiếm nhà cung cấp</a>
  </li>
  <li>
- <label for="biblionumber" class="required">Record:</label>
+ <label for="biblionumber" class="required">Bản ghi:</label>
  <input type="text" name="biblionumber" id="biblionumber" value="[% bibnum | html %]" size="8" />
  <input type="text" name="title" value="[% bibliotitle | html %]" disabled="disabled" readonly="readonly" /><span class="required" title="Ấn phẩm định kỳ phải được liên kết tới biểu ghi thư mục">Bắt buộc</span>
  <span id="error_bib_not_exist"></span>
  <div class="hint">Ấn phẩm định kỳ phải được liên kết tới biểu ghi thư mục</div>
- <div class="inputnote"> <a href="#" id="record_search"><i class="fa fa-search"></i> Search for record</a>
+ <div class="inputnote"> <a href="#" id="record_search"><i class="fa fa-search"></i> Tìm kiếm bản ghi</a>
  [% IF ( CAN_user_editcatalogue ) %]
  [% IF ( modify ) %]
  | <a href="#" id="biblio_add_edit" data-biblionumber="[% bibnum | html %]"><i class="fa fa-pencil"></i> Sửa biểu ghi</a>
  [% ELSE %]
- | <a href="#" id="biblio_add_edit"><i class="fa fa-plus"></i> Create record</a>
+ | <a href="#" id="biblio_add_edit"><i class="fa fa-plus"></i> Tạo bản ghi</a>
  [% END %]
  [% END %]
  </div>
  </li>
  <li>
- <span class="label">When receiving this serial:</span>
+ <span class="label">Khi nhận được ấn phẩm này:</span>
  [% IF ( serialsadditems ) %]
  <input type="radio" id="serialsadditems-yes" name="serialsadditems" value="1" checked="checked" />
- <label class="radio" for="serialsadditems-yes"> Create an item record</label>
+ <label class="radio" for="serialsadditems-yes"> Tạo một bản ghi mục</label>
  <input type="radio" id="serialsadditems-no" name="serialsadditems" value="0" />
- <label class="radio" for="serialsadditems-no"> Do not create an item record</label>
+ <label class="radio" for="serialsadditems-no"> Không tạo bản ghi mục</label>
  [% ELSE %]
  <input type="radio" id="serialsadditems-yes" name="serialsadditems" value="1"/>
- <label class="radio" for="serialsadditems-yes"> Create an item record</label>
+ <label class="radio" for="serialsadditems-yes"> Tạo một bản ghi mục</label>
  <input type="radio" id="serialsadditems-no" name="serialsadditems" value="0" checked="checked" />
- <label class="radio" for="serialsadditems-no"> Do not create an item record</label>
+ <label class="radio" for="serialsadditems-no"> Không tạo bản ghi mục</label>
  [% END %]
  </li>
  <li>
@@ -120,7 +120,7 @@ fieldset.rows table { clear: none; margin: 0; }
  [% END %]
  </li>
  <li>
- <label for="manualhistory">Manual history:</label>
+ <label for="manualhistory">Lịch sử thủ công:</label>
  [% IF (manualhistory) %]
  <input type="checkbox" id="manualhistory" name="manualhist" checked="checked" />
  [% ELSE %]
@@ -265,7 +265,7 @@ fieldset.rows table { clear: none; margin: 0; }
  </ol>
  </fieldset>
  <fieldset class="action">
- <button type="button" class="btn btn-primary" id="subscription_add_next" style="float:right;">Next <i class="fa fa-long-arrow-right"></i></button>
+ <button type="button" class="btn btn-primary" id="subscription_add_next" style="float:right;">Tiếp theo <i class="fa fa-long-arrow-right"></i></button>
  </fieldset>
  </div> <!-- /.col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 -->
  </div> <!-- /.row#page_1 -->

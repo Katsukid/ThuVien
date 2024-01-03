@@ -10,7 +10,7 @@
  [%- END -%]
 [%- END -%]
  [% INCLUDE 'doc-head-open.inc' %]
- <title>[% IF ( layout_id ) %]Edit label layout [% layout_id | html %] [% ELSE %] New label layout [% END %] &rsaquo; Layouts &rsaquo; Label creator &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+ <title>[% IF ( layout_id ) %]Edit label layout [% layout_id | html %] [% ELSE %] Bố cục nhãn mới [% END %] &rsaquo; Bố cục &rsaquo; Tạo nhãn gáy &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
  [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -35,13 +35,13 @@
  <a href="/cgi-bin/koha/labels/label-home.pl">Tạo nhãn gáy</a>
  [% END %]
  [% WRAPPER breadcrumb_item %]
- <a href="/cgi-bin/koha/labels/label-manage.pl?label_element=layout">Layouts</a>
+ <a href="/cgi-bin/koha/labels/label-manage.pl?label_element=layout">Bố cục</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
  [% IF ( layout_id ) %]
  <span>Edit label layout [% layout_id | html %]</span>
  [% ELSE %]
- <span>New label layout</span>
+ <span>Bố cục nhãn mới</span>
  [% END %]
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
@@ -57,7 +57,7 @@
  [% IF ( layout_id ) %]
  <h1>Edit label layout [% layout_id | html %]</h1>
  [% ELSE %]
- <h1>New label layout</h1>
+ <h1>Bố cục nhãn mới</h1>
  [% END %]
 
  <form name="input" action="/cgi-bin/koha/labels/label-edit-layout.pl" method="get">

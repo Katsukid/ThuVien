@@ -2,7 +2,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Average loan time &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Thời gian ghi mượn trung bình &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

@@ -13,14 +13,14 @@
  [% IF ( suggestionid ) %]
  Edit suggestion #[% suggestionid | html %] &rsaquo; Suggestions
  [% ELSE %]
- Add suggestion &rsaquo; Suggestions
+ Tạo đề xuất mua &rsaquo; Suggestions
  [% END %]
 
  [% ELSIF ( op == 'show' ) %]
  Show suggestion #[% suggestionid | html %] &rsaquo; Suggestions
 
  [% ELSE %]
- Suggestions management
+ Quản lý đề xuất mua
  [% END %] &rsaquo; Acquisitions &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
@@ -75,7 +75,7 @@
  [% END %]
  [% ELSE %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Add suggestion</span>
+ <span>Tạo đề xuất mua</span>
  [% END %]
  [% END %]
  [% ELSIF ( op == 'show' ) %]
@@ -405,7 +405,7 @@
  <textarea name="note" id="note" rows="5" cols="40">[% note | html %]</textarea>
  </li>
  <li>
- <label for="note">Non-public notes:</label>
+ <label for="note">Ghi chú không công khai:</label>
  <textarea name="staff_note" id="staff_note" rows="5" cols="40">[% staff_note | html %]</textarea>
  </li>
  </ol>
@@ -513,7 +513,7 @@
  </tr>
  <tr>
  <th>
- <label for="accepteddate">Accepted on:</label>
+ <label for="accepteddate">Đã chấp nhận vào:</label>
  </th>
  <td>
  <input type="text" id="accepteddate" name="accepteddate" class="flatpickr" size="10" maxlength="10" value="[% accepteddate | html %]" />[% INCLUDE 'date-format.inc' %]
@@ -529,7 +529,7 @@
  </tr>
  <tr>
  <th>
- <label for="lastmodificationdate">Last modification on:</label>
+ <label for="lastmodificationdate">Sửa đổi lần cuối vào:</label>
  </th>
  <td>
  [% lastmodificationdate | $KohaDates %]
@@ -545,27 +545,27 @@
  </table>
  </li>
  <li>
- <label for="managedon">Managed on:</label>
+ <label for="managedon">Được quản lý trên:</label>
  <input type="text" id="managedon" name="manageddate" class="flatpickr" size="10" maxlength="10" value="[% manageddate | html %]" />[% INCLUDE 'date-format.inc' %]
  </li>
  <li>
- <label for="managedby_name">by:</label>
+ <label for="managedby_name">bởi:</label>
  <div>
  <span id="managedby_name" name="managedby_name">
- <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% logged_in_user.borrowernumber | uri %]">You</a>
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% logged_in_user.borrowernumber | uri %]">Bạn</a>
  </span>
  [% IF managedby_patron.borrowernumber && logged_in_user.borrowernumber != managedby_patron.borrowernumber %]
  | Previously was [% INCLUDE 'patron-title.inc' patron=managedby_patron hide_patron_infos_if_needed=1 %] [% Branches.GetName( managedby_patron.branchcode ) | html %] ([% managedby_patron.category.description | html %])
  [% END %]
  <br />
- <a id="edit_manager" class="new_window" href="#"><i class="fa fa-search"></i> Select manager</a>
+ <a id="edit_manager" class="new_window" href="#"><i class="fa fa-search"></i> Chọn người quản lý</a>
  [% IF managedby_patron.borrowernumber && logged_in_user.borrowernumber != managedby_patron.borrowernumber %]
  <a id="restore_previous_manager" href="#"><i class="fa fa-trash"></i> Keep existing manager</a>
  [% END %]
  <input type="hidden" name="managedby" id="managedby" value="[% logged_in_user.borrowernumber | html %]" />
 
  <br/>
- <label for="notify">Notify manager:</label>
+ <label for="notify">Thông báo cho người quản lý:</label>
  <input type="checkbox" id="notify" name="notify" value="notify" disabled="disabled" title="A NOTIFY_MANAGER notice will be generated and send to the manager if a valid email address is defined. This can be checked if a new manager has been selected." />
  </div> <!-- /div -->
  </li>
@@ -596,7 +596,7 @@
  [% END %]
  [% END %]
  </select>
- <label for="showallfunds" style="float:none;width:auto;">&nbsp;Show inactive:</label>
+ <label for="showallfunds" style="float:none;width:auto;">&nbsp;Hiển thị không hoạt động:</label>
  <input type="checkbox" id="showallfunds" />
  </li>
  <li>
@@ -662,7 +662,7 @@
  <h1>Quản lý đề xuất mua</h1>
 
  [% IF ( displayby != "branchcode" ) %]
- <label for="branchcode">Viewing suggestions for library:</label>
+ <label for="branchcode">Xem đề xuất cho thư viện:</label>
  <select name="branchcode" id="branchcode">
  <option value="__ANY__">Tất cả</option>
  [% PROCESS options_for_libraries libraries => Branches.all( selected => branchfilter || branchcode ) %]
@@ -725,17 +725,17 @@
  <th class="NoSort noExport">&nbsp;</th>
  <th class="anti-the">Đề xuất mua</th>
  <th>Người đề xuất</th>
- <th>Suggester category</th>
- <th>Suggested on</th>
- <th>Patron reason</th>
+ <th>Danh mục gợi ý</th>
+ <th>Được đề xuất trên</th>
+ <th>Lý do bảo trợ</th>
  <th>Người quản lý</th>
- <th>Managed on</th>
- <th>Last modification by</th>
- <th>Last modification on</th>
+ <th>Được quản lý trên</th>
+ <th>Sửa đổi lần cuối bởi</th>
+ <th>Sửa đổi lần cuối vào</th>
  <th>Lần cập nhật cuối</th>
  <th>Thư viện</th>
  <th>Quỹ</th>
- <th>Non-public note</th>
+ <th>Ghi chú không công khai</th>
  <th>Trạng thái</th>
  <th class="NoSort noExport">&nbsp;</th>
  </tr>
@@ -863,7 +863,7 @@
 
  <div class="row">
  <div class="col-sm-12">
- <h2>Change selected suggestions</h2>
+ <h2>Thay đổi đề xuất đã chọn</h2>
  </div>
  </div>
  <div class="suggestions_batch_ops row">
@@ -935,7 +935,7 @@
  <div class="col-sm-2">
  <fieldset class="brief">
  <label id="suggestion_itemtype">
- Update item types with:
+ Cập nhật các loại mục với:
  </label>
  [% PROCESS 'av-build-dropbox.inc' name="suggestion_itemtype", category="SUGGEST_FORMAT", size = 20  %]
  <input type="hidden" name="branchcode" value="[% branchfilter | html %]" />
@@ -948,8 +948,8 @@
 
  <div class="col-sm-2">
  <fieldset class="brief">
- <span class="label">Update manager</span>
- <a id="set_manager_[% loop.count | html %]" data-tab="[% loop.count | html %]" class="set_manager" href="#"><i class="fa fa-search"></i> Select manager</a>
+ <span class="label">Trình quản lý cập nhật</span>
+ <a id="set_manager_[% loop.count | html %]" data-tab="[% loop.count | html %]" class="set_manager" href="#"><i class="fa fa-search"></i> Chọn người quản lý</a>
  <span id="managedby_name[% loop.count | html %]"></span>
  <input type="hidden" name="suggestion_managedby" id="managedby[% loop.count | html %]" value="[% logged_in_user.borrowernumber | html %]" />
  <input type="hidden" name="branchcode" value="[% branchfilter | html %]" />
@@ -972,7 +972,7 @@
  </div> <!-- /.col-sm-2 -->
  <div class="col-sm-2">
  <fieldset class="brief">
- <span class="label">Archive selected</span>
+ <span class="label">Đã chọn lưu trữ</span>
  <input type="hidden" name="branchcode" value="[% branchfilter | html %]" />
  <input type="hidden" name="filter_archived" value="[% filter_archived | html %]" />
  <fieldset class="action">
@@ -1002,7 +1002,7 @@
  [% INCLUDE 'csrf-token.inc' %]
  <input type="hidden" name="branchcode" value="[% branchfilter | html %]" />
  <fieldset class="brief">
- <h4>Organize by:</h4>
+ <h4>Tổ chức bởi:</h4>
  <ol>
  <li>
  <label for="displayby" class="sr-only">Sắp xếp đề xuất mua theo: </label>
@@ -1225,7 +1225,7 @@
  <div id="filter_archived_information">
  <ol>
  <li>
- <label for="archived" style="display: inline;">Include archived:</label>
+ <label for="archived" style="display: inline;">Bao gồm lưu trữ:</label>
  [% IF filter_archived %]
  <input type="checkbox" id="archived" value="1" name="filter_archived" checked="checked" title="Include archived suggestions in the search" />
  [% ELSE %]

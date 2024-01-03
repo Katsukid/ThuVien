@@ -148,7 +148,8 @@
  <li>
  <label for="export_remove_fields">Không xuất trường:</label>
  <input id="export_remove_fields" type="text" name="export_remove_fields" value="[% export_remove_fields | html %]" />
- các trường cách nhau dấu cách. (VD: 100a 200 606) </li>
+ các trường cách nhau dấu cách. (VD: 100a 200 606) 
+ </li>
  </ol>
  </fieldset>
 
@@ -220,7 +221,7 @@
  </legend>
  <ol>
  <li>
- File containing a list of authids with one authid per line. This list works as a filter: it is compatible with other parameters. (File types accepted: .csv and .txt)
+ Tệp chứa danh sách số thư mục với một số thư mục trên mỗi dòng. Danh sách này hoạt động như một bộ lọc: nó tương thích với các tham số khác. (Các loại tệp được chấp nhận: .csv và .txt)
  </li>
  <li>
  <label for="id_list_file">Tệp tin:</label> <input type="file" id="id_list_file" name="id_list_file" />

@@ -2,7 +2,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Holds statistics[% IF ( do_it ) %] &rsaquo; Results[% END %] &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Thống kê đặt mượn[% IF ( do_it ) %] &rsaquo; Results[% END %] &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
 	.sql {display:none;}
@@ -281,8 +281,8 @@
  </tbody>
  </table><br /></fieldset>
 
-<fieldset class="rows"><legend>Giá trị các ô </legend><ol><li><label for="cellvalue1">Count holds:</label> <input type="radio" name="Cellvalue" value="1" id="cellvalue1" checked="checked" /> </li>
- <li><label for="cellvalue2">Count unique borrowers:</label> <input type="radio" name="Cellvalue" value="2" id="cellvalue2" /> </li><li><label for="cellvalue3">Count unique items:</label> <input type="radio" name="Cellvalue" id="cellvalue3" value="3" /> </li><li><label for="cellvalue4">Count unique bibliographic records:</label> <input type="radio" name="Cellvalue" id="cellvalue4" value="4" /> </li></ol></fieldset>
+<fieldset class="rows"><legend>Giá trị các ô </legend><ol><li><label for="cellvalue1">Đếm giữ:</label> <input type="radio" name="Cellvalue" value="1" id="cellvalue1" checked="checked" /> </li>
+ <li><label for="cellvalue2">Count unique borrowers:</label> <input type="radio" name="Cellvalue" value="2" id="cellvalue2" /> </li><li><label for="cellvalue3">Đếm các mục độc đáo:</label> <input type="radio" name="Cellvalue" id="cellvalue3" value="3" /> </li><li><label for="cellvalue4">Đếm các bản ghi thư mục độc đáo:</label> <input type="radio" name="Cellvalue" id="cellvalue4" value="4" /> </li></ol></fieldset>
  
  <fieldset class="rows">
  <legend>Hiển thị báo cáo</legend>
@@ -293,7 +293,7 @@
  <li>
  <label for="outputfile">Xuất ra tệp tin:</label> <input type="radio" name="output" value="file" id="outputfile" />
  <label class="inline" for="basename">Tên tệp tin: </label><input id="basename" name="basename" type="text" value="Xuất dữ liệu" />
- <label class="inline" for="MIME">Into an application:</label>
+ <label class="inline" for="MIME">Định dạng:</label>
  <select name="MIME" id="MIME">
  [% FOREACH value IN CGIextChoice %]
  <option value="[% value | html %]">[% value | html %]</option>

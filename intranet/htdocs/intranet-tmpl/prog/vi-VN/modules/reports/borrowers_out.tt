@@ -1,7 +1,7 @@
 [% USE raw %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Patrons with no checkouts &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Bạn đọc không ghi mượn tài liệu &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -110,7 +110,7 @@
  <li>
  <label for="outputfile">Xuất ra tệp tin:</label> <input type="radio" name="output" value="file" id="outputfile" />
  <label class="inline" for="basename">Tên tệp tin: </label><input id="basename" name="basename" type="text" value="Xuất dữ liệu" />
- <label class="inline" for="MIME">Into an application:</label>
+ <label class="inline" for="MIME">Định dạng:</label>
  <select name="MIME" id="MIME">
  [% FOREACH value IN CGIextChoice %]
  <option value="[% value | html %]">[% value | html %]</option>

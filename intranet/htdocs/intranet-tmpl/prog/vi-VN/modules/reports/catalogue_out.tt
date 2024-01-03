@@ -2,7 +2,7 @@
 [% USE Branches %]
 [% USE ItemTypes %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Items with no checkouts &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Tài liệu không lưu thông &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
     .sql {display: none;}

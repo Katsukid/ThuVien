@@ -12,10 +12,10 @@
 [%- BLOCK area_name -%]
  [%- SWITCH area -%]
  [%- CASE 'CIRC' -%]<span>Phân hệ lưu thông</span>
- [%- CASE 'CAT'  -%]<span>Tìm kiếm</span>
+ [%- CASE 'CAT'  -%]<span>Phân hệ biên mục</span>
  [%- CASE 'PAT'  -%]<span>Bạn đọc</span>
  [%- CASE 'ACQ'  -%]<span>Phân hệ bổ sung</span>
- [%- CASE 'ACC'  -%]<span>Accounts</span>
+ [%- CASE 'ACC'  -%]<span>Tài khoản</span>
  [%- CASE 'SER'  -%]<span>Ấn phẩm định kỳ</span>
  [%- END -%]
 [%- END -%]
@@ -24,20 +24,20 @@
 
 <title>
  [%- IF ( saved1 ) -%]
- Saved reports &rsaquo; [%- ELSIF ( create ) -%]
- Create from SQL &rsaquo; [%- ELSIF ( showsql ) -%]
+ Báo cáo đã lưu &rsaquo; [%- ELSIF ( create ) -%]
+ Tạo báo cáo từ SQL &rsaquo; [%- ELSIF ( showsql ) -%]
  SQL view &rsaquo; Saved reports &rsaquo; [%- ELSIF ( execute ) -%]
  Report [% name | html %] ([% id | html %]) &rsaquo; Saved reports &rsaquo; [%- ELSIF ( editsql ) -%]
  Edit report [% reportname | html %] ([% id | html %]) &rsaquo; Saved reports &rsaquo; [%- END -%]
 
  [%- IF ( build1 ) -%]
- Build a report, step 1 of 6: Choose a module &rsaquo; [%- ELSIF ( build2 ) -%]
+ Xây dựng báo cáo, bước 1/6: Chọn mô-đun &rsaquo; [%- ELSIF ( build2 ) -%]
  Build a report, step 2 of 6: Pick a report type &rsaquo; [%- ELSIF ( build3 ) -%]
  Build a report, step 3 of 6: Select columns for display &rsaquo; [%- ELSIF ( build4 ) -%]
  Build a report, step 4 of 6: Select criteria to limit on &rsaquo; [%- ELSIF ( build5 ) -%]
  Build a report, step 5 of 6: Pick which columns to total &rsaquo; [%- ELSIF ( build6 ) -%]
  Build a report, step 6 of 6: Select how you want the report ordered &rsaquo; [%- END -%]
- Guided reports wizard &rsaquo; Reports &rsaquo; Trường CĐKTQS1
+ Hướng dẫn tạo báo cáo &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1
 </title>
 
 [% INCLUDE 'doc-head-close.inc' %]
@@ -113,7 +113,7 @@
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
  [% IF ( build1 ) %]
- <span>Step 1 of 6: Choose a module</span>
+ <span>Bước 1 trên 6: Chọn mô-đun</span>
  [% ELSIF ( build2 ) %]
  <span>Bước 2/6: Chọn kiểu hiển thị</span>
  [% ELSIF ( build3 ) %]
@@ -263,10 +263,10 @@
  <th>Ghi chú</th>
  <th>Tác giả</th>
  <th>Ngày tạo</th>
- <th>Last edit</th>
- <th>Last run</th>
+ <th>Chỉnh sửa lần cuối</th>
+ <th>Lần chạy cuối cùng</th>
  <th class="report_public">Cộng đồng</th>
- <th class="report_json_url">JSON URL</th>
+ <th class="report_json_url">Đường dẫn JSON</th>
  [% IF (usecache) %]
  <th>Bộ nhớ đệm hết hạn (giây)</th>
  [% ELSE %]
@@ -441,7 +441,7 @@
  <h1>Tạo báo cáo mới</h1>
  <form action="/cgi-bin/koha/reports/guided_reports.pl">
  <fieldset class="rows">
- <legend>Step 1 of 6: Choose a module to report on,[% IF (usecache) %] Set cache expiry, [% END %] and choose report visibility </legend>
+ <legend>Bước 1 trên 6: Chọn mô-đun để báo cáo,[% IF (usecache) %] Đặt hết hạn bộ nhớ đệm, [% END %] và chọn khả năng hiển thị báo cáo </legend>
  <ol>
  <li>
  <label for="area">Chọn: </label>
@@ -1228,7 +1228,7 @@
  <div style="margin:1em;">
  [% PROCESS insert_runtime_parameter  %]
  <textarea id="sql" name="sql" class="required" required="required" cols="50" rows="10" >[% sql | html %]</textarea>
- <span style='color:#383838; font-style:italic'>* In order to achieve auto-complete for columns, please prepend the column name with the table name, followed by a period. For example: 'borrowers.surname'</span>
+ <span style='color:#383838; font-style:italic'>* Để đạt được tính năng tự động hoàn thành cho các cột, vui lòng thêm tên cột vào trước tên bảng, theo sau là dấu chấm. Ví dụ: 'borrowers.surname'</span>
  <br/>
  <span class="required">Bắt buộc</span>
  </div>
@@ -1236,7 +1236,7 @@
 
  <fieldset class="action">
  <input type="hidden" name="phase" value="Save Report" />
- <input type="submit" name="submit" class="btn btn-primary" value="Save report" />
+ <input type="submit" name="submit" class="btn btn-primary" value="Lưu lại báo cáo" />
  <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Use%20saved" class="cancel">Hủy bỏ</a>
  </fieldset>
 
@@ -2398,7 +2398,7 @@
  [% END %]
  </select>
  <input type="radio" name="select_or_create_group" id="create_group" />
- <label for="create_group" class="radio">or create:</label>
+ <label for="create_group" class="radio">hoặc tạo:</label>
  <input id="group_input" name="group" placeholder="Mã" title="Mã nhóm" type="text" />
  <input id="groupdesc_input" name="groupdesc" placeholder="Tên" title="Tên nhóm" type="text" />
  </li>
@@ -2434,7 +2434,7 @@
 [% BLOCK insert_runtime_parameter %]
  <div class="btn-group"  style="margin-left:30px;">
  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- Insert runtime parameter <span class="caret"></span>
+ Chèn tham số thời gian chạy <span class="caret"></span>
  </button>
  <ul class="dropdown-menu">
  <li><a href="#" class="insertParam" id="insertAuthVal">Giá trị định trước</a></li>

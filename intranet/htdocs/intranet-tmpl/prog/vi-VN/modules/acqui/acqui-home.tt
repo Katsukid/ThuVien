@@ -5,7 +5,7 @@
 [% USE TablesSettings %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Acquisitions &rsaquo; Trường CĐKTQS1</title>
+<title>Phân hệ bổ sung &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.css("lib/jquery/plugins/treetable/stylesheets/jquery.treetable.css") | $raw %]
 </head>
@@ -84,7 +84,7 @@
 [% IF ( loop_budget ) %]
 
 <div class="page-section">
- <h3>All available funds</h3>
+ <h3>Tất cả số tiền có sẵn</h3>
 
  <div id="BudgetsAndFunds">
  <div class="toolbar btn-toolbar">

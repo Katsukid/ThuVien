@@ -44,7 +44,7 @@
  <main>
 
  [% INCLUDE 'labels-toolbar.inc' %]
- <h1>Manage labels</h1>
+ <h1>Quản lý nhãn</h1>
 
  [% IF ( error ) %]
  <div class="dialog alert">
@@ -55,11 +55,11 @@
  [% IF ( table_loop ) %]
  <form name="layouts" action="/cgi-bin/koha/label-manage.pl?label_element=[% label_element | html %]">
  [% IF    ( label_element == 'layout' ) %]
- <h2>Currently available layouts</h2>
+ <h2>Các bố cục hiện có sẵn</h2>
  [% ELSIF ( label_element == 'template' ) %]
- <h2>Currently available templates</h2>
+ <h2>Các mẫu hiện có sẵn</h2>
  [% ELSIF ( label_element == 'profile' ) %]
- <h2>Currently available profiles</h2>
+ <h2>Hồ sơ hiện có</h2>
  [% ELSIF ( label_element == 'batch' ) %]
  <h2>Currently available batches</h2>
  [% END %]

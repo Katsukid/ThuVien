@@ -1,7 +1,7 @@
 [% USE raw %]
 [% SET footerjs = 1 %]
  [% INCLUDE 'doc-head-open.inc' %]
- <title>[% IF ( template_id ) %]Edit label template [% template_id | html %] [% ELSE %] New label template [% END %] &rsaquo; Templates &rsaquo; Label creator &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+ <title>[% IF ( template_id ) %]Edit label template [% template_id | html %] [% ELSE %] Mẫu nhãn mới [% END %] &rsaquo; Mẫu &rsaquo; Tạo nhãn gáy &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
  [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -19,13 +19,13 @@
  <a href="/cgi-bin/koha/labels/label-home.pl">Tạo nhãn gáy</a>
  [% END %]
  [% WRAPPER breadcrumb_item %]
- <a href="/cgi-bin/koha/labels/label-manage.pl?label_element=template">Templates</a>
+ <a href="/cgi-bin/koha/labels/label-manage.pl?label_element=template">Mẫu</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
  [% IF ( template_id ) %]
  <span>Edit label template [% template_id | html %]</span>
  [% ELSE %]
- <span>New label template</span>
+ <span>Mẫu nhãn mới</span>
  [% END %]
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
@@ -40,7 +40,7 @@
  [% IF ( template_id ) %]
  <h1>Edit label template [% template_id | html %]</h1>
  [% ELSE %]
- <h1>New label template</h1>
+ <h1>Mẫu nhãn mới</h1>
  [% END %]
 
  <form name="input" action="/cgi-bin/koha/labels/label-edit-template.pl" method="get">

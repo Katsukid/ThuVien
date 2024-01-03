@@ -1,7 +1,7 @@
 [% USE raw %]
 [% SET footerjs = 1 %]
  [% INCLUDE 'doc-head-open.inc' %]
- <title>[% IF ( profile_id ) %]Edit printer profile [% profile_id | html %] [% ELSE %] New printer profile [% END%] &rsaquo; Profiles &rsaquo; Label creator &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+ <title>[% IF ( profile_id ) %]Edit printer profile [% profile_id | html %] [% ELSE %] Hồ sơ máy in mới [% END%] &rsaquo; Hồ sơ &rsaquo; Tạo nhãn gáy &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
  [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -19,13 +19,13 @@
  <a href="/cgi-bin/koha/labels/label-home.pl">Tạo nhãn gáy</a>
  [% END %]
  [% WRAPPER breadcrumb_item %]
- <a href="/cgi-bin/koha/labels/label-manage.pl?label_element=profile">Profiles</a>
+ <a href="/cgi-bin/koha/labels/label-manage.pl?label_element=profile">Hồ sơ</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
  [% IF ( profile_id ) %]
  <span>Edit printer profile [% profile_id | html %]</span>
  [% ELSE %]
- <span>New printer profile</span>
+ <span>Hồ sơ máy in mới</span>
  [% END%]
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
@@ -41,7 +41,7 @@
  [% IF ( profile_id ) %]
  <h1>Edit printer profile [% profile_id | html %]</h1>
  [% ELSE %]
- <h1>New printer profile</h1>
+ <h1>Hồ sơ máy in mới</h1>
  [% END%]
 
  <form name="input" action="/cgi-bin/koha/labels/label-edit-profile.pl" method="get">
