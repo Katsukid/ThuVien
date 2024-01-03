@@ -5,7 +5,7 @@
 [% USE KohaDates %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-    <title>[% IF ( supplierid ) -%] Claims for [% suppliername | html %] &rsaquo; [% END %] Claims &rsaquo; Serials &rsaquo; Trường CĐKTQS1</title>
+    <title>[% IF ( supplierid ) -%] Claims for [% suppliername | html %] &rsaquo; [% END %] Khiếu nại &rsaquo; Ấn phẩm định kỳ &rsaquo; Trường CĐKTQS1</title>
     [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -41,7 +41,7 @@
         <div class="col-sm-10 col-sm-push-2">
             <main>
 
-                <h1>Claims [% IF ( suppliername ) %] for [% suppliername | html %] [% END %]</h1>
+                <h1>Khiếu nại [% IF ( suppliername ) %] for [% suppliername | html %] [% END %]</h1>
 
                 [% IF error_claim %]
                     [% IF error_claim == 'no_vendor_email' %]

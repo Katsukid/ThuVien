@@ -2,7 +2,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Most-circulated items[% IF ( do_it ) %] &rsaquo; Results[% END %] &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Tài liệu lưu thông nhiều nhất[% IF ( do_it ) %] &rsaquo; Results[% END %] &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -114,7 +114,7 @@
     </select>
       </li>
       <li> 
-        <label for="itemcallnumber">Call number: </label><input type="text" name="Filter" id="itemcallnumber" value="" />
+        <label for="itemcallnumber">Số cuộc gọi: </label><input type="text" name="Filter" id="itemcallnumber" value="" />
       </li>
       <li>
         <label for="ccode">Collection: </label><select name="Filter" id="ccode"><option value="" > Any collection</option>
@@ -124,7 +124,7 @@
     </select>
       </li>
       <li>
-        <label for="shelvingloc">Shelving location: </label><select name="Filter" id="shelvingloc"><option value="" > Any shelving location</option>
+        <label for="shelvingloc">Vị trí kệ: </label><select name="Filter" id="shelvingloc"><option value="" > Any shelving location</option>
     [% FOREACH shelvinglocloo IN shelvinglocloop %]
         <option value="[% shelvinglocloo.value | html %]" >[% shelvinglocloo.description | html %] </option>
      [% END %]
@@ -177,7 +177,7 @@
         <li>
             <label for="outputfile">To a file:</label> <input type="radio" name="output" value="file" id="outputfile" />
             <label class="inline" for="basename">Named: </label><input type="text" name="basename" id="basename" value="Export" />
-            <label class="inline" for="MIME">Into an application:</label>
+            <label class="inline" for="MIME">Định dạng:</label>
             <select name="MIME" id="MIME">
             [% FOREACH value IN CGIextChoice %]
                 <option value="[% value | html %]">[% value | html %]</option>

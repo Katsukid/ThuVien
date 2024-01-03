@@ -3,7 +3,7 @@
 [% USE ItemTypes %]
 [% SET footerjs = 1 %]
     [% INCLUDE 'doc-head-open.inc' %]
-    <title>[% IF batch_id %]Edit label batch ([% batch_id | html %])[% ELSE %]New label batch[% END %]&rsaquo; Batches &rsaquo; Label creator &rsaquo; Cataloging &rsaquo; Trường CĐKTQS1</title>
+    <title>[% IF batch_id %]Edit label batch ([% batch_id | html %])[% ELSE %]Lô nhãn mới[% END %]&rsaquo; Lô &rsaquo; Tạo nhãn gáy &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
     [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -21,7 +21,7 @@
             <a href="/cgi-bin/koha/labels/label-home.pl">Label creator</a>
         [% END %]
         [% WRAPPER breadcrumb_item %]
-            <a href="/cgi-bin/koha/labels/label-manage.pl?label_element=batch">Batches</a>
+            <a href="/cgi-bin/koha/labels/label-manage.pl?label_element=batch">Lô</a>
         [% END %]
         [% WRAPPER breadcrumb_item bc_active= 1 %]
             [% IF description %]
@@ -29,7 +29,7 @@
             [% ELSIF batch_id %]
                 <span>Edit label batch [% batch_id | html %]</span>
             [% ELSE %]
-                <span>New label batch</span>
+                <span>Lô nhãn mới</span>
             [% END %]
         [% END %]
     [% END #/ WRAPPER breadcrumbs %]
@@ -47,7 +47,7 @@
                         [% ELSIF batch_id %]
                             <h1>Edit label batch [% batch_id | html %]</h1>
                         [% ELSE %]
-                            <h1>New label batch</h1>
+                            <h1>Lô nhãn mới</h1>
                         [% END %]
 
                         [% IF ( err ) %]
@@ -88,20 +88,20 @@
                                         </li>
                                     <li>
                                         <input type="radio" name="number_type" id="barcode_enter" value="barcode" checked />
-                                        <label for="barcode_enter">Enter by barcode:</label>
+                                        <label for="barcode_enter">Nhập bằng mã vạch:</label>
                                     </li>
                                     <li>
                                         <input type="radio" name="number_type" id="itemnum_enter" value="itemnumber" />
-                                        <label for="itemnum_enter">Enter by itemnumber:</label>
+                                        <label for="itemnum_enter">Nhập theo số mục:</label>
                                     </li>
                                     <li>
                                         <label for="number_list">
-                                            Add by barcode(s) or itemnumbers(s):
+                                            Thêm theo (các) mã vạch hoặc (các) số mặt hàng:
                                         </label>
                                         <textarea rows="5" id="number_list" name="number_list" tabindex="1" class="focus"></textarea>
                                         <div class="hint">
-                                            One number per line.
-                                            <br /> Leave empty to add via item search (itemnumber)
+                                            Một số trên mỗi dòng.
+                                            <br /> Để trống để thêm thông qua tìm kiếm mục (itemnumber)
                                         </div>
                                     </li></ol>
                                     </fieldset>
@@ -175,8 +175,8 @@
                                 </form>
                                 [% ELSE %]
                                     <div class="dialog message">
-                                        <h4>There are no items in this batch yet</h4>
-                                        <p>Add items by using the text area above or leave empty to add via item search.</p>
+                                        <h4>Chưa có sản phẩm nào trong đợt này</h4>
+                                        <p>Thêm các mục bằng cách sử dụng vùng văn bản ở trên hoặc để trống để thêm thông qua tìm kiếm mục.</p>
                                     </div>
                                 [% END %]
                             </div>

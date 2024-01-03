@@ -4,7 +4,7 @@
 [% USE ItemTypes %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Catalog by item types &rsaquo; Reports &rsaquo; Trường CĐKTQS1</title>
+<title>Số bản tài liệu &rsaquo; Báo cáo &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% IF ( do_it ) %]
 [% END %]
