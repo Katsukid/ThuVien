@@ -8,7 +8,7 @@
 [% PROCESS 'accounts.inc' %]
 
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Create manual invoice &rsaquo; Patrons &rsaquo; Trường CĐKTQS1</title>
+<title>Create manual invoice &rsaquo; Bạn đọc &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

@@ -3,7 +3,7 @@
 [% SET footerjs = 1 %]
 [% USE Koha %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Share content with Mana KB &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Share content with Mana KB &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

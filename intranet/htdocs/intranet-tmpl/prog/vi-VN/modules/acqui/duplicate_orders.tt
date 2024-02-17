@@ -173,7 +173,7 @@ Acquisitions &rsaquo; Trường CĐKTQS1
  <fieldset class="action">
  <input type="hidden" name="op" value="batch_edit" />
  <input type="hidden" name="basketno" value="[% basket.basketno | html %]" />
- <button type="submit" class="btn btn-primary go_to_batch_edit">Next <i class="fa fa-fw fa-arrow-right"></i></button>
+ <button type="submit" class="btn btn-primary go_to_batch_edit">Tiếp <i class="fa fa-fw fa-arrow-right"></i></button>
  </fieldset>
 </form>
 

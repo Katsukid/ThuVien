@@ -5,7 +5,7 @@
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
 <title>[% IF op == 'add_form' %][% IF ( restriction ) %]Modify restriction type '[% PROCESS restriction_type_description restriction_type=restriction %]' &rsaquo; [% ELSE %]New restriction type &rsaquo; [% END %][% END %]
-[% IF op == 'delete_confirm' %]Confirm deletion of restriction type '[% PROCESS restriction_type_description restriction_type=restriction %]' &rsaquo; [% END %]Patron restriction types &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+[% IF op == 'delete_confirm' %]Confirm deletion of restriction type '[% PROCESS restriction_type_description restriction_type=restriction %]' &rsaquo; [% END %]Patron restriction types &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

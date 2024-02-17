@@ -20,7 +20,7 @@
             [% END %]
             [% INCLUDE 'patron-title.inc' no_html = 1 %]
             [% IF patron_category %]([% patron_category.description | html %])[% END %]
-        [% END %] &rsaquo; Patrons &rsaquo; Trường CĐKTQS1
+        [% END %] &rsaquo; Bạn đọc  &rsaquo; Trường CĐKTQS1
     </title>
 <style>
 legend:hover {

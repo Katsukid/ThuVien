@@ -5,7 +5,7 @@
 [% PROCESS 'permissions.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
 <title>
-    Set permissions for [% INCLUDE 'patron-title.inc' no_html = 1 %] &rsaquo; Patrons &rsaquo; Trường CĐKTQS1
+    Set permissions for [% INCLUDE 'patron-title.inc' no_html = 1 %] &rsaquo; Bạn đọc  &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

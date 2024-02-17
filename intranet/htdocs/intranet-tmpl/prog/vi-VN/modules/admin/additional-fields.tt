@@ -6,7 +6,7 @@
  [% SWITCH op %]
  [% CASE 'add_form' %][% IF field %]Modify additional field '[% field.name | html %]'[% ELSE %]Add additional field[% END %]
  [% CASE %]Manage additional fields
- [% END %] &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ [% END %] &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

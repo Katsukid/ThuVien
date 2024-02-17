@@ -164,7 +164,7 @@
         </xsl:call-template>
 
     <xsl:if test="$DisplayIconsXSLT!='0' and $materialTypeCode!=''">
-        <span class="results_summary type"><span class="label">Material type: </span>
+        <span class="results_summary type"><span class="label">Loại vật liệu: </span>
     <xsl:element name="img"><xsl:attribute name="class">materialtype mt_icon_<xsl:value-of select="$materialTypeCode"/></xsl:attribute><xsl:attribute name="src">/intranet-tmpl/prog/img/famfamfam/<xsl:value-of select="$materialTypeCode"/>.png</xsl:attribute><xsl:attribute name="alt"></xsl:attribute></xsl:element>
         <xsl:text> </xsl:text>
         <xsl:value-of select="$materialTypeLabel"/>
@@ -276,7 +276,7 @@
                 <xsl:with-param name="basetags">260,264</xsl:with-param>
                 <xsl:with-param name="codes">abcg</xsl:with-param>
                 <xsl:with-param name="class">results_summary publisher</xsl:with-param>
-                <xsl:with-param name="label">Publication details: </xsl:with-param>
+                <xsl:with-param name="label">Thông tin phát hành: </xsl:with-param>
             </xsl:call-template>
         </xsl:if>
 
@@ -288,7 +288,7 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="marc:datafield[@tag=260]">
-                <span class="results_summary publisher"><span class="label">Publication details: </span>
+                <span class="results_summary publisher"><span class="label">Thông tin phát hành: </span>
                     <xsl:for-each select="marc:datafield[@tag=260]">
                         <xsl:for-each select="marc:subfield">
                             <xsl:if test="@code='a'">

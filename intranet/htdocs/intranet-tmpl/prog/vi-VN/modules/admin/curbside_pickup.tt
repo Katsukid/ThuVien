@@ -7,7 +7,7 @@
 [% PROCESS 'i18n.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
 <title>
- Curbside pickup &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ Curbside pickup &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>

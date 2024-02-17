@@ -4,7 +4,7 @@
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
 [% PROCESS 'budget_planning.inc' %]
-<title>Planning for [% budget_period_description | html %] [% PROCESS planning plan=authcat %] &rsaquo; Funds &rsaquo; Budgets &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Planning for [% budget_period_description | html %] [% PROCESS planning plan=authcat %] &rsaquo; Funds &rsaquo; Budgets &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>td.locked { background-image: url('[% interface | html %]/[% theme | html %]/img/locked.png'); padding-left : 20px; background-repeat: no-repeat; background-position: 5px 5px; } a.control { font-size:85%;text-decoration:none; } .plan_entry { text-align: right; width:90%; }</style>
 </head>

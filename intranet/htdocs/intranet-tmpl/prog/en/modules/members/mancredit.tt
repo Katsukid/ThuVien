@@ -9,7 +9,7 @@
 
 [% INCLUDE 'doc-head-open.inc' %]
 [% SET registers = Registers.all( { filters => { current_branch => 1 } } ) %]
-<title>Create manual credit &rsaquo; Patrons &rsaquo; Trường CĐKTQS1</title>
+<title>Create manual credit &rsaquo; Bạn đọc  &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

@@ -3,7 +3,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Transport cost matrix &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Transport cost matrix &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
 .disabled-transfer {

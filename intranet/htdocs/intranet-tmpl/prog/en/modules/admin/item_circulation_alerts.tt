@@ -3,7 +3,7 @@
 [% USE Branches %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Item circulation alerts &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Item circulation alerts &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
     <style>

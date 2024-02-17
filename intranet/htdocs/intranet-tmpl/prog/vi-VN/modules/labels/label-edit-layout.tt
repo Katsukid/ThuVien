@@ -2,23 +2,23 @@
 [% SET footerjs = 1 %]
 [%- BLOCK translate_label_types -%]
  [%-  SWITCH type -%]
- [%- CASE 'BIB' -%]<span> Only the bibliographic data is printed</span>
- [%- CASE 'BARBIB'-%]<span> Barcode precedes bibliographic data</span>
- [%- CASE 'BIBBAR'-%]<span> Bibliographic data precedes barcode</span>
- [%- CASE 'ALT' -%]<span> Barcode and bibliographic data are printed on alternating labels</span>
- [%- CASE 'BAR' -%]<span> Only the barcode is printed</span>
+ [%- CASE 'BIB' -%]<span> Chỉ in các trường dữ liệu thư mục</span>
+ [%- CASE 'BARBIB'-%]<span> In mã vạch đứng trước các trường dữ liệu thư mục</span>
+ [%- CASE 'BIBBAR'-%]<span> In các trường dữ liệu thư mục đứng trước mã vạch</span>
+ [%- CASE 'ALT' -%]<span> In xen kẽ mã vạch và các trường dữ liệu thư mục</span>
+ [%- CASE 'BAR' -%]<span> Chỉ in mã vạch</span>
  [%- END -%]
 [%- END -%]
  [% INCLUDE 'doc-head-open.inc' %]
- <title>[% IF ( layout_id ) %]Edit label layout [% layout_id | html %] [% ELSE %] Bố cục nhãn mới [% END %] &rsaquo; Bố cục &rsaquo; Tạo nhãn gáy &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
+ <title>[% IF ( layout_id ) %]Tùy chỉnh bố cục nhãn [% layout_id | html %] [% ELSE %] Bố cục nhãn mới [% END %] &rsaquo; Bố cục &rsaquo; Tạo nhãn gáy &rsaquo; Phân hệ biên mục &rsaquo; Trường CĐKTQS1</title>
  [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
 [% BLOCK translate_justification_types %]
 [%  SWITCH type %]
-[%   CASE 'L' %]<span>Left</span>
-[%   CASE 'C' %]<span>Center</span>
-[%   CASE 'R' %]<span>Right</span>
+[%   CASE 'L' %]<span>Trái</span>
+[%   CASE 'C' %]<span>Giữa</span>
+[%   CASE 'R' %]<span>Phải</span>
 [%  END %]
 [% END %]
 <body id="labels_label-edit-layout" class="tools labels">
@@ -183,7 +183,7 @@
  <input type="text" name="font_size" id="font_size" size="2" value="[% font_size | html %]" />
  </li>
  <li>
- <label for="oblique_title">Oblique title: </label>
+ <label for="oblique_title">Tiêu đề nghiêng: </label>
  [% IF ( oblique_title ) %]
  <input type="checkbox" name="oblique_title" id="oblique_title" value="1"  checked="checked" />
  [% ELSE %]

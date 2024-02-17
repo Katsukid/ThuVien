@@ -3,7 +3,7 @@
 [% USE Koha %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Advanced editor shortcuts &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Advanced editor shortcuts &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body id="adveditor_shortcuts" class="admin">

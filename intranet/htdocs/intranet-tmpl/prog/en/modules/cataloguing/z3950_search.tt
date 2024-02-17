@@ -4,7 +4,7 @@
 [% USE Koha %]
 [% USE TablesSettings %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Z39.50/SRU search results &rsaquo; Trường CĐKTQS1</title>
+<title>Tìm kiếm Z39.50/SRU results &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
     #dataPreview {
@@ -36,7 +36,7 @@
 <body id="cat_z3950_search" class="cat">
     <div class="container-fluid">
         [% IF ( opsearch ) %]
-            <h1>Z39.50/SRU search</h1>
+            <h1>Tìm kiếm Z39.50/SRU</h1>
             <form method="post" action="z3950_search.pl" name="f" class="checkboxed">
                 <div class="row">
                     <div class="col-xs-6">

@@ -63,7 +63,7 @@
  [% IF closed %]
  Budget [% budget_period_description | html %] closed &rsaquo; [% END %]
 
- Budgets &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ Budgets &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 
 </title>
 

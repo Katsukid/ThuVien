@@ -11,7 +11,7 @@
 <div class="page-section">
  <form id="f_pop" onsubmit="report()" action="">
  <input type="hidden" name="plugin_name" value="marc21_field_007.pl" />
- <p><label for="MatTypeList">Material type: </label>
+ <p><label for="MatTypeList">Loại vật liệu: </label>
  <select name="MatTypeList" id="MatTypeList" onchange="RedrawChoices(this.options[selectedIndex].value);">
  [% IF ( f0a ) %]
  <option value="a" selected="selected">Bản đồ</option>

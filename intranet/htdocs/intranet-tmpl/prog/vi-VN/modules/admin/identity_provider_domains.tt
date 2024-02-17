@@ -9,7 +9,7 @@
  New identity provider domain &rsaquo; [% ELSIF op == 'edit_form' %]
  Edit identity provider domain &rsaquo; [% END %]
 
- Identity providers &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ Identity providers &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

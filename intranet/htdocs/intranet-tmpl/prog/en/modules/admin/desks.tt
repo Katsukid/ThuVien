@@ -13,7 +13,7 @@
         [% IF op == 'delete_confirm' %]
             Confirm deletion of desk &rsaquo; [% END %]
     [% END %]
-    Desks &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+    Desks &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

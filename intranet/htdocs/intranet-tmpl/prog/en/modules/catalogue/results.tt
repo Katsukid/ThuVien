@@ -12,7 +12,7 @@
 [% USE AuthorisedValues %]
 [% INCLUDE 'doc-head-open.inc' %]
 
-<title>[% IF ( searchdesc ) %]Results of search [% IF ( query_desc ) %]for '[% query_desc | html %]'[% END %][% IF ( limit_desc ) %]&nbsp;with limit(s):&nbsp;'[% limit_desc | html %]'[% END %][% ELSE %]You did not specify any search criteria[% END %] &rsaquo; Catalog &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF ( searchdesc ) %]Kết quả tìm kiếm [% IF ( query_desc ) %]for '[% query_desc | html %]'[% END %][% IF ( limit_desc ) %]&nbsp;với điều kiện:&nbsp;'[% limit_desc | html %]'[% END %][% ELSE %]Bạn không chỉ định điều kiện tìm kiếm[% END %] &rsaquo; Catalog &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 
@@ -77,14 +77,14 @@
                     </h3>
 
                 [% UNLESS scan %]
-                    <a href="/cgi-bin/koha/catalogue/search.pl?advsearch=1&edit_search=1&[% query_cgi | $raw %]&[% limit_cgi | $raw %]&sort_by=[% sort_by | $raw %]">Edit this search</a>
+                    <a href="/cgi-bin/koha/catalogue/search.pl?advsearch=1&edit_search=1&[% query_cgi | $raw %]&[% limit_cgi | $raw %]&sort_by=[% sort_by | $raw %]">Tùy chỉnh tìm kiếm</a>
                     [% IF ( Koha.Preference('SavedSearchFilters') && CAN_user_parameters_manage_search_filters ) %]
                         | <a href="#" id="save_search_filter">Save search as filter</a>
                     [% END %]
 
                     <div id="search_within_results">
                         <form id="refine_search">
-                            <label for="limit">Search within results</label>
+                            <label for="limit">Tìm trong các kết quả</label>
                             [% IF ( Koha.Preference('IntranetCatalogSearchPulldown') ) %]
                                 [% INCLUDE 'search_indexes.inc' ms_kw = 1 refiner = 1 %]
                             [% END %]
@@ -113,7 +113,7 @@
                             [% IF Koha.Preference('virtualshelves') %]
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-list"></i> Add to list <span class="caret"></span>
+                                        <i class="fa fa-list"></i> Thêm vào danh sách <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
                                         [% IF add_to_some_private_shelves.count %]
@@ -191,7 +191,7 @@
 
                             [% IF ( CAN_user_editcatalogue_edit_catalogue ) %]
                                 <div class="btn-group">
-                                    <a class="btn btn-default btn-xs" id="z3950submit" href="#"><i class="fa fa-search"></i> Z39.50/SRU search</a>
+                                    <a class="btn btn-default btn-xs" id="z3950submit" href="#"><i class="fa fa-search"></i> Tìm kiếm Z39.50/SRU</a>
                                 </div>
                                 <div class="btn-group">
                                     <button type="button" id="results_batch_ops" class="btn btn-default btn-xs dropdown-toggle disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -224,7 +224,7 @@
 
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Sort <span class="caret"></span>
+                                    Sắp xếp <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
                                     [% IF ( sort_by == "relevance" ) %]
@@ -342,7 +342,7 @@
                 [% ELSE # /IF total %]
                     <form method="post" name="fz3950" class="fz3950bigrpad">
                         <div id="toolbar" class="btn-toolbar" style="background-color:transparent"><div>
-                            <button class="btn btn-default" type="button" id="z3950submit"><i class="fa fa-search"></i> Z39.50/SRU search</button>
+                            <button class="btn btn-default" type="button" id="z3950submit"><i class="fa fa-search"></i> Tìm kiếm Z39.50/SRU</button>
                         </div></div>
                     </form>
 
@@ -355,7 +355,7 @@
                             [% IF CAN_user_acquisition_order_manage && searchtoorder_basketno && searchtoorder_vendorid %][%# Coming from the basket or vendor view %]
                                 <p><a href="/cgi-bin/koha/acqui/basket.pl?basketno=[% searchtoorder_basketno | uri %]">View basket<a></p>
                             [% END %]
-                            <a href="/cgi-bin/koha/catalogue/search.pl?advsearch=1&edit_search=1&[% query_cgi | $raw %]&[% limit_cgi | $raw %]&sort_by=[% sort_by | $raw %]">Edit this search</a>
+                            <a href="/cgi-bin/koha/catalogue/search.pl?advsearch=1&edit_search=1&[% query_cgi | $raw %]&[% limit_cgi | $raw %]&sort_by=[% sort_by | $raw %]">Tùy chỉnh tìm kiếm</a>
                             [% IF ( Koha.Preference('SavedSearchFilters') && CAN_user_parameters_manage_search_filters ) %]
                                 | <a href="#" id="save_search_filter">Save search as filter</a>
                             [% END %]
@@ -594,7 +594,7 @@
                                                                 <span class="blocker inaccurate-item-statuses" title="Item statuses may be inaccurate. Please view the record details for accurate item statuses">
                                                             [% END %]
 
-                                                            [% tnx('{count} item', '{count} items', SEARCH_RESULT.items_count, {count = SEARCH_RESULT.items_count}) | html %][% IF ( SEARCH_RESULT.availablecount ) %], [% SEARCH_RESULT.availablecount | html %] <span>available:</span>[% ELSE %], <span>None available</span>[% END %]
+                                                            [% tnx('{count} item', '{count} items', SEARCH_RESULT.items_count, {count = SEARCH_RESULT.items_count}) | html %][% IF ( SEARCH_RESULT.availablecount ) %], [% SEARCH_RESULT.availablecount | html %] <span>khả dụng:</span>[% ELSE %], <span>None available</span>[% END %]
 
                                                             [% IF MaxSearchResultsItemsPerRecordStatusCheck && SEARCH_RESULT.items_count > MaxSearchResultsItemsPerRecordStatusCheck %]
                                                                 </span>
@@ -608,7 +608,7 @@
                                                                 [% END %]
                                                             [% ELSIF status_count == "othercount" %]
                                                                 [% IF SEARCH_RESULT.${status_count} > 0 %]
-                                                                    <div class="results_unavailable">[% SEARCH_RESULT.${status_count} | html %] unavailable:</div>
+                                                                    <div class="results_unavailable">[% SEARCH_RESULT.${status_count} | html %] không khả dụng:</div>
                                                                 [% END %]
                                                             [% END %]
                                                             [% IF SEARCH_RESULT.${items_loop}.size > 0 %]

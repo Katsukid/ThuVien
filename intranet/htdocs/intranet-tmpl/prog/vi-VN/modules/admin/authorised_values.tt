@@ -11,7 +11,7 @@
  Authorized values for category [% category_name | html %] &rsaquo;
  [% END %]
  [% END %]
- Authorized values &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ Authorized values &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 

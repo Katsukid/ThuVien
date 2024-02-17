@@ -5,7 +5,7 @@
 [% USE KohaDates %]
 [% USE Price %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Koha usage statistics &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Koha usage statistics &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.css("lib/leaflet/leaflet.css") | $raw %]
 </head>

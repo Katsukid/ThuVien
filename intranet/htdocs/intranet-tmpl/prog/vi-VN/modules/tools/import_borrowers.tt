@@ -7,7 +7,7 @@
 <title>
  [% IF ( uploadborrowers ) %]
  Results &rsaquo; [% END %]
- Import patrons &rsaquo; Tools &rsaquo; Trường CĐKTQS1
+ Import Bạn đọc &rsaquo; Tools &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>

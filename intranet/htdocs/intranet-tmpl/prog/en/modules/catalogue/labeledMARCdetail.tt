@@ -50,7 +50,7 @@
                     [% IF ( unknownbiblionumber ) %]
                         Unknown record
                     [% ELSE %]
-                        Labeled MARC record : [% biblionumber | html %]  ( [% bibliotitle | html %] )
+                        Labeled bản ghi MARC record : [% biblionumber | html %]  ( [% bibliotitle | html %] )
                     [% END %]
                 </h1>
 

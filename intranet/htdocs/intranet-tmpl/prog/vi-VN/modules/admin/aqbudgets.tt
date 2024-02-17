@@ -6,7 +6,7 @@
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
 
-<title>[% IF op == 'add_form' %][% IF ( budget_id ) %]Modify fund[% IF ( budget_name ) %] '[% budget_name | html %]'[% END %][% ELSE %]Add fund[% END %] &rsaquo;[% END %] Funds &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>[% IF op == 'add_form' %][% IF ( budget_id ) %]Modify fund[% IF ( budget_name ) %] '[% budget_name | html %]'[% END %][% ELSE %]Add fund[% END %] &rsaquo;[% END %] Funds &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% Asset.css("lib/jquery/plugins/treetable/stylesheets/jquery.treetable.css") | $raw %]
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

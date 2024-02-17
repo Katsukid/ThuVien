@@ -484,7 +484,7 @@
     <span class="results_summary">
     <xsl:if test="$typeOf008!=''">
         <span class="results_material_type">
-        <span class="label">Material type: </span>
+        <span class="label">Loại vật liệu: </span>
             <xsl:choose>
                 <xsl:when test="$leader19='a'"><img src="/intranet-tmpl/prog/img/famfamfam/silk/book_link.png" alt="book" title="book" class="materialtype"/> Set</xsl:when>
                 <xsl:when test="$leader6='a'">
@@ -832,7 +832,7 @@
         <xsl:with-param name="basetags">260</xsl:with-param>
         <xsl:with-param name="codes">abcg</xsl:with-param>
         <xsl:with-param name="class">results_summary publisher</xsl:with-param>
-        <xsl:with-param name="label">Publication details: </xsl:with-param>
+        <xsl:with-param name="label">Thông tin phát hành: </xsl:with-param>
       </xsl:call-template>
     </xsl:if>
 
@@ -848,7 +848,7 @@
             <xsl:call-template name="showRDAtag264"/>
         </xsl:when>
         <xsl:when test="marc:datafield[@tag=260]">
-            <span class="results_summary publisher"><span class="label">Publication details: </span>
+            <span class="results_summary publisher"><span class="label">Thông tin phát hành: </span>
                 <xsl:for-each select="marc:datafield[@tag=260]">
                     <xsl:if test="marc:subfield[@code='a']">
                         <xsl:call-template name="subfieldSelect">

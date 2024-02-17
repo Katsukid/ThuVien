@@ -9,7 +9,7 @@
  Details of job #[% job.id | html %] &rsaquo;
  [% END %]
  Jobs &rsaquo;
- Administration &rsaquo; Trường CĐKTQS1
+ Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 
 [% INCLUDE 'doc-head-close.inc' %]

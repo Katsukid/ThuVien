@@ -22,7 +22,7 @@
  [% END %] &rsaquo; [% END %]
 [% IF op == 'delete_confirmed' %]
  Data deleted &rsaquo; [% END %]
-Item types &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+Item types &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]

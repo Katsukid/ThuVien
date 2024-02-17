@@ -7,11 +7,11 @@
 [% ELSIF ( caller == 'transfer' ) %]
 <title>Transfers print receipt &rsaquo; Circulation &rsaquo; Trường CĐKTQS1</title>
 [% ELSIF ( caller == 'members' ) %]
-<title>Print receipt for [% borrowernumber | html %] &rsaquo; Patrons &rsaquo; Trường CĐKTQS1</title>
+<title>Print receipt for [% borrowernumber | html %] &rsaquo; Bạn đọc  &rsaquo; Trường CĐKTQS1</title>
 [% ELSIF ( caller == 'recall' ) %]
 <title>Recall print receipt &rsaquo; Circulation &rsqaquo; Koha</title>
 [% ELSIF ( title ) %][%# FIXME title is never defined %]
-<title>[% title | html %] &rsaquo; Patrons &rsaquo; Trường CĐKTQS1</title>
+<title>[% title | html %] &rsaquo; Bạn đọc  &rsaquo; Trường CĐKTQS1</title>
 [% END %]
 [% INCLUDE 'doc-head-close.inc' %]
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

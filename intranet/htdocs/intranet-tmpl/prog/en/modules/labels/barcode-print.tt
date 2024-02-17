@@ -101,11 +101,11 @@
                                         <label class="qrcode" for="barcode">Text, URL, or barcode, etc: </label>
                                         <input type="text" name="barcode" id="barcode" size="50" />
                                         <div class="hint qrcode">Actual dimensions of the QR code depend on the amount of characters being encoded.</div>
-                                        <div class="hint bcode">Văn bản mã vạch phải là số (0-9)</div>
+                                        <div class="hint bcode">Văn bản mã vạch phải là số (0-9) và ký tự không dấu</div>
                                     </li>
                                 </ol>
                                 <fieldset class="action">
-                                    <input type="submit" class="btn btn-primary" value="Show barcode" />
+                                    <input type="submit" class="btn btn-primary" value="Hiển thị mã vạch" />
                                 </fieldset>
                             </div>
                             <div class="col-sm-6">

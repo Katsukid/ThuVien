@@ -15,7 +15,7 @@
  New library [% library.branchcode | html %]
  [% END %] &rsaquo; [% ELSIF op == 'delete_confirm' %]
  Confirm deletion of library '[% library.branchcode | html %]' &rsaquo; [% END %]
-Libraries &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+Libraries &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

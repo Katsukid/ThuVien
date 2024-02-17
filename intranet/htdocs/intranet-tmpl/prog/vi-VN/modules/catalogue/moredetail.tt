@@ -65,7 +65,7 @@
  <li><span class="label">Hourly rental charge:</span>[% rentalcharge_hourly | $Price %]&nbsp;</li>
  [% END %]
  <li><span class="label">Số ISBN:</span> [% isbn | html %]&nbsp;</li>
- <li><span class="label">Publication details:</span>[% place | html %] [% publishercode | html %] [% publicationyear | html %]&nbsp;</li>
+ <li><span class="label">Thông tin phát hành:</span>[% place | html %] [% publishercode | html %] [% publicationyear | html %]&nbsp;</li>
  [% IF ( volumeddesc ) %]
  <li><span class="label">Tập:</span> [% volumeddesc | html %]</li>
  [% END %]

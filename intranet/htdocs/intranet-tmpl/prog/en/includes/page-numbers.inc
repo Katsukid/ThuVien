@@ -14,7 +14,7 @@
         [% END %]
     [% END %]
     [% IF ( next_page_offset ) %]
-        <li><a class="nav" href="/cgi-bin/koha/catalogue/search.pl?[% query_cgi | $raw %][% limit_cgi | $raw %]&amp;offset=[% next_page_offset | html %][% IF ( sort_by ) %]&amp;sort_by=[% sort_by |url %][% END %][% IF results_per_page %]&amp;count=[% results_per_page | html %][% END %]">Next <i class="fa fa-fw fa-angle-right"></i></a></li>
-        <li><a class="nav" href="/cgi-bin/koha/catalogue/search.pl?[% query_cgi | $raw %][% limit_cgi | $raw %]&amp;offset=[% last_page_offset | html %][% IF ( sort_by ) %]&amp;sort_by=[% sort_by |url %][% END %][% IF results_per_page %]&amp;count=[% results_per_page | html %][% END %]">Last <i class="fa fa-fw fa-angle-double-right"></i></a></li>
+        <li><a class="nav" href="/cgi-bin/koha/catalogue/search.pl?[% query_cgi | $raw %][% limit_cgi | $raw %]&amp;offset=[% next_page_offset | html %][% IF ( sort_by ) %]&amp;sort_by=[% sort_by |url %][% END %][% IF results_per_page %]&amp;count=[% results_per_page | html %][% END %]">Tiếp <i class="fa fa-fw fa-angle-right"></i></a></li>
+        <li><a class="nav" href="/cgi-bin/koha/catalogue/search.pl?[% query_cgi | $raw %][% limit_cgi | $raw %]&amp;offset=[% last_page_offset | html %][% IF ( sort_by ) %]&amp;sort_by=[% sort_by |url %][% END %][% IF results_per_page %]&amp;count=[% results_per_page | html %][% END %]">Cuối <i class="fa fa-fw fa-angle-double-right"></i></a></li>
     [% END %]
 </ul></nav>[% END %]

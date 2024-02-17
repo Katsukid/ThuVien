@@ -6,7 +6,7 @@
 [% USE KohaDates %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Update patron records &rsaquo; Patrons &rsaquo; Trường CĐKTQS1</title>
+<title>Update patron records &rsaquo; Bạn đọc  &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

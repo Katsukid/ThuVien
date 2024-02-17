@@ -7,7 +7,7 @@
  New SMTP server &rsaquo; [% ELSIF op == 'edit_form' %]
  Edit SMTP server &rsaquo; [% END %]
 
- SMTP servers &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ SMTP servers &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

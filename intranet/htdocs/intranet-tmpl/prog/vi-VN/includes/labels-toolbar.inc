@@ -6,7 +6,7 @@
  <li><a href="/cgi-bin/koha/labels/label-edit-batch.pl?op=new">Lô nhãn</a></li>
  <li><a href="/cgi-bin/koha/labels/label-edit-layout.pl?op=new">Cách trình bày</a></li>
  <li><a href="/cgi-bin/koha/labels/label-edit-template.pl?op=new">Hình thức nhãn gáy</a></li>
- <li><a href="/cgi-bin/koha/labels/label-edit-profile.pl?op=new">Mẫu in</a></li>
+ <li><a href="/cgi-bin/koha/labels/label-edit-profile.pl?op=new">Mẫu máy in</a></li>
  <li><a href="/cgi-bin/koha/labels/label-edit-range.pl">Phạm vi mã vạch</a></li>
  </ul>
  </div>
@@ -16,7 +16,7 @@
  <li><a href="/cgi-bin/koha/labels/label-manage.pl?label_element=batch">Lô nhãn</a></li>
  <li><a href="/cgi-bin/koha/labels/label-manage.pl?label_element=layout">Cách trình bày</a></li>
  <li><a href="/cgi-bin/koha/labels/label-manage.pl?label_element=template">Hình thức nhãn gáy</a></li>
- <li><a href="/cgi-bin/koha/labels/label-manage.pl?label_element=profile">Mẫu in</a></li>
+ <li><a href="/cgi-bin/koha/labels/label-manage.pl?label_element=profile">Mẫu máy in</a></li>
  </ul>
  </div>
 </div>

@@ -129,7 +129,7 @@
  [% IF Koha.Preference('virtualshelves') %]
  <div class="btn-group">
  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- <i class="fa fa-list"></i> Add to list <span class="caret"></span>
+ <i class="fa fa-list"></i> Thêm vào danh sách <span class="caret"></span>
  </button>
  <ul class="dropdown-menu">
  [% IF add_to_some_private_shelves.count %]

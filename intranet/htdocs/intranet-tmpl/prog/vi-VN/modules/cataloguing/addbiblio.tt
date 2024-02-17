@@ -909,7 +909,7 @@ $(document).ready(function(){
 
  [% UNLESS (circborrowernumber) %][%# Hide in fast cataloging %]
  [% IF biblionumber %]
- <div class="btn-group"><a class="btn btn-default" href="#" id="z3950search"><i class="fa fa-search"></i> Replace record via Z39.50/SRU search</a></div>
+ <div class="btn-group"><a class="btn btn-default" href="#" id="z3950search"><i class="fa fa-search"></i> Replace record via Tìm kiếm Z39.50/SRU</a></div>
  [% ELSE %]
  <div class="btn-group"><a class="btn btn-default" href="#" id="z3950search"><i class="fa fa-search"></i> Tìm kiếm Z39.50/SRU</a></div>
  [% END %]

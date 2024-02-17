@@ -7,7 +7,7 @@
 [% SET footerjs = 1 %]
 [% PROCESS 'accounts.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Details of [% IF type == 'credit' %]credit[% ELSE %]debit[% END %] &rsaquo; [% INCLUDE 'patron-title.inc' no_html = 1 %] &rsaquo; Patrons &rsaquo; Trường CĐKTQS1</title>
+<title>Details of [% IF type == 'credit' %]credit[% ELSE %]debit[% END %] &rsaquo; [% INCLUDE 'patron-title.inc' no_html = 1 %] &rsaquo; Bạn đọc &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

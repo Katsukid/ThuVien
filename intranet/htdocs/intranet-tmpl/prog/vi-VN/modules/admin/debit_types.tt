@@ -12,7 +12,7 @@
  [% ELSE %]
  New debit type
  [% END %] &rsaquo; [% END %]
- Debit types &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ Debit types &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

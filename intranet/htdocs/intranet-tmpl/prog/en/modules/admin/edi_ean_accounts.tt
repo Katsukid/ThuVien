@@ -11,7 +11,7 @@
     [% END %] &rsaquo; [% END %]
 [% IF delete_confirm %]
     Confirm deletion of EAN &rsaquo; [% END %]
-Library EANs &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+Library EANs &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

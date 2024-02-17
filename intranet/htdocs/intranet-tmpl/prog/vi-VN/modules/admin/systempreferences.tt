@@ -20,7 +20,7 @@
  [% IF ( delete_confirmed ) %]
  Parameter deleted &rsaquo; [% END %]
 
- System preferences &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ System preferences &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

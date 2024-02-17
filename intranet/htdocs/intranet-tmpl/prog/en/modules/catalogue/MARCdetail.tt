@@ -53,7 +53,7 @@
 [% INCLUDE 'cat-toolbar.inc' %]
 
 [% UNLESS ( popup ) %]
-    <h1>MARC record: [% biblionumber | html %]  ( [% bibliotitle | html %] )</h1>
+    <h1>Bản ghi MARC: [% biblionumber | html %]  ( [% bibliotitle | html %] )</h1>
 [% END %]
 
     <p><strong>With framework : <select name="Frameworks" id="Frameworks">

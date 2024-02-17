@@ -12,7 +12,7 @@
  New cash register [% cash_register.id | html %]
  [% END %] &rsaquo; [% ELSIF op == 'delete_confirm' %]
  Confirm deletion of cash register '[% cash_register.id | html %]' &rsaquo; [% END %]
-Cash registers &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+Cash registers &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

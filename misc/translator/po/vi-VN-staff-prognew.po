@@ -56871,7 +56871,7 @@ msgstr "Hiển thị tất cả các tài liệu hiện tại đang được ghi
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/barcode-print.tt:108
 #, fuzzy
 msgid "Show barcode"
-msgstr "%s Không có đăng ký cá biệt"
+msgstr "%s Hiển thị mã vạch"
 
 #. %1$s:  booksellername | html 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:209

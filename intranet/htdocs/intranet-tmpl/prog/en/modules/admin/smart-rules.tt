@@ -24,7 +24,7 @@
 [% itemtypes.push(undef) %]
 
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Circulation and fine rules &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Circulation and fine rules &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

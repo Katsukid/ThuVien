@@ -31,7 +31,7 @@
             [% authtypecode | html %] Framework
         [% ELSE %]Default framework
         [% END %] &rsaquo; [% END %]
-Authority MARC framework &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+Authority MARC framework &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 

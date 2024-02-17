@@ -14,7 +14,7 @@
                     [% END %]
                 [% END %]
                 [% IF ( displaynext ) %]
-                    <li><a class="nav" href="label-item-search.pl?startfrom=[% startfromnext | html %]&amp;ccl_query=[% ccl_query | html %]&amp;resultsperpage=[% resultsperpage | html %]&amp;op=do_search&amp;batch_id=[% batch_id | html %]">Next <i class="fa fa-arrow-right"></i></a></li>
+                    <li><a class="nav" href="label-item-search.pl?startfrom=[% startfromnext | html %]&amp;ccl_query=[% ccl_query | html %]&amp;resultsperpage=[% resultsperpage | html %]&amp;op=do_search&amp;batch_id=[% batch_id | html %]">Tiếp <i class="fa fa-arrow-right"></i></a></li>
                 [% END %]
             </ul>
         [% END %]

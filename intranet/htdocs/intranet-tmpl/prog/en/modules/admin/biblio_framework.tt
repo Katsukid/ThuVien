@@ -10,7 +10,7 @@
         Add framework
     [% END %] &rsaquo; [% ELSIF op == 'delete_confirm' %]
     Delete framework for [% framework.frameworktext | html %] ([% framework.frameworkcode | html %])? &rsaquo; [% END %]
-MARC frameworks &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+MARC frameworks &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

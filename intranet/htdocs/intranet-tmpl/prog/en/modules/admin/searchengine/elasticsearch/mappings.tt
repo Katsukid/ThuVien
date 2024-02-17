@@ -3,7 +3,7 @@
 [% SET footerjs = 1 %]
 [% PROCESS 'i18n.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Search engine configuration (Elasticsearch) &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Search engine configuration (Elasticsearch) &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>
 a.add, a.delete {

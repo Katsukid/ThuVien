@@ -16,7 +16,7 @@
 [% IF ( delete_attribute_type_form ) %]
     Confirm deletion of patron attribute type &quot;[% code | html %]&quot; &rsaquo; [% END %]
 
-Patron attribute types &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+Patron attribute types &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

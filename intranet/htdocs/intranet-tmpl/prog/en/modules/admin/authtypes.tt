@@ -10,7 +10,7 @@
         New authority type
     [% END %] &rsaquo; [% ELSIF op == 'delete_confirm' %]
     Confirm deletion of authority type &rsaquo; [% END %]
-Authority types &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+Authority types &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

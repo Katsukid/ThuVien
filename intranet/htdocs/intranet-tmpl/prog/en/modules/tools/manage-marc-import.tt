@@ -645,10 +645,10 @@
             [% END %]
             [% IF ( current_page < pages.size() ) %]
                 <li>
-                    <a href="?offset=[% offset + results_per_page | uri %]" class="nav">Next <i class="fa fa-fw fa-angle-right"></i></a>
+                    <a href="?offset=[% offset + results_per_page | uri %]" class="nav">Tiếp <i class="fa fa-fw fa-angle-right"></i></a>
                 </li>
                 <li>
-                    <a href="?offset=[% ( results_per_page * ( pages.size - 1 ) ) | uri %]" class="nav">Last <i class="fa fa-fw fa-angle-double-right"></i></a>
+                    <a href="?offset=[% ( results_per_page * ( pages.size - 1 ) ) | uri %]" class="nav">Cuối <i class="fa fa-fw fa-angle-double-right"></i></a>
                 </li>
             [% END %]
         </ul>

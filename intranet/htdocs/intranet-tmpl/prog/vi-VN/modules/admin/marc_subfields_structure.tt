@@ -29,7 +29,7 @@
 
  [%- IF ( else ) -%]
  MARC subfield structure
- [%- END -%] &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ [%- END -%] &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 <style>.constraints::after { content:  " "; clear: both; display:block; }</style>

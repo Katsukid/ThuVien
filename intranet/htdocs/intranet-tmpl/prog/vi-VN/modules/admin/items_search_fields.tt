@@ -3,7 +3,7 @@
 [% SET footerjs = 1 %]
 [% USE AuthorisedValues %]
 [% INCLUDE 'doc-head-open.inc' %]
- <title>Các trường tìm kiếm tài liệu &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+ <title>Các trường tìm kiếm tài liệu &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
  [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

@@ -7,7 +7,7 @@
 [% INCLUDE 'doc-head-open.inc' %]
 <title>[% IF op == 'add_form' %][% IF currency %]Modify currency '[% currency.currency | html %]'[% ELSE %]New currency[% END %][% END %]
 [% IF op == 'delete_confirm' %]Confirm deletion of currency '[% currency.currency | html %]'[% END %]
-[% IF op == 'list' %]Currencies[% END %] &rsaquo; Currencies and exchange rates &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+[% IF op == 'list' %]Currencies[% END %] &rsaquo; Currencies and exchange rates &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

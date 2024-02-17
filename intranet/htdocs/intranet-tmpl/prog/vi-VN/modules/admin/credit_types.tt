@@ -14,7 +14,7 @@
  [% END %]
  [% ELSE %]
  Credit types
- [% END %] &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+ [% END %] &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

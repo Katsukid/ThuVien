@@ -24,7 +24,7 @@
 </div>
 [% END %]
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Did you mean? &rsaquo; Administration &rsaquo; Trường CĐKTQS1</title>
+<title>Did you mean? &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 

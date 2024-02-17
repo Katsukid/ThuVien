@@ -12,7 +12,7 @@
     [% IF ( delete_matching_rule_form ) %]
         Confirm deletion of record matching rule &quot;[% code | html %]&quot; &rsaquo; [% END %]
 
-    Record matching rules &rsaquo; Administration &rsaquo; Trường CĐKTQS1
+    Record matching rules &rsaquo; Quản trị hệ thống &rsaquo; Trường CĐKTQS1
 </title>
 [% INCLUDE 'doc-head-close.inc' %]
 
