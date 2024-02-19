@@ -333,8 +333,8 @@
     [% UNLESS uploadedbarcodesflag %]
       <div style="padding : .3em 0"><a href="#" class="checkall"><i class="fa fa-check"></i> Chọn tất cả</a> <a href="#" class="clearall"><i class="fa fa-remove"></i> Bỏ chọn tất cả</a></div>
       <input type="submit" id="markseenandquit" class="btn btn-primary" value="Mark seen and quit" />
-      <input type="submit" value="Mark seen and continue &gt;&gt;" id="markseenandcontinuebutton" />
-      <input type="submit" value="Continue without marking &gt;&gt;" id="continuewithoutmarkingbutton" class="submit" />
+    <input type="submit" value="Đánh dấu đã xem và tiếp tục &gt;&gt;" id="markseenandcontinuebutton" />
+    <input type="submit" value="Tiếp tục mà không đánh dấu &gt;&gt;" id="continuewithoutmarkingbutton" class="submit" />
     [% END %]
     </form>
 
